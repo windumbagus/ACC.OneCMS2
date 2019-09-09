@@ -18,4 +18,5 @@
 
 //Home Admin LTE
 Route::get('/','AdminController@index');
+Route::get('/approve','ApproveController@index');
 

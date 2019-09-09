@@ -28,7 +28,7 @@
             </a>
             <ul class="treeview-menu">
             <li class="@yield('pending')"><a href="#"><i class="fa fa-circle-o"></i> Pending List</a></li>
-            <li class="@yield('approve')"><a href="#"><i class="fa fa-circle-o"></i> Approve List</a></li>
+            <li class="@yield('approve')"><a href="{{ asset('approve') }}"><i class="fa fa-circle-o"></i> Approve List</a></li>
             <li class="@yield('rejected')"><a href="#"><i class="fa fa-circle-o"></i> Rejected List</a></li>
             </ul>
         </li>
