@@ -1,12 +1,11 @@
 @extends('admin.admin') 
 
 
-@section('rejected', 'active')
+@section('pending', 'active')
 @section('account-verification', 'active')
 
-
 @section('content')
-<h3 class="box-title">Rejected List</h3>
+<h3 class="box-title">Pending List</h3>
 
 
 @endsection 

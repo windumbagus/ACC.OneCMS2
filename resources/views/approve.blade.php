@@ -2,6 +2,7 @@
 
 
 @section('approve', 'active')
+@section('account-verification', 'active')
 
 
 @section('content')
