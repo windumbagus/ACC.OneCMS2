@@ -155,7 +155,7 @@
 
                     }
 
-                    // FotoKK
+                    // FotoKK    sasa
                     if (val.hasOwnProperty('FotoKK_MstPictures')) {
                         if (val.FotoKK_MstPictures.hasOwnProperty('Picture')) {
                             $('[name="rejected_KK_view"]').attr("src","data:image/jpeg;base64,"+val.FotoKK_MstPictures.Picture);   
