@@ -88,6 +88,8 @@
 {{-- <script src="js/buttons.html5.min.js"></script> --}}
 {{-- <script src="js/jszip.min.js"></script> --}}
 
+{{-- Sweet Alert --}}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <body class="hold-transition skin-blue-light sidebar-mini">
     <div class="wrapper">
