@@ -18,7 +18,7 @@ class PendingController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $data = json_decode($result);
-        // dd($data); bangsat
+        // dd($data); coba2
         
         return view('pending',['Pendings' => $data]);    
     }
