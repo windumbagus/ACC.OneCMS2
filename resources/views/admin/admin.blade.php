@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="assets/accone-logo.png"> 
   <title>ACC.OneCMS</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -35,28 +36,12 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/adminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-
-<body class="hold-transition skin-blue-light sidebar-mini">
-
-<div class="wrapper">
-  <!-- Main Header -->
-  @include('admin/header')
-  <!-- sidebar -->
-  @include('admin/sidebar')
-
-  <!-- Content Wrapper -->
-  <div class="content-wrapper">
-    <section class="content">
-        @yield('content')
-    </section>
-  </div>
-
-  <!-- Footer -->
-  @include('admin/footer')
-</div>
 
 <!-- jQuery 3 -->
 <script src="assets/adminLTE/bower_components/jquery/dist/jquery.min.js"></script>
@@ -95,5 +80,31 @@
 {{-- <script src="assets/adminLTE/dist/js/pages/dashboard.js"></script> --}}
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="assets/adminLTE/dist/js/demo.js"></script> --}}
-</body>
+
+<!-- DataTables -->
+<script src="assets/adminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/adminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+{{-- <script src="js/dataTables.buttons.min.js"></script> --}}
+{{-- <script src="js/buttons.html5.min.js"></script> --}}
+{{-- <script src="js/jszip.min.js"></script> --}}
+
+
+  <body class="hold-transition skin-blue-light sidebar-mini">
+    <div class="wrapper">
+      <!-- Main Header -->
+      @include('admin/header')
+      <!-- sidebar -->
+      @include('admin/sidebar')
+
+      <!-- Content Wrapper -->
+      <div class="content-wrapper">
+        <section class="content">
+            @yield('content')
+        </section>
+      </div>
+
+      <!-- Footer -->
+      @include('admin/footer')
+    </div>
+  </body>
 </html>

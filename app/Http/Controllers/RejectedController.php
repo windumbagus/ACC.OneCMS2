@@ -8,6 +8,18 @@ class RejectedController extends Controller
 {
     public function index()
     {
-        return view('rejected');
+        //API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RejectedListAPI/GetAllRejectedList"; 
+        $ch = curl_init($url);                                                     
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result);
+        // dd($Hasils);
+        
+        return view('rejected',['Rejected' =>$Hasils]);    
     }
 }
