@@ -1,9 +1,7 @@
 @extends('admin.admin') 
 
-
 @section('rejected', 'active')
 @section('account-verification', 'active')
-
 
 @section('content')
 
@@ -56,7 +54,7 @@
                 @endif
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Reject->User->Id}}" class="update-rejected btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
+                    <a href="#" data-id="{{ $Reject->User->Id}}" class="view-rejected btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
                 </span>
                 </td>
             </tr>   
@@ -83,7 +81,7 @@
           "columns": [
                 null,
                 null,
-                {"searchable":false},
+                null,
                 null,
                 {"searchable":false},
                 {"searchable":false},
@@ -104,10 +102,87 @@
             $('.InputSearch').val('')
         })
 
-        
+        //VIEW
+        $(document).on('click','.view-rejected',function(){
+            var id = $(this).attr('data-id');
+            console.log(id);
+            $.ajax({
+                url:"{{asset('/rejected/show')}}",
+                data: {'Id':id ,'_token':'{{csrf_token()}}' },
+                dataType:'JSON', 
+                type:'GET',
+                success: function (val){
+                    console.log(val);
+                    $('[name="rejected_Name_view"]').val(val.User.Name);
+                    $('[name="rejected_Username_view"]').val(val.User.Username);
+                    $('[name="rejected_Email_view"]').val(val.User.Email);
+                    $('[name="rejected_MobilePhone_view"]').val(val.User.MobilePhone);
+                    $('[name="rejected_Last_Login_view"]').val(val.User.Last_Login);
+                    $('[name="rejected_Is_Active_view"]').val(val.User.Is_Active);
+                    $('[name="rejected_TanggalLahir_view"]').val(val.MstCustomerDetail.TanggalLahir);
+                    $('[name="rejected_Status_view"]').val(val.MstStatus.Label);
+                    //StatusNoHP
+                    if (val.MstCustomerDetail.hasOwnProperty('StatusNoHP')) {
+                        $('[name="rejected_StatusNoHP_view"]').val(val.MstCustomerDetail.StatusNoHP);   
+                    }else{
+                        $('[name="rejected_StatusNoHP_view"]').val("False");        
+                    }
+                    // Subscribe
+                    if (val.MstCustomerDetail.hasOwnProperty('Subscribe')) {
+                        $('[name="rejected_Subscribe_view"]').val(val.MstCustomerDetail.Subscribe);   
+                    }else{
+                        $('[name="rejected_Subscribe_view"]').val("N");        
+                    }
+                    // FotoKTP
+                    if (val.hasOwnProperty('FotoKTP_MstPictures')) {
+                        if (val.FotoKTP_MstPictures.hasOwnProperty('Picture')) {
+                            $('[name="rejected_KTP_view"]').attr("src","data:image/jpeg;base64,"+val.FotoKTP_MstPictures.Picture);   
+                        }else{
+                            $('[name="rejected_KTP_view"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    // FotoNPWP
+                    if (val.hasOwnProperty('FotoNPWP_MstPictures')) {
+                        if (val.FotoNPWP_MstPictures.hasOwnProperty('Picture')) {
+                            $('[name="rejected_NPWP_view"]').attr("src","data:image/jpeg;base64,"+val.FotoNPWP_MstPictures.Picture);   
+                        }else{
+                            $('[name="rejected_NPWP_view"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    // FotoKK
+                    if (val.hasOwnProperty('FotoKK_MstPictures')) {
+                        if (val.FotoKK_MstPictures.hasOwnProperty('Picture')) {
+                            $('[name="rejected_KK_view"]').attr("src","data:image/jpeg;base64,"+val.FotoKK_MstPictures.Picture);   
+                        }else{
+                            $('[name="rejected_kk_view"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    $('[name="rejected_Reason_view"]').val(val.MstCustomerDetail.Reason);
+                    // foto NPWP
+                    // FOTO KK
+                    // FOTO ktp
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                console.log(jqXhr);
+                console.log( errorThrown );
+                console.log(textStatus);
+                },
+            });
+            $('#view-rejected').modal();
+        });
+
         
     })
   </script>
-  
+  @include('modal.view_rejected')
 @endsection 
 

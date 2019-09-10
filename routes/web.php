@@ -18,7 +18,10 @@
 
 //Home Admin LTE
 Route::get('/','AdminController@index');
-Route::get('/approve','ApproveController@index');
+
 Route::get('/rejected','RejectedController@index');
+Route::get('/rejected/show','RejectedController@show');
+
+Route::get('/approve','ApproveController@index');
 Route::get('/pending','PendingController@index');
 
