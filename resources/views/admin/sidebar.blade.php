@@ -143,7 +143,7 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                <li class="@yield('customer')"><a href="#"><i class="fa fa-circle-o"></i> Customer</a></li>
+                <li class="@yield('customer')"><a href="{{ asset('customer') }}"><i class="fa fa-circle-o"></i> Customer</a></li>
                 </ul>
             </li>
 
