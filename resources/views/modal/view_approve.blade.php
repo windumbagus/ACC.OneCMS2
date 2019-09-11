@@ -13,7 +13,7 @@
                     @csrf	
                     <div class="form-group">
                         <label>Foto Profile:</label><br>
-                        <img style="width: 150px; height: 200px;" name="approve_Profile_view" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="approve_Profile_view" name="approve_Profile_view" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Name :</label>
@@ -67,15 +67,15 @@
                     </div>
                     <div class="form-group">
                         <label>Foto KTP:</label><br>
-                        <img style="width: 150px; height: 200px;" name="approve_KTP_view" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="approve_KTP_view" name="approve_KTP_view" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Foto NPWP:</label><br>
-                        <img style="width: 150px; height: 200px;" name="approve_NPWP_view" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="approve_NPWP_view" name="approve_NPWP_view" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Foto KK:</label><br>
-                        <img style="width: 150px; height: 200px;" name="approve_KK_view" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="approve_KK_view" name="approve_KK_view" alt=""/><br>
                     </div>
                 </form>	
             </div>
@@ -91,6 +91,10 @@
         $('#close-modal').click(function() {
         $('#view-approve').modal('hide');
         $('#form-view-approve')[0].reset();  
+        $('#approve_Profile_view').attr('src', "");
+        $('#approve_KTP_view').attr('src', "");
+        $('#approve_NPWP_view').attr('src', "");
+        $('#approve_KK_view').attr('src', "");
         });      
     });
 </Script>

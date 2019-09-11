@@ -13,7 +13,7 @@
                     @csrf	
                     <div class="form-group">
                         <label>Foto Profile:</label><br>
-                        <img style="width: 150px; height: 200px;" name="rejected_Profile_view" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="rejected_Profile_view" name="rejected_Profile_view" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Name :</label>
@@ -67,15 +67,15 @@
                     </div>
                     <div class="form-group">
                         <label>Foto KTP:</label><br>
-                        <img style="width: 150px; height: 200px;" name="rejected_KTP_view" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="rejected_KTP_view" name="rejected_KTP_view" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Foto NPWP:</label><br>
-                        <img style="width: 150px; height: 200px;" name="rejected_NPWP_view" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="rejected_NPWP_view" name="rejected_NPWP_view" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Foto KK:</label><br>
-                        <img style="width: 150px; height: 200px;" name="rejected_KK_view" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="rejected_KK_view" name="rejected_KK_view" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Reason:</label>
@@ -96,6 +96,10 @@
         $('#close-modal').click(function() {
         $('#view-rejected').modal('hide');
         $('#form-view-rejected')[0].reset();  
+        $('#rejected_Profile_view').attr('src', "");
+        $('#rejected_KTP_view').attr('src', "");
+        $('#rejected_NPWP_view').attr('src', "");
+        $('#rejected_KK_view').attr('src', "");
         });      
     });
 </Script>

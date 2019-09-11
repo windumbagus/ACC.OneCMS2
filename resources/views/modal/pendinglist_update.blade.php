@@ -14,7 +14,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
                     @csrf	
                     <div class="form-group">
                         <label>Foto Profile:</label><br>
-                        <img style="width: 150px; height: 200px;" name="pendinglist_Profile_update_data" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="pendinglist_Profile_update_data" name="pendinglist_Profile_update_data" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Name :</label>
@@ -59,15 +59,15 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
                     </div>
                     <div class="form-group">
                         <label>Foto KTP:</label><br>
-                        <img style="width: 150px; height: 200px;" name="pendinglist_KTP_update_data" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="pendinglist_KTP_update_data" name="pendinglist_KTP_update_data" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Foto NPWP:</label><br>
-                        <img style="width: 150px; height: 200px;" name="pendinglist_NPWP_update_data" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="pendinglist_NPWP_update_data" name="pendinglist_NPWP_update_data" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Foto KK:</label><br>
-                        <img style="width: 150px; height: 200px;" name="pendinglist_KK_update_data" alt=""/><br>
+                        <img style="width: 150px; height: 200px;" id="pendinglist_KK_update_data" name="pendinglist_KK_update_data" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label>Reason:</label>
@@ -86,8 +86,12 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
 <Script>
     $(function() {
         $('#close-modal').click(function() {
-        $('#view-rejected').modal('hide');
+        $('#pendinglist_update_modal').modal('hide');
         $('#form-pedinglist-update')[0].reset();  
+        $('#pendinglist_Profile_update_data').attr('src', "");
+        $('#pendinglist_KTP_update_data').attr('src', "");
+        $('#pendinglist_NPWP_update_data').attr('src', "");
+        $('#pendinglist_KK_update_data').attr('src', "");
         });      
     });
 </Script>
