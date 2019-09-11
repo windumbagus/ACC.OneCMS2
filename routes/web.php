@@ -28,3 +28,10 @@ Route::get('/approve/show','ApproveController@show');
 Route::get('/pendinglist','PendinglistController@index');
 Route::get('/pendinglist/update','PendinglistController@update');
 
+<<<<<<< HEAD
+=======
+Route::get('/customer','CustomerController@index');
+
+// coba coba
+
+>>>>>>> f7b0bcebc3bb4ed037188b918ed0afd2bfb67d00
