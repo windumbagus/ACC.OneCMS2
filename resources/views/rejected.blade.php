@@ -15,7 +15,7 @@
 
         <div class="row">
                 <div class="col-sm-8">
-                    <input type="text" placeholder="Search by Name, Username, or Mobile Phone" class="InputSearch form-control">
+                    <input type="text" placeholder="Search by Name, Username, Email or Mobile Phone" class="InputSearch form-control">
                 </div>
                 <div class="col-sm-4">
                     <div class="col-sm-6">
@@ -133,6 +133,14 @@
                     }else{
                         $('[name="rejected_Subscribe_view"]').val("N");        
                     }
+
+                     // FotoProfil
+                     if (val.FotoProfil_MstPicture.hasOwnProperty('Picture')) {
+                        $('[name="rejected_Profile_view"]').attr("src","data:image/jpeg;base64,"+val.FotoProfil_MstPicture.Picture);   
+                    }else{
+                        $('[name="rejected_Profile_view"]').val("");        
+                    }
+
                     // FotoKTP
                     if (val.hasOwnProperty('FotoKTP_MstPictures')) {
                         if (val.FotoKTP_MstPictures.hasOwnProperty('Picture')) {
