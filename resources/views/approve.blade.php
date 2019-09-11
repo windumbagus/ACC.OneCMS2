@@ -147,10 +147,14 @@
                     }
 
                     // FotoProfil
-                    if (val.FotoProfil_MstPicture.hasOwnProperty('Picture')) {
-                        $('[name="approve_Profile_view"]').attr("src","data:image/jpeg;base64,"+val.FotoProfil_MstPicture.Picture);   
+                    if (val.hasOwnProperty('FotoProfil_MstPicture')) {
+                        if (val.FotoProfil_MstPicture.hasOwnProperty('Picture')) {
+                            $('[name="approve_Profile_view"]').attr("src","data:image/jpeg;base64,"+val.FotoProfil_MstPicture.Picture);   
+                        }else{
+                            $('[name="approve_Profile_view"]').val("");        
+                        }
                     }else{
-                        $('[name="approve_Profile_view"]').val("");        
+
                     }
                     
                     // FotoKTP

@@ -121,7 +121,7 @@
 
         //Update
         $(document).on('click','.pendinglist_updateonclick',function(){
-            var id = $(this).attr('datauser-id');
+            var id = $(this).attr('data-userid');
             console.log(id);
             $.ajax({
                 url:"{{asset('/pendinglist/update')}}",
@@ -131,7 +131,7 @@
                 success: function (val){
                     console.log(val);
                     // FotoProfil
-                    if (val.hasOwnProperty('FotoKTP_MstPictures')) {
+                    if (val.hasOwnProperty('FotoProfil_MstPicture')) {
                         if (val.FotoProfil_MstPicture.hasOwnProperty('Picture')) {
                             $('[name="pendinglist_Profile_update_data"]').attr("src","data:image/jpeg;base64,"+val.FotoProfil_MstPicture.Picture);   
                         }else{
@@ -149,12 +149,14 @@
                     $('[name="pendinglist_Is_Active_update_data"]').val(val.User.Is_Active);
                     $('[name="pendinglist_TanggalLahir_update_data"]').val(val.MstCustomerDetail.TanggalLahir);
                     $('[name="pendinglist_Status_update_data"]').val(val.MstStatus.Label);
+                    
                     //StatusNoHP
                     if (val.MstCustomerDetail.hasOwnProperty('StatusNoHP')) {
                         $('[name="pendinglist_StatusNoHP_update_data"]').val(val.MstCustomerDetail.StatusNoHP);   
                     }else{
                         $('[name="pendinglist_StatusNoHP_update_data"]').val("False");        
                     }
+                    
                     // Subscribe
                     if (val.MstCustomerDetail.hasOwnProperty('Subscribe')) {
                         $('[name="pendinglist_Subscribe_update_data"]').val(val.MstCustomerDetail.Subscribe);   
