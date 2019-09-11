@@ -28,5 +28,3 @@ Route::get('/approve/show','ApproveController@show');
 Route::get('/pendinglist','PendinglistController@index');
 Route::get('/pendinglist/update','PendinglistController@update');
 
-// coba coba
-
