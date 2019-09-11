@@ -25,5 +25,6 @@ Route::get('/rejected/show','RejectedController@show');
 Route::get('/approve','ApproveController@index');
 Route::get('/approve/show','ApproveController@show');
 
-Route::get('/pending','PendingController@index');
+Route::get('/pendinglist','PendinglistController@index');
+Route::get('/pendinglist/update','PendinglistController@update');
 
