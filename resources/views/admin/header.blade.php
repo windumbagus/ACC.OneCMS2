@@ -34,7 +34,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                 <div style="text-align:center;">
-                    <a href="#" class="btn btn-danger btn-flat">Sign out</a>
+                    <a href="{{ asset('logout') }}" class="btn btn-danger btn-flat">Sign out</a>
                 </div>
                 </li>
             </ul>
