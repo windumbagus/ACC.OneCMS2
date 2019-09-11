@@ -29,4 +29,3 @@ Route::get('/pendinglist','PendinglistController@index');
 Route::get('/pendinglist/update','PendinglistController@update');
 
 Route::get('/customer','CustomerController@index');
-
