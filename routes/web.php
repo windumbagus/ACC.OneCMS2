@@ -18,7 +18,7 @@
 Route::get('/login','LoginController@index');
 Route::post('/login-Process','LoginController@LoginSession');
 
-Route::group(['middleware' => 'SessionCheck'],function()
+Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 {//start group
     Route::get('/logout','LoginController@LogoutSession');
     
