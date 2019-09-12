@@ -22,4 +22,9 @@ class CustomerController extends Controller
         
         return view('customer',['Customers' => $data]);    
     }
+
+    public function edit(Request $request)
+    {
+        
+    }
 }

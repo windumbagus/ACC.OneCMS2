@@ -98,9 +98,9 @@
   $('#ShowPass').on('ifChanged', function(){
         var x = $('#ShowPass').is(':checked')
         if(x == true){
-            document.getElementById('password').setAttribute('type', 'text')
+            document.getElementById('Password').setAttribute('type', 'text')
         }else{
-            document.getElementById('password').setAttribute('type', 'password')
+            document.getElementById('Password').setAttribute('type', 'password')
         }
     })
 
