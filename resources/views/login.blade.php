@@ -33,17 +33,22 @@
   
   <div class="login-box-body">
     <div class="login-logo">
-        <img src="assets/ACC_LOGO.png" alt="" style="Height:45%; width:30%; margin-top:5%;"><br>
-      <h3>CMS-LMS<br><b>AstraCreditCompany</b></h3>
+        <img src="assets/accone-logo.png" alt="" style="Height:45%; width:45%; margin-top:5%;"><br>
+      <h3><b>ACC.One CMS</b></h3>
+      <h4>AstraCreditCompany</h4>
     </div>
     <!-- /.login-logo -->
     <form action="{{ asset('login-Process') }}" method="post">
         @csrf
-        {{-- @error('Username')
+
+        @if (isset($error))
+          @if (!$error==null)
           <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
+            <strong>{{ $error }}</strong>
           </span>
-        @enderror --}}
+          @endif
+        @endif
+
       <div class="form-group has-feedback"> 
           <input id="Username" type="text" class="form-control" name="Username" required autocomplete="Username" autofocus placeholder="Username">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>

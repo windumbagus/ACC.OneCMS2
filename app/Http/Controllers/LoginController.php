@@ -26,26 +26,15 @@ class LoginController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        
-        
-        dd($result);
+    
+        // dd($result);
+    
         if ($result== "Berhasil login" ){
             $request->session()->put('LoginSession',$request->Username);
-        }elseif ($result=="User telah expired"){
-            //sweet alert
-            return redirect('login');
-        }elseif($result=="Salah Email/Password"){
-            //sweet alert
-            return redirect('login');
-        }elseif($result=="Email/Password tidak booleh kosong"){
-            //sweet alert
-            return redirect('login');
+            return redirect('/');
         }else{
-            //sweet alert 
-            return redirect('login');
+            return view('login',['error' =>$result]);    
         }
-        
-        return redirect('/');
 	}
  
 	// menghapus session
