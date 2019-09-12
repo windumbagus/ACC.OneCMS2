@@ -32,6 +32,7 @@ Route::group(['middleware' => 'SessionCheck'],function()
 
     Route::get('/pendinglist','PendinglistController@index');
     Route::get('/pendinglist/update','PendinglistController@update');
+    Route::post('/pendinglist/verification-process','PendinglistController@verification');
 
     Route::get('/customer','CustomerController@index');
 });//end group route

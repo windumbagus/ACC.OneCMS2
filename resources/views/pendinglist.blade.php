@@ -141,6 +141,7 @@
                     
                     }
 
+                    $('[name="pendinglist_Userid_update_data"]').val(val.User.Id);
                     $('[name="pendinglist_Name_update_data"]').val(val.User.Name);
                     $('[name="pendinglist_Username_update_data"]').val(val.User.Username);
                     $('[name="pendinglist_Email_update_data"]').val(val.User.Email);

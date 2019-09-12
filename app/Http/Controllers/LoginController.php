@@ -15,7 +15,7 @@ class LoginController extends Controller
             "Username"=>"$request->Username",
             "Password"=>"$request->Password",
         )); 
-            // dd($data);
+        // dd($data);
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LoginAPI/Login"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
@@ -28,7 +28,6 @@ class LoginController extends Controller
         curl_close($ch);
     
         // dd($result);
-    
         if ($result== "Berhasil login" ){
             $request->session()->put('LoginSession',$request->Username);
             return redirect('/');

@@ -10,8 +10,11 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
                 <h4 class="box-title">Update Pending List</h4>   
             </div>
             <div class="modal-body">
-                <form id="form-pedinglist-update" action="#" method="post"> 
+                <form id="form_pedinglist_update" action="{{ asset('pendinglist/verification-process') }}" method="post"> 
                     @csrf	
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="pendinglist_Userid_update_data">
+                    </div>
                     <div class="form-group">
                         <label>Foto Profile:</label><br>
                         <img style="width: 150px; height: 200px;" id="pendinglist_Profile_update_data" name="pendinglist_Profile_update_data" alt=""/><br>
@@ -70,15 +73,22 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
                         <img style="width: 150px; height: 200px;" id="pendinglist_KK_update_data" name="pendinglist_KK_update_data" alt=""/><br>
                     </div>
                     <div class="form-group">
-                        <label>Reason:</label>
-                        <input type="text" class="form-control" name="pendinglist_Reason_update_data"
-                        placeholder="Reason">
+                        <label> Approve/Reject:</label><br>
+                        <div> 
+                            <input type="radio" name="pendinglist_isApproving_update_data" value=true onclick="onClickApprove();" checked> Approve<br>
+                            <input type="radio" name="pendinglist_isApproving_update_data" value=false onclick="onClickReject();"> Reject
+                        </div>
                     </div>
-                </form>	
+                    <div class="form-group" id="pendinglist_Reason_element" hidden>
+                        <label>Reason:</label>
+                        <input type="text" class="form-control" name="pendinglist_Reason_update_data" placeholder="Reason">
+                    </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="close-modal">Close</button>		
-            </div>		
+                <button type="submit" class="btn btn-warning" id="on-save">Save</button>	
+                <button type="button" class="btn btn-primary" id="close-modal">Close</button>	
+            </div>
+                </form>		
         </div>
     </div>
 </div>
@@ -86,12 +96,21 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
 <Script>
     $(function() {
         $('#close-modal').click(function() {
-        $('#pendinglist_update_modal').modal('hide');
-        $('#form-pedinglist-update')[0].reset();  
-        $('#pendinglist_Profile_update_data').attr('src', "");
-        $('#pendinglist_KTP_update_data').attr('src', "");
-        $('#pendinglist_NPWP_update_data').attr('src', "");
-        $('#pendinglist_KK_update_data').attr('src', "");
-        });      
+            $('#pendinglist_update_modal').modal('hide');
+            $('#form_pedinglist_update')[0].reset();  
+            $('#pendinglist_Profile_update_data').attr('src', "");
+            $('#pendinglist_KTP_update_data').attr('src', "");
+            $('#pendinglist_NPWP_update_data').attr('src', "");
+            $('#pendinglist_KK_update_data').attr('src', "");
+        }); 
     });
+
+    function onClickApprove()
+    {
+        document.getElementById("pendinglist_Reason_element").style.display="none";
+    }
+    function onClickReject()
+    {
+        document.getElementById("pendinglist_Reason_element").style.display="block";
+    }
 </Script>
