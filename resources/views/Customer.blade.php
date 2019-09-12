@@ -53,7 +53,7 @@
                 @endif --}}
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Customer->User->Id}}" class="view-rejected btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
+                    <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
                 </span>
                 </td>
             </tr>   
@@ -99,9 +99,53 @@
             tab.search('').draw()
             $('.InputSearch').val('')
         })
+
+        //VIEW
+        $(document).on('click','.update-customer',function(){
+            var id = $(this).attr('data-id');
+            console.log(id);
+            $.ajax({
+                url:"{{asset('/customer/show')}}",
+                data: {'Id':id ,'_token':'{{csrf_token()}}' },
+                dataType:'JSON', 
+                type:'GET',
+                success: function (val){
+                    console.log(val);
+
+                    $('[name="customer_Id_update"]').val(val.User.Id);
+                    $('[name="customer_UserId_update"]').val(val.User.UserId);
+                    $('[name="customer_GCMId_update"]').val(val.User.GCMId);
+                    $('[name="customer_User_update"]').val(val.User.Email);
+                    $('[name="customer_NamaBank_update"]').val(val.MstGCM.CharDesc2);
+                    $('[name="customer_NoRekening_update"]').val(val.MstBankAccountCustomer.NoRekening);
+                    $('[name="customer_NamaRekening_update"]').val(val.MstBankAccountCustomer.NamaRekening);
+                    //Rekening Utama
+                    if (val.MstBankAccountCustomer.hasOwnProperty('RekeningUtama')) {
+                        $('[name="customer_RekeningUtama_update"]').val(val.MstBankAccountCustomer.RekeningUtama);   
+                    }else{
+                        $('[name="customer_RekeningUtama_update"]').val("Tidak");        
+                    }
+                    $('[name="customer_Cabang_update"]').val(val.MstBankAccountCustomer.Cabang);
+                    $('[name="customer_IsActive_update"]').val(val.User.Is_Active);
+                    // if (val.User.Is_Active==true) {
+                    //     $('[name="customer_IsActive_update"]').iCheck('check')   
+                    // } else {
+                    //     $('[name="customer_IsActive_update"]').iCheck('uncheck');                        
+                    // }
+                    // $('[name="customer__update"]').val(val..);
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                console.log(jqXhr);
+                console.log( errorThrown );
+                console.log(textStatus);
+                },
+            });
+            $('#update-customer').modal();
+        });
+
         
     })
   </script>
 
-
+@include('modal.update_customer')
 @endsection

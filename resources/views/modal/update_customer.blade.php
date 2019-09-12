@@ -1,4 +1,4 @@
-{{-- <!-- Modal ADD -->
+<!-- Modal ADD -->
 <div class="modal fade" id="update-customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -9,69 +9,53 @@
                 <h4 class="box-title">Update Customer</h4> 
             </div>
             <div class="modal-body">
-                <form id="form-view-approve" action="#" method="post"> 
+                <form id="form-update-customer" action="#" method="post"> 
                     @csrf
                     <div class="form-group">
-                        <label>User :</label>
-                        <input type="text" class="form-control" name="customer__update"
+                        <input type="hidden" class="form-control" name="customer_Id_update"
                         placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label>Username :</label>
-                        <input type="text" class="form-control" name="approve_Username_view"
-                        placeholder="Username">
+                        <input type="hidden" class="form-control" name="customer_UserId_update"
+                        placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label>Email:</label>
-                        <input type="text" class="form-control" name="approve_Email_view"
-                        placeholder="Email">
+                        <input type="hidden" class="form-control" name="customer_GCMId_update"
+                        placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label>Mobile Phone:</label>
-                        <input type="text" class="form-control" name="approve_MobilePhone_view"
-                        placeholder="Mobile Phone">
+                        <label>User :</label>
+                        <input type="text" class="form-control" name="customer_User_update"
+                        placeholder="User">
                     </div>
                     <div class="form-group">
-                        <label>Last Login:</label>
-                        <input type="text" class="form-control" name="approve_Last_Login_view"
-                        placeholder="Last Login">
+                        <label>Nama Bank:</label>
+                        <input type="text" class="form-control" name="customer_NamaBank_update"
+                        placeholder="Nama Bank">
                     </div>
                     <div class="form-group">
-                        <label>Is Active:</label>
-                        <input type="text" class="form-control" name="approve_Is_Active_view"
-                        placeholder="Is Active">
+                        <label>No Rekening:</label>
+                        <input type="text" class="form-control" name="customer_NoRekening_update"
+                        placeholder="No Rekening">
                     </div>
                     <div class="form-group">
-                        <label>Tanggal Lahir:</label>
-                        <input type="text" class="form-control" name="approve_TanggalLahir_view"
-                        placeholder="Tanggal Lahir">
+                        <label>Nama Rekening:</label>
+                        <input type="text" class="form-control" name="customer_NamaRekening_update"
+                        placeholder="Nama Rekening">
                     </div>
                     <div class="form-group">
-                        <label>Status:</label>
-                        <input type="text" class="form-control" name="approve_Status_view"
-                        placeholder="Status">
+                        <label>Rekening Utama:</label>
+                        <input type="text" class="form-control" name="customer_RekeningUtama_update"
+                        placeholder="Rekening Utama">
                     </div>
                     <div class="form-group">
-                        <label>Status No HP:</label>
-                        <input type="text" class="form-control" name="approve_StatusNoHP_view"
-                        placeholder="StatusNoHP">
+                        <label>Cabang:</label>
+                        <input type="text" class="form-control" name="customer_Cabang_update"
+                        placeholder="Cabang">
                     </div>
                     <div class="form-group">
-                        <label>Subscribe:</label>
-                        <input type="text" class="form-control" name="approve_Subscribe_view"
-                        placeholder="Subscribe">
-                    </div>
-                    <div class="form-group">
-                        <label>Foto KTP:</label><br>
-                        <img style="width: 150px; height: 200px;" id="approve_KTP_view" name="approve_KTP_view" alt=""/><br>
-                    </div>
-                    <div class="form-group">
-                        <label>Foto NPWP:</label><br>
-                        <img style="width: 150px; height: 200px;" id="approve_NPWP_view" name="approve_NPWP_view" alt=""/><br>
-                    </div>
-                    <div class="form-group">
-                        <label>Foto KK:</label><br>
-                        <img style="width: 150px; height: 200px;" id="approve_KK_view" name="approve_KK_view" alt=""/><br>
+                        <label>Is_Active:</label>
+                        <input type="text" class="form-control" name="customer_IsActive_update" id="customer_IsActive_update">
                     </div>
                 </form>	
             </div>
@@ -85,12 +69,8 @@
 <Script>
     $(function() {
         $('#close-modal').click(function() {
-        $('#view-approve').modal('hide');
-        $('#form-view-approve')[0].reset();  
-        // $('#approve_Profile_view').attr('src', "");
-        // $('#approve_KTP_view').attr('src', "");
-        // $('#approve_NPWP_view').attr('src', "");
-        // $('#approve_KK_view').attr('src', "");
+        $('#update-customer').modal('hide');
+        $('#form-update-customer')[0].reset();  
         });      
     });
-</Script> --}}
+</Script>

@@ -35,4 +35,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/pendinglist/verification-process','PendinglistController@verification');
 
     Route::get('/customer','CustomerController@index');
+    Route::get('/customer/show','CustomerController@show');
+
 });//end group route
