@@ -54,13 +54,14 @@
                         placeholder="Cabang">
                     </div>
                     <div class="form-group">
-                        <label>Is_Active:</label>
-                        <input type="text" class="form-control" name="customer_IsActive_update" id="customer_IsActive_update">
+                        <label>Is_Active:</label><br>
+                        <input type="checkbox" class="" name="customer_IsActive_update">
                     </div>
                 </form>	
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="close-modal">Close</button>		
+                    <button type="button" class="btn btn-default" id="close-modal">Close</button>		
+                    <button type="button" class="btn btn-success">OK</button>		
             </div>	
         </div>
     </div>

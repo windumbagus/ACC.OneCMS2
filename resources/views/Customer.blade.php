@@ -53,7 +53,8 @@
                 @endif --}}
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
+                    <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                    <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="delete-customer btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> 
                 </span>
                 </td>
             </tr>   
@@ -126,12 +127,20 @@
                         $('[name="customer_RekeningUtama_update"]').val("Tidak");        
                     }
                     $('[name="customer_Cabang_update"]').val(val.MstBankAccountCustomer.Cabang);
-                    $('[name="customer_IsActive_update"]').val(val.User.Is_Active);
-                    // if (val.User.Is_Active==true) {
+                    if (val.User.Is_Active == true) {
+                        $('[name="customer_IsActive_update"]').attr('checked', true);
+                    } else {
+                        $('[name="customer_IsActive_update"]').attr('checked', false);                     
+                    }
+
+                    // $('[name="customer_IsActive_update"]').val(val.User.Is_Active);
+
+                    // if (val.User.Is_Active == true) {
                     //     $('[name="customer_IsActive_update"]').iCheck('check')   
                     // } else {
                     //     $('[name="customer_IsActive_update"]').iCheck('uncheck');                        
                     // }
+
                     // $('[name="customer__update"]').val(val..);
                 },
                 error: function( jqXhr, textStatus, errorThrown ){

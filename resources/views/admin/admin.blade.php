@@ -90,7 +90,7 @@
 
 {{-- Sweet Alert --}}
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- iCheck -->
+{{-- <!-- iCheck -->
 <script src="assets/adminLTE/plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {
@@ -100,7 +100,7 @@
       increaseArea: '20%' /* optional */
     });
   });
-</script>
+</script> --}}
 
   <body class="hold-transition skin-blue-light sidebar-mini">
     <div class="wrapper">
