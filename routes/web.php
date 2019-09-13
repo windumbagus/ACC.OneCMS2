@@ -16,7 +16,7 @@
 // });
 
 Route::get('/login','LoginController@index');
-Route::post('/login-Process','LoginController@LoginSession');
+Route::post('/login-process','LoginController@LoginSession');
 
 Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 {//start group
@@ -31,7 +31,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/approve/show','ApproveController@show');
 
     Route::get('/pendinglist','PendinglistController@index');
-    Route::get('/pendinglist/update','PendinglistController@update');
+    Route::get('/pendinglist/show','PendinglistController@show');
     Route::post('/pendinglist/verification-process','PendinglistController@verification');
 
     Route::get('/customer','CustomerController@index');

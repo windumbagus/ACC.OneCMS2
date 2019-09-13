@@ -124,7 +124,7 @@
             var id = $(this).attr('data-userid');
             console.log(id);
             $.ajax({
-                url:"{{asset('/pendinglist/update')}}",
+                url:"{{asset('/pendinglist/show')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}' },
                 dataType:'JSON', 
                 type:'GET',

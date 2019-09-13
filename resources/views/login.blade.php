@@ -38,7 +38,7 @@
       <h4>AstraCreditCompany</h4>
     </div>
     <!-- /.login-logo -->
-    <form action="{{ asset('login-Process') }}" method="post">
+    <form action="{{ asset('login-process') }}" method="post">
         @csrf
 
         @if (isset($error))

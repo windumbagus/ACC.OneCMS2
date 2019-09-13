@@ -24,7 +24,7 @@ class PendinglistController extends Controller
         return view('pendinglist',['Pendings' => $data]);    
     }
 
-    public function update(Request $request)
+    public function show(Request $request)
     {
         //API GET
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PendingListAPI/GetPendingListByUserid?Userid=".$request->Id; 
