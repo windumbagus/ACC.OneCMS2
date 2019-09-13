@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Alert;
+
 
 class CustomerController extends Controller
 {
@@ -75,7 +75,7 @@ class CustomerController extends Controller
         curl_close($ch);
         $data = json_decode($result);
         // dd($result);
-        // Alert::error('Bank Account Customer Update Successfully. ');
+
         return redirect('/customer');
     }
 
