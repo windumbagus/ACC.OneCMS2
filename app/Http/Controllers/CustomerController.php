@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use Alert;
 
 class CustomerController extends Controller
 {
@@ -40,21 +41,27 @@ class CustomerController extends Controller
          return json_encode($val);
     }
 
-    public function edit(Request $request)
+    public function update(Request $request)
     {
+        if($request->customer_IsActive_update == "on"){
+            $IsActive = true;
+        }else{
+            $IsActive = false;
+        }
+
         $data = json_encode(array(
             "Id"=> "$request->customer_Id_update" ,
             "UserId"=> "$request->customer_UserId_update" ,
             "GCMId"=> "$request->customer_GCMId_update" ,
             "NoRekening"=> "$request->customer_NoRekening_update" ,
             "NamaRekening"=> "$request->customer_NamaRekening_update" ,
-            "AddedDate"=> "$request->" ,
-            "UserAdded"=> "$request->" ,
+            "AddedDate"=> "$request->customer_AddedDate_update" ,
+            "UserAdded"=> "$request->customer_UserAdded_update" ,
             "Cabang"=> "$request->customer_Cabang_update" ,
-            "Is_Active"=> "$request->customer_IsActive_update" ,
-            "BankCode"=> "$request->" 
+            "Is_Active"=> $IsActive ,
+            "BankCode"=> "$request->customer_BankCode_update" 
         )); 
-        dd($data);
+        // dd($data);
 
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BankAccountCustomerAPI/UpdateBankAccount"; 
         $ch = curl_init($url);                   
@@ -63,6 +70,24 @@ class CustomerController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+        // Alert::error('Bank Account Customer Update Successfully. ');
+        return redirect('/customer');
+    }
+
+    public function delete(Request $request)
+    {
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BankAccountCustomerAPI/DeleteBankAccount?BankAccountCustomerID=".$request->Id;
+        dd($url);        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);

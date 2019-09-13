@@ -113,10 +113,13 @@
                 success: function (val){
                     console.log(val);
 
-                    $('[name="customer_Id_update"]').val(val.User.Id);
-                    $('[name="customer_UserId_update"]').val(val.User.UserId);
-                    $('[name="customer_GCMId_update"]').val(val.User.GCMId);
+                    $('[name="customer_Id_update"]').val(val.MstBankAccountCustomer.Id);
+                    $('[name="customer_UserId_update"]').val(val.MstBankAccountCustomer.UserId);
+                    $('[name="customer_GCMId_update"]').val(val.MstBankAccountCustomer.GCMId);
                     $('[name="customer_User_update"]').val(val.User.Email);
+                    $('[name="customer_UserAdded_update"]').val(val.MstBankAccountCustomer.UserAdded);
+                    $('[name="customer_AddedDate_update"]').val(val.MstBankAccountCustomer.AddedDate);
+                    $('[name="customer_BankCode_update"]').val(val.MstBankAccountCustomer.BankCode);
                     $('[name="customer_NamaBank_update"]').val(val.MstGCM.CharDesc2);
                     $('[name="customer_NoRekening_update"]').val(val.MstBankAccountCustomer.NoRekening);
                     $('[name="customer_NamaRekening_update"]').val(val.MstBankAccountCustomer.NamaRekening);
@@ -127,21 +130,16 @@
                         $('[name="customer_RekeningUtama_update"]').val("Tidak");        
                     }
                     $('[name="customer_Cabang_update"]').val(val.MstBankAccountCustomer.Cabang);
-                    if (val.User.Is_Active == true) {
-                        $('[name="customer_IsActive_update"]').attr('checked', true);
-                    } else {
-                        $('[name="customer_IsActive_update"]').attr('checked', false);                     
+                    
+                    //kalo ga ada true kalo ada false 
+                    if (val.MstBankAccountCustomer.hasOwnProperty('Is_Active')) {
+                        if (val.MstBankAccountCustomer.Is_Active == false) {
+                            $('[name="customer_IsActive_update"]').attr('checked', false);
+                        }
+                    }else{
+                        $('[name="customer_IsActive_update"]').attr('checked', true);   
                     }
-
-                    // $('[name="customer_IsActive_update"]').val(val.User.Is_Active);
-
-                    // if (val.User.Is_Active == true) {
-                    //     $('[name="customer_IsActive_update"]').iCheck('check')   
-                    // } else {
-                    //     $('[name="customer_IsActive_update"]').iCheck('uncheck');                        
-                    // }
-
-                    // $('[name="customer__update"]').val(val..);
+                    
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                 console.log(jqXhr);

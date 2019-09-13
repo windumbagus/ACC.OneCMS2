@@ -8,8 +8,8 @@
                 </button>
                 <h4 class="box-title">Update Customer</h4> 
             </div>
+        <form id="form-update-customer" action="{{ asset('customer/update') }}" method="post"> 
             <div class="modal-body">
-                <form id="form-update-customer" action="#" method="post"> 
                     @csrf
                     <div class="form-group">
                         <input type="hidden" class="form-control" name="customer_Id_update"
@@ -24,45 +24,57 @@
                         placeholder="Name">
                     </div>
                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="customer_UserAdded_update"
+                        placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="customer_BankCode_update"
+                        placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="customer_AddedDate_update"
+                        placeholder="Name">
+                    </div>
+                    <div class="form-group">
                         <label>User :</label>
                         <input type="text" class="form-control" name="customer_User_update"
-                        placeholder="User">
+                        placeholder="User" readonly>
                     </div>
                     <div class="form-group">
                         <label>Nama Bank:</label>
                         <input type="text" class="form-control" name="customer_NamaBank_update"
-                        placeholder="Nama Bank">
+                        placeholder="Nama Bank" readonly>
                     </div>
                     <div class="form-group">
                         <label>No Rekening:</label>
                         <input type="text" class="form-control" name="customer_NoRekening_update"
-                        placeholder="No Rekening">
+                        placeholder="No Rekening" readonly>
                     </div>
                     <div class="form-group">
                         <label>Nama Rekening:</label>
                         <input type="text" class="form-control" name="customer_NamaRekening_update"
-                        placeholder="Nama Rekening">
+                        placeholder="Nama Rekening" readonly>
                     </div>
                     <div class="form-group">
                         <label>Rekening Utama:</label>
                         <input type="text" class="form-control" name="customer_RekeningUtama_update"
-                        placeholder="Rekening Utama">
+                        placeholder="Rekening Utama" readonly>
                     </div>
                     <div class="form-group">
                         <label>Cabang:</label>
                         <input type="text" class="form-control" name="customer_Cabang_update"
-                        placeholder="Cabang">
+                        placeholder="Cabang" readonly>
                     </div>
                     <div class="form-group">
                         <label>Is_Active:</label><br>
                         <input type="checkbox" class="" name="customer_IsActive_update">
-                    </div>
-                </form>	
+                    </div>	
             </div>
             <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="close-modal">Close</button>		
-                    <button type="button" class="btn btn-success">OK</button>		
+                <button type="button" class="btn btn-default" id="close-modal">Close</button>		
+                <button type="submit" class="btn btn-success">OK</button>		
             </div>	
+        </form>
         </div>
     </div>
 </div>
