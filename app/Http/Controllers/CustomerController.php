@@ -76,7 +76,7 @@ class CustomerController extends Controller
         $data = json_decode($result);
         // dd($result);
 
-        return redirect('/customer');
+        return redirect('/customer')->with('success',' Update Data Successfully!');
     }
 
     public function delete($id=null,Request $request)
@@ -93,6 +93,6 @@ class CustomerController extends Controller
         $data = json_decode($result);
         // dd($result);
 
-        return redirect('/customer');
+        return redirect('/customer')->with('success',' Delete Data Successfully!');
     }
 }
