@@ -79,14 +79,13 @@ class CustomerController extends Controller
         return redirect('/customer');
     }
 
-    public function delete(Request $request)
+    public function delete($id=null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BankAccountCustomerAPI/DeleteBankAccount?BankAccountCustomerID=".$request->Id;
-        dd($url);        
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BankAccountCustomerAPI/DeleteBankAccount?BankAccountCustomerID=".$id;
+        // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $err = curl_error($ch);

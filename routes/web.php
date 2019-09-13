@@ -37,5 +37,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/customer','CustomerController@index');
     Route::get('/customer/show','CustomerController@show');
     Route::post('/customer/update','CustomerController@update');
+    Route::get('/customer/delete/{id}','CustomerController@delete');
 
 });//end group route

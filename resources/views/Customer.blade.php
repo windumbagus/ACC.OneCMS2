@@ -54,7 +54,10 @@
                 <td>
                 <span>
                     <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                    <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="delete-customer btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> 
+                    <a  href="{{asset('customer/delete/'.$Customer->MstBankAccountCustomer->Id)}}" 
+                        data-id2="{{ $Customer->MstBankAccountCustomer->Id}}" class=" btn btn-danger btn-sm" 
+                        onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
+                    </a> 
                 </span>
                 </td>
             </tr>   
@@ -139,7 +142,6 @@
                     }else{
                         $('[name="customer_IsActive_update"]').attr('checked', true);   
                     }
-                    
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                 console.log(jqXhr);
@@ -150,6 +152,10 @@
             $('#update-customer').modal();
         });
 
+        // $(document).on('click','.delete-customer',function(){
+        //     var id2 = $(this).attr('data-id2');
+        //     console.log(id2);     
+        // });
         
     })
   </script>
