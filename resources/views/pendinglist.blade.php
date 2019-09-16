@@ -208,7 +208,7 @@
         });        
     })
   </script>
-  @include('modal.pendinglist_update')
+  @include('modal.update_pendinglist')
 @endsection 
 
 
