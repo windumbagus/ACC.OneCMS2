@@ -113,7 +113,7 @@
                 </a>
                 <ul class="treeview-menu">
                 <li class="@yield('product-feedback')"><a href="{{ asset('product-feedback') }}"><i class="fa fa-circle-o"></i> Product Feedback</a></li>
-                <li class="@yield('bug-report')"><a href="#"><i class="fa fa-circle-o"></i> Bug Report</a></li>
+                <li class="@yield('bug-report')"><a href="{{ asset('bug-report') }}"><i class="fa fa-circle-o"></i> Bug Report</a></li>
                 <li class="@yield('survey')"><a href="#"><i class="fa fa-circle-o"></i> Survey</a></li>
                 </ul>
             </li>

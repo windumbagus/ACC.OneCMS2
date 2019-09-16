@@ -43,5 +43,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/product-feedback/show','ProductFeedbackController@show');
     Route::get('/product-feedback/delete/{id}','ProductFeedbackController@delete');
 
+    Route::get('/bug-report','BugReportController@index');
+    Route::get('/bug-report/show','BugReportController@show');
+    Route::get('/bug-report/delete/{id}','BugReportController@delete');
+
 
 });//end group route
