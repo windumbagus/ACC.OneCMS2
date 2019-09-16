@@ -84,7 +84,7 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                <li class="@yield('registered-contract')"><a href="#"><i class="fa fa-circle-o"></i> Registered Contract</a></li>
+                <li class="@yield('registered-contract')"><a href="{{ asset('registered-contract') }}"><i class="fa fa-circle-o"></i> Registered Contract</a></li>
                 <li class="@yield('status-pengajuan-aplikasi')"><a href="#"><i class="fa fa-circle-o"></i> Ststus Pengajuan Aplikasi</a></li>
                 </ul>
             </li>
