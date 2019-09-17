@@ -58,7 +58,7 @@
                 @endif --}}
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Contract->MstRegisteredContract->Id}}" class="view-registered-contract btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
+                    <a href="#" data-id="{{ $Contract->MstRegisteredContract->Id}}" class="view-registered-contract-detail btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
                     <a  href="{{asset('bug-report/delete/'.$Contract->MstRegisteredContract->Id)}}" 
                         data-id2="{{ $Contract->MstRegisteredContract->Id}}" class=" btn btn-danger btn-sm" 
                         onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
@@ -111,8 +111,8 @@
             $('.InputSearch').val('')
         })
 
-        //VIEW
-        $(document).on('click','.view-registered-contract',function(){
+        // VIEW
+        $(document).on('click','.view-registered-contract-detail',function(){
             var id = $(this).attr('data-id');
             console.log(id);
             $.ajax({
@@ -123,10 +123,10 @@
                 success: function (val){
                     console.log(val);
 
-                    // $('[name="bug_report_User_view"]').val(val.User.Name);
-                    // $('[name="bug_report_Report_view"]').val(val.MstKritikSaranBug.Report);
-                    // $('[name="bug_report_Flag_view"]').val(val.MstKritikSaranBug.Flag);
-                    
+                    $('[name="registered_contract_Name_detail"]').val(val.User.Name);
+                    $('[name="registered_contract_Name_detail"]').val(val.User.Name);
+                //     // $('[name="bug_report_Report_view"]').val(val.MstKritikSaranBug.Report);
+                //     // $('[name="bug_report_Flag_view"]').val(val.MstKritikSaranBug.Flag);
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                 console.log(jqXhr);
@@ -134,11 +134,11 @@
                 console.log(textStatus);
                 },
             });
-            // $('#view-bug-report').modal();
+            $('#view-registered-contract-detail').modal();
         });
         
     })
 </script>
 
-
+@include('modal.view_registered_contract_detail')
 @endsection

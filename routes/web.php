@@ -52,7 +52,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/survey/delete/{id}','SurveyController@delete');
 
     Route::get('/registered-contract','RegisteredContractController@index');
-    Route::get('/registered-contract-detail','RegisteredContractController@RegisteredContractDetail');
+    Route::get('/registered-contract/show','RegisteredContractController@show');
 
 
 });//end group route
