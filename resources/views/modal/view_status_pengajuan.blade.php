@@ -72,8 +72,7 @@
                 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="view-status-data" class="view-status-data
-                        btn btn-info">View Status Data</button>	
+                    <button type="button" class="btn btn-success" id="view-status-data">View Status Data</button>	
                     <button type="button" class="btn btn-primary" id="close-modal-status-pengajuan">Close</button>		
                 </div>
             </form>		
@@ -89,39 +88,36 @@
         });      
     });
 
-    $(document).ready(function () {
-        $(document).on('click','.view-status-data',function(){
-            var id  = $(this).attr('data-id2');
-            console.log(id);
-            
-            $.ajax({
-                url:"{{asset('/status-pengajuan-aplikasi/status-data')}}",
-                data: {'Id':id ,'_token':'{{csrf_token()}}' },
-                dataType:'JSON', 
-                type:'GET',
-                success: function (Status_Datas){
-                    console.log(Status_Datas);
-
-                    $('[name="status_data_Id_data"]').val(Status_Datas.Id);
-                    $('[name="status_data_Status_data"]').val(Status_Datas.Status);
-                    $('[name="status_data_Date_data"]').val(Status_Datas.Date);
-                    $('[name="status_data_MstStatusPengajuanID_data"]').val(Status_Datas.MstStatusPengajuanID);
-                    
-                    // if (Status_Datas.MstCustomerDetail.hasOwnProperty('Subscribe')) {
-                    //     $('[name="pendinglist_Subscribe_update_data"]').val(Status_Datas.MstCustomerDetail.Subscribe);   
-                    // }else{
-                    //     $('[name="pendinglist_Subscribe_update_data"]').val("N");        
-                    // }
-                },
-                error: function( jqXhr, textStatus, errorThrown ){
-                console.log(jqXhr);
-                console.log( errorThrown );
-                console.log(textStatus);
-                },
-            });
-            $('#view-status-data').modal();
+    $(document).on('click','#view-status-data',function(){
+        var id  = $(this).attr('data-id2');
+        console.log(id);
+        
+        $.ajax({
+            url:"{{asset('/status-pengajuan-aplikasi/status-data')}}",
+            data: {'Id':id ,'_token':'{{csrf_token()}}' },
+            dataType:'JSON', 
+            type:'GET',
+            success: function (val){
+                console.log(val);
+                var Status_data = val.Status_data;
+                var table = $('#example2').DataTable()
+                table.clear().draw()
+                Status_data.map(e=>{
+                    table.row.add([
+                        e.Status,
+                        e.Date,
+                    ]).draw(false)
+                    // $('.conditions').hide()
+                }) 
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+            console.log(jqXhr);
+            console.log( errorThrown );
+            console.log(textStatus);
+            },
         });
-    })
+        $('#view-status-data-modal').modal();
+    });
 </Script>
 
 

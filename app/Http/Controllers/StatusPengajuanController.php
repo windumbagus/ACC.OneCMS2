@@ -69,8 +69,11 @@ class StatusPengajuanController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $Hasil = json_decode($result);
-        // dd($Status_Datas);
+        // dd($Status_Data);
+        $val = [
+            "Status_data"=> $Hasil,
+        ];
 
-        return  ['Status_Datas' => $Hasil];
+        return  $val;
     }
 }

@@ -140,7 +140,7 @@
                     $('[name="status_pengajuan_UserId_data"]').val(val.MstStatusPengajuan.UserId);
                     $('[name="status_pengajuan_Status_data"]').val(val.MstStatusPengajuan.Status);
 
-                    document.getElementById("view-status-data").setAttribute("data-id2",val.MstStatusPengajuan.Id);
+                    document.getElementById('view-status-data').setAttribute('data-id2',val.MstStatusPengajuan.Id);
 
                     if (val.MstStatusPengajuan.hasOwnProperty('Brand')) {
                         $('[name="status_pengajuan_Brand_data"]').val(val.MstStatusPengajuan.Brand);   
