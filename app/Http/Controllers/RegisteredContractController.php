@@ -46,12 +46,6 @@ class RegisteredContractController extends Controller
             "NoKontrak"=>$request->ContractNo,
             "Username"=>$request->Username,
             )); 
-        // $data = json_encode(array(
-        //     "MstRegisteredContractId"=>"3333",
-        //     "NoKontrak"=>"01100129001800019",
-        //     "Username"=>"April1@mailinator.com",
-        //     )); 
-            // dd($data);
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetAllTransactionHistoryRegisteredContractId"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
@@ -65,12 +59,35 @@ class RegisteredContractController extends Controller
         $Hasils= json_decode($result); 
         // dd($Hasils);
        $val= [
-            "MstTransactionHistory"=> $Hasils,
+            "Data"=> $Hasils,
             "MstRegisteredContractId"=>$request->Id,
-            "NoKontrak"=>$request->ContractNo,
+            "ContractNo"=>$request->ContractNo,
             "Username"=>$request->Username,
        ];
         return $val;
+    }
+
+    public function TransactionDetail(Request $request)
+    {
+        $data = json_encode(array(
+            "MstTransactionHistoryId"=>$request->MstTransactionHistoryId,
+            "MstRegisteredContractId"=>$request->MstRegisteredContractId,
+            "ContractNo"=>$request->ContractNo,
+            "Username"=>$request->Username,
+            )); 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetTransactionHistoryById"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val= json_decode($result); 
+        // dd($val);
+        return json_encode($val);
     }
 
 

@@ -178,4 +178,5 @@
 
 @include('modal.view_registered_contract_detail')
 @include('modal.view_transaction_history')
+@include('modal.view_transaction_history_detail')
 @endsection

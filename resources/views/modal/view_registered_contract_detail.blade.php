@@ -168,49 +168,89 @@
         });      
     });
 
-    // VIEW
+    // VIEW all transaction
     $(document).on('click','#view-transaction-history',function(){
-            var id = $(this).attr('data-IdMstRegisteredContract');
-            var ContractNo = $(this).attr('data-ContractNo');
-            var Username = $(this).attr('data-Username');
-            console.log(id);
-            console.log(ContractNo);
-            console.log(Username);
+        var id = $(this).attr('data-IdMstRegisteredContract');
+        var ContractNo = $(this).attr('data-ContractNo');
+        var Username = $(this).attr('data-Username');
+        console.log(id);
+        console.log(ContractNo);
+        console.log(Username);
 
-            $.ajax({
-                url:"{{asset('/transaction-history/show')}}",
-                data: {'Id':id ,'ContractNo':ContractNo,'Username':Username,'_token':'{{csrf_token()}}' },
-                dataType:'JSON', 
-                type:'GET',
-                success: function (val){
-                    console.log(val);
-                    var MstTransactionHistory = val.MstTransactionHistory;
-                    var MstRegisteredContractId = val.MstRegisteredContractId;
-                    var NoKontrak = val.NoKontrak;
-                    var Username = val.Username;
-                    var table = $('#example2').DataTable()
-                    table.clear().draw()
-                    MstTransactionHistory.map(e=>{
-                        table.row.add([
-                            e.MstTransactionHistory.CONTRACT_NO,
-                            e.MstTransactionHistory.NO_INSTALLMENT,
-                            e.MstTransactionHistory.DUEDATE_PAYMENT,
-                            e.MstTransactionHistory.AMOUNT_INSTALLMENT,
-                            `<a href="#" data-MstTransactionHistoryId=${e.MstTransactionHistory.Id} 
-                            data-MstRegisteredContractId=${MstRegisteredContractId}
-                            data-NoKontrak=${NoKontrak}
-                            data-Username=${Username} 
-                            class="update-master-content btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>`,
-                        ]).draw(false)
-                        // $('.conditions').hide()
-                    }) 
-                },
-                error: function( jqXhr, textStatus, errorThrown ){
-                console.log(jqXhr);
-                console.log( errorThrown );
-                console.log(textStatus);
-                },
-            });
-            $('#view-transaction-history-modal').modal();
+        $.ajax({
+            url:"{{asset('/transaction-history/show')}}",
+            data: {'Id':id ,'ContractNo':ContractNo,'Username':Username,'_token':'{{csrf_token()}}' },
+            dataType:'JSON', 
+            type:'GET',
+            success: function (val){
+                console.log(val);
+                var Data = val.Data;
+                var MstRegisteredContractId = val.MstRegisteredContractId;
+                var ContractNo = val.ContractNo;
+                var Username = val.Username;
+                var table = $('#example2').DataTable()
+                table.clear().draw()
+                Data.map(e=>{
+                    table.row.add([
+                        e.MstTransactionHistory.CONTRACT_NO,
+                        e.MstTransactionHistory.NO_INSTALLMENT,
+                        e.MstTransactionHistory.DUEDATE_PAYMENT,
+                        e.MstTransactionHistory.AMOUNT_INSTALLMENT,
+                        `<a href="#" data-MstTransactionHistoryId=${e.MstTransactionHistory.Id} 
+                        data-MstRegisteredContractId=${MstRegisteredContractId}
+                        data-ContractNo=${ContractNo}
+                        data-Username=${Username} 
+                        class="transaction-history-detail btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>`,
+                    ]).draw(false)
+                    // $('.conditions').hide()
+                }) 
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+            console.log(jqXhr);
+            console.log( errorThrown );
+            console.log(textStatus);
+            },
         });
+        $('#view-transaction-history-modal').modal();
+    });
+
+    // VIEW all transaction
+        $(document).on('click','.transaction-history-detail',function(){
+        var MstTransactionHistoryId = $(this).attr('data-MstTransactionHistoryId');
+        var MstRegisteredContractId = $(this).attr('data-MstRegisteredContractId');
+        var ContractNo              = $(this).attr('data-ContractNo');
+        var Username                = $(this).attr('data-Username');
+        console.log(MstTransactionHistoryId);
+        console.log(MstRegisteredContractId);
+        console.log(ContractNo);
+        console.log(Username);
+
+        $.ajax({
+            url:"{{asset('/transaction-detail/show')}}",
+            data: {'MstTransactionHistoryId':MstTransactionHistoryId,'MstRegisteredContractId':MstRegisteredContractId ,'ContractNo':ContractNo,'Username':Username,'_token':'{{csrf_token()}}' },
+            dataType:'JSON', 
+            type:'GET',
+            success: function (val){
+               var val=val[0];
+                console.log(val);
+                $('[name="transaction_detail_CONTRACT_NO"]').val(val.MstTransactionHistory.CONTRACT_NO);
+                $('[name="transaction_detail_NO_INSTALLMENT"]').val(val.MstTransactionHistory.NO_INSTALLMENT);
+                $('[name="transaction_detail_DUEDATE_PAYMENT"]').val(val.MstTransactionHistory.DUEDATE_PAYMENT);
+                $('[name="transaction_detail_AMOUNT_INSTALLMENT"]').val(val.MstTransactionHistory.AMOUNT_INSTALLMENT);
+                $('[name="transaction_detail_AMOUNT_INSTALLMENT_PAID"]').val(val.MstTransactionHistory.AMOUNT_INSTALLMENT_PAID);
+                $('[name="transaction_detail_ACTUALDATE_PAYMENT"]').val(val.MstTransactionHistory.ACTUALDATE_PAYMENT);
+                $('[name="transaction_detail_STATUS"]').val(val.MstTransactionHistory.STATUS);
+                $('[name="transaction_detail_AMT_CHARGE"]').val(val.MstTransactionHistory.AMT_CHARGE);
+                $('[name="transaction_detail_AMT_PENALTY"]').val(val.MstTransactionHistory.AMT_PENALTY);
+                $('[name="transaction_detail_CURRENT_INSURANCE"]').val(val.MstTransactionHistory.CURRENT_INSURANCE);
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+            console.log(jqXhr);
+            console.log( errorThrown );
+            console.log(textStatus);
+            },
+        });
+        $('#view-transaction-history-detail-modal').modal();
+    });
+
 </Script>
