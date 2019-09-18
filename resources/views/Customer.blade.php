@@ -8,24 +8,34 @@
 <!-- TableUserCMS -->
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Customer</h3>
+        
+        <div class="row">
+            <div class="col-sm-8">
+                <h3 class="box-title">Customer</h3>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                <a href="{{asset('/customer/download')}}" class="btn btn-block btn-primary">Download</a>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-
         <div class="row">
-                <div class="col-sm-8">
-                    <input type="text" placeholder="Search by Nama Bank, No Rekening or Nama Rekening" class="InputSearch form-control">
+            <div class="col-sm-8">
+                <input type="text" placeholder="Search by Nama Bank, No Rekening or Nama Rekening" class="InputSearch form-control">
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6">
+                    <a href="#" class="ButtonSearch btn btn-block btn-info">Search</a>    
                 </div>
-                <div class="col-sm-4">
-                    <div class="col-sm-6">
-                        <a href="#" class="ButtonSearch btn btn-block btn-info">Search</a>    
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="#" class="ResetSearch btn btn-block btn-info">Reset</a>    
-                    </div>
+                <div class="col-sm-6">
+                    <a href="#" class="ResetSearch btn btn-block btn-info">Reset</a>    
                 </div>
-            </div><br>
+            </div>
+        </div><br>
 
         <table id="example1" class="table table-bordered display nowrap" style="width:100%">
         <thead>

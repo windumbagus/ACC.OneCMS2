@@ -38,6 +38,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/customer/show','CustomerController@show');
     Route::post('/customer/update','CustomerController@update');
     Route::get('/customer/delete/{id}','CustomerController@delete');
+    Route::get('/customer/download','CustomerController@download');
+    
 
     Route::get('/product-feedback','ProductFeedbackController@index');
     Route::get('/product-feedback/show','ProductFeedbackController@show');

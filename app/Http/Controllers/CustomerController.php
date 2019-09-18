@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\BankAccountExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class CustomerController extends Controller
@@ -94,5 +96,47 @@ class CustomerController extends Controller
         // dd($result);
 
         return redirect('/customer')->with('success',' Delete Data Successfully!');
+    }
+
+    public function download()
+    {
+        //API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BankAccountCustomerAPI/GetAllBankAccountList"; 
+        $ch = curl_init($url);                                                     
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils = json_decode($result);
+        // dd($Hasil);
+
+        $data=[];
+        foreach ($Hasils as $Hasil) {
+         
+            if (property_exists($Hasil->MstBankAccountCustomer, 'BankCode')){
+                $BankCode = $Hasil->MstBankAccountCustomer->BankCode;
+            }else{
+                $BankCode = "";
+            }
+            if (property_exists($Hasil->MstBankAccountCustomer, 'RekeningUtama')){
+                $RekeningUtama =  $Hasil->MstBankAccountCustomer->RekeningUtama;
+            }else{
+                $RekeningUtama = "FALSE";
+            }
+
+            array_push($data,[
+                "Username"=>$Hasil->User->Username,
+                "CharDesc1"=>$Hasil->MstGCM->CharDesc1,
+                "NoRekening"=>$Hasil->MstBankAccountCustomer->NoRekening,
+                "NamaRekening"=>$Hasil->MstBankAccountCustomer->NamaRekening,
+                "Cabang"=>$Hasil->MstBankAccountCustomer->Cabang,
+                "BankCode"=>$BankCode,
+                "RekeningUtama"=>$RekeningUtama,
+            ]);
+        }
+        // dd($data);
+        return Excel::download(new BankAccountExport($data), 'BankAccountCustomer.xlsx');
     }
 }
