@@ -53,6 +53,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/registered-contract','RegisteredContractController@index');
     Route::get('/registered-contract/show','RegisteredContractController@show');
+    Route::get('/registered-contract/delete/{id}','RegisteredContractController@delete');
     Route::get('/transaction-history/show','RegisteredContractController@TransactionHistory');
     Route::get('/transaction-detail/show','RegisteredContractController@TransactionDetail');
 

@@ -39,6 +39,23 @@ class RegisteredContractController extends Controller
          return json_encode($val);
     }
 
+    public function delete($id=null, Request $request)
+    {
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/DeleteRegisteredContractById?Id=".$id;
+        // dd($url);        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/registered-contract');
+    }
+
     public function TransactionHistory(Request $request)
     {
         $data = json_encode(array(

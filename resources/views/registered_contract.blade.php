@@ -59,7 +59,7 @@
                 <td>
                 <span>
                     <a href="#" data-id="{{ $Contract->MstRegisteredContract->Id}}" class="view-registered-contract-detail btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
-                    <a  href="{{asset('bug-report/delete/'.$Contract->MstRegisteredContract->Id)}}" 
+                    <a  href="{{asset('registered-contract/delete/'.$Contract->MstRegisteredContract->Id)}}" 
                         class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
                         <i class="fa fa-trash"></i>
                     </a> 
