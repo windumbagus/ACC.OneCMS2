@@ -8,7 +8,17 @@
 <!-- TableUserCMS -->
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Product Feedback</h3>
+        <div class="row">
+            <div class="col-sm-8">
+                <h3 class="box-title">Product Feedback</h3>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                <a href="{{asset('/product-feedback/download')}}" class="btn btn-block btn-primary">Download</a>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.box-header -->
     <div class="box-body">

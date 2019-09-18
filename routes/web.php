@@ -44,14 +44,18 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/product-feedback','ProductFeedbackController@index');
     Route::get('/product-feedback/show','ProductFeedbackController@show');
     Route::get('/product-feedback/delete/{id}','ProductFeedbackController@delete');
+    Route::get('/product-feedback/download','ProductFeedbackController@download');
+
 
     Route::get('/bug-report','BugReportController@index');
     Route::get('/bug-report/show','BugReportController@show');
     Route::get('/bug-report/delete/{id}','BugReportController@delete');
+    Route::get('/bug-report/download','BugReportController@download');
 
     Route::get('/survey','SurveyController@index');
     Route::get('/survey/show','SurveyController@show');
     Route::get('/survey/delete/{id}','SurveyController@delete');
+    Route::get('/survey/download','SurveyController@download');
 
     Route::get('/registered-contract','RegisteredContractController@index');
     Route::get('/registered-contract/show','RegisteredContractController@show');

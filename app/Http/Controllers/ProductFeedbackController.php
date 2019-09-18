@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductFeedbackExport;
 
 class ProductFeedbackController extends Controller
 {
@@ -56,5 +58,30 @@ class ProductFeedbackController extends Controller
         // dd($result);
 
         return redirect('/product-feedback');
+    }
+
+    public function download()
+    {
+         //API GET
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ProductFeedbackAPI/GetAllProductFeedback"; 
+         $ch = curl_init($url);                                                     
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+         $result = curl_exec($ch);
+         $err = curl_error($ch);
+         curl_close($ch);
+         $Hasils= json_decode($result);
+        //  dd($Hasils);
+         $data=[];
+         foreach ($Hasils as $Hasil) {
+            array_push($data,[
+                "Username"=>$Hasil->User->Username,
+                "Report"=>$Hasil->MstKritikSaranBug->Report,
+            ]);
+         }
+        //  dd($data);
+        return Excel::download(new ProductFeedbackExport($data), 'ProductFeedback.xlsx');
+
     }
 }
