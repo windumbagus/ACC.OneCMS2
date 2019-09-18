@@ -4,7 +4,8 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="@yield('user-management') treeview">
+
+        {{-- <li class="@yield('user-management') treeview">
             <a href="#">
             <i class="fa fa-users"></i> <span>User Management</span>
             <span class="pull-right-container">
@@ -17,7 +18,7 @@
             <li class="@yield('role-management')"><a href="#"><i class="fa fa-circle-o"></i> Role Management</a></li>
             <li class="@yield('acc-yes-migration')"><a href="#"><i class="fa fa-circle-o"></i> ACCYes Migration</a></li>
             </ul>
-        </li>
+        </li> --}}
 
         <li class="@yield('account-verification') treeview">
             <a href="#">
@@ -33,7 +34,7 @@
             </ul>
         </li>
     
-        <li class="@yield('master-management') treeview">
+        {{-- <li class="@yield('master-management') treeview">
             <a href="#">
             <i class="fa fa-sitemap"></i> <span>Master Management</span>
             <span class="pull-right-container">
@@ -48,9 +49,9 @@
             <li class="@yield('master-holiday')"><a href="#"><i class="fa fa-circle-o"></i> Holiday GCM</a></li>
             <li class="@yield('master-product-accone')"><a href="#"><i class="fa fa-circle-o"></i> Master Product ACCOne</a></li>
             </ul>
-        </li>
+        </li> --}}
 
-        <li class="@yield('car') treeview">
+        {{-- <li class="@yield('car') treeview">
                 <a href="#">
                 <i class="fa fa-car"></i> <span>Car</span>
                 <span class="pull-right-container">
@@ -61,9 +62,9 @@
                 <li class="@yield('new-car')"><a href="#"><i class="fa fa-circle-o"></i> New Car</a></li>
                 <li class="@yield('lease')"><a href="#"><i class="fa fa-circle-o"></i> Lease</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
-            <li class="@yield('fund') treeview">
+            {{-- <li class="@yield('fund') treeview">
                 <a href="#">
                 <i class="fa fa-credit-card"></i> <span>Fund</span>
                 <span class="pull-right-container">
@@ -74,7 +75,7 @@
                 <li class="@yield('trade-in')"><a href="#"><i class="fa fa-circle-o"></i> Trade In</a></li>
                 <li class="@yield('Multipurpose')"><a href="#"><i class="fa fa-circle-o"></i> Multipurpose</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
             <li class="@yield('service') treeview">
                 <a href="#">
@@ -118,7 +119,7 @@
                 </ul>
             </li>
 
-            <li class="@yield('acc-safe') treeview">
+            {{-- <li class="@yield('acc-safe') treeview">
                 <a href="#">
                 <i class="fa fa-bookmark"></i> <span>ACC Safe</span>
                 <span class="pull-right-container">
@@ -133,7 +134,7 @@
                 <li class="@yield('master-pernyataan')"><a href="#"><i class="fa fa-circle-o"></i> Master Pernyataan</a></li>
                 <li class="@yield('history-pembayaran-asuransi-jiwa')"><a href="#"><i class="fa fa-circle-o"></i> History Pembayaran Asuransi Jiwa</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
             <li class="@yield('bank-account') treeview">
                 <a href="#">
