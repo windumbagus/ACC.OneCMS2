@@ -44,8 +44,8 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
 <Script>
     $(function() {
         $('#close-modal').click(function() {
-        $('#view-survey').modal('hide');
-        $('#form-view-survey')[0].reset();  
+            $('#view-survey').modal('hide');
+            $('#form-view-survey')[0].reset();  
         });      
     });
 </Script>

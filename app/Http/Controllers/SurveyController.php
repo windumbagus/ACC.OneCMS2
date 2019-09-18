@@ -55,6 +55,6 @@ class SurveyController extends Controller
         $data = json_decode($result);
         // dd($result);
 
-        return redirect('/survey');
+        return redirect('/survey')->with('success',' Delete Data Successfully!');
     }
 }
