@@ -64,4 +64,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/status-pengajuan-aplikasi/delete/{id}','StatusPengajuanController@delete');
     Route::get('/status-pengajuan-aplikasi/status-data','StatusPengajuanController@StatusData');
 
+    Route::get('/push-notification','PushNotificationController@index');
+    Route::get('/push-notification/show','PushNotificationController@show');
+    Route::get('/push-notification/delete/{id}','PushNotificationController@delete');
+    Route::post('/push-notification/update','PushNotificationController@update');
+
 });//end group route

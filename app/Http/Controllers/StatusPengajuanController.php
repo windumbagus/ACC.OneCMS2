@@ -54,7 +54,7 @@ class StatusPengajuanController extends Controller
         $data = json_decode($result);
         // dd($result);
 
-        return redirect('/status-pengajuan-aplikasi');
+        return redirect('/status-pengajuan-aplikasi')->with('success',' Delete Data Successfully!');
     }
     
     public function StatusData(Request $request)
