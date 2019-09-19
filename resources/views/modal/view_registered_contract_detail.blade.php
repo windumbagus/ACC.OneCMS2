@@ -189,6 +189,17 @@
                 var ContractNo = val.ContractNo;
                 var Username = val.Username;
                 var table = $('#example2').DataTable()
+                
+                //send data id,username,contractno for download
+                $('[name="MstRegisteredContractId"]').val(MstRegisteredContractId);
+                $('[name="ContractNo"]').val(ContractNo);
+                $('[name="Username"]').val(Username);
+
+                // var SendAttrBtn = document.querySelector(".DownloadTransactionHistoryButton")
+                // SendAttrBtn.setAttribute('data-IdMstRegisteredContract',MstRegisteredContractId); 
+                // SendAttrBtn.setAttribute('data-ContractNo',ContractNo); 
+                // SendAttrBtn.setAttribute('data-Username',Username); 
+                
                 table.clear().draw()
                 Data.map(e=>{
                     table.row.add([
@@ -203,7 +214,8 @@
                         class="transaction-history-detail btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>`,
                     ]).draw(false)
                     // $('.conditions').hide()
-                }) 
+                })
+
             },
             error: function( jqXhr, textStatus, errorThrown ){
             console.log(jqXhr);
