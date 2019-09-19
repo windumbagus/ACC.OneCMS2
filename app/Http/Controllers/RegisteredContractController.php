@@ -194,7 +194,7 @@ class RegisteredContractController extends Controller
            ]);
          }
         // dd($data);
-        return Excel::download(new RegisteredContractExport($data), 'RegisteredContract.xlsx');
+        return Excel::download(new RegisteredContractExport($data), 'accone Selling Car Transaction  '. date("Y-m-d") .'.xlsx');
     }
 
     public function DownloadTransactionHistory(Request $request)
@@ -249,7 +249,7 @@ class RegisteredContractController extends Controller
             ]);
         }
         // dd($X);
-        return Excel::download(new TransactionHistoryExport($X), 'TransactionHistory'.$Hasil->MstTransactionHistory->CONTRACT_NO.'.xlsx');
+        return Excel::download(new TransactionHistoryExport($X), 'accone Transaction History '.$Hasil->MstTransactionHistory->CONTRACT_NO. ' Per '. date("Y-m-d") .'.xlsx');
     }
     
 }
