@@ -137,6 +137,6 @@ class CustomerController extends Controller
             ]);
         }
         // dd($data);
-        return Excel::download(new BankAccountExport($data), 'BankAccountCustomer.xlsx');
+        return Excel::download(new BankAccountExport($data), 'Bank Account - Customer.xlsx');
     }
 }

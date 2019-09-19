@@ -106,6 +106,6 @@ class SurveyController extends Controller
            ]);
          }
         // dd($data);
-        return Excel::download(new SurveyExport($data), 'Survey.xlsx');
+        return Excel::download(new SurveyExport($data), 'accone Survey List '. date("Y-m-d") .'.xlsx');
     }
 }

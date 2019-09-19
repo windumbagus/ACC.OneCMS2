@@ -81,7 +81,7 @@ class ProductFeedbackController extends Controller
             ]);
          }
         //  dd($data);
-        return Excel::download(new ProductFeedbackExport($data), 'ProductFeedback.xlsx');
+        return Excel::download(new ProductFeedbackExport($data), 'accone Product Feedback '. date("Y-m-d") .'.xlsx');
 
     }
 }

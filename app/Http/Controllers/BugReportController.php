@@ -80,6 +80,6 @@ class BugReportController extends Controller
            ]);
         }
        //  dd($data);
-       return Excel::download(new BugReportExport($data), 'BugReport.xlsx');
+       return Excel::download(new BugReportExport($data), 'accone Bug Report '. date("Y-m-d") .'.xlsx');
     }
 }
