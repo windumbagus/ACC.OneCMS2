@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\RegisteredContractExport;
+use App\Exports\TransactionHistoryExport;
 
 class RegisteredContractController extends Controller
 {
@@ -62,7 +63,7 @@ class RegisteredContractController extends Controller
     {
         $data = json_encode(array(
             "MstRegisteredContractId"=>$request->Id,
-            "NoKontrak"=>$request->ContractNo,
+            "ContractNo"=>$request->ContractNo,
             "Username"=>$request->Username,
             )); 
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetAllTransactionHistoryRegisteredContractId"; 
@@ -194,6 +195,61 @@ class RegisteredContractController extends Controller
          }
         // dd($data);
         return Excel::download(new RegisteredContractExport($data), 'RegisteredContract.xlsx');
+    }
+
+    public function DownloadTransactionHistory(Request $request)
+    {
+        $data = json_encode(array(
+            "MstRegisteredContractId"=>$request->Id,
+            "ContractNo"=>$request->ContractNo,
+            "Username"=>$request->Username,
+            )); 
+            // dd($data);
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetAllTransactionHistoryRegisteredContractId"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result); 
+        // dd($Hasils);
+
+        $X=[];
+        foreach ($Hasils as $Hasil) {
+
+            if (property_exists($Hasil->MstTransactionHistory, 'AMOUNT_INSTALLMENT_PAID')){
+                $AMOUNT_INSTALLMENT_PAID =  $Hasil->MstTransactionHistory->AMOUNT_INSTALLMENT_PAID;
+            }else{
+                $AMOUNT_INSTALLMENT_PAID = "";
+            }
+
+            if (property_exists($Hasil->MstTransactionHistory, 'ACTUALDATE_PAYMENT')){
+                $ACTUALDATE_PAYMENT =  $Hasil->MstTransactionHistory->ACTUALDATE_PAYMENT;
+            }else{
+                $ACTUALDATE_PAYMENT = "";
+            }
+
+            array_push($X,[
+                "Username"=> $request->Username,
+                "CONTRACT_NO"=>$Hasil->MstTransactionHistory->CONTRACT_NO,
+                "NO_INSTALLMENT"=>$Hasil->MstTransactionHistory->NO_INSTALLMENT,
+                "DUEDATE_PAYMENT"=>$Hasil->MstTransactionHistory->DUEDATE_PAYMENT,
+                "AMOUNT_INSTALLMENT"=>$Hasil->MstTransactionHistory->AMOUNT_INSTALLMENT,
+                "AMOUNT_INSTALLMENT_PAID"=>$AMOUNT_INSTALLMENT_PAID,
+                "ACTUALDATE_PAYMENT"=>$ACTUALDATE_PAYMENT,
+                "STATUS"=>$Hasil->MstTransactionHistory->STATUS,
+                "AMT_CHARGE"=>$Hasil->MstTransactionHistory->AMT_CHARGE,
+                "AMT_PENALTY"=>$Hasil->MstTransactionHistory->AMT_PENALTY,
+                "CURRENT_INSTALLMENT"=>$Hasil->MstTransactionHistory->CURRENT_INSTALLMENT,
+                "CURRENT_INSURANCE"=>$Hasil->MstTransactionHistory->CURRENT_INSURANCE,            
+            ]);
+        }
+        // dd($X);
+        return Excel::download(new TransactionHistoryExport($X), 'TransactionHistory'.$Hasil->MstTransactionHistory->CONTRACT_NO.'.xlsx');
     }
     
 }

@@ -10,6 +10,22 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <h4 class="box-title">View Transaction History</h4> 
             </div>
             <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-8">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <form action="{{asset('/transaction-history/download')}}" method="POST"> 
+                                @csrf
+                                <input type="hidden" class="form-control" name="MstRegisteredContractId" readonly>
+                                <input type="hidden" class="form-control" name="ContractNo" readonly>
+                                <input type="hidden" class="form-control" name="Username" readonly>
+                                <button type="submit" class="DownloadTransactionHistoryButton btn btn-block btn-primary">Download</button>                    
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <table id="example2"class="table table-bordered table-hover"  >
                     <thead>
                         <tr>
@@ -52,12 +68,26 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
             'autoWidth'   : false,
             'scrollX': true,
              sDom: 'lrtip', 
-            //  "columns": [
-            //     {"searchable":false},
-            //     {"searchable":false},
-            //     {"searchable":false},
-            //     {"searchable":false},
-            //     {"searchable":false},
-            // ]
     })
+
+    // $(document).on('click','.DownloadTransactionHistoryButton',function(){
+    //     var id = $(this).attr('data-IdMstRegisteredContract');
+    //     var ContractNo = $(this).attr('data-ContractNo');
+    //     var Username = $(this).attr('data-Username');
+    //     $.ajax({
+    //         url:"{{asset('/transaction-history/download')}}",
+    //         data: {'Id':id ,'ContractNo':ContractNo,'Username':Username,'_token':'{{csrf_token()}}' },
+    //         dataType:'JSON', 
+    //         type:'GET',
+    //         success: function (){
+    //         },
+    //         error: function( jqXhr, textStatus, errorThrown ){
+    //         console.log(jqXhr);
+    //         console.log( errorThrown );
+    //         console.log(textStatus);
+    //         },
+    //     });
+    // });
+
+
 </Script>

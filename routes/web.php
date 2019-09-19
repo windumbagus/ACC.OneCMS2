@@ -62,6 +62,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/registered-contract/delete/{id}','RegisteredContractController@delete');
     Route::get('/registered-contract/download','RegisteredContractController@DownloadRegisteredContract');
     Route::get('/transaction-history/show','RegisteredContractController@TransactionHistory');
+    Route::post('/transaction-history/download','RegisteredContractController@DownloadTransactionHistory');
     Route::get('/transaction-detail/show','RegisteredContractController@TransactionDetail');
 
     Route::get('/status-pengajuan-aplikasi','StatusPengajuanController@index');
