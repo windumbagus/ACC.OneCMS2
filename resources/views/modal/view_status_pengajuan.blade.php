@@ -100,12 +100,17 @@
             success: function (val){
                 console.log(val);
                 var Status_data = val.Status_data;
+                var MstStatusPengajuan_Id = val.Status_data[0].MstStatusData.MstStatusPengajuanID;
                 var table = $('#example2').DataTable()
+
+                //send data id for download
+                $('[name="MstStatusPengajuan_Id"]').val(MstStatusPengajuan_Id);
+
                 table.clear().draw()
                 Status_data.map(e=>{
                     table.row.add([
-                        e.Status,
-                        e.Date,
+                        e.MstStatusData.Status,
+                        e.MstStatusData.Date,
                     ]).draw(false)
                     // $('.conditions').hide()
                 }) 

@@ -69,7 +69,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/status-pengajuan-aplikasi/show','StatusPengajuanController@show');
     Route::get('/status-pengajuan-aplikasi/delete/{id}','StatusPengajuanController@delete');
     Route::get('/status-pengajuan-aplikasi/status-data','StatusPengajuanController@StatusData');
-    Route::get('/status-pengajuan-aplikasi/download','StatusPengajuanController@download');
+    Route::get('/status-pengajuan-aplikasi/download','StatusPengajuanController@DownloadStatusPengajuan');
+    Route::post('/status-pengajuan-aplikasi/status-data/download','StatusPengajuanController@DownloadStatusData');
 
     Route::get('/push-notification','PushNotificationController@index');
     Route::get('/push-notification/show','PushNotificationController@show');

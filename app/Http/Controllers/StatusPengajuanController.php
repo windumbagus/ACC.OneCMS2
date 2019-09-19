@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StatusPengajuanExport;
+use App\Exports\StatusDataExport;
 
 class StatusPengajuanController extends Controller
 {
@@ -70,31 +71,31 @@ class StatusPengajuanController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $Hasil = json_decode($result);
-        // dd($Status_Data);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
         $val = [
-            "Status_data"=> $Hasil,
+            "Status_data"=> $Hasils,
         ];
 
         return  $val;
     }
 
-    public function download()
+    public function DownloadStatusPengajuan()
     {
-         //API
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusPengajuan"; 
-         $ch = curl_init($url);                                                     
-         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $Hasils= json_decode($result);
+        //API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusPengajuan"; 
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result);
         //  dd($Hasils);
 
-         $data=[];
-         foreach ($Hasils as $Hasil) {
+        $data=[];
+        foreach ($Hasils as $Hasil) {
 
             if (property_exists($Hasil->MstStatusPengajuan, 'Id')){
                 $Id = $Hasil->MstStatusPengajuan->Id;
@@ -206,5 +207,64 @@ class StatusPengajuanController extends Controller
         }
         // dd($data);
         return Excel::download(new StatusPengajuanExport($data), 'Status Pengajuan Aplikasi '. date("Y-m-d His") .'.xlsx');
+    }
+
+    public function DownloadStatusData(Request $request)
+    {
+        // API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusDataByStatusPengajuanId?MstStatusPengajuan_Id=".$request->MstStatusPengajuan_Id; 
+        $ch = curl_init($url);                                                     
+        //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
+        
+        $data2=[];
+        foreach ($Hasils as $Hasil) {
+
+            if (property_exists($Hasil, 'User_Name')){
+                $User_Name = $Hasil->User_Name;
+            }else{
+                $User_Name = "";
+            }
+            
+            if (property_exists($Hasil, 'MstStatusPengajuan_RegistrationNo')){
+                $MstStatusPengajuan_RegistrationNo = $Hasil->MstStatusPengajuan_RegistrationNo;
+            }else{
+                $MstStatusPengajuan_RegistrationNo = "";
+            }
+
+            if (property_exists($Hasil->MstStatusData, 'Id')){
+                $Id = $Hasil->MstStatusData->Id;
+            }else{
+                $Id = "";
+            }
+
+            if (property_exists($Hasil->MstStatusData, 'Status')){
+                $Status = $Hasil->MstStatusData->Status;
+            }else{
+                $Status = "";
+            }
+
+            if (property_exists($Hasil->MstStatusData, 'Date')){
+                $Date = $Hasil->MstStatusData->Date;
+            }else{
+                $Date = "";
+            }
+
+            array_push($data2,[
+                "Name"=>$User_Name,
+                "RegistrationNo"=>$MstStatusPengajuan_RegistrationNo,
+                "Id"=>$Id,
+                "Status"=>$Status,
+                "Date"=>$Date,
+           ]);
+        }
+        // dd($data2);
+        return Excel::download(new StatusDataExport($data2), 'Status Data '. $User_Name .'.xlsx');
     }
 }

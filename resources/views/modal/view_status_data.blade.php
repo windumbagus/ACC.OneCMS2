@@ -10,6 +10,20 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <h4 class="box-title">View Transaction History</h4> 
             </div>
             <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-8">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <form action="{{asset('/status-pengajuan-aplikasi/status-data/download')}}" method="POST"> 
+                                @csrf
+                                <input type="hidden" class="form-control" name="MstStatusPengajuan_Id" readonly>
+                                <button type="submit" class="btn btn-block btn-primary">Download</button>                    
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <table id="example2"class="table table-bordered table-hover"  >
                     <thead>
                         <tr>
