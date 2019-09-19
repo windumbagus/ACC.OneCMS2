@@ -205,6 +205,6 @@ class StatusPengajuanController extends Controller
            ]);
         }
         // dd($data);
-        return Excel::download(new StatusPengajuanExport($data), 'StatusPengajuanAplikasi '. date("Y-m-d His") .'.xlsx');
+        return Excel::download(new StatusPengajuanExport($data), 'Status Pengajuan Aplikasi '. date("Y-m-d His") .'.xlsx');
     }
 }
