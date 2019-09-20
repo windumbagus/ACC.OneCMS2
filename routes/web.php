@@ -77,4 +77,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/push-notification/delete/{id}','PushNotificationController@delete');
     Route::post('/push-notification/update','PushNotificationController@update');
 
+    Route::get('/holiday-gcm','HolidayGCMController@index');
+    Route::post('/holiday-gcm/add','HolidayGCMController@add');
+
+
 });//end group route

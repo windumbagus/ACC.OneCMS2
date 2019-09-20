@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class HolidayGCMController extends Controller
+{
+    public function index()
+    {
+        //API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday"; 
+        $ch = curl_init($url);                                                     
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($data);
+        
+        return view('holiday_gcm',['Holidays' => $data]);    
+    }
+
+    public function add(Request $request)
+    {
+        $data = json_encode(array(
+            "Description" => "$request->description_holiday_add",
+            "TanggalHoliday" => "$request->tanggal_holiday_add",
+        )); 
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/CreateOrUpdateMasterHolidayCMS"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $hasils = json_decode($result);
+        // dd($result);
+
+        return redirect('/holiday-gcm');
+    }
+
+    public function update(Request $request)
+    {
+        $data = json_encode(array(
+            "Id"=>"$request->id_holiday_update",
+            "Description" => "$request->description_holiday_update",
+            "TanggalHoliday" => "$request->tanggal_holiday_update",
+        )); 
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/CreateOrUpdateMasterHolidayCMS"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $hasils = json_decode($result);
+        // dd($result);
+
+        return redirect('/holiday-gcm');
+    }
+
+    public function delete($id=null,Request $request)
+    {
+        
+    }
+
+    
+}

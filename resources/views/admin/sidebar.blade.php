@@ -34,7 +34,7 @@
             </ul>
         </li>
     
-        {{-- <li class="@yield('master-management') treeview">
+        <li class="@yield('master-management') treeview">
             <a href="#">
             <i class="fa fa-sitemap"></i> <span>Master Management</span>
             <span class="pull-right-container">
@@ -46,10 +46,10 @@
             <li class="@yield('master-kota')"><a href="#"><i class="fa fa-circle-o"></i> Master Kota</a></li>
             <li class="@yield('master-searching')"><a href="#"><i class="fa fa-circle-o"></i> Master Searching</a></li>
             <li class="@yield('master-otr')"><a href="#"><i class="fa fa-circle-o"></i> Master OTR</a></li>
-            <li class="@yield('master-holiday')"><a href="#"><i class="fa fa-circle-o"></i> Holiday GCM</a></li>
+            <li class="@yield('master-holiday')"><a href="{{ asset('holiday-gcm') }}"><i class="fa fa-circle-o"></i> Holiday GCM</a></li>
             <li class="@yield('master-product-accone')"><a href="#"><i class="fa fa-circle-o"></i> Master Product ACCOne</a></li>
             </ul>
-        </li> --}}
+        </li>
 
         {{-- <li class="@yield('car') treeview">
                 <a href="#">
