@@ -84,6 +84,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/holiday-gcm/delete/{id}','HolidayGCMController@delete');
     Route::get('/holiday-gcm/download','HolidayGCMController@download');
 
+    Route::get('/master-kota','MasterKotaController@index');
+
+
 
 
 

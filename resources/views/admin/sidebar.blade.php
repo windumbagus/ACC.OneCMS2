@@ -43,7 +43,7 @@
             </a>
             <ul class="treeview-menu">
             <li class="master-gcm"><a href="#"><i class="fa fa-circle-o"></i> Master GCM</a></li>
-            <li class="@yield('master-kota')"><a href="#"><i class="fa fa-circle-o"></i> Master Kota</a></li>
+            <li class="@yield('master-kota')"><a href="{{asset('master-kota')}}"><i class="fa fa-circle-o"></i> Master Kota</a></li>
             <li class="@yield('master-searching')"><a href="#"><i class="fa fa-circle-o"></i> Master Searching</a></li>
             <li class="@yield('master-otr')"><a href="#"><i class="fa fa-circle-o"></i> Master OTR</a></li>
             <li class="@yield('master-holiday')"><a href="{{ asset('holiday-gcm') }}"><i class="fa fa-circle-o"></i> Holiday GCM</a></li>
