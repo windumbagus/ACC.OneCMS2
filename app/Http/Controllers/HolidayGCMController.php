@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\HolidayGCMExport;
+
 
 class HolidayGCMController extends Controller
 {
@@ -74,8 +77,62 @@ class HolidayGCMController extends Controller
 
     public function delete($id=null,Request $request)
     {
-        
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/DeleteMasterHolidayCMS?HolidayCMSId=".$id;
+        // dd($url);        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/holiday-gcm');
     }
 
-    
+    public function show(Request $request)
+    {
+        //API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetHolidayCMSById?HolidayCMSId=".$request->Id; 
+        $ch = curl_init($url);                                                     
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($Hasil);
+        return json_encode($val);
+    }
+
+    public function download()
+    {
+        //API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday"; 
+        $ch = curl_init($url);                                                     
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
+        $data=[];
+        foreach ($Hasils as $Hasil) {
+
+       
+          array_push($data,[
+              "Id"=>$Hasil->HolidayCMS->Id,
+              "TanggalHoliday"=>$Hasil->HolidayCMS->TanggalHoliday,
+              "Description"=>$Hasil->HolidayCMS->Description,
+          ]);
+        }
+        // dd($data);
+      
+        return Excel::download(new HolidayGCMExport($data), 'accone Master Holiday '. date("Y-m-d") .'.xlsx');
+    }
 }

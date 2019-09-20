@@ -79,6 +79,12 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/holiday-gcm','HolidayGCMController@index');
     Route::post('/holiday-gcm/add','HolidayGCMController@add');
+    Route::get('/holiday-gcm/show','HolidayGCMController@show');
+    Route::post('/holiday-gcm/update','HolidayGCMController@update');
+    Route::get('/holiday-gcm/delete/{id}','HolidayGCMController@delete');
+    Route::get('/holiday-gcm/download','HolidayGCMController@download');
+
+
 
 
 });//end group route

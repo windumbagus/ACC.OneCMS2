@@ -18,7 +18,7 @@
                     <a href="#" class="add-holiday-gcm btn btn-block btn-primary">Create New Holiday</a>  
                 </div>
                 <div class="col-sm-6">
-                    <a href="#" class="btn btn-block btn-primary">Download</a>
+                    <a href="{{asset('/holiday-gcm/download')}}" class="btn btn-block btn-primary">Download</a>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                 <td>
                 <span>
                     <a href="#" data-id="{{ $Holiday->HolidayCMS->Id}}" class="update-holiday-gcm btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                    <a  href="{{asset('holiday_gcm/delete/'.$Holiday->HolidayCMS->Id)}}" class=" btn btn-danger btn-sm" 
+                    <a  href="{{asset('holiday-gcm/delete/'.$Holiday->HolidayCMS->Id)}}" class=" btn btn-danger btn-sm" 
                         onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
                     </a> 
                 </span>
@@ -113,9 +113,35 @@
         $('#add-holiday-gcm').modal();     
         });
 
+        //VIEW
+        $(document).on('click','.update-holiday-gcm',function(){
+            var id = $(this).attr('data-id');
+            console.log(id);
+            $.ajax({
+                url:"{{asset('/holiday-gcm/show')}}",
+                data: {'Id':id ,'_token':'{{csrf_token()}}' },
+                dataType:'JSON', 
+                type:'GET',
+                success: function (val){
+                    console.log(val);
+                    $('[name="id_holiday_update"]').val(val.Id);
+                    $('[name="tanggal_holiday_update"]').val(val.TanggalHoliday);
+                    $('[name="description_holiday_update"]').val(val.Description);
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                console.log(jqXhr);
+                console.log( errorThrown );
+                console.log(textStatus);
+                },
+            });
+            $('#update-holiday-gcm').modal();
+        });
+
+
         
     })
   </script>
 
 @include('modal.add_holiday_gcm')
+@include('modal.update_holiday_gcm')
 @endsection

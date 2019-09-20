@@ -22,7 +22,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="close-modal">Close</button>	
+                    <button type="button" class="btn btn-default" id="close-modal-add">Close</button>	
                     <button type="submit" class="btn btn-success">Create</button>		
                 </div>	
             </form>
@@ -32,7 +32,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
 
 <Script>
     $(function() {
-        $('#close-modal').click(function() {
+        $('#close-modal-add').click(function() {
             $('#add-holiday-gcm').modal('hide');
             $('#form-add-holiday-gcm')[0].reset();  
         });      
