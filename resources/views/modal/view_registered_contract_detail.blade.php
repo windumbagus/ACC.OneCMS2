@@ -211,7 +211,7 @@
                         data-MstRegisteredContractId=${MstRegisteredContractId}
                         data-ContractNo=${ContractNo}
                         data-Username=${Username} 
-                        class="transaction-history-detail btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>`,
+                        class="transaction-history-detail btn btn-info btn-sm"><i class="fa fa-eye"></i></a>`,
                     ]).draw(false)
                     // $('.conditions').hide()
                 })
