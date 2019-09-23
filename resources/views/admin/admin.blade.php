@@ -50,6 +50,13 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
+  
+  //alert flash out
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+  }, 2000);
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="assets/adminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -89,7 +96,8 @@
 {{-- <script src="js/jszip.min.js"></script> --}}
 
 {{-- Sweet Alert --}}
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+
 {{-- <!-- iCheck -->
 <script src="assets/adminLTE/plugins/iCheck/icheck.min.js"></script>
 <script>

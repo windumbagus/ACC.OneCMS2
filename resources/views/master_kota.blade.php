@@ -14,7 +14,7 @@
             </div>
             <div class="col-sm-5">
                 <div class="col-sm-8">
-                    <a href="#" class="add-holiday-gcm btn btn-block btn-primary">Create New Master GCM Kota</a>  
+                    <a href="#" class="add-master-kota btn btn-block btn-primary">Create New Master GCM Kota</a>  
                 </div>
                 <div class="col-sm-4">
                 <a href="{{asset('/master-kota/upload')}}" class="btn btn-block btn-primary">Upload</a>
@@ -68,7 +68,7 @@
                         @endif --}}                       
                         <td>
                             <span>
-                                <a href="#" data-id="{{$Kota->MstCity->Id}}" class="edit-master-kota btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                <a href="#" data-id="{{$Kota->MstCity->Id}}" class="update-master-kota btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
                                 <a href="{{asset('master-kota/delete/'.$Kota->MstCity->Id)}}" class=" btn btn-danger btn-sm" 
                                     onclick="return confirm('Are you sure want to delete this data?')" ><i class="fa fa-trash"></i>
                                 </a> 
@@ -118,35 +118,64 @@
             $('.InputSearch').val('')
         })
 
-        // //VIEW
-        // $(document).on('click','.view-survey',function(){
-        //     var id = $(this).attr('data-id');
-        //     console.log(id);
-        //     $.ajax({
-        //         url:"{{asset('/survey/show')}}",
-        //         data: {'Id':id ,'_token':'{{csrf_token()}}' },
-        //         dataType:'JSON', 
-        //         type:'GET',
-        //         success: function (val){
-        //             console.log(val);
+        //ADD
+        $(document).on('click','.add-master-kota',function(){
+        $('#add-master-kota').modal();     
+        });
 
-        //             $('[name="survey_User_view"]').val(val.User.Name);
-        //             $('[name="survey_Star_view"]').val(val.MstSurveyRating.Bintang);
-        //             $('[name="survey_Comment_view"]').val(val.MstSurveyRating.Komentar);
-        //             $('[name="survey_LastSurveyDate_view"]').val(val.MstSurveyRating.LastSurveyDate);
-        //             $('[name="survey_Pilihan_view"]').val(val.MstSurveyRating.Pilihan);
+        //VIEW
+        $(document).on('click','.update-master-kota',function(){
+            var id = $(this).attr('data-id');
+            console.log(id);
+            $.ajax({
+                url:"{{asset('/master-kota/show')}}",
+                data: {'Id':id ,'_token':'{{csrf_token()}}' },
+                dataType:'JSON', 
+                type:'GET',
+                success: function (val){
+                    console.log(val);
+
+                    $('[name="CD_CITY_master_kota_update"]').val(val.MstCity.CD_CITY);
+                    $('[name="CITY_master_kota_update"]').val(val.MstCity.CITY);
+
+                    if (val.MstCity.FLAG_ACTIVE == "Y") {
+                    $('[name="FLAG_ACTIVE_master_kota_update"]').attr('checked', true);
+                    }else{
+                    $('[name="FLAG_ACTIVE_master_kota_update"]').attr('checked', false);
+                    }
+
+                    if (val.MstCity.FLAG_TRANSFER == "Y") {
+                    $('[name="FLAG_TRANSFER_master_kota_update"]').attr('checked', true);
+                    }else{
+                    $('[name="FLAG_TRANSFER_master_kota_update"]').attr('checked', false);
+                    }
+
+                    $('[name="DT_TRANSFER_master_kota_update"]').val(val.MstCity.DT_TRANSFER);
+                    $('[name="DT_UPLOADED_master_kota_update"]').val(val.MstCity.DT_UPLOADED);
+                    $('[name="CD_SP_master_kota_update"]').val(val.MstCity.CD_SP);
+                    $('[name="CD_SP_COLL_master_kota_update"]').val(val.MstCity.CD_SP_COLL);
+                    $('[name="AREA_CODE_master_kota_update"]').val(val.MstCity.AREA_CODE);
                     
-        //         },
-        //         error: function( jqXhr, textStatus, errorThrown ){
-        //         console.log(jqXhr);
-        //         console.log(errorThrown);
-        //         console.log(textStatus);
-        //         },
-        //     });
-        //     $('#view-survey').modal();
-        // });
+                    if (val.MstCity.FLAG_SUB_AREA_CODE == "Y") {
+                    $('[name="FLAG_SUB_AREA_CODE_master_kota_update"]').attr('checked', true);
+                    }else{
+                    $('[name="FLAG_SUB_AREA_CODE_master_kota_update"]').attr('checked', false);
+                    }
+
+                    $('[name="CD_PROVINSI_master_kota_update"]').val(val.MstCity.CD_PROVINSI);
+
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                console.log(jqXhr);
+                console.log(errorThrown);
+                console.log(textStatus);
+                },
+            });
+            $('#update-master-kota').modal();
+        });
         
     })
 </script>
-{{-- @include('modal.view_survey') --}}
+@include('modal.add_master_kota')
+@include('modal.update_master_kota')
 @endsection
