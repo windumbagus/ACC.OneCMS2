@@ -32,7 +32,7 @@ class RegisteredContractController extends Controller
         //  dd($Hasils);
 
         return view('registered_contract',[
-            'Contracts'=>$Hasils
+            'Contracts'=>$Hasils,
             'session' => $session            
             ]);  
     }
