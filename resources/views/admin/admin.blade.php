@@ -109,7 +109,9 @@
     });
   });
 </script> --}}
-
+{{-- @dd($session); --}}
+{{-- {{$session[0]->LoginSession}} --}}
+{{-- {!! $session->LoginSession !!} --}}
   <body class="hold-transition skin-blue-light sidebar-mini">
     <div class="wrapper">
       <!-- Main Header -->
@@ -120,6 +122,7 @@
       <!-- Content Wrapper -->
       <div class="content-wrapper">
         <section class="content">
+          
           <div>
             @if ($message = Session::get('success'))
             <div class="alert alert-success alert-block">

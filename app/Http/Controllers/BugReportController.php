@@ -8,8 +8,16 @@ use App\Exports\BugReportExport;
 
 class BugReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId')
+        ]);
          //API GET
          $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/GetAllBugReport"; 
          $ch = curl_init($url);                                                     
@@ -22,7 +30,10 @@ class BugReportController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        return view('bug_report',['Bugs'=>$Hasils]);    
+        return view('bug_report',[
+            'Bugs'=>$Hasils,
+            'session' => $session
+        ]);    
     }
 
     public function show(Request $request)

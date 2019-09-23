@@ -20,15 +20,15 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="hidden-xs">Windu Muhammad Bagus</span>
+                <span class="hidden-xs">{{$session[0]['Name']}}</span>
             </a>
             <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
                 <i class="fa fa-user-circle fa-5x" style="margin-top:10%; color:white;"></i>
                 <p>
-                    Windu Muhammad Bagus
-                    <small>Full Stack Developer</small>
+                    {{$session[0]['LoginSession']}}
+                    <small>{{$session[0]['Email']}}</small>
                 </p>
                 </li>
                 <!-- Menu Footer-->

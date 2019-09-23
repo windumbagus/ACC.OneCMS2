@@ -26,10 +26,15 @@ class LoginController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-    
-        // dd($result);
-        if ($result== "Berhasil login" ){
-            $request->session()->put('LoginSession',$request->Username);
+        $Hasil= json_decode($result);
+        // dd($err);
+        if ($Hasil->Error == "Berhasil login" ){
+            $request->session()->put('LoginSession',$Hasil->User->Username);
+            $request->session()->put('Email',$Hasil->User->Email);
+            $request->session()->put('Name',$Hasil->User->Name);
+            $request->session()->put('Id',$Hasil->User->Id);
+            $request->session()->put('RoleId',$Hasil->User->RoleId);
+
             return redirect('/');
         }else{
             return view('login',['error' =>$result]);    

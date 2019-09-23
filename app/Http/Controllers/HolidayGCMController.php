@@ -9,8 +9,16 @@ use App\Exports\HolidayGCMExport;
 
 class HolidayGCMController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId')
+        ]);
         //API
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday"; 
         $ch = curl_init($url);                                                     
@@ -23,7 +31,10 @@ class HolidayGCMController extends Controller
         $data = json_decode($result);
         // dd($data);
         
-        return view('holiday_gcm',['Holidays' => $data]);    
+        return view('holiday_gcm',[
+            'Holidays' => $data,
+            'session' => $session            
+            ]);    
     }
 
     public function add(Request $request)

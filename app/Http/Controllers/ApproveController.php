@@ -6,8 +6,16 @@ use Illuminate\Http\Request;
 
 class ApproveController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId')
+        ]);
         //API GET
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ApproveListAPI/GetAllApproveList"; 
         $ch = curl_init($url);                                                     
@@ -20,7 +28,10 @@ class ApproveController extends Controller
         $Hasils= json_decode($result);
         // dd($Hasils);
         
-        return view('approve',['Approved' =>$Hasils]);    
+        return view('approve',[
+            'Approved' =>$Hasils,
+            'session' => $session
+            ]);    
     }
 
     public function show(Request $request)

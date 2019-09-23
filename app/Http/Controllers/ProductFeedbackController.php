@@ -8,8 +8,16 @@ use App\Exports\ProductFeedbackExport;
 
 class ProductFeedbackController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId')
+        ]);
          //API GET
          $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ProductFeedbackAPI/GetAllProductFeedback"; 
          $ch = curl_init($url);                                                     
@@ -22,7 +30,10 @@ class ProductFeedbackController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        return view('product_feedback',['Feedbacks'=>$Hasils]);    
+        return view('product_feedback',[
+            'Feedbacks'=>$Hasils,
+            'session' => $session            
+            ]);    
     }
 
     public function show(Request $request)

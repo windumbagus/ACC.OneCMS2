@@ -8,8 +8,16 @@ use App\Exports\SurveyExport;
 
 class SurveyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId')
+        ]);
          //API GET
          $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/SurveyAPI/GetAllSurvey"; 
          $ch = curl_init($url);                                                     
@@ -22,7 +30,10 @@ class SurveyController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        return view('survey',['Surveys'=>$Hasils]);    
+        return view('survey',[
+            'Surveys'=>$Hasils,
+            'session' => $session            
+            ]);    
     }
 
     public function show(Request $request)

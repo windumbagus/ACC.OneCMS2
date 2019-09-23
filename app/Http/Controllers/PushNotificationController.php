@@ -6,8 +6,16 @@ use Illuminate\Http\Request;
 
 class PushNotificationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId')
+        ]);
         //API
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PushNotificationAPI/GetAllPushNotification"; 
         $ch = curl_init($url);                                                     
@@ -20,7 +28,10 @@ class PushNotificationController extends Controller
         $data = json_decode($result);
         // dd($data);
         
-        return view('push_notification',['Push_Notifications' => $data]);    
+        return view('push_notification',[
+            'Push_Notifications' => $data,
+            'session' => $session            
+            ]);    
     }
 
     public function show(Request $request)

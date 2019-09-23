@@ -9,8 +9,16 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId')
+        ]);
         //API
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BankAccountCustomerAPI/GetAllBankAccountList"; 
         $ch = curl_init($url);                                                     
@@ -22,8 +30,12 @@ class CustomerController extends Controller
         curl_close($ch);
         $data = json_decode($result);
         // dd($data);
-        
-        return view('customer',['Customers' => $data]);    
+
+        return view(
+            'customer',[
+                'Customers' => $data,
+                'session' => $session
+        ]);    
     }
 
     public function show(Request $request)
