@@ -92,5 +92,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/promo/update','PromoController@update');
     Route::post('/promo/update-order','PromoController@updateorder');
     Route::post('/promo/update-picture','PromoController@updatepicture');
+    
+    Route::get('/master-product-accone','MasterProductAccOneController@index');
+    Route::get('/master-product-accone/show','MasterProductAccOneController@show');
+    Route::get('/master-product-accone/deleteAll','MasterProductAccOneController@deleteAll');
+
+
 
 });//end group route
