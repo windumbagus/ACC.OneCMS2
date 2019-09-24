@@ -88,6 +88,9 @@
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="assets/adminLTE/dist/js/demo.js"></script> --}}
 
+{{-- CKEDITOR --}}
+<script src="assets\AdminLTE\bower_components\ckeditor\ckeditor.js"></script>
+
 <!-- DataTables -->
 <script src="assets/adminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="assets/adminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
