@@ -17,7 +17,7 @@
                         <label>Jenis Promo</label>
                         <select class="form-control select2" style="width:100%;" name="promo_MstPromo_PromoType">
                             
-                            <option selected="selected" value="">Silahkan Pilih Jenis Promo/option>
+                            <option selected="selected" value="">Silahkan Pilih Jenis Promo</option>
                             <option value="Promo">
                                 <a href="#" data-promotype="Promo" class="update-jenispromo">Promo</a>
                             </option>
@@ -41,12 +41,12 @@
 
                     <div class="form-group">
                         <label>Is Active:</label><br>
-                        <input type="checkbox" class="minimal form-control" name="promo_MstPromo_IsActivePromo">
+                        <input type="checkbox" class="" name="promo_MstPromo_IsActivePromo">
                     </div>
 
                     <div class="form-group">
                         <label>Is Active Banner:</label><br>
-                        <input type="checkbox" class="minimal form-control" name="promo_MstPromo_IsActiveBanner">
+                        <input type="checkbox" class="" name="promo_MstPromo_IsActiveBanner">
                     </div>
 
                     <div class="form-group">
@@ -65,7 +65,7 @@
                         <label>Promo Type:</label>
                         <select class="form-control select2" style="width:100%;" name="promo_MstPromo_PromoType">
                             
-                            <option selected="selected" value="">Silahkan Pilih Tipe Promo/option>
+                            <option selected="selected" value="">Silahkan Pilih Tipe Promo</option>
                             @foreach ($PromoTypes as $PromoTypeDropdown)
                                 <option value="{{ $PromoTypeDropdown }}">
                                     <a href="#" data-promotype="{{ $PromoTypeDropdown }}" class="update-promotype">

@@ -100,6 +100,7 @@
 
 {{-- <!-- iCheck -->
 <script src="assets/adminLTE/plugins/iCheck/icheck.min.js"></script>
+
 <script>
   $(function () {
     $('input').iCheck({
