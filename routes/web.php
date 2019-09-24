@@ -87,7 +87,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-kota','MasterKotaController@index');
     Route::get('/master-kota/show','MasterKotaController@show');
 
-
+    Route::get('/master-product-accone','MasterProductAccOneController@index');
+    Route::get('/master-product-accone/show','MasterProductAccOneController@show');
+    Route::get('/master-product-accone/deleteAll','MasterProductAccOneController@deleteAll');
 
 
 
