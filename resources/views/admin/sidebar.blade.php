@@ -98,7 +98,7 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                <li class="@yield('promo')"><a href="#"><i class="fa fa-circle-o"></i> Promo</a></li>
+                <li class="@yield('promo')"><a href="{{ asset('promo') }}"><i class="fa fa-circle-o"></i> Promo</a></li>
                 <li class="@yield('push-notification')"><a href="{{ asset('push-notification') }}"><i class="fa fa-circle-o"></i> Push Notification</a></li>
                 <li class="@yield('master-content')"><a href="#"><i class="fa fa-circle-o"></i> Master Content</a></li>
                 <li class="@yield('landing-page')"><a href="#"><i class="fa fa-circle-o"></i> Landing Page</a></li>

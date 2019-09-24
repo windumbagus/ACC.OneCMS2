@@ -39,13 +39,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/customer/update','CustomerController@update');
     Route::get('/customer/delete/{id}','CustomerController@delete');
     Route::get('/customer/download','CustomerController@download');
-    
 
     Route::get('/product-feedback','ProductFeedbackController@index');
     Route::get('/product-feedback/show','ProductFeedbackController@show');
     Route::get('/product-feedback/delete/{id}','ProductFeedbackController@delete');
     Route::get('/product-feedback/download','ProductFeedbackController@download');
-
 
     Route::get('/bug-report','BugReportController@index');
     Route::get('/bug-report/show','BugReportController@show');
@@ -87,8 +85,12 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-kota','MasterKotaController@index');
     Route::get('/master-kota/show','MasterKotaController@show');
 
-
-
-
+    Route::get('/promo','PromoController@index');
+    Route::get('/promo/show','PromoController@show');
+    Route::get('/promo/delete/{id}','PromoController@delete');
+    Route::post('/promo/add','PromoController@add');
+    Route::post('/promo/update','PromoController@update');
+    Route::post('/promo/update-order','PromoController@updateorder');
+    Route::post('/promo/update-picture','PromoController@updatepicture');
 
 });//end group route
