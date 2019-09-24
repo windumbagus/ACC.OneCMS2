@@ -44,6 +44,7 @@ class LoginController extends Controller
 	// menghapus session
 	public function LogoutSession(Request $request) {
         $request->session()->forget('LoginSession');
-        return redirect('login');        
+        // return redirect('login');        
+        return redirect(\URL::previous());
 	}
 }
