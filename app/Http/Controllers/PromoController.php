@@ -90,7 +90,7 @@ class PromoController extends Controller
         $hasils = json_decode($result);
         // dd($result);
 
-        return redirect('/promo')->with('success',' Add/Update Data Successfully!');;
+        return redirect('/promo')->with('success',' Add/Update Data Successfully!');
     }
 
     public function UpdateOrder(Request $request)
@@ -114,7 +114,7 @@ class PromoController extends Controller
         $hasils = json_decode($result);
         // dd($result);
 
-        return redirect('/promo')->with('success',' Update Promo Order Successfully!');;
+        return $result;
     }
 
     public function CreateOrUpdatePicture(Request $request)
@@ -142,6 +142,6 @@ class PromoController extends Controller
         $hasils = json_decode($result);
         // dd($result);
 
-        return redirect('/promo')->with('success',' Create/Update Picture Successfully!');;
+        return redirect('/promo')->with('success',' Create/Update Picture Successfully!');
     }
 }
