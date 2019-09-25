@@ -99,5 +99,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/master-product-accone/upload','MasterProductAccOneController@upload');
 
     Route::get('/master-searching','MasterSearchingController@index');
+    Route::get('/master-searching/show','MasterSearchingController@show');
 
 });//end group route

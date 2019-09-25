@@ -53,19 +53,19 @@
                 @foreach ($Searching as $Search)
 
                     <tr>  
-                        <td><span>{{$Search->MstSearch->Input_Keyword}}</span></td>
-                        <td><span>{{$Search->MstSearch->Search_Suggestions}}</span></td>
-                        <td><span>{{$Search->MstSearch->Destination}}</span></td>
-                        @if (property_exists($Search->MstSearch, 'RedirectToScreen'))
-                            <td><span>{{$Search->MstSearch->RedirectToScreen}}</span></td>
+                        <td><span>{{$Search->Input_Keyword}}</span></td>
+                        <td><span>{{$Search->Search_Suggestions}}</span></td>
+                        <td><span>{{$Search->Destination}}</span></td>
+                        @if (property_exists($Search, 'RedirectToScreen'))
+                            <td><span>{{$Search->RedirectToScreen}}</span></td>
                         @else
                         <td><span>-</span></td>
                         @endif
                                                
                         <td>
                             <span>
-                                <a href="#" data-id="{{$Search->MstSearch->Id}}" class="update-master-searching btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                                <a href="{{asset('master-searching/delete/'.$Search->MstSearch->Id)}}" class=" btn btn-danger btn-sm" 
+                                <a href="#" data-id="{{$Search->Id}}" class="update-master-searching btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                <a href="{{asset('master-searching/delete/'.$Search->Id)}}" class=" btn btn-danger btn-sm" 
                                     onclick="return confirm('Are you sure want to delete this data?')" ><i class="fa fa-trash"></i>
                                 </a> 
                             </span>
@@ -81,6 +81,10 @@
  <!-- page script -->
 <script>
     $(document).ready(function () {
+        
+      $('#RedirectToScreenAdd').hide()
+      $('#RedirectToScreenUpdate').hide()
+
       $('#example1').DataTable({
           'deferRender': true,
           'paging'      : true,
@@ -116,7 +120,7 @@
 
         //ADD
         $(document).on('click','.add-master-searching',function(){
-        // $('#add-master-searching').modal();     
+        $('#add-master-searching').modal();     
         });
 
         //VIEW
@@ -124,42 +128,16 @@
             var id = $(this).attr('data-id');
             console.log(id);
             $.ajax({
-                url:"{{asset('/master-kota/show')}}",
+                url:"{{asset('/master-searching/show')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}' },
                 dataType:'JSON', 
                 type:'GET',
                 success: function (val){
                     console.log(val);
 
-                    // $('[name="CD_CITY_master_kota_update"]').val(val.MstCity.CD_CITY);
-                    // $('[name="CITY_master_kota_update"]').val(val.MstCity.CITY);
-
-                    // if (val.MstCity.FLAG_ACTIVE == "Y") {
-                    // $('[name="FLAG_ACTIVE_master_kota_update"]').attr('checked', true);
-                    // }else{
-                    // $('[name="FLAG_ACTIVE_master_kota_update"]').attr('checked', false);
-                    // }
-
-                    // if (val.MstCity.FLAG_TRANSFER == "Y") {
-                    // $('[name="FLAG_TRANSFER_master_kota_update"]').attr('checked', true);
-                    // }else{
-                    // $('[name="FLAG_TRANSFER_master_kota_update"]').attr('checked', false);
-                    // }
-
-                    // $('[name="DT_TRANSFER_master_kota_update"]').val(val.MstCity.DT_TRANSFER);
-                    // $('[name="DT_UPLOADED_master_kota_update"]').val(val.MstCity.DT_UPLOADED);
-                    // $('[name="CD_SP_master_kota_update"]').val(val.MstCity.CD_SP);
-                    // $('[name="CD_SP_COLL_master_kota_update"]').val(val.MstCity.CD_SP_COLL);
-                    // $('[name="AREA_CODE_master_kota_update"]').val(val.MstCity.AREA_CODE);
-                    
-                    // if (val.MstCity.FLAG_SUB_AREA_CODE == "Y") {
-                    // $('[name="FLAG_SUB_AREA_CODE_master_kota_update"]').attr('checked', true);
-                    // }else{
-                    // $('[name="FLAG_SUB_AREA_CODE_master_kota_update"]').attr('checked', false);
-                    // }
-
-                    // $('[name="CD_PROVINSI_master_kota_update"]').val(val.MstCity.CD_PROVINSI);
-
+                    $('[name="input_keyword_update"]').val(val.MstSearch.Input_Keyword);
+                    $('[name="search_suggestion_update"]').val(val.MstSearch.Search_Suggestions);
+                    $('[name="destination_update"]').val(val.MstSearch.Destination)
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                 console.log(jqXhr);
@@ -167,11 +145,11 @@
                 console.log(textStatus);
                 },
             });
-            // $('#update-master-searching').modal();
+            $('#update-master-searching').modal();
         });
         
     })
 </script>
-{{-- @include('modal.add_master_searching') --}}
-{{-- @include('modal.update_master_searching') --}}
+@include('modal.add_master_searching')
+@include('modal.update_master_searching')
 @endsection
