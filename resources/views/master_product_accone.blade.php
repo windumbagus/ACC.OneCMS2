@@ -15,7 +15,7 @@
             <div class="col-sm-5">
                 <div class="col-sm-8"></div>
                 <div class="col-sm-4">
-                <a href="{{asset('/master-product-accone/deleteAll')}}" class="btn btn-block btn-danger">Delete All</a>
+                <a href="{{asset('/master-product-accone/deleteAll')}}" class="btn btn-block btn-danger" onclick="return confirm('Are you sure want to delete this ?')">Delete All</a>
                 </div>
             </div>
         </div>
@@ -66,13 +66,13 @@
         </table>
         <br>
 
-        <form id="form-add-master-kota" action="{{ asset('master-product-accone/upload') }}" method="post"> 
+        <form id="form-add-master-kota" action="{{ asset('master-product-accone/upload') }}" method="post" enctype="multipart/form-data"> 
             @csrf
             <label>Upload Excel</label>
             <div class="row">
                 <div class="col-sm-7">
                     <div class="form-group">
-                        <input type="file" class="form-control" name="upload-master-product-accone" >
+                        <input type="file" class="form-control" name="upload_master_product_accone"  >
                     </div>
                 </div>
                 <div class="col-sm-5">

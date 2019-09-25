@@ -64,12 +64,42 @@ class MasterProductAccOneController extends Controller
         curl_close($ch);
         $val= json_decode($result);
         // dd($val);
-        return view('master_product_accone');   
+        return redirect('/master-product-accone')->with('success','Master Product ACC One Delete Successfull !!!');   
     }
 
     public function upload(Request $request)
     {
-        
+        $file = $request->upload_master_product_accone;
+        $x= file_get_contents($file);
+        $y= base64_encode($x);
+
+        // $Base64File= base64_encode($file);
+        // $x= base64_decode($Base64File);
+        // $xFile = $file->getPathName();
+        // $cFile = curl_file_create($file);
+        // dd($file);
+        // dd($x);
+        $name = $file->getClientOriginalName();
+        $data = json_encode(array(
+            "Filename" => "$name",
+            "Content" => $y,
+        ));
+        // dd($data);  
+
+        $url = "https://acc-dev1.outsystemsenterprise.com//ACCWorldCMS/rest/MasterProductAccOneAPI/UploadProductAccOne"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        dd($result);
+
+        return redirect('/master-product-accone')->with('success',' Upload Data Successfully!');
     }
 
 }
