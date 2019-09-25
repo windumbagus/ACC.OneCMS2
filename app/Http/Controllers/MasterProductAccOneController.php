@@ -69,6 +69,9 @@ class MasterProductAccOneController extends Controller
 
     public function upload(Request $request)
     {
+        $request->validate([
+            'upload_master_product_accone' => 'required',
+        ]);
         $file = $request->upload_master_product_accone;
         $x= file_get_contents($file);
         $y= base64_encode($x);

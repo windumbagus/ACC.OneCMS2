@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="assets/adminLTE/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="assets/adminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Pace style -->
+  <link rel="stylesheet" href="assets/adminLTE/plugins/pace/pace.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -56,7 +58,7 @@
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove(); 
     });
-  }, 2000);
+  }, 3000);
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="assets/adminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -89,7 +91,9 @@
 {{-- <script src="assets/adminLTE/dist/js/demo.js"></script> --}}
 
 {{-- CKEDITOR --}}
-<script src="assets\AdminLTE\bower_components\ckeditor\ckeditor.js"></script>
+<script src="assets/AdminLTE/bower_components/ckeditor/ckeditor.js"></script>
+<!-- PACE -->
+<script src="assets/adminLTE/bower_components/PACE/pace.min.js"></script>
 
 <!-- DataTables -->
 <script src="assets/adminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -159,7 +163,8 @@
             @if ($errors->any())
             <div class="alert alert-danger">
               <button type="button" class="close" data-dismiss="alert">×</button>	
-              Please check the form below for errors
+              <strong>{{ $errors }}</strong>
+
             </div>
             @endif
           </div>

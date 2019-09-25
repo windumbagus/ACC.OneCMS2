@@ -17,7 +17,7 @@
                     <a href="#" class="add-master-searching btn btn-block btn-primary">Create New Master GCM Searching</a>  
                 </div>
                 <div class="col-sm-4">
-                <a href="{{asset('/master-searching/upload')}}" class="btn btn-block btn-primary">Upload</a>
+                <a href="#" class="upload-master-searching btn btn-block btn-primary">Upload</a>
                 </div>
             </div>
         </div>
@@ -122,6 +122,11 @@
         $(document).on('click','.add-master-searching',function(){
         $('#add-master-searching').modal();     
         });
+        
+        //Upload
+        $(document).on('click','.upload-master-searching',function(){
+        $('#upload-master-searching').modal();     
+        });
 
         //VIEW
         $(document).on('click','.update-master-searching',function(){
@@ -152,4 +157,5 @@
 </script>
 @include('modal.add_master_searching')
 @include('modal.update_master_searching')
+@include('modal.upload_master_searching')
 @endsection
