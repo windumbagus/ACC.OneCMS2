@@ -4,12 +4,12 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close close-modal-add-promo" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="box-title">Create New Promo</h4> 
             </div>
-            <form id="form-add-promo" action="#" method="post">
+            <form class="form-update-promo" action="#" method="post">
                 <div class="modal-body"> 
                     @csrf	
 
@@ -107,7 +107,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning"
                         onclick="return confirm('Are you sure want to update this data?')">Save</button>	
-                    <button type="button" class="btn btn-primary" id="close-modal-add-promo">Cancel</button>		
+                    <button type="button" class="btn btn-primary close-modal-add-promo">Cancel</button>		
                 </div>
             </form>		
         </div>
@@ -116,9 +116,9 @@
 
 <Script>
     $(function() {
-        $('#close-modal-add-promo').click(function() {
+        $('.close-modal-add-promo').click(function() {
             $('#add-promo').modal('hide');
-            $('#form-add-promo')[0].reset();  
+            $('.form-update-promo')[0].reset();  
         });      
     });
 

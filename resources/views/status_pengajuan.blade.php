@@ -125,7 +125,6 @@
         $(document).on('click','.view-status-pengajuan',function(){
             var id = $(this).attr('data-id');
             console.log(id);
-
             $.ajax({
                 url:"{{asset('/status-pengajuan-aplikasi/show')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}' },

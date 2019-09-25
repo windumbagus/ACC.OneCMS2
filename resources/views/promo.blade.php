@@ -78,21 +78,43 @@
                     @endif
                     
                     @if (property_exists($Promo, 'IsActiveBanner'))
-                        <td><span>{{$Promo->IsActiveBanner}}</span></td>
+                        @if ($Promo->IsActivePromo=='1')
+                            <td>&check;</td>
+                        @else
+                            <td><span>{{$Promo->IsActiveBanner}}</span></td>
+                        @endif
                     @else
                         <td>&times;</td>
                     @endif
 
-                    @if (property_exists($Promo, 'OrderName'))
-                        <td><span>{{$Promo->OrderName}}</span></td>
-                    @else
-                        <td></td>
-                    @endif
+                    <td>
+                        <select class="form-control select2 OrderNameDropdownElement" style="width:100%;" data-id2="{{$Promo->Id}}" >
+                            @for($OrderNameDropdownVal=0; $OrderNameDropdownVal<=5; $OrderNameDropdownVal++)
+                                @if (property_exists($Promo, 'OrderName'))
+                                    @if ($OrderNameDropdownVal==$Promo->OrderName)
+                                        <option value="{{$OrderNameDropdownVal}}" selected>{{$OrderNameDropdownVal}}</option>
+                                    @else
+                                        @if ($OrderNameDropdownVal==0)
+                                            <option value="{{$OrderNameDropdownVal}}">-</option>
+                                        @else
+                                            <option value="{{$OrderNameDropdownVal}}">{{$OrderNameDropdownVal}}</option>
+                                        @endif 
+                                    @endif
+                                @else
+                                    @if ($OrderNameDropdownVal==0)
+                                        <option value="{{$OrderNameDropdownVal}}" selected>-</option>
+                                    @else
+                                        <option value="{{$OrderNameDropdownVal}}">{{$OrderNameDropdownVal}}</option>
+                                    @endif                                   
+                                @endif
+                            @endfor
+                        </select>
+                    </td>
 
                     <td>
                         <span>
                             <a href="#" data-id="{{ $Promo->Id }}" class="update-promo 
-                                btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
+                                btn btn-info btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
                             <a href="{{asset('promo/delete/'.$Promo->Id)}}" 
                                 class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
                                 <i class="fa fa-trash"></i>
@@ -143,6 +165,38 @@
             tab.search('').draw()
             $('.InputSearch').val('')
         })
+        
+        // OrderName Dropdown
+        $(document).on('change','.OrderNameDropdownElement', function(){
+            // $('.OrderNameDropdownElement').change(function(){
+            var PromoId = $(this).attr('data-id2');
+            var SelectedOrderName = $(this).find('option:selected').val();
+            // console.log(PromoId);
+            // console.log(SelectedOrderName);
+            $.ajax({
+                url:"{{asset('/promo/update-order')}}",
+                data: {
+                    "MstPromoId": PromoId,
+                    "SelectedOrderName": SelectedOrderName,
+                '_token':'{{csrf_token()}}'},
+                dataType:'JSON', 
+                type:'POST',
+                success: function (result){
+                    // console.log(result);
+                    window.location = "{{asset('promo')}}";
+                    if (result.Success==true){ 
+                        alert("Update Order Successfully!");
+                    } else {
+                        alert(result.Error);
+                    };
+                },
+                error: function(jqXhr, textStatus, errorThrown){
+                    console.log(jqXhr);
+                    console.log(errorThrown);
+                    console.log(textStatus);
+                },
+            });
+        })
 
         //Add
         $(document).on('click','.add-promo',function(){
@@ -152,14 +206,14 @@
         // Update
         $(document).on('click','.update-promo',function(){
             var id = $(this).attr('data-id');
-            console.log(id);
+            // console.log(id);
             $.ajax({
                 url:"{{asset('/promo/show')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}'},
                 dataType:'JSON', 
                 type:'GET',
                 success: function (val){
-                    console.log(val);
+                    // console.log(val);
 
                     $('[name="promo_MstPicture_Id"]').val(val.MstPicture.Id);
                     $('[name="promo_MstPicture_DataId"]').val(val.MstPicture.DataId);
@@ -198,9 +252,9 @@
                     // }
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
-                console.log(jqXhr);
-                console.log( errorThrown );
-                console.log(textStatus);
+                    console.log(jqXhr);
+                    console.log( errorThrown );
+                    console.log(textStatus);
                 },
             });
             $('#update-promo').modal();
