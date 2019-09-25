@@ -97,9 +97,9 @@ class MasterProductAccOneController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $data = json_decode($result);
-        dd($result);
+        // dd($result);
 
-        return redirect('/master-product-accone')->with('success',' Upload Data Successfully!');
+        return redirect('/master-product-accone')->with('success',$data->ErrorMessage);
     }
 
 }

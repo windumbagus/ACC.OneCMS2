@@ -58,7 +58,7 @@ class HolidayGCMController extends Controller
         $hasils = json_decode($result);
         // dd($result);
 
-        return redirect('/holiday-gcm');
+        return redirect('/holiday-gcm')->with('success','Master Holiday Successfully Added !!!');;
     }
 
     public function update(Request $request)
@@ -83,7 +83,7 @@ class HolidayGCMController extends Controller
         $hasils = json_decode($result);
         // dd($result);
 
-        return redirect('/holiday-gcm');
+        return redirect('/holiday-gcm')->with('success','Master Holiday Successfully Updated !!!');
     }
 
     public function delete($id=null,Request $request)
@@ -100,7 +100,7 @@ class HolidayGCMController extends Controller
         $data = json_decode($result);
         // dd($result);
 
-        return redirect('/holiday-gcm');
+        return redirect('/holiday-gcm')->with('success','Master Holiday Successfully Deleted !!!');
     }
 
     public function show(Request $request)

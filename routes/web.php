@@ -98,6 +98,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-product-accone/deleteAll','MasterProductAccOneController@deleteAll');
     Route::post('/master-product-accone/upload','MasterProductAccOneController@upload');
 
-
+    Route::get('/master-searching','MasterSearchingController@index');
 
 });//end group route
