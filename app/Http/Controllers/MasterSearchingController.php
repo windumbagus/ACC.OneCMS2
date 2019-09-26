@@ -52,6 +52,72 @@ class MasterSearchingController extends Controller
         return json_encode($val);
     
     }
+
+    public function add(Request $request)
+    {
+        $data = json_encode(
+            array("UserId"=> $request->session()->get('Id'),
+                "MstSearch"=>array(
+                    // "Id"=> $request->id_update,
+                    "Input_Keyword"=> $request->input_keyword_add,
+                    "Search_Suggestions"=> $request->search_suggestion_add,
+                    "Destination"=> $request->destination_add ,
+                    "RedirectToScreen"=> $request->redirect_to_screen_add        
+                )
+            )
+        );
+
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/CreateOrUpdateMasterSearching"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/master-searching')->with('success',' Data Master Searching Added Successfull !!!');
+    }
+
+    public function update(Request $request)
+    {
+        $data = json_encode(
+            array("UserId"=> $request->session()->get('Id'),
+                "MstSearch"=>array(
+                    "Id"=> $request->id_update,
+                    "Input_Keyword"=> $request->input_keyword_update,
+                    "Search_Suggestions"=> $request->search_suggestion_update,
+                    "Destination"=> $request->destination_update ,
+                    "RedirectToScreen"=> $request->redirect_to_screen_update        
+                )
+            )
+        );
+
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/CreateOrUpdateMasterSearching"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/master-searching')->with('success',' Data Master Searching Update Successfull !!!');
+    }
+
+
     public function delete($id = null,Request $request)
     {
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/DeleteMasterSearching?MstSearchId=".$id;
@@ -66,7 +132,7 @@ class MasterSearchingController extends Controller
         $data = json_decode($result);
         // dd($result);
 
-        return redirect('/master-searching')->with('success','Data Deleted Successfully !!!');
+        return redirect('/master-searching')->with('success','Data Master Searching Delete Successfull !!!');
     }
 
     public function upload(Request $request)
@@ -101,6 +167,6 @@ class MasterSearchingController extends Controller
         $data = json_decode($result);
         // dd($result);
 
-        return redirect('/master-searching')->with('success','Upload Successfull !!!');
+        return redirect('/master-searching')->with('success','Upload Data Master Searching Successfull !!!');
     }
 }

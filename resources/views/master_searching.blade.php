@@ -144,7 +144,7 @@
                     $('[name="search_suggestion_update"]').val(val.MstSearch.Search_Suggestions);
                     $('[name="destination_update"]').val(val.MstSearch.Destination);
                     $('[name="redirect_to_screen_update"]').val(val.MstSearch.RedirectToScreen);
-
+                    $('[name="id_update"]').val(val.MstSearch.Id);
                     if(val.MstSearch.Destination=="acc.one"){
                         $('#RedirectToScreenUpdate').show()
                     }

@@ -13,6 +13,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="id_update" >
+                    </div>
+                    <div class="form-group">
                         <label>Input Keyword</label>
                         <input type="text" class="form-control" name="input_keyword_update" >
                     </div>
