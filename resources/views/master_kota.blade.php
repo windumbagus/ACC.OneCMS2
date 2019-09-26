@@ -17,7 +17,7 @@
                     <a href="#" class="add-master-kota btn btn-block btn-primary">Create New Master GCM Kota</a>  
                 </div>
                 <div class="col-sm-4">
-                <a href="{{asset('/master-kota/upload')}}" class="btn btn-block btn-primary">Upload</a>
+                <a href="#" class="upload-master-kota btn btn-block btn-primary">Upload</a>
                 </div>
             </div>
         </div>
@@ -123,6 +123,11 @@
         $('#add-master-kota').modal();     
         });
 
+        //UPLOAD
+        $(document).on('click','.upload-master-kota',function(){
+        $('#upload-master-kota').modal();     
+        });
+
         //VIEW
         $(document).on('click','.update-master-kota',function(){
             var id = $(this).attr('data-id');
@@ -178,4 +183,5 @@
 </script>
 @include('modal.add_master_kota')
 @include('modal.update_master_kota')
+@include('modal.upload_master_kota')
 @endsection

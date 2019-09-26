@@ -65,4 +65,36 @@ class MasterKotaController extends Controller
     {
         
     }
+
+    public function Upload(Request $request)
+    {
+        $request->validate([
+            'upload_master_kota' => 'required',
+        ]);
+        $file = $request->upload_master_kota;
+        $x= file_get_contents($file);
+        $y= base64_encode($x);
+
+        $name = $file->getClientOriginalName();
+        $data = json_encode(array(
+            "Filename" => "$name",
+            "Content" => $y,
+        ));
+        // dd($data);  
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterKotaAPI/UploadMasterKota"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/master-kota')->with('success','Data Master Kota Upload Successfull !!!');
+    }
 }

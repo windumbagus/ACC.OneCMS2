@@ -84,6 +84,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/master-kota','MasterKotaController@index');
     Route::get('/master-kota/show','MasterKotaController@show');
+    Route::post('/master-kota/upload','MasterKotaController@upload');
+
 
     Route::get('/promo','PromoController@index');
     Route::get('/promo/show','PromoController@show');

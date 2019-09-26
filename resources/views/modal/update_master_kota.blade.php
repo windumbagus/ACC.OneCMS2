@@ -4,12 +4,12 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close-modal-update close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="box-title">Update Master Kota</h4> 
             </div>
-            <form id="form-add-master-kota" action="{{ asset('master-kota/update') }}" method="post"> 
+            <form id="form-update-master-kota" action="{{ asset('master-kota/update') }}" method="post"> 
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
@@ -58,7 +58,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="close-modal-update">Close</button>	
+                    <button type="button" class="close-modal-update btn btn-default">Close</button>	
                     <button type="submit" class="btn btn-success">Create</button>		
                 </div>	
             </form>
@@ -68,9 +68,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
 
 <Script>
     $(function() {
-        $('#close-modal-update').click(function() {
+        $('.close-modal-update').click(function() {
             $('#update-master-kota').modal('hide');
-            $('#form-update-master-kota')[0].reset();  
+            $('#form-update-master-kota')[0].reset();   
         });      
     });
 </Script>
