@@ -8,7 +8,7 @@
                     </button>
                     <h4 class="box-title">Upload Master Searching</h4> 
                 </div>
-            <form id="form-upload-master-searching" action="{{asset('/master-searching/upload')}}" method="post"> 
+            <form id="form-upload-master-searching" action="{{asset('/master-searching/upload')}}" method="post" enctype="multipart/form-data"> 
                 <div class="modal-body">
                     @csrf
                     Structure : Input_Keyword, Search_Suggestions, Destination, RedirectToScreen <br>

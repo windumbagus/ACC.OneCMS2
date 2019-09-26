@@ -100,5 +100,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/master-searching','MasterSearchingController@index');
     Route::get('/master-searching/show','MasterSearchingController@show');
-
+    Route::get('/master-searching/delete/{id}','MasterSearchingController@delete');
+    Route::post('/master-searching/upload','MasterSearchingController@upload');
 });//end group route

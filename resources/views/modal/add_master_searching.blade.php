@@ -54,6 +54,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
         $('#close-modal-add').click(function() {
             $('#add-master-searching').modal('hide');
             $('#form-add-master-searching')[0].reset();  
+            $('#RedirectToScreenAdd').hide();
         });      
     });
 
@@ -63,7 +64,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
            if ($('#destination_add').val()=="acc.one"){
                $('#RedirectToScreenAdd').show()
            }else{
-            $('#RedirectToScreenAdd').hide()
+               $('#RedirectToScreenAdd').hide()
            }
         });
 </Script>

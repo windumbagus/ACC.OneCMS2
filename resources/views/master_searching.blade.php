@@ -142,7 +142,13 @@
 
                     $('[name="input_keyword_update"]').val(val.MstSearch.Input_Keyword);
                     $('[name="search_suggestion_update"]').val(val.MstSearch.Search_Suggestions);
-                    $('[name="destination_update"]').val(val.MstSearch.Destination)
+                    $('[name="destination_update"]').val(val.MstSearch.Destination);
+                    $('[name="redirect_to_screen_update"]').val(val.MstSearch.RedirectToScreen);
+
+                    if(val.MstSearch.Destination=="acc.one"){
+                        $('#RedirectToScreenUpdate').show()
+                    }
+
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                 console.log(jqXhr);
