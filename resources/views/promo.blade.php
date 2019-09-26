@@ -198,7 +198,21 @@
             });
         })
 
-        //Add
+        // Jenis Promo Dropdown
+        $('#checkbox_TampilPeriodePromo_Add').hide()
+        // $('#checkbox_TampilPeriodePromo_Update').hide()
+
+        // Promo Amount Input Addon
+        $('#currencymask_PromoAmountRp_Add').hide()
+        $('#currencymask_PromoAmountPr_Add').hide()
+        $('#inputaddon_PromoAmountRp_Add').hide()
+        $('#inputaddon_PromoAmountPr_Add').hide()
+        // $('#currencymask_PromoAmountRp_Update').hide()
+        // $('#currencymask_PromoAmountPr_Update').hide()
+        // $('#inputaddon_PromoAmountRp_Update').hide()
+        // $('#inputaddon_PromoAmountPr_Update').hide()
+
+        // Add
         $(document).on('click','.add-promo',function(){
             $('#add-promo').modal();
         });
