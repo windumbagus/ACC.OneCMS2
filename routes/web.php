@@ -110,4 +110,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/master-searching/update','MasterSearchingController@update');
     Route::get('/master-searching/delete/{id}','MasterSearchingController@delete');
     Route::post('/master-searching/upload','MasterSearchingController@upload');
+
+    Route::get('/master-otr','MasterOtrController@index');
+    Route::get('/master-otr/delete/{id}','MasterOtrController@delete');
+    Route::get('/master-otr/download','MasterOtrController@download');
+
+
+
 });//end group route

@@ -45,7 +45,7 @@
             <li class="master-gcm"><a href="#"><i class="fa fa-circle-o"></i> Master GCM</a></li>
             <li class="@yield('master-kota')"><a href="{{asset('master-kota')}}"><i class="fa fa-circle-o"></i> Master Kota</a></li>
             <li class="@yield('master-searching')"><a href="{{asset('master-searching')}}"><i class="fa fa-circle-o"></i> Master Searching</a></li>
-            <li class="@yield('master-otr')"><a href="#"><i class="fa fa-circle-o"></i> Master OTR</a></li>
+            <li class="@yield('master-otr')"><a href="{{asset('master-otr')}}"><i class="fa fa-circle-o"></i> Master OTR</a></li>
             <li class="@yield('master-holiday')"><a href="{{ asset('holiday-gcm') }}"><i class="fa fa-circle-o"></i> Holiday GCM</a></li>
             <li class="@yield('master-product-accone')"><a href="{{asset('master-product-accone')}}"><i class="fa fa-circle-o"></i> Master Product ACCOne</a></li>
             </ul>
