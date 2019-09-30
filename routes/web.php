@@ -114,7 +114,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-otr','MasterOtrController@index');
     Route::get('/master-otr/delete/{id}','MasterOtrController@delete');
     Route::get('/master-otr/download','MasterOtrController@download');
-
+    Route::get('/master-otr/GetMstGcmType/{Brand}','MasterOtrController@GetMstGcmType');
+    Route::get('/master-otr/GetMstGcmModel/{Type}','MasterOtrController@GetMstGcmModel');
+    Route::post('/master-otr/add','MasterOtrController@add');
 
 
 });//end group route

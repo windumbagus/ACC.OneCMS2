@@ -56,29 +56,70 @@
         </thead>
             <tbody>
                 @foreach ($OTRs as $otr)
-
                     <tr>  
                         <td>
+                            @if (property_exists($otr->MstOtr, 'CD_BRAND'))
                             <span style="font-size:12px">{{$otr->MstOtr->CD_BRAND}}</span><br>
-                            <span>{{$otr->MstOtr->DESC_BRAND}}</span>
+                            @else
+                            <span>-</span><br>
+                            @endif
+
+                            @if (property_exists($otr->MstOtr, 'DESC_BRAND'))
+                            <span>{{$otr->MstOtr->DESC_BRAND}}</span><br>
+                            @else
+                            <span>-</span>
+                            @endif
+                            {{-- <span style="font-size:12px">{{$otr->MstOtr->CD_BRAND}}</span><br>
+                            <span>{{$otr->MstOtr->DESC_BRAND}}</span> --}}
                         </td>
                         <td>
+                            @if (property_exists($otr->MstOtr, 'CD_TYPE'))
                             <span style="font-size:12px">{{$otr->MstOtr->CD_TYPE}}</span><br>
-                            <span>{{$otr->MstOtr->DESC_TYPE}}</span>
+                            @else
+                            <span>-</span><br>
+                            @endif
+
+                            @if (property_exists($otr->MstOtr, 'DESC_TYPE'))
+                            <span>{{$otr->MstOtr->DESC_TYPE}}</span><br>
+                            @else
+                            <span>-</span>
+                            @endif
+
+                            {{-- <span style="font-size:12px">{{$otr->MstOtr->CD_TYPE}}</span><br>
+                            <span>{{$otr->MstOtr->DESC_TYPE}}</span> --}}
                         </td>
                         <td>
-                            <span style="font-size:12px">{{$otr->MstOtr->CD_MODEL}}</span><br>
-                            <span>{{$otr->MstOtr->DESC_MODEL}}
-                            </span>
+                                @if (property_exists($otr->MstOtr, 'CD_MODEL'))
+                                <span style="font-size:12px">{{$otr->MstOtr->CD_MODEL}}</span><br>
+                                @else
+                                <span>-</span><br>
+                                @endif
+    
+                                @if (property_exists($otr->MstOtr, 'DESC_MODEL'))
+                                <span>{{$otr->MstOtr->DESC_MODEL}}</span><br>
+                                @else
+                                <span>-</span>
+                                @endif
+                            {{-- <span style="font-size:12px">{{$otr->MstOtr->CD_MODEL}}</span><br>
+                            <span>{{$otr->MstOtr->DESC_MODEL}}</span> --}}
                         </td>
 
-                        @if($otr->MstOtr->FLAG_NEW_USED == "N")
-                        <td><span>New</span></td>
+                        @if (property_exists($otr->MstOtr, 'FLAG_NEW_USED'))
+                            @if($otr->MstOtr->FLAG_NEW_USED == "N")
+                            <td><span>New</span></td>
+                            @else
+                            <td><span>Used</span></td>
+                            @endif
                         @else
-                        <td><span>Used</span></td>
+                        <td><span>-</span></td>
                         @endif
 
+                        @if (property_exists($otr->MstOtr, 'TAHUN'))
                         <td><span>{{$otr->MstOtr->TAHUN}}</span></td>
+                        @else
+                        <td><span>-</span></td>
+                        @endif
+
                         @if (property_exists($otr->MstOtr, 'OTR'))
                             <td><span>{{$otr->MstOtr->OTR}}</span></td>
                         @else
@@ -142,10 +183,10 @@
             $('.InputSearch').val('')
         })
 
-        // //ADD
-        // $(document).on('click','.add-master-searching',function(){
-        // $('#add-master-searching').modal();     
-        // });
+        //ADD
+        $(document).on('click','.add-master-otr',function(){
+        $('#add-master-otr').modal();     
+        });
         
         // //Upload
         // $(document).on('click','.upload-master-searching',function(){
@@ -185,7 +226,7 @@
         
     })
 </script>
-{{-- @include('modal.add_master_searching')
-@include('modal.update_master_searching')
+@include('modal.add_master_otr')
+{{-- @include('modal.update_master_searching')
 @include('modal.upload_master_searching') --}}
 @endsection
