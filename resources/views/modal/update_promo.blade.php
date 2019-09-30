@@ -1,10 +1,10 @@
 
-<div class="modal fade" id="update-promo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
+<div class="modal fade" id="modal_promo_update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
     aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close close-modal-update-promo" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close close-modal-promo-update" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="box-title">Update Promo</h4> 
@@ -94,7 +94,7 @@
                     
                     <div class="form-group">
                         <label>Syarat dan Ketentuan:</label><br>
-                        <textarea id="editor1" name="editor1" rows="10" cols="60"
+                        <textarea rows="10" cols="60"
                         type="text" class="form-control" name="promo_MstPromo_SyaratDanKetentuan"></textarea>
                     </div>
 
@@ -107,7 +107,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning"
                         onclick="return confirm('Are you sure want to update this data?')">Save</button>	
-                    <button type="button" class="btn btn-primary close-modal-update-promo">Cancel</button>		
+                    <button type="button" class="btn btn-primary close-modal-promo-update">Cancel</button>		
                 </div>
             </form>		
         </div>
@@ -116,7 +116,7 @@
 
 <Script>
     $(function() {
-        $('.close-modal-update-promo').click(function() {
+        $('.close-modal-promo-update').click(function() {
             $('#update-promo').modal('hide');
             $('.form-update-promo')[0].reset();  
         });      

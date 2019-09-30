@@ -13,7 +13,7 @@
             <div class="col-sm-4">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                    <a href="#" class="add-promo btn btn-block btn-primary">Create</a>  
+                    <a href="#" class="button-promo-add btn btn-block btn-primary">Create</a>  
                 </div>
             </div>
         </div>
@@ -22,19 +22,19 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <input type="text" placeholder="Search by Name or Description" class="InputSearch form-control">
+                <input type="text" placeholder="Search by Name or Description" class="input-search form-control">
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
-                    <a href="#" class="ButtonSearch btn btn-block btn-info">Search</a>    
+                    <a href="#" class="button-search btn btn-block btn-info">Search</a>    
                 </div>
                 <div class="col-sm-6">
-                    <a href="#" class="ButtonResetSearch btn btn-block btn-info">Reset</a>    
+                    <a href="#" class="button-resetsearch btn btn-block btn-info">Reset</a>    
                 </div>
             </div>
         </div><br>
 
-        <table id="example1" class="table table-bordered display nowrap" style="width:100%">
+        <table id="datatable_1" class="table table-bordered display nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -88,23 +88,23 @@
                     @endif
 
                     <td>
-                        <select class="form-control select2 OrderNameDropdownElement" style="width:100%;" data-id2="{{$Promo->Id}}" >
-                            @for($OrderNameDropdownVal=0; $OrderNameDropdownVal<=5; $OrderNameDropdownVal++)
+                        <select class="form-control select2 dropdown-promo-ordername" style="width:100%;" data-id2="{{$Promo->Id}}" >
+                            @for($promo_OrderName_dropdownVal=0; $promo_OrderName_dropdownVal<=5; $promo_OrderName_dropdownVal++)
                                 @if (property_exists($Promo, 'OrderName'))
-                                    @if ($OrderNameDropdownVal==$Promo->OrderName)
-                                        <option value="{{$OrderNameDropdownVal}}" selected>{{$OrderNameDropdownVal}}</option>
+                                    @if ($promo_OrderName_dropdownVal==$Promo->OrderName)
+                                        <option value="{{$promo_OrderName_dropdownVal}}" selected>{{$promo_OrderName_dropdownVal}}</option>
                                     @else
-                                        @if ($OrderNameDropdownVal==0)
-                                            <option value="{{$OrderNameDropdownVal}}">-</option>
+                                        @if ($promo_OrderName_dropdownVal==0)
+                                            <option value="{{$promo_OrderName_dropdownVal}}">-</option>
                                         @else
-                                            <option value="{{$OrderNameDropdownVal}}">{{$OrderNameDropdownVal}}</option>
+                                            <option value="{{$promo_OrderName_dropdownVal}}">{{$promo_OrderName_dropdownVal}}</option>
                                         @endif 
                                     @endif
                                 @else
-                                    @if ($OrderNameDropdownVal==0)
-                                        <option value="{{$OrderNameDropdownVal}}" selected>-</option>
+                                    @if ($promo_OrderName_dropdownVal==0)
+                                        <option value="{{$promo_OrderName_dropdownVal}}" selected>-</option>
                                     @else
-                                        <option value="{{$OrderNameDropdownVal}}">{{$OrderNameDropdownVal}}</option>
+                                        <option value="{{$promo_OrderName_dropdownVal}}">{{$promo_OrderName_dropdownVal}}</option>
                                     @endif                                   
                                 @endif
                             @endfor
@@ -113,7 +113,7 @@
 
                     <td>
                         <span>
-                            <a href="#" data-id="{{ $Promo->Id }}" class="update-promo 
+                            <a href="#" data-id="{{ $Promo->Id }}" class="button-promo-update 
                                 btn btn-info btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
                             <a href="{{asset('promo/delete/'.$Promo->Id)}}" 
                                 class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
@@ -131,7 +131,7 @@
 <!-- page script -->
 <script>
     $(document).ready(function () {
-        $('#example1').DataTable({
+        $('#datatable_1').DataTable({
             'deferRender' : true,
             'paging'      : true,
             'lengthChange': false,
@@ -153,22 +153,22 @@
         })
 
         //Button Search
-        $('.ButtonSearch').on('click', function(){
-            var searchData = $('.InputSearch').val()
-            var dtable = $('#example1').DataTable()
+        $('.button-search').on('click', function(){
+            var searchData = $('.input-search').val()
+            var dtable = $('#datatable_1').DataTable()
             dtable.search(searchData).draw()
         })
 
         //Reset Button Search
-        $('.ButtonResetSearch').on('click',function(){
-            var tab = $('#example1').DataTable()
+        $('.button-resetsearch').on('click',function(){
+            var tab = $('#datatable_1').DataTable()
             tab.search('').draw()
-            $('.InputSearch').val('')
+            $('.input-search').val('')
         })
         
         // OrderName Dropdown
-        $(document).on('change','.OrderNameDropdownElement', function(){
-            // $('.OrderNameDropdownElement').change(function(){
+        $(document).on('change','.dropdown-promo-ordername', function(){
+            // $('.dropdown-promo-ordername').change(function(){
             var PromoId = $(this).attr('data-id2');
             var SelectedOrderName = $(this).find('option:selected').val();
             // console.log(PromoId);
@@ -199,26 +199,26 @@
         })
 
         // Jenis Promo Dropdown
-        $('#checkbox_TampilPeriodePromo_Add').hide()
-        // $('#checkbox_TampilPeriodePromo_Update').hide()
+        $('#checkbox_promoModalAdd_TampilPeriodePromo').hide()
+        // $('#checkbox_promoModalUpdate_TampilPeriodePromo').hide()
 
         // Promo Amount Input Addon
-        $('#currencymask_PromoAmountRp_Add').hide()
-        $('#currencymask_PromoAmountPr_Add').hide()
-        $('#inputaddon_PromoAmountRp_Add').hide()
-        $('#inputaddon_PromoAmountPr_Add').hide()
-        // $('#currencymask_PromoAmountRp_Update').hide()
-        // $('#currencymask_PromoAmountPr_Update').hide()
-        // $('#inputaddon_PromoAmountRp_Update').hide()
-        // $('#inputaddon_PromoAmountPr_Update').hide()
+        $('#currencymask_promoModalAdd_PromoAmountRp').hide()
+        $('#currencymask_promoModalAdd_PromoAmountPr').hide()
+        $('#inputaddon_promoModalAdd_PromoAmountRp').hide()
+        $('#inputaddon_promoModalAdd_PromoAmountPr').hide()
+        // $('#currencymask_promoModalUpdate_PromoAmountRp').hide()
+        // $('#currencymask_promoModalUpdate_PromoAmountPr').hide()
+        // $('#inputaddon_promoModalUpdate_PromoAmountRp').hide()
+        // $('#inputaddon_promoModalUpdate_PromoAmountPr').hide()
 
-        // Add
-        $(document).on('click','.add-promo',function(){
-            $('#add-promo').modal();
+        // Modal Add
+        $(document).on('click','.button-promo-add',function(){
+            $('#modal_promo_add').modal();
         });
 
-        // Update
-        $(document).on('click','.update-promo',function(){
+        // Modal Update
+        $(document).on('click','.button-promo-update',function(){
             var id = $(this).attr('data-id');
             // console.log(id);
             $.ajax({
@@ -271,7 +271,7 @@
                     console.log(textStatus);
                 },
             });
-            $('#update-promo').modal();
+            $('#modal_promo_update').modal();
         });
     })
 </script>
