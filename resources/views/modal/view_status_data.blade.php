@@ -46,11 +46,11 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
 <Script>
     $(function() {
         $('#close-modal-status-data').click(function() {
-        $('#view-status-data-modal').modal('hide');
-        $('#view-status-data-modal').on('hidden.bs.modal',function(){
-            $('body').addClass('modal-open');
-        })
-        // $('#form-view-survey')[0].reset();  
+            $('#view-status-data-modal').modal('hide');
+            $('#view-status-data-modal').on('hidden.bs.modal',function(){
+                $('body').addClass('modal-open');
+            })
+            // $('#form-view-survey')[0].reset();  
         });      
     });
 

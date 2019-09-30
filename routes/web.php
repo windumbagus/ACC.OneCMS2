@@ -90,10 +90,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/promo','PromoController@index');
     Route::get('/promo/show','PromoController@show');
     Route::get('/promo/delete/{id}','PromoController@delete');
-    Route::post('/promo/add','PromoController@add');
-    Route::post('/promo/update','PromoController@update');
-    Route::post('/promo/update-order','PromoController@updateorder');
-    Route::post('/promo/update-picture','PromoController@updatepicture');
+    Route::post('/promo/add','PromoController@CreateOrUpdate');
+    Route::post('/promo/update','PromoController@CreateOrUpdate');
+    Route::post('/promo/update-order','PromoController@UpdateOrder');
+    Route::post('/promo/update-picture','PromoController@CreateOrUpdatePicture');
     
     Route::get('/master-product-accone','MasterProductAccOneController@index');
     Route::get('/master-product-accone/show','MasterProductAccOneController@show');

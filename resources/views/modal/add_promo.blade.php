@@ -1,28 +1,29 @@
 
-<div class="modal fade" id="add-promo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
+<div class="modal fade" id="modal_promo_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
     aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close close-modal-add-promo" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close close-modal-promo-add" data-dismiss="modal" aria-label="Close"
+                    onclick="return confirm('Are you sure want to cancel?')">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="box-title">Create New Promo</h4> 
             </div>
-            <form class="form-update-promo" action="#" method="post">
+            <form id="form_promoModalAdd_add" action="{{ asset('promo/add') }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body"> 
                     @csrf	
 
-                    <!-- <div class="form-group">
+                    <div class="form-group" hidden>
                         <label>User Added:</label><br>
-                        <input type="hidden" class="form-control" name="promo_MstPromo_UserAdded" 
+                        <input type="hidden" class="form-control" name="promo_User_Id" 
                             value="{{ session()->get('Id')}}">
-                    </div> -->
+                    </div>
 
                     <div class="form-group">
                         <label>Jenis Promo</label>
                         <select class="form-control select2" style="width:100%;" 
-                            name="promo_MstPromo_PromoType" id="dropdown_JenisPromo_Add" required>
+                            name="promo_MstPromo_JenisPromo" id="dropdown_promoModalAdd_JenisPromo" required>
                             
                             <option selected="selected" value="">Silahkan Pilih Jenis Promo</option>
                             <option value="Promo">
@@ -42,8 +43,8 @@
                     
                     <div class="form-group">
                         <label>Description:</label><br>
-                        <textarea id="editor1" name="editor1" rows="10" cols="60"
-                        type="text" class="form-control" name="promo_MstPromo_Description" required></textarea>
+                        <textarea rows="10" cols="60"
+                            type="text" class="form-control" name="promo_MstPromo_Description" required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -58,9 +59,10 @@
 
                     <div class="form-group">
                         <label>Picture:</label><br>
-                        <img style="width: 150px; height: 200px;" id="pendinglist_KTP_update_data" 
-                        name="promo_MstPicture_Picture" alt=""/><br>
-                        <button type="button" class="btn btn-success">Upload Picture</button>
+                        <img style="width: 300px; height: 200px;" name="promo_MstPicture_Picture" alt=""
+                            id="placeholder_promoModalAdd_picture"/><br>
+                        File type : JPEG/PNG<br>
+                        <input type="file" class="form-control" name="promo_MstPicture" id="input_promoModalAdd_picture">
                     </div>
 
                     <div class="form-group">
@@ -71,7 +73,7 @@
                     <div class="form-group">
                         <label>Promo Type:</label>
                         <select class="form-control select2" style="width:100%;" name="promo_MstPromo_PromoType"
-                            id="dropdown_PromoType_Add" required>
+                            id="dropdown_promoModalAdd_promoType" required>
                             
                             <option selected="selected" value="">Silahkan Pilih Tipe Promo</option>
                             @foreach ($PromoTypes as $PromoTypeDropdown)
@@ -88,18 +90,18 @@
                     <div class="form-group">
                         <label>Promo Amount:</label><br>
                         <div class="input-group">
-                            <span class="input-group-addon" id="inputaddon_PromoAmountRp_Add">Rp</span>
-                            <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_PromoAmountRp_Add"
+                            <span class="input-group-addon" id="inputaddon_promoModalAdd_PromoAmountRp">Rp</span>
+                            <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_promoModalAdd_PromoAmountRp"
                                 min="0.00" step="1" max="1000000000" value="0" required>
-                            <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_PromoAmountPr_Add"
+                            <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_promoModalAdd_PromoAmountPr"
                                 min="0.00" step="0.01" max="100" value="0" required>
-                            <span class="input-group-addon" id="inputaddon_PromoAmountPr_Add">%</span>
+                            <span class="input-group-addon" id="inputaddon_promoModalAdd_PromoAmountPr">%</span>
                         </div>
-                        <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_PromoAmount_Add"
+                        <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_promoModalAddPromoAmount"
                             min="0" value="0" required>
                     </div>
 
-                    <div class="form-group" id="checkbox_TampilPeriodePromo_Add">
+                    <div class="form-group" id="checkbox_promoModalAdd_TampilPeriodePromo">
                         <label>Tampilkan Periode Promo:</label><br>
                         <input type="checkbox" class="" name="promo_MstPromo_TampilPeriodePromo">
                     </div>
@@ -110,8 +112,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control" id="datepicker_StartDate_Add" name="promo_MstPromo_StartDate"
-                                value="{{ date('d/m/Y') }}" required>
+                            <input type="text" class="form-control" id="datepicker_promoModalAdd_StartDate" 
+                                name="promo_MstPromo_StartDate"value="{{ date('d/m/Y') }}" required>
                         </div>
                     </div>
 
@@ -121,16 +123,15 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control" id="datepicker_EndDate_Add" name="promo_MstPromo_EndDate"
-                                value="{{ date('d/m/Y') }}" required>
+                            <input type="text" class="form-control" id="datepicker_promoModalAdd_EndDate" 
+                                name="promo_MstPromo_EndDate" value="{{ date('d/m/Y') }}" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label>Syarat dan Ketentuan:</label><br>
-                        <textarea id="editor1" name="editor1" rows="10" cols="60" type="text" class="form-control" 
-                            name="promo_MstPromo_SyaratDanKetentuan" id="textarea_SyaratDanKetentuan_Add" required>
-                        </textarea>
+                        <textarea rows="10" cols="60" type="text" class="form-control" name="promo_MstPromo_SyaratDanKetentuan" 
+                            id="textarea_promoModalAdd_SyaratDanKetentuan" required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -142,7 +143,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning"
                         onclick="return confirm('Are you sure want to save this data?')">Save</button>	
-                    <button type="button" class="btn btn-primary close-modal-add-promo"
+                    <button type="button" class="btn btn-primary close-modal-promo-add"
                         onclick="return confirm('Are you sure want to cancel?')">Cancel</button>		
                 </div>
             </form>		
@@ -152,10 +153,62 @@
 
 <Script>
     $(function() {
-        $('.close-modal-add-promo').click(function() {
-            $('#add-promo').modal('hide');
-            $('.form-update-promo')[0].reset();  
+        $('.close-modal-promo-add').click(function() {
+            $('#modal_promo_add').modal('hide');
+            $('#form_promoModalAdd_add')[0].reset();  
         });      
+    });
+
+    // Jenis Promo Dropdown
+    $(document).on('change','#dropdown_promoModalAdd_JenisPromo',function(){
+        // console.log($('#dropdown_promoModalAdd_JenisPromo').val());
+        if ($('#dropdown_promoModalAdd_JenisPromo').val()=="Non-Promo"){
+            $('#checkbox_promoModalAdd_TampilPeriodePromo').show()
+
+            document.getElementById("dropdown_promoModalAdd_promoType").removeAttribute("required");
+            document.getElementById("currencymask_promoModalAddPromoAmount").removeAttribute("required");
+            document.getElementById("currencymask_promoModalAdd_PromoAmountRp").removeAttribute("required");
+            document.getElementById("currencymask_promoModalAdd_PromoAmountPr").removeAttribute("required");
+            document.getElementById("textarea_promoModalAdd_SyaratDanKetentuan").removeAttribute("required");
+        }else{
+            $('#checkbox_promoModalAdd_TampilPeriodePromo').hide()
+
+            document.getElementById("dropdown_promoModalAdd_promoType").setAttribute("required", "");
+            document.getElementById("currencymask_promoModalAddPromoAmount").setAttribute("required", "");
+            document.getElementById("currencymask_promoModalAdd_PromoAmountRp").setAttribute("required", "");
+            document.getElementById("currencymask_promoModalAdd_PromoAmountPr").setAttribute("required", "");
+            document.getElementById("textarea_promoModalAdd_SyaratDanKetentuan").setAttribute("required", "");
+        }
+    });
+
+    // Promo Type Dropdown
+    $(document).on('change','#dropdown_promoModalAdd_promoType',function(){
+        console.log($('#dropdown_promoModalAdd_promoType').val());
+        switch($('#dropdown_promoModalAdd_promoType').val()) {
+            case "FIXED VALUE":
+                $('#currencymask_promoModalAddPromoAmount').hide()
+                $('#currencymask_promoModalAdd_PromoAmountPr').hide()
+                $('#inputaddon_promoModalAdd_PromoAmountPr').hide()
+
+                $('#currencymask_promoModalAdd_PromoAmountRp').show()
+                $('#inputaddon_promoModalAdd_PromoAmountRp').show()
+                break;
+            case "PERCENTAGE":
+                $('#currencymask_promoModalAddPromoAmount').hide()
+                $('#currencymask_promoModalAdd_PromoAmountRp').hide()
+                $('#inputaddon_promoModalAdd_PromoAmountRp').hide()
+
+                $('#currencymask_promoModalAdd_PromoAmountPr').show()
+                $('#inputaddon_promoModalAdd_PromoAmountPr').show()
+                break;
+            default:
+                $('#currencymask_promoModalAdd_PromoAmountRp').hide()
+                $('#currencymask_promoModalAdd_PromoAmountPr').hide()
+                $('#inputaddon_promoModalAdd_PromoAmountRp').hide()
+                $('#inputaddon_promoModalAdd_PromoAmountPr').hide()
+
+                $('#currencymask_promoModalAddPromoAmount').show()
+        }
     });
 
     // Start-End Datepicker
@@ -163,7 +216,7 @@
     // var FromEndDate = new Date();
     // var ToEndDate = new Date();
     // ToEndDate.setDate(ToEndDate.getDate()+365);
-    $('#datepicker_StartDate_Add').datepicker({
+    $('#datepicker_promoModalAdd_StartDate').datepicker({
         autoclose: true,
         format: 'dd/mm/yyyy',
         startDate: '01/01/' + new Date().getFullYear(),
@@ -171,9 +224,9 @@
     }).on('changeDate', function(selected){
         startDate = new Date(selected.date.valueOf());
         // startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
-        $('#datepicker_EndDate_Add').datepicker('setStartDate', startDate);
+        $('#datepicker_promoModalAdd_EndDate').datepicker('setStartDate', startDate);
     });
-    $('#datepicker_EndDate_Add').datepicker({
+    $('#datepicker_promoModalAdd_EndDate').datepicker({
         autoclose: true,
         format: 'dd/mm/yyyy',
         startDate: '01/01/' + new Date().getFullYear(),
@@ -184,56 +237,18 @@
     //     $('.from_date').datepicker('setEndDate', FromEndDate);
     });
 
-    // Jenis Promo Dropdown
-    $(document).on('change','#dropdown_JenisPromo_Add',function(){
-        // console.log($('#dropdown_JenisPromo_Add').val());
-        if ($('#dropdown_JenisPromo_Add').val()=="Non-Promo"){
-            $('#checkbox_TampilPeriodePromo_Add').show()
-            document.getElementById("dropdown_PromoType_Add").removeAttribute("required");
-            document.getElementById("currencymask_PromoAmount_Add").removeAttribute("required");
-            document.getElementById("currencymask_PromoAmountRp_Add").removeAttribute("required");
-            document.getElementById("currencymask_PromoAmountPr_Add").removeAttribute("required");
-        }else{
-            $('#checkbox_TampilPeriodePromo_Add').hide()
-            document.getElementById("dropdown_PromoType_Add").setAttribute("required", "");
-            document.getElementById("currencymask_PromoAmount_Add").setAttribute("required", "");
-            document.getElementById("currencymask_PromoAmountRp_Add").setAttribute("required", "");
-            document.getElementById("currencymask_PromoAmountPr_Add").setAttribute("required", "");
+    $("#input_promoModalAdd_picture").change(function() {
+        readURL(this);
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+            $('#placeholder_promoModalAdd_picture').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
         }
-    });
+    }
 
-    // Promo Type Dropdown
-    $(document).on('change','#dropdown_PromoType_Add',function(){
-        console.log($('#dropdown_PromoType_Add').val());
-        switch($('#dropdown_PromoType_Add').val()) {
-            case "FIXED VALUE":
-                $('#currencymask_PromoAmount_Add').hide()
-                $('#currencymask_PromoAmountPr_Add').hide()
-                $('#inputaddon_PromoAmountPr_Add').hide()
-
-                $('#currencymask_PromoAmountRp_Add').show()
-                $('#inputaddon_PromoAmountRp_Add').show()
-                break;
-            case "PERCENTAGE":
-                $('#currencymask_PromoAmount_Add').hide()
-                $('#currencymask_PromoAmountRp_Add').hide()
-                $('#inputaddon_PromoAmountRp_Add').hide()
-
-                $('#currencymask_PromoAmountPr_Add').show()
-                $('#inputaddon_PromoAmountPr_Add').show()
-                break;
-            default:
-                $('#currencymask_PromoAmountRp_Add').hide()
-                $('#currencymask_PromoAmountPr_Add').hide()
-                $('#inputaddon_PromoAmountRp_Add').hide()
-                $('#inputaddon_PromoAmountPr_Add').hide()
-
-                $('#currencymask_PromoAmount_Add').show()
-        }
-    });
-
-    // Update Picture
-    $(document).on('click','.update-picture',function(){
-        $('#update-promo-picture-modal').modal();
-    });
 </Script>
