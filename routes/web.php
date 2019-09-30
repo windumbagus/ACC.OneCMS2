@@ -89,13 +89,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/master-kota/update','MasterKotaController@update');
     Route::get('/master-kota/delete/{id}','MasterKotaController@delete');
 
-
-
     Route::get('/promo','PromoController@index');
     Route::get('/promo/show','PromoController@show');
     Route::get('/promo/delete/{id}','PromoController@delete');
-    Route::post('/promo/add','PromoController@CreateOrUpdate');
-    Route::post('/promo/update','PromoController@CreateOrUpdate');
+    Route::post('/promo/add','PromoController@create');
+    Route::post('/promo/update','PromoController@update');
     Route::post('/promo/update-order','PromoController@UpdateOrder');
     Route::post('/promo/update-picture','PromoController@CreateOrUpdatePicture');
     

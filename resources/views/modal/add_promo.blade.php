@@ -16,20 +16,20 @@
 
                     <div class="form-group" hidden>
                         <label>User Added:</label><br>
-                        <input type="hidden" class="form-control" name="promo_User_Id" 
+                        <input type="hidden" class="form-control" name="addPromo_User_Id" 
                             value="{{ session()->get('Id')}}">
                     </div>
 
                     <div class="form-group">
                         <label>Jenis Promo</label>
                         <select class="form-control select2" style="width:100%;" 
-                            name="promo_MstPromo_JenisPromo" id="dropdown_promoModalAdd_JenisPromo" required>
-                            
+                            name="addPromo_MstPromo_JenisPromo" id="dropdown_promoModalAdd_JenisPromo" required>
+
                             <option selected="selected" value="">Silahkan Pilih Jenis Promo</option>
-                            <option value="Promo">
+                            <option value="1">
                                 <a href="#" class="">Promo</a>
                             </option>
-                            <option value="Non-Promo">
+                            <option value="2">
                                 <a href="#" class="">Non-Promo</a>
                             </option>
 
@@ -38,41 +38,41 @@
 
                     <div class="form-group">
                         <label>Name:</label><br>
-                        <input type="text" class="form-control" name="promo_MstPromo_Name" required>
+                        <input type="text" class="form-control" name="addPromo_MstPromo_Name" required>
                     </div>
                     
                     <div class="form-group">
                         <label>Description:</label><br>
                         <textarea rows="10" cols="60"
-                            type="text" class="form-control" name="promo_MstPromo_Description" required></textarea>
+                            type="text" class="form-control" name="addPromo_MstPromo_Description" required></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Is Active:</label><br>
-                        <input type="checkbox" class="" name="promo_MstPromo_IsActivePromo">
+                        <input type="checkbox" class="" value="True" name="addPromo_MstPromo_IsActivePromo">
                     </div>
 
                     <div class="form-group">
                         <label>Is Active Banner:</label><br>
-                        <input type="checkbox" class="" name="promo_MstPromo_IsActiveBanner">
+                        <input type="checkbox" class="" value="True" name="addPromo_MstPromo_IsActiveBanner">
                     </div>
 
                     <div class="form-group">
                         <label>Picture:</label><br>
-                        <img style="width: 300px; height: 200px;" name="promo_MstPicture_Picture" alt=""
+                        <img style="width: 300px; height: 200px;" name="addPromo_MstPicture_Picture" alt=""
                             id="placeholder_promoModalAdd_picture"/><br>
                         File type : JPEG/PNG<br>
-                        <input type="file" class="form-control" name="promo_MstPicture" id="input_promoModalAdd_picture">
+                        <input type="file" class="form-control" name="addPromo_MstPicture" id="input_promoModalAdd_picture">
                     </div>
 
                     <div class="form-group">
                         <label>Promo Code:</label><br>
-                        <input type="text" class="form-control" name="promo_MstPromo_PromoCode">
+                        <input type="text" class="form-control" name="addPromo_MstPromo_PromoCode">
                     </div>
 
                     <div class="form-group">
                         <label>Promo Type:</label>
-                        <select class="form-control select2" style="width:100%;" name="promo_MstPromo_PromoType"
+                        <select class="form-control select2" style="width:100%;" name="addPromo_MstPromo_PromoType"
                             id="dropdown_promoModalAdd_promoType" required>
                             
                             <option selected="selected" value="">Silahkan Pilih Tipe Promo</option>
@@ -90,20 +90,20 @@
                     <div class="form-group">
                         <label>Promo Amount:</label><br>
                         <div class="input-group">
+                            <span class="input-group-addon" id="inputaddon_promoModalAdd_PromoAmount">
+                                <i class="fa fa-dollar"></i>
+                            </span>
                             <span class="input-group-addon" id="inputaddon_promoModalAdd_PromoAmountRp">Rp</span>
-                            <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_promoModalAdd_PromoAmountRp"
-                                min="0.00" step="1" max="1000000000" value="0" required>
-                            <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_promoModalAdd_PromoAmountPr"
-                                min="0.00" step="0.01" max="100" value="0" required>
+                            <input type="number" class="form-control" name="addPromo_MstPromo_PromoAmount" 
+                                id="currencymask_promoModalAdd_PromoAmount" value="0" required>
                             <span class="input-group-addon" id="inputaddon_promoModalAdd_PromoAmountPr">%</span>
                         </div>
-                        <input type="number" class="form-control" name="promo_MstPromo_PromoAmount" id="currencymask_promoModalAddPromoAmount"
-                            min="0" value="0" required>
                     </div>
 
                     <div class="form-group" id="checkbox_promoModalAdd_TampilPeriodePromo">
                         <label>Tampilkan Periode Promo:</label><br>
-                        <input type="checkbox" class="" name="promo_MstPromo_TampilPeriodePromo">
+                        <input type="checkbox" class="" value="True" checked
+                            name="addPromo_MstPromo_TampilPeriodePromo" id="checkbox_promoModalAdd_TampilPeriodePromo">
                     </div>
 
                     <div class="form-group">
@@ -113,7 +113,7 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
                             <input type="text" class="form-control" id="datepicker_promoModalAdd_StartDate" 
-                                name="promo_MstPromo_StartDate"value="{{ date('d/m/Y') }}" required>
+                                name="addPromo_MstPromo_StartDate" value="{{ date('d/m/Y') }}" required>
                         </div>
                     </div>
 
@@ -124,19 +124,19 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
                             <input type="text" class="form-control" id="datepicker_promoModalAdd_EndDate" 
-                                name="promo_MstPromo_EndDate" value="{{ date('d/m/Y') }}" required>
+                                name="addPromo_MstPromo_EndDate" value="{{ date('d/m/Y') }}" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label>Syarat dan Ketentuan:</label><br>
-                        <textarea rows="10" cols="60" type="text" class="form-control" name="promo_MstPromo_SyaratDanKetentuan" 
+                        <textarea rows="10" cols="60" type="text" class="form-control" name="addPromo_MstPromo_SyaratDanKetentuan" 
                             id="textarea_promoModalAdd_SyaratDanKetentuan" required></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>URL:</label><br>
-                        <input type="text" class="form-control" name="promo_MstPromo_URL">
+                        <input type="text" class="form-control" name="addPromo_MstPromo_URL">
                     </div>
                 
                 </div>
@@ -162,52 +162,49 @@
     // Jenis Promo Dropdown
     $(document).on('change','#dropdown_promoModalAdd_JenisPromo',function(){
         // console.log($('#dropdown_promoModalAdd_JenisPromo').val());
-        if ($('#dropdown_promoModalAdd_JenisPromo').val()=="Non-Promo"){
+        if ($('#dropdown_promoModalAdd_JenisPromo').val()=="2"){
             $('#checkbox_promoModalAdd_TampilPeriodePromo').show()
 
             document.getElementById("dropdown_promoModalAdd_promoType").removeAttribute("required");
-            document.getElementById("currencymask_promoModalAddPromoAmount").removeAttribute("required");
-            document.getElementById("currencymask_promoModalAdd_PromoAmountRp").removeAttribute("required");
-            document.getElementById("currencymask_promoModalAdd_PromoAmountPr").removeAttribute("required");
             document.getElementById("textarea_promoModalAdd_SyaratDanKetentuan").removeAttribute("required");
         }else{
             $('#checkbox_promoModalAdd_TampilPeriodePromo').hide()
 
             document.getElementById("dropdown_promoModalAdd_promoType").setAttribute("required", "");
-            document.getElementById("currencymask_promoModalAddPromoAmount").setAttribute("required", "");
-            document.getElementById("currencymask_promoModalAdd_PromoAmountRp").setAttribute("required", "");
-            document.getElementById("currencymask_promoModalAdd_PromoAmountPr").setAttribute("required", "");
             document.getElementById("textarea_promoModalAdd_SyaratDanKetentuan").setAttribute("required", "");
         }
     });
 
     // Promo Type Dropdown
     $(document).on('change','#dropdown_promoModalAdd_promoType',function(){
-        console.log($('#dropdown_promoModalAdd_promoType').val());
+        // console.log($('#dropdown_promoModalAdd_promoType').val());
         switch($('#dropdown_promoModalAdd_promoType').val()) {
             case "FIXED VALUE":
-                $('#currencymask_promoModalAddPromoAmount').hide()
-                $('#currencymask_promoModalAdd_PromoAmountPr').hide()
                 $('#inputaddon_promoModalAdd_PromoAmountPr').hide()
-
-                $('#currencymask_promoModalAdd_PromoAmountRp').show()
+                $('#inputaddon_promoModalAdd_PromoAmount').hide()
                 $('#inputaddon_promoModalAdd_PromoAmountRp').show()
+
+                document.getElementById("currencymask_promoModalAdd_PromoAmount").setAttribute("min", "0")
+                document.getElementById("currencymask_promoModalAdd_PromoAmount").setAttribute("max", "1000000000")
+                document.getElementById("currencymask_promoModalAdd_PromoAmount").setAttribute("step", "1")
                 break;
             case "PERCENTAGE":
-                $('#currencymask_promoModalAddPromoAmount').hide()
-                $('#currencymask_promoModalAdd_PromoAmountRp').hide()
                 $('#inputaddon_promoModalAdd_PromoAmountRp').hide()
-
-                $('#currencymask_promoModalAdd_PromoAmountPr').show()
+                $('#inputaddon_promoModalAdd_PromoAmount').hide()
                 $('#inputaddon_promoModalAdd_PromoAmountPr').show()
+
+                document.getElementById("currencymask_promoModalAdd_PromoAmount").setAttribute("min", "0")
+                document.getElementById("currencymask_promoModalAdd_PromoAmount").setAttribute("max", "100")
+                document.getElementById("currencymask_promoModalAdd_PromoAmount").setAttribute("step", "0.01")
                 break;
             default:
-                $('#currencymask_promoModalAdd_PromoAmountRp').hide()
-                $('#currencymask_promoModalAdd_PromoAmountPr').hide()
                 $('#inputaddon_promoModalAdd_PromoAmountRp').hide()
                 $('#inputaddon_promoModalAdd_PromoAmountPr').hide()
-
-                $('#currencymask_promoModalAddPromoAmount').show()
+                $('#inputaddon_promoModalAdd_PromoAmount').show()
+                
+                document.getElementById("textarea_promoModalAdd_SyaratDanKetentuan").removeAttribute("min");
+                document.getElementById("textarea_promoModalAdd_SyaratDanKetentuan").removeAttribute("max");
+                document.getElementById("textarea_promoModalAdd_SyaratDanKetentuan").removeAttribute("step");
         }
     });
 

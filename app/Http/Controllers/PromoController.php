@@ -69,72 +69,168 @@ class PromoController extends Controller
         return redirect('/promo')->with('success',' Delete Data Successfully!');
     }
 
-    public function CreateOrUpdate(Request $request)
+    public function create(Request $request)
     {
         // dd($request);
         
         $validator = Validator::make($request->all(), [
-            'promo_MstPicture' => 'required'
+            'addPromo_MstPicture' => 'required'
         ]);
         if ($validator->fails()) {
-            return redirect('/promo')->with('error',' Create/Update Picture Failed!');
+            return redirect('/promo')->with('error',' Upload Picture Failed!');
         }
-
-        $file = $request->promo_MstPicture;
+        $file = $request->addPromo_MstPicture;
         $getContent = file_get_contents($file);
         $content= base64_encode($getContent);
         $name = $file->getClientOriginalName();
         $type = $file->extension();
 
-        $MstPicture = array(
-            "Picture" => $content,
-            "FileName" => $name,
-            "FileType" => "image/".$type,
-        );
-        // dd($MstPicture);
+        if ($request->addPromo_MstPromo_IsActivePromo <> "True") {
+            $request->addPromo_MstPromo_IsActivePromo = "False";
+        };
+        if ($request->addPromo_MstPromo_IsActiveBanner <> "True") {
+            $request->addPromo_MstPromo_IsActiveBanner = "False";
+        };
+        if ($request->addPromo_MstPromo_TampilPeriodePromo <> "True") {
+            $request->addPromo_MstPromo_TampilPeriodePromo = "False";
+        };
         
         $data = json_encode(array(
-            "MstPromo" => array(
-                "Id" => "$request->promo_MstPromo_Id",
-                "Name" => "$request->promo_MstPromo_Name",
-                "PromoCode" => "$request->promo_MstPromo_PromoCode",
-                "Description" => "$request->promo_MstPromo_Description",
-                "IsActivePromo" => "$request->promo_MstPromo_IsActivePromo",             
-                "AddedDate" => "$request->promo_MstPromo_AddedDate",
-                "UserAdded" => "$request->promo_MstPromo_UserAdded",
-                "UpdatedDate" => "$request->promo_MstPromo_UpdatedDate",
-                "UserUpdated" => "$request->promo_MstPromo_UserUpdated",
-                "StartDate" => "$request->promo_MstPromo_StartDate",
-                "EndDate" => "$request->promo_MstPromo_EndDate",
-                "SyaratDanKetentuan" => "$request->promo_MstPromo_SyaratDanKetentuan",
-                "PromoType" => "$request->promo_MstPromo_PromoType",
-                "PromoAmount" => "$request->promo_MstPromo_PromoAmount",
-                "ProductOwner" => "$request->promo_MstPromo_ProductOwner",
-                "OrderName" => "$request->promo_MstPromo_OrderName",          
-                "JenisPromo" => "$request->promo_MstPromo_JenisPromo",
-                "TampilPeriodePromo" => "$request->promo_MstPromo_TampilPeriodePromo",             
-                "URL" => "$request->promo_MstPromo_URL",
-                "IsActiveBanner" => "$request->promo_MstPromo_IsActiveBanner"
+            "MstPromo" => array(       
+                "Name" => "$request->addPromo_MstPromo_Name",
+                "PromoCode" => "$request->addPromo_MstPromo_PromoCode",
+                "Description" => "$request->addPromo_MstPromo_Description",
+                "IsActivePromo" => "$request->addPromo_MstPromo_IsActivePromo",
+                "IsActiveBanner" => "$request->addPromo_MstPromo_IsActiveBanner",
+                "TampilPeriodePromo" => "$request->addPromo_MstPromo_TampilPeriodePromo", 
+                // "OrderName" => "$request->addPromo_MstPromo_OrderName", 
+                "PromoType" => "$request->addPromo_MstPromo_PromoType",          
+                "JenisPromo" => "$request->addPromo_MstPromo_JenisPromo",
+                "PromoAmount" => "$request->addPromo_MstPromo_PromoAmount", 
+                "SyaratDanKetentuan" => "$request->addPromo_MstPromo_SyaratDanKetentuan",   
+                "URL" => "$request->addPromo_MstPromo_URL",           
+                // "AddedDate" => "$request->addPromo_MstPromo_AddedDate",
+                // "UserAdded" => "$request->addPromo_MstPromo_UserAdded",
+                // "UpdatedDate" => "$request->addPromo_MstPromo_UpdatedDate",
+                // "UserUpdated" => "$request->addPromo_MstPromo_UserUpdated",
+                // "ProductOwner" => "$request->addPromo_MstPromo_ProductOwner",
             ),
-            "MstPicture" => $MstPicture,
-            "User_Id" => $request->promo_User_Id,
+            "MstPicture" => array(
+                "Picture" => $content,
+                "FileName" => $name,
+                "FileType" => "image/".$type,
+            ),
+            "MstPromo_Id" => $request->addPromo_MstPromo_Id,
+            "MstPromo_StartDate" => $request->addPromo_MstPromo_StartDate,
+            "MstPromo_EndDate" => $request->addPromo_MstPromo_EndDate,
+            "User_Id" => $request->addPromo_User_Id,
         )); 
-        dd($data);
+        // dd($data);
 
-        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePromo"; 
-        // $ch = curl_init($url);                   
-        // curl_setopt($ch, CURLOPT_POST, true);                                  
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-        // $result = curl_exec($ch);
-        // $err = curl_error($ch);
-        // curl_close($ch);
-        // $hasils = json_decode($result);
-        // // dd($result);
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePromo"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
 
-        // return redirect('/promo')->with('success',' Add/Update Data Successfully!');
+        if(property_exists($Hasils, 'Success') && ($Hasils->Success)) {
+            return redirect('/promo')->with('success',' Add Data Successfully!');
+        } elseif(property_exists($Hasils, 'Error')) {
+            return redirect('/promo')->with('error', $Hasils->Error);
+        } elseif(property_exists($Hasils, 'Errors')) {
+            return redirect('/promo')->with('error', $Hasils->Errors);
+        } else {
+            return redirect('/promo')->with('error',' Add Data Failed!');
+        }
+    }
+
+    public function update(Request $request)
+    {
+        // dd($request);
+        
+        $validator = Validator::make($request->all(), [
+            'updatePromo_MstPicture' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect('/promo')->with('error',' Upload Picture Failed!');
+        }
+        $file = $request->updatePromo_MstPicture;
+        $getContent = file_get_contents($file);
+        $content= base64_encode($getContent);
+        $name = $file->getClientOriginalName();
+        $type = $file->extension();
+
+        if ($request->updatePromo_MstPromo_IsActivePromo <> "True") {
+            $request->updatePromo_MstPromo_IsActivePromo = "False";
+        };
+        if ($request->updatePromo_MstPromo_IsActiveBanner <> "True") {
+            $request->updatePromo_MstPromo_IsActiveBanner = "False";
+        };
+        if ($request->updatePromo_MstPromo_TampilPeriodePromo <> "True") {
+            $request->updatePromo_MstPromo_TampilPeriodePromo = "False";
+        };
+        
+        $data = json_encode(array(
+            "MstPromo" => array(         
+                "Name" => "$request->updatePromo_MstPromo_Name",
+                "PromoCode" => "$request->updatePromo_MstPromo_PromoCode",
+                "Description" => "$request->updatePromo_MstPromo_Description",
+                "IsActivePromo" => "$request->updatePromo_MstPromo_IsActivePromo",
+                "IsActiveBanner" => "$request->updatePromo_MstPromo_IsActiveBanner",
+                "TampilPeriodePromo" => "$request->updatePromo_MstPromo_TampilPeriodePromo", 
+                "OrderName" => "$request->updatePromo_MstPromo_OrderName", 
+                "PromoType" => "$request->updatePromo_MstPromo_PromoType",          
+                "JenisPromo" => "$request->updatePromo_MstPromo_JenisPromo",
+                "PromoAmount" => "$request->updatePromo_MstPromo_PromoAmount", 
+                "SyaratDanKetentuan" => "$request->updatePromo_MstPromo_SyaratDanKetentuan",   
+                "URL" => "$request->updatePromo_MstPromo_URL",           
+                "AddedDate" => "$request->updatePromo_MstPromo_AddedDate",
+                "UserAdded" => "$request->updatePromo_MstPromo_UserAdded",
+                // "UpdatedDate" => "$request->updatePromo_MstPromo_UpdatedDate",
+                // "UserUpdated" => "$request->updatePromo_MstPromo_UserUpdated",
+                // "ProductOwner" => "$request->updatePromo_MstPromo_ProductOwner",
+            ),
+            "MstPicture" => array(
+                "Picture" => $content,
+                "FileName" => $name,
+                "FileType" => "image/".$type,
+            ),
+            // "MstPromo_Id" => $request->updatePromo_MstPromo_Id,
+            "MstPromo_StartDate" => $request->updatePromo_MstPromo_StartDate,
+            "MstPromo_EndDate" => $request->updatePromo_MstPromo_EndDate,
+            "User_Id" => $request->updatePromo_User_Id,
+        )); 
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePromo"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
+
+        if(property_exists($Hasils, 'Success') && ($Hasils->Success)) {
+            return redirect('/promo')->with('success',' Update Data Successfully!');
+        } elseif(property_exists($Hasils, 'Error')) {
+            return redirect('/promo')->with('error', $Hasils->Error);
+        } elseif(property_exists($Hasils, 'Errors')) {
+            return redirect('/promo')->with('error', $Hasils->Errors);
+        } else {
+            return redirect('/promo')->with('error',' Update Data Failed!');
+        }
     }
 
     public function UpdateOrder(Request $request)
@@ -155,46 +251,46 @@ class PromoController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $hasils = json_decode($result);
+        $Hasils = json_decode($result);
         // dd($result);
 
         return $result;
     }
 
-    public function CreateOrUpdatePicture(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'promo_MstPicture' => 'required'
-        ]);
-        if ($validator->fails()) {
-            return redirect('/promo')->with('error',' Create/Update Picture Failed!');
-        }
+    // public function CreateOrUpdatePicture(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'promo_MstPicture' => 'required'
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return redirect('/promo')->with('error',' Create/Update Picture Failed!');
+    //     }
 
-        $file = $request->promo_MstPicture;
-        $content= base64_encode(file_get_contents($file));
-        $name = $file->getClientOriginalName();
-        $type = $file->extension();
+    //     $file = $request->updatePromo_MstPicture;
+    //     $content= base64_encode(file_get_contents($file));
+    //     $name = $file->getClientOriginalName();
+    //     $type = $file->extension();
 
-        $MstPicture = json_encode(array(
-            "Picture" => $content,
-            "FileName" => $name,
-            "FileType" => "image/".$type,
-        ));
-        dd($MstPicture);  
+    //     $MstPicture = json_encode(array(
+    //         "Picture" => $content,
+    //         "FileName" => $name,
+    //         "FileType" => "image/".$type,
+    //     ));
+    //     dd($MstPicture);  
 
-        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePicture"; 
-        // $ch = curl_init($url);                   
-        // curl_setopt($ch, CURLOPT_POST, true);                                  
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, $MstPicture);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-        // $result = curl_exec($ch);
-        // $err = curl_error($ch);
-        // curl_close($ch);
-        // $hasils = json_decode($result);
-        // dd($result);
+    //     // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePicture"; 
+    //     // $ch = curl_init($url);                   
+    //     // curl_setopt($ch, CURLOPT_POST, true);                                  
+    //     // curl_setopt($ch, CURLOPT_POSTFIELDS, $MstPicture);
+    //     // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+    //     // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+    //     // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+    //     // $result = curl_exec($ch);
+    //     // $err = curl_error($ch);
+    //     // curl_close($ch);
+    //     // $Hasils = json_decode($result);
+    //     // dd($result);
 
-        return redirect('/promo')->with('success',' Create/Update Picture Successfully!');
-    }
+    //     return redirect('/promo')->with('success',' Create/Update Picture Successfully!');
+    // }
 }

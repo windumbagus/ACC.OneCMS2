@@ -200,17 +200,10 @@
 
         // Jenis Promo Dropdown
         $('#checkbox_promoModalAdd_TampilPeriodePromo').hide()
-        // $('#checkbox_promoModalUpdate_TampilPeriodePromo').hide()
 
         // Promo Amount Input Addon
-        $('#currencymask_promoModalAdd_PromoAmountRp').hide()
-        $('#currencymask_promoModalAdd_PromoAmountPr').hide()
         $('#inputaddon_promoModalAdd_PromoAmountRp').hide()
         $('#inputaddon_promoModalAdd_PromoAmountPr').hide()
-        // $('#currencymask_promoModalUpdate_PromoAmountRp').hide()
-        // $('#currencymask_promoModalUpdate_PromoAmountPr').hide()
-        // $('#inputaddon_promoModalUpdate_PromoAmountRp').hide()
-        // $('#inputaddon_promoModalUpdate_PromoAmountPr').hide()
 
         // Modal Add
         $(document).on('click','.button-promo-add',function(){
@@ -227,43 +220,74 @@
                 dataType:'JSON', 
                 type:'GET',
                 success: function (val){
-                    // console.log(val);
+                    console.log(val);
 
-                    $('[name="promo_MstPicture_Id"]').val(val.MstPicture.Id);
-                    $('[name="promo_MstPicture_DataId"]').val(val.MstPicture.DataId);
-                    $('[name="promo_MstPicture_Picture"]').val(val.MstPicture.Picture);
-                    $('[name="promo_MstPicture_FileName"]').val(val.MstPicture.FileName);
-                    $('[name="promo_MstPicture_FileType"]').val(val.MstPicture.FileType);
-                    $('[name="promo_MstPicture_Type"]').val(val.MstPicture.Type);
+                    $('[name="updatePromo_MstPicture_Id"]').val(val.MstPicture.Id);
+                    $('[name="updatePromo_MstPicture_DataId"]').val(val.MstPicture.DataId);
+                    $('[name="updatePromo_MstPicture_Picture"]').val(val.MstPicture.Picture);
+                    $('[name="updatePromo_MstPicture_FileName"]').val(val.MstPicture.FileName);
+                    $('[name="updatePromo_MstPicture_FileType"]').val(val.MstPicture.FileType);
+                    $('[name="updatePromo_MstPicture_Type"]').val(val.MstPicture.Type);
 
-                    $('[name="promo_MstPromo_Id"]').val(val.MstPromo.Id);
-                    $('[name="promo_MstPromo_Name"]').val(val.MstPromo.Name);
-                    $('[name="promo_MstPromo_PromoCode"]').val(val.MstPromo.PromoCode);
-                    $('[name="promo_MstPromo_Description"]').val(val.MstPromo.Description);
-                    $('[name="promo_MstPromo_IsActivePromo"]').val(val.MstPromo.IsActivePromo);
-                    $('[name="promo_MstPromo_AddedDate"]').val(val.MstPromo.AddedDate);
-                    $('[name="promo_MstPromo_UserAdded"]').val(val.MstPromo.UserAdded);
-                    $('[name="promo_MstPromo_UpdatedDate"]').val(val.MstPromo.UpdatedDate);
-                    $('[name="promo_MstPromo_UserUpdated"]').val(val.MstPromo.UserUpdated);
-                    $('[name="promo_MstPromo_StartDate"]').val(val.MstPromo.StartDate);
-                    $('[name="promo_MstPromo_EndDate"]').val(val.MstPromo.EndDate);
-                    $('[name="promo_MstPromo_SyaratDanKetentuan"]').val(val.MstPromo.SyaratDanKetentuan);
-                    $('[name="promo_MstPromo_PromoType"]').val(val.MstPromo.PromoType);
-                    $('[name="promo_MstPromo_PromoAmount"]').val(val.MstPromo.PromoAmount);
-                    $('[name="promo_MstPromo_ProductOwner"]').val(val.MstPromo.ProductOwner);
-                    $('[name="promo_MstPromo_OrderName"]').val(val.MstPromo.OrderName);
-                    $('[name="promo_MstPromo_JenisPromo"]').val(val.MstPromo.JenisPromo);
-                    $('[name="promo_MstPromo_TampilPeriodePromo"]').val(val.MstPromo.TampilPeriodePromo);
-                    $('[name="promo_MstPromo_URL"]').val(val.MstPromo.URL);
-                    $('[name="promo_MstPromo_IsActiveBanner"]').val(val.MstPromo.IsActiveBanner);
+                    $('[name="updatePromo_MstPromo_Id"]').val(val.MstPromo.Id);
+                    $('[name="updatePromo_MstPromo_Name"]').val(val.MstPromo.Name);
+                    $('[name="updatePromo_MstPromo_PromoCode"]').val(val.MstPromo.PromoCode);
+                    $('[name="updatePromo_MstPromo_Description"]').val(val.MstPromo.Description);
+                    $('[name="updatePromo_MstPromo_AddedDate"]').val(val.MstPromo.AddedDate);
+                    $('[name="updatePromo_MstPromo_UserAdded"]').val(val.MstPromo.UserAdded);
+                    $('[name="updatePromo_MstPromo_UpdatedDate"]').val(val.MstPromo.UpdatedDate);
+                    $('[name="updatePromo_MstPromo_UserUpdated"]').val(val.MstPromo.UserUpdated);
+                    $('[name="updatePromo_MstPromo_SyaratDanKetentuan"]').val(val.MstPromo.SyaratDanKetentuan);
+                    $('[name="updatePromo_MstPromo_PromoType"]').val(val.MstPromo.PromoType);
+                    $('[name="updatePromo_MstPromo_PromoAmount"]').val(val.MstPromo.PromoAmount);
+                    $('[name="updatePromo_MstPromo_ProductOwner"]').val(val.MstPromo.ProductOwner);
+                    $('[name="updatePromo_MstPromo_OrderName"]').val(val.MstPromo.OrderName);
+                    $('[name="updatePromo_MstPromo_JenisPromo"]').val(val.MstPromo.JenisPromo);
+                    $('[name="updatePromo_MstPromo_URL"]').val(val.MstPromo.URL);
 
-                    // document.getElementById('view-status-data').setAttribute('data-id2',val.MstStatusPengajuan.Id);
+                    if (val.MstPromo.hasOwnProperty('IsActivePromo')) {
+                        $('[name="updatePromo_MstPromo_IsActivePromo"]').val(val.MstPromo.IsActivePromo); 
+                        if (val.MstPromo.IsActivePromo=="true") {
+                            document.getElementById('checkbox_promoModalUpdate_IsActivePromo').setAttribute('checked',''); 
+                        }
+                    } else {
+                        $('[name="updatePromo_MstPromo_IsActivePromo"]').val("false");
+                        document.getElementById('checkbox_promoModalUpdate_IsActivePromo').removeAttribute('checked');
+                    }
 
-                    // if (val.MstStatusPengajuan.hasOwnProperty('Brand')) {
-                    //     $('[name="status_pengajuan_Brand_data"]').val(val.MstStatusPengajuan.Brand);   
-                    // }else{
-                    //     $('[name="status_pengajuan_Brand_data"]').val("");        
-                    // }
+                    if (val.MstPromo.hasOwnProperty('IsActiveBanner')) {
+                        $('[name="updatePromo_MstPromo_IsActiveBanner"]').val(val.MstPromo.IsActiveBanner);
+                        if (val.MstPromo.IsActiveBanner=="true") {
+                            document.getElementById('checkbox_promoModalUpdate_IsActiveBanner').setAttribute('checked','');
+                        } 
+                    } else {
+                        $('[name="updatePromo_MstPromo_IsActiveBanner"]').val("false");
+                        document.getElementById('checkbox_promoModalUpdate_IsActiveBanner').removeAttribute('checked');
+                    }
+                    
+                    $('[name="updatePromo_MstPromo_TampilPeriodePromo"]').val(val.MstPromo_TampilPeriodePromo);
+                    $('[name="updatePromo_MstPromo_StartDate"]').val(val.MstPromo_StartDate);
+                    $('[name="updatePromo_MstPromo_EndDate"]').val(val.MstPromo_EndDate);
+                    document.getElementById('datepicker_promoModalUpdate_StartDate').setAttribute('value',val.MstPromo_StartDate);
+                    document.getElementById('datepicker_promoModalUpdate_EndDate').setAttribute('value',val.MstPromo_EndDate);
+
+                    // Jenis Promo Dropdown
+                    if (val.MstPromo.JenisPromo==="2") {
+                    //     if (val.MstPromo.TampilPeriodePromo=="true") {
+                    //         document.getElementById('checkbox_promoModalUpdate_TampilPeriodePromo')
+                    //             .setAttribute('checked','');
+                    //         // document.getElementById('checkbox_promoModalUpdate_TampilPeriodePromo')
+                    //         //     .setAttribute('Value','True');
+                    //     }
+                    } else {
+                        $('#checkbox_promoModalUpdate_TampilPeriodePromo').hide()
+                    }
+
+                    // Promo Amount Input Addon
+                    // $('#inputaddon_promoModalAdd_PromoAmountRp').hide()
+                    // $('#inputaddon_promoModalAdd_PromoAmountPr').hide()
+                    // $('#inputaddon_promoModalUpdate_PromoAmountRp').hide()
+                    // $('#inputaddon_promoModalUpdate_PromoAmountPr').hide()
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                     console.log(jqXhr);
