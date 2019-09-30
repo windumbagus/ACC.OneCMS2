@@ -85,6 +85,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-kota','MasterKotaController@index');
     Route::get('/master-kota/show','MasterKotaController@show');
     Route::post('/master-kota/upload','MasterKotaController@upload');
+    Route::post('/master-kota/add','MasterKotaController@add');
+    Route::post('/master-kota/update','MasterKotaController@update');
+    Route::get('/master-kota/delete/{id}','MasterKotaController@delete');
+
 
 
     Route::get('/promo','PromoController@index');
@@ -106,4 +110,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/master-searching/update','MasterSearchingController@update');
     Route::get('/master-searching/delete/{id}','MasterSearchingController@delete');
     Route::post('/master-searching/upload','MasterSearchingController@upload');
+
+    Route::get('/master-otr','MasterOtrController@index');
+    Route::get('/master-otr/delete/{id}','MasterOtrController@delete');
+    Route::get('/master-otr/download','MasterOtrController@download');
+
+
+
 });//end group route

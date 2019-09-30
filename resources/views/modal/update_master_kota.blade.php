@@ -13,6 +13,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="Id_master_kota_update" >
+                    </div>
+                    <div class="form-group">
                         <label>CD CITY</label>
                         <input type="text" class="form-control" name="CD_CITY_master_kota_update" >
                     </div>
@@ -59,7 +62,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="close-modal-update btn btn-default">Close</button>	
-                    <button type="submit" class="btn btn-success">Create</button>		
+                    <button type="submit" class="btn btn-warning">Update</button>		
                 </div>	
             </form>
         </div>

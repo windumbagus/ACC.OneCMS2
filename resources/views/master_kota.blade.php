@@ -140,6 +140,7 @@
                 success: function (val){
                     console.log(val);
 
+                    $('[name="Id_master_kota_update"]').val(val.MstCity.Id);
                     $('[name="CD_CITY_master_kota_update"]').val(val.MstCity.CD_CITY);
                     $('[name="CITY_master_kota_update"]').val(val.MstCity.CITY);
 

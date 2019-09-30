@@ -22,7 +22,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     </div>
                     <div class="form-group">
                         <label>FLAG ACTIVE:</label><br>
-                        <input type="checkbox" class="" name="FLAG ACTIVE_master_kota_add">
+                        <input type="checkbox" class="" name="FLAG_ACTIVE_master_kota_add">
                     </div>
                     <div class="form-group">
                         <label>FLAG TRANSFER:</label><br>
