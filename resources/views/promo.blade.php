@@ -114,7 +114,7 @@
                     <td>
                         <span>
                             <a href="#" data-id="{{ $Promo->Id }}" class="button-promo-update 
-                                btn btn-info btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
                             <a href="{{asset('promo/delete/'.$Promo->Id)}}" 
                                 class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
                                 <i class="fa fa-trash"></i>
@@ -220,74 +220,125 @@
                 dataType:'JSON', 
                 type:'GET',
                 success: function (val){
-                    console.log(val);
+                    // console.log(val);
 
+                    // Promo Picture
                     $('[name="updatePromo_MstPicture_Id"]').val(val.MstPicture.Id);
                     $('[name="updatePromo_MstPicture_DataId"]').val(val.MstPicture.DataId);
                     $('[name="updatePromo_MstPicture_Picture"]').val(val.MstPicture.Picture);
                     $('[name="updatePromo_MstPicture_FileName"]').val(val.MstPicture.FileName);
                     $('[name="updatePromo_MstPicture_FileType"]').val(val.MstPicture.FileType);
                     $('[name="updatePromo_MstPicture_Type"]').val(val.MstPicture.Type);
-
+                    $('#placeholder_promoModalUpdate_picture').attr('src', "data:image/png;base64," + val.MstPicture.Picture);
+                    
                     $('[name="updatePromo_MstPromo_Id"]').val(val.MstPromo.Id);
                     $('[name="updatePromo_MstPromo_Name"]').val(val.MstPromo.Name);
                     $('[name="updatePromo_MstPromo_PromoCode"]').val(val.MstPromo.PromoCode);
                     $('[name="updatePromo_MstPromo_Description"]').val(val.MstPromo.Description);
                     $('[name="updatePromo_MstPromo_AddedDate"]').val(val.MstPromo.AddedDate);
                     $('[name="updatePromo_MstPromo_UserAdded"]').val(val.MstPromo.UserAdded);
-                    $('[name="updatePromo_MstPromo_UpdatedDate"]').val(val.MstPromo.UpdatedDate);
-                    $('[name="updatePromo_MstPromo_UserUpdated"]').val(val.MstPromo.UserUpdated);
+                    // $('[name="updatePromo_MstPromo_UpdatedDate"]').val(val.MstPromo.UpdatedDate);
+                    // $('[name="updatePromo_MstPromo_UserUpdated"]').val(val.MstPromo.UserUpdated);
                     $('[name="updatePromo_MstPromo_SyaratDanKetentuan"]').val(val.MstPromo.SyaratDanKetentuan);
-                    $('[name="updatePromo_MstPromo_PromoType"]').val(val.MstPromo.PromoType);
-                    $('[name="updatePromo_MstPromo_PromoAmount"]').val(val.MstPromo.PromoAmount);
                     $('[name="updatePromo_MstPromo_ProductOwner"]').val(val.MstPromo.ProductOwner);
-                    $('[name="updatePromo_MstPromo_OrderName"]').val(val.MstPromo.OrderName);
-                    $('[name="updatePromo_MstPromo_JenisPromo"]').val(val.MstPromo.JenisPromo);
                     $('[name="updatePromo_MstPromo_URL"]').val(val.MstPromo.URL);
+                    
+                    // Jenis Promo
+                    $('[name="updatePromo_MstPromo_JenisPromo"]').val(val.MstPromo.JenisPromo);
+                    if (val.MstPromo.JenisPromo == "2") {
+                        $("#div_promoModalUpdate_TampilPeriodePromo").removeAttr("hidden");
+                        $("#dropdown_promoModalUpdate_promoType").removeAttr("required");
+                        $("#textarea_promoModalUpdate_SyaratDanKetentuan").removeAttr("required");
+                    } else {
+                        $("#div_promoModalUpdate_TampilPeriodePromo").attr("hidden","");
+                        $("#dropdown_promoModalUpdate_promoType").attr("required","");
+                        $("#textarea_promoModalUpdate_SyaratDanKetentuan").attr("required","");
+                    }
+                    
+                    // Promo Type
+                    $('[name="updatePromo_MstPromo_PromoType"]').val(val.MstPromo.PromoType);
+                   switch(val.MstPromo.PromoType) {
+                        case "FIXED VALUE":
+                            $('#inputaddon_promoModalUpdate_PromoAmount').hide()
+                            $('#inputaddon_promoModalUpdate_PromoAmountRp').show()
+                            $('#inputaddon_promoModalUpdate_PromoAmountPr').hide()
 
+                            document.getElementById("currencymask_promoModalUpdate_PromoAmount").setAttribute("min", "0")
+                            document.getElementById("currencymask_promoModalUpdate_PromoAmount").setAttribute("max", "1000000000")
+                            break;
+                        case "PERCENTAGE":
+                            $('#inputaddon_promoModalUpdate_PromoAmount').hide()
+                            $('#inputaddon_promoModalUpdate_PromoAmountRp').hide()
+                            $('#inputaddon_promoModalUpdate_PromoAmountPr').show()
+
+                            document.getElementById("currencymask_promoModalUpdate_PromoAmount").setAttribute("min", "0")
+                            document.getElementById("currencymask_promoModalUpdate_PromoAmount").setAttribute("max", "100")
+                            break;
+                        default:
+                            $('#inputaddon_promoModalUpdate_PromoAmount').show()
+                            $('#inputaddon_promoModalUpdate_PromoAmountRp').hide()
+                            $('#inputaddon_promoModalUpdate_PromoAmountPr').hide()
+                            
+                            document.getElementById("currencymask_promoModalUpdate_PromoAmount").removeAttribute("min");
+                            document.getElementById("currencymask_promoModalUpdate_PromoAmount").removeAttribute("max");
+                            document.getElementById("currencymask_promoModalUpdate_PromoAmount").removeAttribute("step");
+                    }
+
+                    // Promo Amount
+                    if (val.MstPromo.PromoAmount>0) {
+                        $('[name="updatePromo_MstPromo_PromoAmount"]').val(val.MstPromo.PromoAmount);
+                    } else {
+                        $('[name="updatePromo_MstPromo_PromoAmount"]').val("0");
+                    }
+
+                    // Order Name
+                    if (val.MstPromo.OrderName>0) {
+                        $('[name="updatePromo_MstPromo_OrderName"]').val(val.MstPromo.OrderName);
+                    } else {
+                        $('[name="updatePromo_MstPromo_OrderName"]').val("0");
+                    }
+
+                    // Is Active Promo
                     if (val.MstPromo.hasOwnProperty('IsActivePromo')) {
                         $('[name="updatePromo_MstPromo_IsActivePromo"]').val(val.MstPromo.IsActivePromo); 
-                        if (val.MstPromo.IsActivePromo=="true") {
-                            document.getElementById('checkbox_promoModalUpdate_IsActivePromo').setAttribute('checked',''); 
+                        if (val.MstPromo.IsActivePromo) {
+                            $("#checkbox_promoModalUpdate_IsActivePromo").attr("checked","");
                         }
                     } else {
                         $('[name="updatePromo_MstPromo_IsActivePromo"]').val("false");
-                        document.getElementById('checkbox_promoModalUpdate_IsActivePromo').removeAttribute('checked');
+                        $("#checkbox_promoModalUpdate_IsActivePromo").removeAttr("checked");
                     }
 
+                    // Is Active Banner
                     if (val.MstPromo.hasOwnProperty('IsActiveBanner')) {
                         $('[name="updatePromo_MstPromo_IsActiveBanner"]').val(val.MstPromo.IsActiveBanner);
-                        if (val.MstPromo.IsActiveBanner=="true") {
-                            document.getElementById('checkbox_promoModalUpdate_IsActiveBanner').setAttribute('checked','');
-                        } 
+                        if (val.MstPromo.IsActiveBanner) {
+                            $("#checkbox_promoModalUpdate_IsActiveBanner").attr("checked","");
+                        } else {
+                            $("#checkbox_promoModalUpdate_IsActiveBanner").removeAttr("checked");
+                        }
                     } else {
                         $('[name="updatePromo_MstPromo_IsActiveBanner"]').val("false");
-                        document.getElementById('checkbox_promoModalUpdate_IsActiveBanner').removeAttribute('checked');
+                        $("#checkbox_promoModalUpdate_IsActiveBanner").removeAttr("checked");
                     }
-                    
-                    $('[name="updatePromo_MstPromo_TampilPeriodePromo"]').val(val.MstPromo_TampilPeriodePromo);
+
+                    // Tampil Periode Promo
+                    if (val.MstPromo.hasOwnProperty('TampilPeriodePromo')) {
+                        $('[name="updatePromo_MstPromo_TampilPeriodePromo"]').val(val.MstPromo.TampilPeriodePromo); 
+                        if (!(val.MstPromo.TampilPeriodePromo)) {
+                            $("#checkbox_promoModalUpdate_TampilPeriodePromo").removeAttr("checked");
+                        }
+                    } else {
+                        $('[name="updatePromo_MstPromo_TampilPeriodePromo"]').val("true");
+                        $("#checkbox_promoModalUpdate_TampilPeriodePromo").attr("checked","");
+                    }
+
+                    // Start-End Date
                     $('[name="updatePromo_MstPromo_StartDate"]').val(val.MstPromo_StartDate);
                     $('[name="updatePromo_MstPromo_EndDate"]').val(val.MstPromo_EndDate);
-                    document.getElementById('datepicker_promoModalUpdate_StartDate').setAttribute('value',val.MstPromo_StartDate);
-                    document.getElementById('datepicker_promoModalUpdate_EndDate').setAttribute('value',val.MstPromo_EndDate);
+                    $('#datepicker_promoModalUpdate_StartDate').datepicker().datepicker('setDate', val.MstPromo_StartDate);
+                    $('#datepicker_promoModalUpdate_EndDate').datepicker().datepicker('setDate', val.MstPromo_EndDate);
 
-                    // Jenis Promo Dropdown
-                    if (val.MstPromo.JenisPromo==="2") {
-                    //     if (val.MstPromo.TampilPeriodePromo=="true") {
-                    //         document.getElementById('checkbox_promoModalUpdate_TampilPeriodePromo')
-                    //             .setAttribute('checked','');
-                    //         // document.getElementById('checkbox_promoModalUpdate_TampilPeriodePromo')
-                    //         //     .setAttribute('Value','True');
-                    //     }
-                    } else {
-                        $('#checkbox_promoModalUpdate_TampilPeriodePromo').hide()
-                    }
-
-                    // Promo Amount Input Addon
-                    // $('#inputaddon_promoModalAdd_PromoAmountRp').hide()
-                    // $('#inputaddon_promoModalAdd_PromoAmountPr').hide()
-                    // $('#inputaddon_promoModalUpdate_PromoAmountRp').hide()
-                    // $('#inputaddon_promoModalUpdate_PromoAmountPr').hide()
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                     console.log(jqXhr);

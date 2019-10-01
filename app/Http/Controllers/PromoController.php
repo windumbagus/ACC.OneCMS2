@@ -72,7 +72,6 @@ class PromoController extends Controller
     public function create(Request $request)
     {
         // dd($request);
-        
         $validator = Validator::make($request->all(), [
             'addPromo_MstPicture' => 'required'
         ]);
@@ -85,18 +84,25 @@ class PromoController extends Controller
         $name = $file->getClientOriginalName();
         $type = $file->extension();
 
-        if ($request->addPromo_MstPromo_IsActivePromo <> "True") {
-            $request->addPromo_MstPromo_IsActivePromo = "False";
+        if ($request->addPromo_MstPromo_IsActivePromo == "") {
+            $request->addPromo_MstPromo_IsActivePromo = "false";
+        } else {
+            $request->addPromo_MstPromo_IsActivePromo = "true";
         };
-        if ($request->addPromo_MstPromo_IsActiveBanner <> "True") {
-            $request->addPromo_MstPromo_IsActiveBanner = "False";
+        if ($request->addPromo_MstPromo_IsActiveBanner == "") {
+            $request->addPromo_MstPromo_IsActiveBanner = "false";
+        } else {
+            $request->addPromo_MstPromo_IsActiveBanner = "true";
         };
-        if ($request->addPromo_MstPromo_TampilPeriodePromo <> "True") {
-            $request->addPromo_MstPromo_TampilPeriodePromo = "False";
+        if ($request->addPromo_MstPromo_TampilPeriodePromo == "") {
+            $request->addPromo_MstPromo_TampilPeriodePromo = "false";
+        } else {
+            $request->addPromo_MstPromo_TampilPeriodePromo = "true";
         };
         
         $data = json_encode(array(
-            "MstPromo" => array(       
+            "MstPromo" => array(   
+                // "Id" => "$request->updatePromo_MstPromo_Id",    
                 "Name" => "$request->addPromo_MstPromo_Name",
                 "PromoCode" => "$request->addPromo_MstPromo_PromoCode",
                 "Description" => "$request->addPromo_MstPromo_Description",
@@ -110,20 +116,21 @@ class PromoController extends Controller
                 "SyaratDanKetentuan" => "$request->addPromo_MstPromo_SyaratDanKetentuan",   
                 "URL" => "$request->addPromo_MstPromo_URL",           
                 // "AddedDate" => "$request->addPromo_MstPromo_AddedDate",
-                // "UserAdded" => "$request->addPromo_MstPromo_UserAdded",
+                "UserAdded" => "$request->addPromo_MstPromo_UserAdded",
                 // "UpdatedDate" => "$request->addPromo_MstPromo_UpdatedDate",
                 // "UserUpdated" => "$request->addPromo_MstPromo_UserUpdated",
-                // "ProductOwner" => "$request->addPromo_MstPromo_ProductOwner",
+                "ProductOwner" => "$request->addPromo_MstPromo_ProductOwner",
             ),
             "MstPicture" => array(
+                // "Id" => "$request->updatePromo_MstPicture_Id",
+                // "DataId" => "$request->updatePromo_MstPicture_DataId",
+                "Type" => "Promo",
                 "Picture" => $content,
                 "FileName" => $name,
                 "FileType" => "image/".$type,
             ),
-            "MstPromo_Id" => $request->addPromo_MstPromo_Id,
             "MstPromo_StartDate" => $request->addPromo_MstPromo_StartDate,
             "MstPromo_EndDate" => $request->addPromo_MstPromo_EndDate,
-            "User_Id" => $request->addPromo_User_Id,
         )); 
         // dd($data);
 
@@ -154,31 +161,53 @@ class PromoController extends Controller
     public function update(Request $request)
     {
         // dd($request);
-        
-        $validator = Validator::make($request->all(), [
-            'updatePromo_MstPicture' => 'required'
-        ]);
-        if ($validator->fails()) {
-            return redirect('/promo')->with('error',' Upload Picture Failed!');
-        }
-        $file = $request->updatePromo_MstPicture;
-        $getContent = file_get_contents($file);
-        $content= base64_encode($getContent);
-        $name = $file->getClientOriginalName();
-        $type = $file->extension();
+        if ($request->updatePromo_IsUpdatePicture=="true") {
+            $validator = Validator::make($request->all(), [
+                'updatePromo_MstPicture' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return redirect('/promo')->with('error',' Upload Picture Failed!');
+            }
+            $file = $request->updatePromo_MstPicture;
+            $getContent = file_get_contents($file);
+            $content= base64_encode($getContent);
+            $name = $file->getClientOriginalName();
+            $type = $file->extension();
 
-        if ($request->updatePromo_MstPromo_IsActivePromo <> "True") {
-            $request->updatePromo_MstPromo_IsActivePromo = "False";
+            $TempMstPicture = array(
+                "Id" => "$request->updatePromo_MstPicture_Id",
+                "DataId" => "$request->updatePromo_MstPicture_DataId",
+                "Type" => "$request->updatePromo_MstPicture_Type",
+                "Picture" => $content,
+                "FileName" => $name,
+                "FileType" => "image/".$type,
+            );
+        } else {
+            $TempMstPicture = array(
+                "FileName" => "",
+                "FileType" => "",
+            );
+        }
+
+        if ($request->updatePromo_MstPromo_IsActivePromo == "") {
+            $request->updatePromo_MstPromo_IsActivePromo = "false";
+        } else {
+            $request->updatePromo_MstPromo_IsActivePromo = "true";
         };
-        if ($request->updatePromo_MstPromo_IsActiveBanner <> "True") {
-            $request->updatePromo_MstPromo_IsActiveBanner = "False";
+        if ($request->updatePromo_MstPromo_IsActiveBanner == "") {
+            $request->updatePromo_MstPromo_IsActiveBanner = "false";
+        } else {
+            $request->updatePromo_MstPromo_IsActiveBanner = "true";
         };
-        if ($request->updatePromo_MstPromo_TampilPeriodePromo <> "True") {
-            $request->updatePromo_MstPromo_TampilPeriodePromo = "False";
+        if ($request->updatePromo_MstPromo_TampilPeriodePromo == "") {
+            $request->updatePromo_MstPromo_TampilPeriodePromo = "false";
+        } else {
+            $request->updatePromo_MstPromo_TampilPeriodePromo = "true";
         };
-        
+
         $data = json_encode(array(
             "MstPromo" => array(         
+                "Id" => "$request->updatePromo_MstPromo_Id",
                 "Name" => "$request->updatePromo_MstPromo_Name",
                 "PromoCode" => "$request->updatePromo_MstPromo_PromoCode",
                 "Description" => "$request->updatePromo_MstPromo_Description",
@@ -194,18 +223,12 @@ class PromoController extends Controller
                 "AddedDate" => "$request->updatePromo_MstPromo_AddedDate",
                 "UserAdded" => "$request->updatePromo_MstPromo_UserAdded",
                 // "UpdatedDate" => "$request->updatePromo_MstPromo_UpdatedDate",
-                // "UserUpdated" => "$request->updatePromo_MstPromo_UserUpdated",
-                // "ProductOwner" => "$request->updatePromo_MstPromo_ProductOwner",
+                "UserUpdated" => "$request->updatePromo_MstPromo_UserUpdated",
+                "ProductOwner" => "$request->updatePromo_MstPromo_ProductOwner",
             ),
-            "MstPicture" => array(
-                "Picture" => $content,
-                "FileName" => $name,
-                "FileType" => "image/".$type,
-            ),
-            // "MstPromo_Id" => $request->updatePromo_MstPromo_Id,
+            "MstPicture" => $TempMstPicture,
             "MstPromo_StartDate" => $request->updatePromo_MstPromo_StartDate,
             "MstPromo_EndDate" => $request->updatePromo_MstPromo_EndDate,
-            "User_Id" => $request->updatePromo_User_Id,
         )); 
         // dd($data);
 
