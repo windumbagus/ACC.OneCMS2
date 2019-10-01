@@ -128,9 +128,16 @@
                                                
                         <td>
                             <span>
-                                <a href="#" data-id="{{$otr->MstOtr->Id}}" class="update-master-otr btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                                <a href="{{asset('master-otr/delete/'.$otr->MstOtr->Id)}}" class=" btn btn-danger btn-sm" 
-                                    onclick="return confirm('Are you sure want to delete this data?')" ><i class="fa fa-trash"></i>
+                                <a href="#" data-id="{{$otr->MstOtr->Id}} " 
+                                    data-brand="{{$otr->MstOtr->DESC_BRAND}}" 
+                                    data-type="{{$otr->MstOtr->DESC_TYPE}}" 
+                                    class="update-master-otr btn btn-warning btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </a> &nbsp; 
+                                <a href="{{asset('master-otr/delete/'.$otr->MstOtr->Id)}}" 
+                                    class=" btn btn-danger btn-sm" 
+                                    onclick="return confirm('Are you sure want to delete this data?')" >
+                                    <i class="fa fa-trash"></i>
                                 </a> 
                             </span>
                         </td>
@@ -193,40 +200,83 @@
         // $('#upload-master-searching').modal();     
         // });
 
-        // //VIEW
-        // $(document).on('click','.update-master-searching',function(){
-        //     var id = $(this).attr('data-id');
-        //     console.log(id);
-        //     $.ajax({
-        //         url:"{{asset('/master-searching/show')}}",
-        //         data: {'Id':id ,'_token':'{{csrf_token()}}' },
-        //         dataType:'JSON', 
-        //         type:'GET',
-        //         success: function (val){
-        //             console.log(val);
+        // get by id to modal
+        $(document).on('click','.update-master-otr',function(){
+            var id = $(this).attr('data-id');
+            var Brand = $(this).attr('data-Brand');
+            var Type = $(this).attr('data-Type');
 
-        //             $('[name="input_keyword_update"]').val(val.MstSearch.Input_Keyword);
-        //             $('[name="search_suggestion_update"]').val(val.MstSearch.Search_Suggestions);
-        //             $('[name="destination_update"]').val(val.MstSearch.Destination);
-        //             $('[name="redirect_to_screen_update"]').val(val.MstSearch.RedirectToScreen);
-        //             $('[name="id_update"]').val(val.MstSearch.Id);
-        //             if(val.MstSearch.Destination=="acc.one"){
-        //                 $('#RedirectToScreenUpdate').show()
-        //             }
+            console.log(Type);
+            $.ajax({
+                url:"{{asset('/master-otr/show')}}",
+                data: {'Id':id ,'Brand':Brand,'Type':Type,'_token':'{{csrf_token()}}' },
+                dataType:'JSON', 
+                type:'GET',
+                success: function (data){
+                    console.log(data);
 
-        //         },
-        //         error: function( jqXhr, textStatus, errorThrown ){
-        //         console.log(jqXhr);
-        //         console.log(errorThrown);
-        //         console.log(textStatus);
-        //         },
-        //     });
-        //     $('#update-master-searching').modal();
-        // });
+                    $('#DESC_TYPE_master_otr_update').empty()
+                    $('#DESC_TYPE_master_otr_update').append('<option value="" selected disabled>-</option>')
+                    if(data.Type != null)  {                    
+                         data.Type.map(d=>{ 
+                            $('#DESC_TYPE_master_otr_update').append('<option cd-type="'+d.CD_TYPE+'" value="'+d.DESC_TYPE+'">'+d.DESC_TYPE+'</option>')
+                        })
+                    }
+                    $('#DESC_MODEL_master_otr_update').empty()
+                    $('#DESC_MODEL_master_otr_update').append('<option value="" selected disabled>-</option>')
+                    if(data.Model != null)  {
+                        data.Model.map(d=>{
+                            $('#DESC_MODEL_master_otr_update').append('<option cd-model="'+d.CD_MODEL+'" value="'+d.DESC_MODEL+'">'+d.DESC_MODEL+'</option>')
+                        })
+                    }
+
+                    $('[name="Id_master_otr_update"]').val(data.GetMstOtrById.Id);
+                    $('[name="CD_AREA_master_otr_update"]').val(data.GetMstOtrById.CD_AREA);
+                    $('[name="CD_BRAND_master_otr_update"]').val(data.GetMstOtrById.CD_BRAND);
+                    $('[name="CD_SP_master_otr_update"]').val(data.GetMstOtrById.CD_SP);
+                    $('[name="CD_TYPE_master_otr_update"]').val(data.GetMstOtrById.CD_TYPE);
+                    $('[name="DESC_BRAND_master_otr_update"]').val(data.GetMstOtrById.DESC_BRAND);
+                    $('[name="DESC_TYPE_master_otr_update"]').val(data.GetMstOtrById.DESC_TYPE);
+                    $('[name="OTR_master_otr_update"]').val(data.GetMstOtrById.OTR);
+                    $('[name="TAHUN_master_otr_update"]').val(data.GetMstOtrById.TAHUN);
+
+                    if (data.GetMstOtrById.hasOwnProperty('DESC_MODEL')) {
+                    $('[name="DESC_MODEL_master_otr_update"]').val(data.GetMstOtrById.DESC_MODEL);
+                    }
+
+                    if (data.GetMstOtrById.hasOwnProperty('CD_MODEL')) {
+                    $('[name="CD_MODEL_master_otr_update"]').val(data.GetMstOtrById.CD_MODEL);
+                    }
+                    if (data.GetMstOtrById.hasOwnProperty('DEVIASI')) {
+                        $('[name="DEVIASI_master_otr_update"]').val(data.GetMstOtrById.DEVIASI);   
+                    }
+                    
+                    if (data.GetMstOtrById.FLAG_ACTIVE == "Y"){
+                    $('[name="IS_ACTIVE_master_otr_update"]').attr('checked', true);
+                    }else{
+                    $('[name="IS_ACTIVE_master_otr_update"]').attr('checked', false);
+                    }
+
+                    if (data.GetMstOtrById.FLAG_NEW_USED == "N"){
+                    $('[name="IS_NEW_master_otr_update"]').attr('checked', true);
+                    }else{
+                    $('[name="IS_NEW_master_otr_update"]').attr('checked', false);
+                    }
+                    
+                    
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                console.log(jqXhr);
+                console.log(errorThrown);
+                console.log(textStatus);
+                },
+            });
+            $('#update-master-otr').modal();
+        });
         
     })
 </script>
 @include('modal.add_master_otr')
-{{-- @include('modal.update_master_searching')
-@include('modal.upload_master_searching') --}}
+@include('modal.update_master_otr')
+{{-- @include('modal.upload_master_otr') --}}
 @endsection

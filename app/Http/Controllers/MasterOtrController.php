@@ -29,8 +29,8 @@ class MasterOtrController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-         //API GET GetMstGCMBranch
-         $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmBranch"; 
+         //API GET GetMstGCMBrand
+         $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmBrand"; 
          $ch2 = curl_init($url2);                                                     
          curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -48,8 +48,68 @@ class MasterOtrController extends Controller
             ]);    
     }
 
+    public function show(Request $request)
+    {
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMasterOtrById?MstOtrId=".$request->Id; 
+        // dd($url); 
+        $ch = curl_init($url);                                                     
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+         $result = curl_exec($ch);
+         $err = curl_error($ch);
+         curl_close($ch);
+         $val= json_decode($result);
+
+         $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmType?Brand=".$request->Brand;
+        //  dd($url);
+         $ch2 = curl_init($url2); 
+         curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+         curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+         curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);                                                                  
+         $result2 = curl_exec($ch2);
+         $err2 = curl_error($ch2);
+         curl_close($ch2);
+         $val2= json_decode($result2);
+        // dd($val2);
+
+        
+        $url3 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmModel?Type=".urlencode($request->Type);
+        //  dd($url3);
+         $ch3 = curl_init($url3); 
+         curl_setopt($ch3, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+         curl_setopt($ch3, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+         curl_setopt($ch3, CURLOPT_RETURNTRANSFER, true);                                                                  
+         $result3 = curl_exec($ch3);
+         $err3 = curl_error($ch3);
+         curl_close($ch3);
+         $val3= json_decode($result3);
+        // dd($result3);
+
+         $data=[
+             "GetMstOtrById"=>$val,
+             "Type"=>$val2,
+             "Model"=>$val3
+         ];
+        //  dd($result3);
+         return json_encode($data);
+    }
+
     public function add(Request $request)
     {
+        $request->validate([
+            "CD_BRAND_master_otr_add"=>'required',
+            "DESC_BRAND_master_otr_add"=>'required',
+            "CD_TYPE_master_otr_add"=>'required',
+            "DESC_TYPE_master_otr_add"=>'required',
+            "CD_MODEL_master_otr_add"=>'required',
+            "DESC_MODEL_master_otr_add"=>'required',
+            "TAHUN_master_otr_add"=>'required',
+            "CD_SP_master_otr_add"=>'required',
+            "CD_AREA_master_otr_add"=>'required',
+            "OTR_master_otr_add"=>'required',          
+        ]);
+
 
         if($request->IS_NEW_master_otr_add== "on"){
             $IS_NEW = "N";
@@ -95,6 +155,68 @@ class MasterOtrController extends Controller
         // dd($result);
 
         return redirect('/master-otr')->with('success','Master OTR Successfully Added !!!');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            "CD_BRAND_master_otr_update"=>'required',
+            "DESC_BRAND_master_otr_update"=>'required',
+            "CD_TYPE_master_otr_update"=>'required',
+            "DESC_TYPE_master_otr_update"=>'required',
+            "CD_MODEL_master_otr_update"=>'required',
+            "DESC_MODEL_master_otr_update"=>'required',
+            "TAHUN_master_otr_update"=>'required',
+            "CD_SP_master_otr_update"=>'required',
+            "CD_AREA_master_otr_update"=>'required',
+            "OTR_master_otr_update"=>'required',          
+        ]);
+
+
+        if($request->IS_NEW_master_otr_update== "on"){
+            $IS_NEW = "N";
+        }else{
+            $IS_NEW = "U";
+        }
+
+        if($request->IS_ACTIVE_master_otr_update== "on"){
+            $IS_ACTIVE = "Y";
+        }else{
+            $IS_ACTIVE = "N";
+        }
+
+        $data = json_encode(array(
+            "Id"=> "$request->Id_master_otr_update",
+            "CD_BRAND"=> "$request->CD_BRAND_master_otr_update",
+            "DESC_BRAND"=> "$request->DESC_BRAND_master_otr_update",
+            "CD_TYPE"=> "$request->CD_TYPE_master_otr_update",
+            "DESC_TYPE"=> "$request->DESC_TYPE_master_otr_update",
+            "CD_MODEL"=> "$request->CD_MODEL_master_otr_update",
+            "DESC_MODEL"=> "$request->DESC_MODEL_master_otr_update",
+            "TAHUN"=> "$request->TAHUN_master_otr_update",
+            "CD_SP"=> "$request->CD_SP_master_otr_update",
+            "CD_AREA"=> "$request->CD_AREA_master_otr_update",
+            "OTR"=> "$request->OTR_master_otr_update",
+            "DEVIASI"=> "$request->DEVIASI_master_otr_update",            
+            "FLAG_ACTIVE"=> $IS_ACTIVE,
+            "FLAG_NEW_USED"=> $IS_NEW
+        )); 
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/CreateOrUpdateMasterOtr"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $hasils = json_decode($result);
+        // dd($result);
+
+        return redirect('/master-otr')->with('success','Master OTR Successfully Updated !!!');
     }
 
     public function delete($id = null,Request $request)
@@ -209,4 +331,37 @@ class MasterOtrController extends Controller
 
         return json_encode($data);
     }
+
+    // public function upload(Request $request)
+    // {
+    //     $request->validate([
+    //         'upload_master_otr' => 'required',
+    //     ]);
+
+    //     $file = $request->upload_master_otr;
+    //     $x= file_get_contents($file);
+    //     $y= base64_encode($x);
+
+    //     $name = $file->getClientOriginalName();
+    //     $data = json_encode(array(
+    //         "Filename" => "$name",
+    //         "Content" => $y,
+    //     ));
+    //     // dd($data);  
+
+    //     $url = "https://acc-dev1.outsystemsenterprise.com//ACCWorldCMS/rest/MasterOtrAPI/UploadMasterOtr"; 
+    //     $ch = curl_init($url);                   
+    //     curl_setopt($ch, CURLOPT_POST, true);                                  
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+    //     $result = curl_exec($ch);
+    //     $err = curl_error($ch);
+    //     curl_close($ch);
+    //     $data = json_decode($result);
+    //     // dd($result);
+
+    //     return redirect('/master-otr')->with('success','Data Master Otr Upload Successfull !!!');
+    // }
 }
