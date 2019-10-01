@@ -349,8 +349,6 @@
             $('#modal_promo_update').modal();
         });
     })
-
-    // coba
 </script>
 
 @include('modal.add_promo')
