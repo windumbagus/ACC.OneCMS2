@@ -57,7 +57,6 @@
                 <td><span>{{$Utama->MstDataTertanggungUtama->TanggalLahir}}</span></td>
                 <td><span>{{$Utama->MstDataTertanggungUtama->JenisKelamin}}</span></td>
                 <td><span>{{$Utama->MstDataTertanggungUtama->Hubungan}}</span></td>
-                {{-- <td><span>{{$Utama->MstDataTertanggungUtama->NoKTP}}</span></td> --}}
                 @if (property_exists($Utama->MstDataTertanggungUtama, 'NoKTP'))
                 <td><span>{{$Utama->MstDataTertanggungUtama->NoKTP}}</span></td>
                 @else 
@@ -65,11 +64,7 @@
                 @endif
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Utama->MstDataTertanggungUtama->Id}}" class="view-history-pembayaran-asuransi-jiwa btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
-                    <a  href="{{asset('history-pembayaran-asuransi-jiwa/delete/'.$Utama->MstDataTertanggungUtama->Id)}}" 
-                        data-id2="{{ $Utama->MstDataTertanggungUtama->Id}}" class=" btn btn-danger btn-sm" 
-                        onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
-                    </a> 
+                    <a href="#" data-id="{{ $Utama->MstDataTertanggungUtama->Id}}" class="view-data-tertanggung-utama btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
                 </span>
                 </td>
             </tr>   
@@ -118,62 +113,40 @@
         })
 
         //VIEW
-        // $(document).on('click','.view-history-pembayaran-asuransi-jiwa',function(){
-        //     var id = $(this).attr('data-id');
-        //     console.log(id);
-        //     $.ajax({
-        //         url:"{{asset('/history-pembayaran-asuransi-jiwa/show')}}",
-        //         data: {'Id':id ,'_token':'{{csrf_token()}}' },
-        //         dataType:'JSON', 
-        //         type:'GET',
-        //         success: function (val){
-        //             console.log(val);
+        $(document).on('click','.view-data-tertanggung-utama',function(){
+            var id = $(this).attr('data-id');
+            console.log(id);
+            $.ajax({
+                url:"{{asset('/data-tertanggung-utama/show')}}",
+                data: {'Id':id ,'_token':'{{csrf_token()}}' },
+                dataType:'JSON', 
+                type:'GET',
+                success: function (val){
+                    console.log(val);
 
-        //             $('[name="Nama"]').val(val.MstDataPemegangPolis.Nama);
-        //             $('[name="TanggalLahir"]').val(val.MstDataPemegangPolis.TanggalLahir);
-        //             $('[name="JenisKelamin"]').val(val.MstDataPemegangPolis.JenisKelamin);
-        //             $('[name="Handphone"]').val(val.MstDataPemegangPolis.Handphone);
-        //             $('[name="NoKTP"]').val(val.MstDataPemegangPolis.NoKTP);
-        //             $('[name="Email"]').val(val.MstDataPemegangPolis.Email);
-        //             $('[name="Alamat"]').val(val.MstDataPemegangPolis.Alamat);
-        //             $('[name="KodePos"]').val(val.MstDataPemegangPolis.KodePos);
-        //             $('[name="NamaRekening"]').val(val.MstDataPemegangPolis.NamaRekening);
-        //             $('[name="NomorRekening"]').val(val.MstDataPemegangPolis.NomorRekening);
-        //             $('[name="NamaBank"]').val(val.MstDataPemegangPolis.NamaBank);
-        //             $('[name="TransIdMerchant"]').val(val.MstHistoryPembayaranAsuransiJiwa.TransIdMerchant);
-        //             $('[name="Product"]').val(val.MstHistoryPembayaranAsuransiJiwa.Product);
-        //             $('[name="TotalBiayaPremi"]').val(val.MstHistoryPembayaranAsuransiJiwa.TotalBiayaPremi);
-        //             $('[name="StatusPembayaran"]').val(val.MstHistoryPembayaranAsuransiJiwa.StatusPembayaran);
+                    $('[name="Nama"]').val(val.MstDataTertanggungUtama.Nama);
+                    $('[name="TanggalLahir"]').val(val.MstDataTertanggungUtama.TanggalLahir);
+                    $('[name="JenisKelamin"]').val(val.MstDataTertanggungUtama.JenisKelamin);
+                    $('[name="NoKTP"]').val(val.MstDataTertanggungUtama.NoKTP);
+                    $('[name="NamaData"]').val(val.MstDataPemegangPolis.Nama);
+                    $('[name="AddedDate"]').val(val.MstDataTertanggungUtama.AddedDate);
+                    $('[name="Hubungan"]').val(val. MstGCM.CharDesc1);
+                    $('[name="UserAdded"]').val(val.User.Name);
+                    $('#KTP').attr('src', "data:image/png;base64," + val.MstPictures.Picture);
 
-                   
-        //             // if (val.MstBankAccountCustomer.hasOwnProperty('RekeningUtama')) {
-        //             //     $('[name="customer_RekeningUtama_update"]').val(val.MstBankAccountCustomer.RekeningUtama);   
-        //             // }else{
-        //             //     $('[name="customer_RekeningUtama_update"]').val("Tidak");        
-        //             // }
-        //             // $('[name="customer_Cabang_update"]').val(val.MstBankAccountCustomer.Cabang);
-                    
-        //             // //kalo ga ada true kalo ada false 
-        //             // if (val.MstBankAccountCustomer.hasOwnProperty('Is_Active')) {
-        //             //     if (val.MstBankAccountCustomer.Is_Active == false) {
-        //             //         $('[name="customer_IsActive_update"]').attr('checked', false);
-        //             //     }
-        //             // }else{
-        //             //     $('[name="customer_IsActive_update"]').attr('checked', true);   
-        //             // }
-        //         },
-        //         error: function( jqXhr, textStatus, errorThrown ){
-        //         console.log(jqXhr);
-        //         console.log( errorThrown );
-        //         console.log(textStatus);
-        //         },
-        //     });
-        //     $('#view-history-pembayaran-asuransi-jiwa').modal();
-        // });
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                console.log(jqXhr);
+                console.log( errorThrown );
+                console.log(textStatus);
+                },
+            });
+            $('#view-data-tertanggung-utama').modal();
+        });
 
         
     })
   </script>
 
-{{-- @include('modal.view_history_pembayaran_asuransi_jiwa') --}}
+@include('modal.view_data_tertanggung_utama')
 @endsection

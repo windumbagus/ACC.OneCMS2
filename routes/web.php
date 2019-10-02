@@ -123,6 +123,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/history-pembayaran-asuransi-jiwa/delete/{id}','HistoryPembayaranAsuransiJiwaController@delete');
 
     Route::get('/data-tertanggung-utama','DataTertanggungUtamaController@index');
+    Route::get('/data-tertanggung-utama/show','DataTertanggungUtamaController@show');
 
 
 });//end group route
