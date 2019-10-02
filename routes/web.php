@@ -118,5 +118,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-otr/show','MasterOtrController@show');
     Route::post('/master-otr/update','MasterOtrController@update');
 
+    Route::get('/history-pembayaran-asuransi-jiwa','HistoryPembayaranAsuransiJiwaController@index');
+    Route::get('/history-pembayaran-asuransi-jiwa/show','HistoryPembayaranAsuransiJiwaController@show');
+    Route::get('/history-pembayaran-asuransi-jiwa/delete/{id}','HistoryPembayaranAsuransiJiwaController@delete');
+
+
 
 });//end group route

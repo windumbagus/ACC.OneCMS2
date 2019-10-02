@@ -119,7 +119,7 @@
                 </ul>
             </li>
 
-            {{-- <li class="@yield('acc-safe') treeview">
+            <li class="@yield('acc-safe') treeview">
                 <a href="#">
                 <i class="fa fa-bookmark"></i> <span>ACC Safe</span>
                 <span class="pull-right-container">
@@ -132,9 +132,9 @@
                 <li class="@yield('data-pemegang-polis')"><a href="#"><i class="fa fa-circle-o"></i> Data Pemegang Polis</a></li>
                 <li class="@yield('data-tertanggung-utama')"><a href="#"><i class="fa fa-circle-o"></i> Data Tertanggung Utama</a></li>
                 <li class="@yield('master-pernyataan')"><a href="#"><i class="fa fa-circle-o"></i> Master Pernyataan</a></li>
-                <li class="@yield('history-pembayaran-asuransi-jiwa')"><a href="#"><i class="fa fa-circle-o"></i> History Pembayaran Asuransi Jiwa</a></li>
+                <li class="@yield('history-pembayaran-asuransi-jiwa')"><a href="{{asset('history-pembayaran-asuransi-jiwa')}}"><i class="fa fa-circle-o"></i> History Pembayaran Asuransi Jiwa</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             <li class="@yield('bank-account') treeview">
                 <a href="#">
