@@ -195,10 +195,10 @@
         $('#add-master-otr').modal();     
         });
         
-        // //Upload
-        // $(document).on('click','.upload-master-searching',function(){
-        // $('#upload-master-searching').modal();     
-        // });
+        //Upload
+        $(document).on('click','.upload-master-otr',function(){
+        $('#upload-master-otr').modal();     
+        });
 
         // get by id to modal
         $(document).on('click','.update-master-otr',function(){
@@ -278,5 +278,5 @@
 </script>
 @include('modal.add_master_otr')
 @include('modal.update_master_otr')
-{{-- @include('modal.upload_master_otr') --}}
+@include('modal.upload_master_otr')
 @endsection
