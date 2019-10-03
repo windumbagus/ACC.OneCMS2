@@ -25,7 +25,7 @@
     <div class="box-body">
         <div class="row">
             <div class="col-sm-8">
-                <input type="text" placeholder="Search by Polis or Product" class="InputSearch form-control">
+                <input type="text" placeholder="Search by Name or NoKTP" class="InputSearch form-control">
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
@@ -55,13 +55,21 @@
             <tr>  
                 <td><span>{{$Utama->MstDataTertanggungUtama->Nama}}</span></td>
                 <td><span>{{$Utama->MstDataTertanggungUtama->TanggalLahir}}</span></td>
-                <td><span>{{$Utama->MstDataTertanggungUtama->JenisKelamin}}</span></td>
-                <td><span>{{$Utama->MstDataTertanggungUtama->Hubungan}}</span></td>
+                @if($Utama->MstDataTertanggungUtama->JenisKelamin== "F")
+                <td><span>Perempuan</span></td>
+                @else
+                <td><span>Laki Laki</span></td>
+                @endif
+
+                {{-- hubungan --}}
+                <td><span>{{$Utama->MstGCM->CharDesc1}}</span></td> 
+                
                 @if (property_exists($Utama->MstDataTertanggungUtama, 'NoKTP'))
                 <td><span>{{$Utama->MstDataTertanggungUtama->NoKTP}}</span></td>
                 @else 
                 <td></td>
                 @endif
+
                 <td>
                 <span>
                     <a href="#" data-id="{{ $Utama->MstDataTertanggungUtama->Id}}" class="view-data-tertanggung-utama btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 

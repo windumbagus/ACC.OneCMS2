@@ -124,6 +124,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/data-tertanggung-utama','DataTertanggungUtamaController@index');
     Route::get('/data-tertanggung-utama/show','DataTertanggungUtamaController@show');
+    Route::get('/data-tertanggung-utama/download','DataTertanggungUtamaController@download');
 
 
 });//end group route
