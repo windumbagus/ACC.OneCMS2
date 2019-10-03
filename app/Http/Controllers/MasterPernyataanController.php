@@ -120,4 +120,92 @@ class MasterPernyataanController extends Controller
 
         return redirect('/master-pernyataan')->with('success',$data->Message);
     }
+
+    public function add(Request $request)
+    {
+        if($request->pemegang_polis_tertanggung_utama_add == "on"){
+            $pemegang_polis_tertanggung_utama_add = true;
+        }else{
+            $pemegang_polis_tertanggung_utama_add = false;
+        }
+        
+        if($request->asuransi_tambahan_add == "on"){
+            $asuransi_tambahan_add = true;
+        }else{
+            $asuransi_tambahan_add = false;
+        }
+
+        $data = json_encode(array(
+            // "Id"=> $request->id_update,
+            "PerlindunganUntuk"=> $request->perlindungan_untuk_add,
+            "JenisProteksi"=> $request->jenis_proteksi_add,
+            "NamaProduk"=> $request->nama_product_add,
+            "IsPemegangPolisTertanggungUt"=> $pemegang_polis_tertanggung_utama_add,
+            "IsiDataTertanggungUtama"=> $request->data_tertanggung_utama_add,
+            "IsAsuransiTambahan"=> $asuransi_tambahan_add,
+            "Pernyataan"=> $request->pernyataan_add   
+        ));
+
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/CreateOrUpdateMasterPernyataan"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/master-pernyataan')->with('success',' Data Master Pernyataan Added Successfull !!!');
+    }
+
+    public function update(Request $request)
+    {
+        if($request->pemegang_polis_tertanggung_utama_update == "on"){
+            $pemegang_polis_tertanggung_utama_update = true;
+        }else{
+            $pemegang_polis_tertanggung_utama_update = false;
+        }
+        
+        if($request->asuransi_tambahan_update == "on"){
+            $asuransi_tambahan_update = true;
+        }else{
+            $asuransi_tambahan_update = false;
+        }
+
+        $data = json_encode(array(
+            "Id"=> $request->Id_update,
+            "PerlindunganUntuk"=> $request->perlindungan_untuk_update,
+            "JenisProteksi"=> $request->jenis_proteksi_update,
+            "NamaProduk"=> $request->nama_product_update,
+            "IsPemegangPolisTertanggungUt"=> $pemegang_polis_tertanggung_utama_update,
+            "IsiDataTertanggungUtama"=> $request->data_tertanggung_utama_update,
+            "IsAsuransiTambahan"=> $asuransi_tambahan_update,
+            "Pernyataan"=> $request->pernyataan_update   
+        ));
+
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/CreateOrUpdateMasterPernyataan"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/master-pernyataan')->with('success',' Data Master Pernyataan Update Successfull !!!');
+    }
+
+    
 }
