@@ -15,10 +15,10 @@
     <!-- /.box-header -->
     <div class="box-body">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <input type="text" placeholder="Search by Message, User, or Code Push Notif" class="InputSearch form-control">
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="col-sm-6">
                     <a href="#" class="ButtonSearch btn btn-block btn-info">Search</a>    
                 </div>

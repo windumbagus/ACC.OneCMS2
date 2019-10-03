@@ -17,7 +17,7 @@ class MasterContentController extends Controller
             'RoleId'=>$request->session()->get('RoleId')
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?MstGCM_ContentType="; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?MstGCM_ContentType=".$request->ContentType; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -26,11 +26,17 @@ class MasterContentController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $val = json_decode($result);
-        //  dd($val);
+        // dd($val);
 
-        return view('promo',[
-            'MstContentList'=> $val->MstPromo,
-            'MstGCM_ContentType'=> $val->PromoTypes,
+        if(property_exists($val, 'MstContentList')) {
+            $TempMstContentList = $val->MstContentList;
+        } else {
+            $TempMstContentList = 0;
+        }
+
+        return view('master-content',[
+            'MstContentList'=> $TempMstContentList,
+            'MstGCM_ContentType'=> $val->MstGCM_ContentType,
             'session'=> $session            
         ]);  
     }

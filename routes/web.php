@@ -131,4 +131,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/data-tertanggung-utama/show','DataTertanggungUtamaController@show');
     Route::get('/data-tertanggung-utama/download','DataTertanggungUtamaController@download');
 
+    Route::get('master-pernyataan','MasterPernyataanController@index');
+    Route::get('master-pernyataan/show','MasterPernyataanController@show');
+    Route::get('master-pernyataan/delete/{id}','MasterPernyataanController@delete');
+    Route::post('master-pernyataan/add','MasterPernyataanController@add');
+    Route::post('master-pernyataan/update','MasterPernyataanController@update');
+
+
 });//end group route

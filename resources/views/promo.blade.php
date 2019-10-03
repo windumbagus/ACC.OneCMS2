@@ -7,10 +7,10 @@
 <div class="box box-primary">
     <div class="box-header with-border">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <h3 class="box-title">Promo</h3>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
                     <a href="#" class="button-promo-add btn btn-block btn-primary">Create</a>  
@@ -21,10 +21,10 @@
     <div class="box-body">
 
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <input type="text" placeholder="Search by Name or Description" class="input-search form-control">
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="col-sm-6">
                     <a href="#" class="button-search btn btn-block btn-info">Search</a>    
                 </div>

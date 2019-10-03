@@ -100,7 +100,7 @@
                 <ul class="treeview-menu">
                 <li class="@yield('promo')"><a href="{{ asset('promo') }}"><i class="fa fa-circle-o"></i> Promo</a></li>
                 <li class="@yield('push-notification')"><a href="{{ asset('push-notification') }}"><i class="fa fa-circle-o"></i> Push Notification</a></li>
-                <li class="@yield('master-content')"><a href="#"><i class="fa fa-circle-o"></i> Master Content</a></li>
+                <li class="@yield('master-content')"><a href="{{ asset('master-content') }}"><i class="fa fa-circle-o"></i> Master Content</a></li>
                 <li class="@yield('landing-page')"><a href="#"><i class="fa fa-circle-o"></i> Landing Page</a></li>
                 </ul>
             </li>
@@ -131,7 +131,7 @@
                 <li class="@yield('master-transaction-mobil')"><a href="#"><i class="fa fa-circle-o"></i> Master Transaction Mobil</a></li>
                 <li class="@yield('data-pemegang-polis')"><a href="#"><i class="fa fa-circle-o"></i> Data Pemegang Polis</a></li>
                 <li class="@yield('data-tertanggung-utama')"><a href="{{asset('data-tertanggung-utama')}}"><i class="fa fa-circle-o"></i> Data Tertanggung Utama</a></li>
-                <li class="@yield('master-pernyataan')"><a href="#"><i class="fa fa-circle-o"></i> Master Pernyataan</a></li>
+                <li class="@yield('master-pernyataan')"><a href="{{asset('master-pernyataan')}}"><i class="fa fa-circle-o"></i> Master Pernyataan</a></li>
                 <li class="@yield('history-pembayaran-asuransi-jiwa')"><a href="{{asset('history-pembayaran-asuransi-jiwa')}}"><i class="fa fa-circle-o"></i> History Pembayaran Asuransi Jiwa</a></li>
                 </ul>
             </li>
