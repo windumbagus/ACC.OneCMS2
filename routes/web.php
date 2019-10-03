@@ -95,7 +95,12 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/promo/add','PromoController@create');
     Route::post('/promo/update','PromoController@update');
     Route::post('/promo/update-order','PromoController@UpdateOrder');
-    Route::post('/promo/update-picture','PromoController@CreateOrUpdatePicture');
+
+    Route::get('/master-content','MasterContentController@index');
+    Route::get('/master-content/show','MasterContentController@show');
+    Route::get('/master-content/delete/{id}','MasterContentController@delete');
+    Route::post('/master-content/add','MasterContentController@create');
+    Route::post('/master-content/update','MasterContentController@update');
     
     Route::get('/master-product-accone','MasterProductAccOneController@index');
     Route::get('/master-product-accone/show','MasterProductAccOneController@show');
@@ -125,6 +130,5 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/data-tertanggung-utama','DataTertanggungUtamaController@index');
     Route::get('/data-tertanggung-utama/show','DataTertanggungUtamaController@show');
     Route::get('/data-tertanggung-utama/download','DataTertanggungUtamaController@download');
-
 
 });//end group route

@@ -279,41 +279,4 @@ class PromoController extends Controller
 
         return $result;
     }
-
-    // public function CreateOrUpdatePicture(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'promo_MstPicture' => 'required'
-    //     ]);
-    //     if ($validator->fails()) {
-    //         return redirect('/promo')->with('error',' Create/Update Picture Failed!');
-    //     }
-
-    //     $file = $request->updatePromo_MstPicture;
-    //     $content= base64_encode(file_get_contents($file));
-    //     $name = $file->getClientOriginalName();
-    //     $type = $file->extension();
-
-    //     $MstPicture = json_encode(array(
-    //         "Picture" => $content,
-    //         "FileName" => $name,
-    //         "FileType" => "image/".$type,
-    //     ));
-    //     dd($MstPicture);  
-
-    //     // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePicture"; 
-    //     // $ch = curl_init($url);                   
-    //     // curl_setopt($ch, CURLOPT_POST, true);                                  
-    //     // curl_setopt($ch, CURLOPT_POSTFIELDS, $MstPicture);
-    //     // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-    //     // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-    //     // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-    //     // $result = curl_exec($ch);
-    //     // $err = curl_error($ch);
-    //     // curl_close($ch);
-    //     // $Hasils = json_decode($result);
-    //     // dd($result);
-
-    //     return redirect('/promo')->with('success',' Create/Update Picture Successfully!');
-    // }
 }
