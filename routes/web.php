@@ -137,5 +137,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('master-pernyataan/add','MasterPernyataanController@add');
     Route::post('master-pernyataan/update','MasterPernyataanController@update');
 
+    Route::get('master-transaction-mobil','MasterTransactionMobilController@index');
+    Route::get('master-transaction-mobil/show','MasterTransactionMobilController@show');
+    Route::get('master-transaction-mobil/delete/{id}','MasterTransactionMobilController@delete');
+
 
 });//end group route
