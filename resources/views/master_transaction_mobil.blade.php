@@ -25,7 +25,7 @@
 
         <div class="row">
                 <div class="col-sm-8">
-                    <input type="text" placeholder="Search by Report or User" class="InputSearch form-control">
+                    <input type="text" placeholder="Search by Nama User, Nama Tertanggung, Kendaraan, No Kontrak or No Polisi" class="InputSearch form-control">
                 </div>
                 <div class="col-sm-4">
                     <div class="col-sm-6">
@@ -165,7 +165,7 @@
                     $('[name="NoPolisi"]').val(val.MstTransactionMobil.NomorPlat);
                     $('[name="NamaTertanggung"]').val(val.MstTransactionMobil.NamaTertanggung);
                     $('[name="Kendaraan"]').val(val.MstTransactionMobil.Kendaraan);
-                    
+
                     if(val.MstTransactionMobil.Pertanggungan == "A"){
                         $('[name="Pertanggungan"]').val('Comprehensive');
                     }else{

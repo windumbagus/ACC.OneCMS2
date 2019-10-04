@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MasterTransactionMobilExport;
 
 class MasterTransactionMobilController extends Controller
 {
@@ -68,5 +70,76 @@ class MasterTransactionMobilController extends Controller
         return redirect('/master-transaction-mobil')->with('success','Data Master Transaction Mobil Delete Successfull !!!');
     }
 
+    public function download()
+    {
+       //API GET
+       $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterTransactionMobilAPI/GetAllMasterTransactionMobil"; 
+       $ch = curl_init($url);                                                     
+       curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+       $result = curl_exec($ch);
+       $err = curl_error($ch);
+       curl_close($ch);
+       $Hasils= json_decode($result);
+    //    dd($Hasils);
+
+        $data=[];
+        foreach ($Hasils as $Hasil) {
+
+            if (property_exists($Hasil->User, 'Name')){
+                $Name = $Hasil->User->Name;
+            }else{
+                $Name = "";
+            }
+
+            if (property_exists($Hasil->MstTransactionMobil, 'NomorPlat')){
+                $NomorPlat = $Hasil->MstTransactionMobil->NomorPlat;
+            }else{
+                $NomorPlat = "";
+            }
+
+            if (property_exists($Hasil->MstTransactionMobil, 'DueDate')){
+                $DueDate = $Hasil->MstTransactionMobil->DueDate;
+            }else{
+                $DueDate = "";
+            }
+        
+            if (property_exists($Hasil->MstTransactionMobil, 'Colour')){
+                $Colour = $Hasil->MstTransactionMobil->Colour;
+            }else{
+                $Colour = "";
+            }
+
+            if (property_exists($Hasil->MstTransactionMobil, 'ColourSTNK')){
+                $ColourSTNK = $Hasil->MstTransactionMobil->ColourSTNK;
+            }else{
+                $ColourSTNK = "";
+            }
+
+            if (property_exists($Hasil->MstTransactionMobil, 'PolicyNumber')){
+                $PolicyNumber = $Hasil->MstTransactionMobil->PolicyNumber;
+            }else{
+                $PolicyNumber = "";
+            }
+
+
+
+            array_push($data,[
+                "Nama"=>$Name,
+                "NoPolisi"=>$NomorPlat,
+                "NamaTertanggung"=>$Hasil->MstTransactionMobil->NamaTertanggung,
+                "Kendaraan"=>$Hasil->MstTransactionMobil->Kendaraan,
+                "Pertanggungan"=>$Hasil->MstTransactionMobil->Pertanggungan,
+                "HargaPertanggungan"=>$Hasil->MstTransactionMobil->HargaPertanggungan,
+                "Warna"=>$Colour,
+                "ColorOnSTNK"=>$ColourSTNK,
+                "NoKontrak"=>$PolicyNumber,
+                "DueDate"=>$DueDate
+            ]);
+        }
+    //   dd($data);
     
+      return Excel::download(new MasterTransactionMobilExport($data), 'accone Master Transaction Mobil '. date("Y-m-d") .'.xlsx');   
+    }
 }

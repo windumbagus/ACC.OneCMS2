@@ -140,6 +140,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('master-transaction-mobil','MasterTransactionMobilController@index');
     Route::get('master-transaction-mobil/show','MasterTransactionMobilController@show');
     Route::get('master-transaction-mobil/delete/{id}','MasterTransactionMobilController@delete');
+    Route::get('master-transaction-mobil/download','MasterTransactionMobilController@download');
 
 
 });//end group route
