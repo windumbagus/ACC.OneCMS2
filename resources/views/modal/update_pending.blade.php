@@ -10,7 +10,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
                 <h4 class="box-title">Update Pending List</h4>   
             </div>
             <div class="modal-body">
-                <form id="form_pedinglist_update" action="{{ asset('pendinglist/verification-process') }}" method="post"> 
+                <form id="form_pedinglist_update" action="{{ asset('pending/verification-process') }}" method="post"> 
                     @csrf	
                     <div class="form-group">
                         <input type="hidden" class="form-control" name="pendinglist_Userid_update_data">

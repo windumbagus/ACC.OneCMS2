@@ -168,7 +168,6 @@
         
         // OrderName Dropdown
         $(document).on('change','.dropdown-promo-ordername', function(){
-            // $('.dropdown-promo-ordername').change(function(){
             var PromoId = $(this).attr('data-id2');
             var SelectedOrderName = $(this).find('option:selected').val();
             // console.log(PromoId);

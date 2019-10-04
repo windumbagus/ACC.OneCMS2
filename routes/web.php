@@ -30,9 +30,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/approve','ApproveController@index');
     Route::get('/approve/show','ApproveController@show');
 
-    Route::get('/pendinglist','PendinglistController@index');
-    Route::get('/pendinglist/show','PendinglistController@show');
-    Route::post('/pendinglist/verification-process','PendinglistController@verification');
+    Route::get('/pending','PendingController@index');
+    Route::get('/pending/show','PendingController@show');
+    Route::post('/pending/verification-process','PendingController@verification');
 
     Route::get('/customer','CustomerController@index');
     Route::get('/customer/show','CustomerController@show');
@@ -97,6 +97,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/promo/update-order','PromoController@UpdateOrder');
 
     Route::get('/master-content','MasterContentController@index');
+    Route::get('/master-content/getByContentType','MasterContentController@getByContentType');
     Route::get('/master-content/show','MasterContentController@show');
     Route::get('/master-content/delete/{id}','MasterContentController@delete');
     Route::post('/master-content/add','MasterContentController@create');

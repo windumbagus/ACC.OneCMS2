@@ -17,7 +17,7 @@ class MasterContentController extends Controller
             'RoleId'=>$request->session()->get('RoleId')
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?MstGCM_ContentType=".$request->ContentType; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType"; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -28,17 +28,35 @@ class MasterContentController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-        if(property_exists($val, 'MstContentList')) {
-            $TempMstContentList = $val->MstContentList;
-        } else {
-            $TempMstContentList = 0;
-        }
-
-        return view('master-content',[
-            'MstContentList'=> $TempMstContentList,
-            'MstGCM_ContentType'=> $val->MstGCM_ContentType,
+        return view('master_content',[
+            'MstGCM_ContentTypeList'=> $val->MstGCM_ContentType,
             'session'=> $session            
         ]);  
+    }
+    
+    public function getByContentType(Request $request)
+    {
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId')
+        ]);
+        
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?MstGCM_ContentType=".urlencode($request->ContentType); 
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($val);
+
+        return json_encode($val); 
     }
 
     public function show(Request $request)

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Alert;
 
-class PendinglistController extends Controller
+class PendingController extends Controller
 {
     public function index(Request $request)
     {
@@ -29,7 +29,7 @@ class PendinglistController extends Controller
         $data = json_decode($result);
         // dd($data);
         
-        return view('pendinglist',[
+        return view('pending',[
             'Pendings' => $data,
             'session' => $session            
             ]);    
@@ -80,6 +80,6 @@ class PendinglistController extends Controller
         //     Alert::success('User has been Rejected');
         // }
         
-        return redirect('/pendinglist')->with('success',' Update Data Successfully!');
+        return redirect('/pending')->with('success',' Update Data Successfully!');
 	}
 }
