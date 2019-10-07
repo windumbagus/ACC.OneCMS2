@@ -143,5 +143,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('master-transaction-mobil/delete/{id}','MasterTransactionMobilController@delete');
     Route::get('master-transaction-mobil/download','MasterTransactionMobilController@download');
 
+    Route::get('data-pemegang-polis','DataPemegangPolisController@index');
+    Route::get('data-pemegang-polis-simulasi/show','DataPemegangPolisController@show');
+    Route::get('data-pemegang-polis/download-simulasi','DataPemegangPolisController@downloadSimulasi');
+
 
 });//end group route
