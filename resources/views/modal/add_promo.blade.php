@@ -51,7 +51,7 @@
                     
                     <div class="form-group">
                         <label>Description:</label><br>
-                        <textarea rows="10" cols="60"
+                        <textarea rows="10" cols="60" id="textarea_promoModalAdd_Description"
                             type="text" class="form-control" name="addPromo_MstPromo_Description" required></textarea>
                     </div>
 
@@ -165,7 +165,11 @@
         $('.close-modal-promo-add').click(function() {
             $('#modal_promo_add').modal('hide');
             $('#form_promoModalAdd_add')[0].reset();  
-        });      
+        });           
+    
+        // Syarat & Ketentuan CKEditor
+        CKEDITOR.replace('textarea_promoModalAdd_SyaratDanKetentuan'),
+        CKEDITOR.replace('textarea_promoModalAdd_Description')
     });
 
     // Jenis Promo Dropdown

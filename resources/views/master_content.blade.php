@@ -25,8 +25,8 @@
                 <select class="form-control select2" id="dropdown_masterContent_contentType" style="width:100%;">
                     <option value="0" selected>-- Choose Content Type --</option>
                     @foreach ($MstGCM_ContentTypeList as $MstGCM_ContentType)
-                        <option value="{{$MstGCM_ContentType->MstGCM_CharDesc1}}">
-                            {{$MstGCM_ContentType->MstGCM_CharDesc1}}
+                        <option value="{{$MstGCM_ContentType}}">
+                            {{$MstGCM_ContentType}}
                         </option>
                     @endforeach
                 </select>
@@ -120,13 +120,46 @@
                             e.Category,
                             e.Status,
                             e.AddedDate,
-                            '<span><a href="#" MstContentId="'+e.id+'" class="button-masterContent-update btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; <a href="{{asset("master-content/delete/".'+e.id+')}}" class=" btn btn-danger btn-sm" onclick="return confirm("Are you sure want to delete this ?")" ><i class="fa fa-trash"></i></a></span>',
+                            '<span><a href="#" MstContentId="'+e.Id+'" class="button-masterContent-update btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" MstContentId="'+e.Id+'" class="button-masterContent-delete btn btn-danger btn-sm" onclick="return confirm(\'Are you sure want to delete this ?\')" ><i class="fa fa-trash"></i></a></span>',
                         ]).draw(false)
                     }) 
                 }
             })
         });
+
+        // Delete
+        $(document).on('click','.button-masterContent-delete',function(){
+            var id = $(this).attr('MstContentId');
+            console.log(id);
+            $.ajax({
+                url:"{{asset('/master-content/delete')}}",
+                data: {'Id':id ,'_token':'{{csrf_token()}}'},
+                dataType:'JSON', 
+                type:'GET',
+                success: function (val){
+                    window.location.assign("{{asset('/master-content')}}");
+                    alert("Delete Master Content Successfully!");
+                },
+                error: function(jqXhr, textStatus, errorThrown){
+                    console.log(jqXhr);
+                    console.log(errorThrown);
+                    console.log(textStatus);
+                },
+            });
+        });
+
+        // Modal Add
+        $(document).on('click','.button-masterContent-add',function(){
+            $('#modal_masterContent_add').modal();
+        });
+        
+        // Modal Update
+        $(document).on('click','.button-masterContent-update',function(){
+            var id = $(this).attr('MstContentId');
+            console.log(id);
+        });
     })
 </script>
 
+@include('modal.add_master_content')
 @endsection

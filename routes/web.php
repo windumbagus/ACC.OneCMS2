@@ -99,7 +99,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-content','MasterContentController@index');
     Route::get('/master-content/getByContentType','MasterContentController@getByContentType');
     Route::get('/master-content/show','MasterContentController@show');
-    Route::get('/master-content/delete/{id}','MasterContentController@delete');
+    Route::get('/master-content/delete','MasterContentController@delete');
     Route::post('/master-content/add','MasterContentController@create');
     Route::post('/master-content/update','MasterContentController@update');
     

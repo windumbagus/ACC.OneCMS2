@@ -77,7 +77,7 @@
                     <div class="form-group">
                         <label>Description:</label><br>
                         <textarea rows="10" cols="60" type="text" class="form-control" name="updatePromo_MstPromo_Description" 
-                            required></textarea>
+                            id="textarea_promoModalUpdate_Description" required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -200,7 +200,11 @@
         $('.close-modal-promo-update').click(function() {
             $('#modal_promo_update').modal('hide');
             $('#form_promoModalUpdate_update')[0].reset();  
-        });      
+        });    
+    
+        // Syarat & Ketentuan CKEditor
+        CKEDITOR.replace('textarea_promoModalUpdate_SyaratDanKetentuan'),
+        CKEDITOR.replace('textarea_promoModalUpdate_Description')
     });
 
     // Jenis Promo Dropdown

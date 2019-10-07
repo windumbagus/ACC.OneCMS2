@@ -233,14 +233,16 @@
                     $('[name="updatePromo_MstPromo_Id"]').val(val.MstPromo.Id);
                     $('[name="updatePromo_MstPromo_Name"]').val(val.MstPromo.Name);
                     $('[name="updatePromo_MstPromo_PromoCode"]').val(val.MstPromo.PromoCode);
-                    $('[name="updatePromo_MstPromo_Description"]').val(val.MstPromo.Description);
                     $('[name="updatePromo_MstPromo_AddedDate"]').val(val.MstPromo.AddedDate);
                     $('[name="updatePromo_MstPromo_UserAdded"]').val(val.MstPromo.UserAdded);
                     // $('[name="updatePromo_MstPromo_UpdatedDate"]').val(val.MstPromo.UpdatedDate);
                     // $('[name="updatePromo_MstPromo_UserUpdated"]').val(val.MstPromo.UserUpdated);
-                    $('[name="updatePromo_MstPromo_SyaratDanKetentuan"]').val(val.MstPromo.SyaratDanKetentuan);
                     $('[name="updatePromo_MstPromo_ProductOwner"]').val(val.MstPromo.ProductOwner);
                     $('[name="updatePromo_MstPromo_URL"]').val(val.MstPromo.URL);
+
+                    // CKEditor
+                    CKEDITOR.instances.textarea_promoModalUpdate_Description.setData(val.MstPromo.Description);
+                    CKEDITOR.instances.textarea_promoModalUpdate_SyaratDanKetentuan.setData(val.MstPromo.SyaratDanKetentuan);
                     
                     // Jenis Promo
                     $('[name="updatePromo_MstPromo_JenisPromo"]').val(val.MstPromo.JenisPromo);
@@ -256,7 +258,7 @@
                     
                     // Promo Type
                     $('[name="updatePromo_MstPromo_PromoType"]').val(val.MstPromo.PromoType);
-                   switch(val.MstPromo.PromoType) {
+                    switch(val.MstPromo.PromoType) {
                         case "FIXED VALUE":
                             $('#inputaddon_promoModalUpdate_PromoAmount').hide()
                             $('#inputaddon_promoModalUpdate_PromoAmountRp').show()

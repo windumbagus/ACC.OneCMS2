@@ -29,7 +29,9 @@ class MasterContentController extends Controller
         // dd($val);
 
         return view('master_content',[
-            'MstGCM_ContentTypeList'=> $val->MstGCM_ContentType,
+            'MstGCM_ContentTypeList'=> $val->MstGCM->ContentType,
+            'MstGCM_ContentStatusList'=> $val->MstGCM->ContentStatus,
+            'MstGCM_NewsCategoryList'=> $val->MstGCM->NewsCategory,
             'session'=> $session            
         ]);  
     }
@@ -75,9 +77,9 @@ class MasterContentController extends Controller
         return json_encode($val);
     }
 
-    public function delete($id=null, Request $request)
+    public function delete(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/DeleteMasterContentById?MstContent_Id=".$id;
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/DeleteMasterContentById?MstContent_Id=".$request->Id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -89,7 +91,7 @@ class MasterContentController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-        return redirect('/master-content')->with('success',' Delete Data Successfully!');
+        return json_encode($val);
     }
 
     public function create(Request $request)
