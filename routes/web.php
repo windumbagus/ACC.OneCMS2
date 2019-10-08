@@ -147,5 +147,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('data-pemegang-polis-simulasi/show','DataPemegangPolisController@show');
     Route::get('data-pemegang-polis/download-simulasi','DataPemegangPolisController@downloadSimulasi');
 
+    Route::get('master-product','MasterProductController@index');
+    Route::get('master-product/show','MasterProductController@show');
+
 
 });//end group route
