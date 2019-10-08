@@ -55,12 +55,21 @@ class MasterProductController extends Controller
 
     public function update(Request $request)
     {
-        $file = $request->PictureInput;
-        $getContent = file_get_contents($file);
-        $content= base64_encode($getContent);
-        $name = $file->getClientOriginalName();
-        $type = $file->extension();
-        
+
+        if ($request->PictureInput==""){
+            $content = "";
+            $name = "";
+            $FileType = "";
+        }else{
+            $file = $request->PictureInput;
+            $getContent = file_get_contents($file);
+            $content= base64_encode($getContent);
+            $name = $file->getClientOriginalName();
+            $type = $file->extension();
+            $FileType= "image/".$type;
+        }
+
+
         $data = json_encode(array(
             "MstProduct" => array(   
                 "Id" => $request->Id,
@@ -81,7 +90,7 @@ class MasterProductController extends Controller
                 "Type" => "ACCSAFEPRODUCT",
                 "Picture" => $content,
                 "FileName" => $name,
-                "FileType" => "image/".$type,
+                "FileType" =>$FileType
             ),
         )); 
         // dd($data);
@@ -99,6 +108,6 @@ class MasterProductController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-
+        return redirect("master-product")->with('success','Data Master Product Update Successfull !!!');
     }
 }
