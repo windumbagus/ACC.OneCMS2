@@ -97,11 +97,14 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/promo/update-order','PromoController@UpdateOrder');
 
     Route::get('/master-content','MasterContentController@index');
-    Route::get('/master-content/getByContentType','MasterContentController@getByContentType');
+    Route::get('/master-content/get-by-content-type','MasterContentController@getByContentType');
     Route::get('/master-content/show','MasterContentController@show');
     Route::get('/master-content/delete','MasterContentController@delete');
     Route::post('/master-content/add','MasterContentController@create');
     Route::post('/master-content/update','MasterContentController@update');
+    Route::post('/master-content/check-content-order','MasterContentController@checkContentOrder');
+    Route::post('/master-content/check-content-title','MasterContentController@checkContentTitle');
+    Route::post('/master-content/check-content-status','MasterContentController@checkContentStatus');
     
     Route::get('/master-product-accone','MasterProductAccOneController@index');
     Route::get('/master-product-accone/show','MasterProductAccOneController@show');

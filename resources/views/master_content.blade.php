@@ -13,7 +13,7 @@
             <div class="col-sm-3">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                    <a href="#" class="button-masterContent-add btn btn-block btn-primary">Create</a>  
+                    <a href="#" class="button_masterContent_create btn btn-block btn-primary">Create</a>  
                 </div>
             </div>
         </div>
@@ -36,10 +36,10 @@
             </div>
             <div class="col-sm-3">
                 <div class="col-sm-6">
-                    <a href="#" class="button-search btn btn-block btn-info">Search</a>    
+                    <a href="#" class="button_masterContent_search btn btn-block btn-info">Search</a>    
                 </div>
                 <div class="col-sm-6">
-                    <a href="#" class="button-resetsearch btn btn-block btn-info">Reset</a>    
+                    <a href="#" class="button_masterContent_resetSearch btn btn-block btn-info">Reset</a>    
                 </div>
             </div>
         </div><br>
@@ -87,14 +87,14 @@
         })
 
         //Button Search
-        $('.button-search').on('click', function(){
+        $('.button_masterContent_search').on('click', function(){
             var searchData = $('.input-search').val()
             var dtable = $('#datatable_1').DataTable()
             dtable.search(searchData).draw()
         })
 
         //Reset Button Search
-        $('.button-resetsearch').on('click',function(){
+        $('.button_masterContent_resetSearch').on('click',function(){
             var tab = $('#datatable_1').DataTable()
             tab.search('').draw()
             $('.input-search').val('')
@@ -105,7 +105,7 @@
             var SelectedContentType = $(this).val();
             // console.log(SelectedContentType);
             $.ajax({
-                url:'master-content/getByContentType',
+                url:'master-content/get-by-content-type',
                 data: {'ContentType':SelectedContentType},
                 dataType:'json',
                 success: function(data){
@@ -130,7 +130,7 @@
         // Delete
         $(document).on('click','.button-masterContent-delete',function(){
             var id = $(this).attr('MstContentId');
-            console.log(id);
+            // console.log(id);
             $.ajax({
                 url:"{{asset('/master-content/delete')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}'},
@@ -149,7 +149,7 @@
         });
 
         // Modal Add
-        $(document).on('click','.button-masterContent-add',function(){
+        $(document).on('click','.button_masterContent_create',function(){
             $('#modal_masterContent_add').modal();
         });
         
