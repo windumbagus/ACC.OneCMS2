@@ -113,6 +113,9 @@
                 success: function (val){
                     console.log(val);
                     $('[name="Id"]').val(val.MstProduct.Id);
+                    $('[name="MstPictureId"]').val(val.MstProduct.MstPictureId);
+                    $('[name="IdPicture"]').val(val.MstPicture.Id);
+                    $('[name="DataId"]').val(val.MstPicture.DataId);
                     $('[name="ProductCode"]').val(val.MstProduct.ProductCode);
                     $('[name="ProductName"]').val(val.MstProduct.ProductName);
                     $('[name="Description"]').val(val.MstProduct.Description);

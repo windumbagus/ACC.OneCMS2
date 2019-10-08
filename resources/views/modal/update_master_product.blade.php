@@ -8,11 +8,23 @@
                 </button>
                 <h4 class="box-title">Update Master Product</h4> 
             </div>
-        <form id="form-update-master-product" action="{{ asset('master-product/update') }}" method="post"> 
+        <form id="form-update-master-product" action="{{ asset('master-product/update') }}" method="post" enctype="multipart/form-data"> 
             <div class="modal-body">
                 @csrf
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="Id"
+                    placeholder="">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="MstPictureId"
+                    placeholder="">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="DataId"
+                    placeholder="">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="IdPicture"
                     placeholder="">
                 </div>
                 <div class="form-group">
@@ -33,7 +45,7 @@
                 <div class="form-group">
                     <label>Mst Picture:</label><br>
                     <img style="width: 200px; height: 200px;" name="Picture" alt="" id="Picture"/><br><br>
-                    <input type="file" class="form-control" name="PictureInput" id="PictureInput" >
+                    <input type="file" class="form-control" name="PictureInput" id="PictureInput">
                 </div>
 
                 <div class="form-group">

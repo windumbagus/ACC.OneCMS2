@@ -52,4 +52,53 @@ class MasterProductController extends Controller
 
         return json_encode($val);
     }
+
+    public function update(Request $request)
+    {
+        $file = $request->PictureInput;
+        $getContent = file_get_contents($file);
+        $content= base64_encode($getContent);
+        $name = $file->getClientOriginalName();
+        $type = $file->extension();
+        
+        $data = json_encode(array(
+            "MstProduct" => array(   
+                "Id" => $request->Id,
+                "MstPictureId" => $request->MstPictureId,
+                "ProductCode" =>$request->ProductCode,
+                "ProductName" =>$request->ProductName,
+                "Description" =>$request->Description,
+                "Pernyataan1" =>$request->Pernyataan1,
+                "Pernyataan2" =>$request->Pernyataan2,
+                "Pernyataan3" =>$request->Pernyataan3,
+                "MappingAnswerCharValue" =>$request->MappingAnswerCharValue,
+                "MappingAnswerDesc" =>$request->MappingAnswerDesc,
+                "UserUpdated"=> $request->session()->get('Id')
+            ),
+            "MstPicture" => array(
+                "Id" => "$request->IdPicture",
+                "DataId"=>$request->DataId,
+                "Type" => "ACCSAFEPRODUCT",
+                "Picture" => $content,
+                "FileName" => $name,
+                "FileType" => "image/".$type,
+            ),
+        )); 
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAPI/CreateOrUpdateMasterProduct"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($val);
+
+
+    }
 }
