@@ -20,10 +20,6 @@
                             value="{{ session()->get('Id') }}">
                     </div>
                     <div class="form-group" hidden>
-                        <label>Promo Id:</label><br>
-                        <input type="hidden" class="form-control" name="updatePromo_MstPromo_Id" value="">
-                    </div>
-                    <div class="form-group" hidden>
                         <label>Product Owner:</label><br>
                         <input type="hidden" class="form-control" name="addPromo_MstPromo_ProductOwner" value="ACC World">
                     </div>
