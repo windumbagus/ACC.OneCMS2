@@ -10,7 +10,7 @@
                 </button>
                 <h4 class="box-title">Update Promo</h4> 
             </div>
-            <form id="form_promoModalUpdate_update" action="{{ asset('promo/update') }}" method="post" enctype="multipart/form-data">
+            <form id="form_promoModalUpdate_update" action="{{ asset('promo/update') }}" method="post" enctype="multipart/form-data" novalidate>
                 <div class="modal-body"> 
                     @csrf	
 

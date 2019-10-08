@@ -64,7 +64,7 @@
                     @if( strlen($Promo->Description)>= 20)
                         <td><span>{{substr($Promo->Description,0,20)."..."}}</span></td>
                     @else 
-                        <td><span>{{$Promo->Name}}</span></td>
+                        <td><span>{{$Promo->Description}}</span></td>
                     @endif
                     
                     @if (property_exists($Promo, 'IsActivePromo'))
