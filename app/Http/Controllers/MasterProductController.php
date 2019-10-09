@@ -110,4 +110,22 @@ class MasterProductController extends Controller
 
         return redirect("master-product")->with('success','Data Master Product Update Successfull !!!');
     }
+
+    public function SyncApiProduct(Request $request )
+    {
+        //API GET
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAPI/SyncProduct"; 
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result);
+        // dd($Hasils);  
+
+        return redirect("master-product")->with('success','Data Master Product "Sync API to Product" Successfull !!!');
+
+    }
 }

@@ -16,7 +16,7 @@
             <div class="col-sm-4">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                <a href="{{asset('/master-product/sync-api-product')}}" class="btn btn-block btn-primary">Sync API Product</a>
+                <a href="{{asset('/master-product/sync-api-product')}}" class="btn btn-block btn-primary">Sync API to Product</a>
                 </div>
             </div>
         </div>
