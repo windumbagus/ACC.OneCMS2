@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group" hidden>
                         <label>Product Owner:</label><br>
-                        <input type="hidden" class="form-control" name="updatePromo_MstPromo_ProductOwner" value="ACC World">
+                        <input type="hidden" class="form-control" name="updatePromo_MstPromo_ProductOwner">
                     </div>
 
                     <div class="form-group" hidden>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group" hidden>
                         <label>Picture Type:</label><br>
-                        <input type="hidden" class="form-control" name="updatePromo_MstPicture_Type" value="Promo">
+                        <input type="hidden" class="form-control" name="updatePromo_MstPicture_Type">
                     </div>
 
                     <div class="form-group">
