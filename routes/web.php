@@ -154,5 +154,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('master-product/show','MasterProductController@show');
     Route::post('master-product/update','MasterProductController@update');
     Route::get('master-product/sync-api-product','MasterProductController@SyncApiProduct');
+
+    Route::get('user-mobile','UserMobileController@index');
+    Route::get('user-mobile/show','UserMobileController@show');
+    Route::post('user-mobile/update','UserMobileController@update');
+
    
 });//end group route
