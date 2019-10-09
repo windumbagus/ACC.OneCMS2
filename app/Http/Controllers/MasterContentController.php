@@ -30,8 +30,8 @@ class MasterContentController extends Controller
 
         return view('master_content',[
             'MstGCM_ContentTypeList'=> $val->MstGCM->ContentType,
-            'MstGCM_ContentStatusList'=> $val->MstGCM->ContentStatus,
-            'MstGCM_NewsCategoryList'=> $val->MstGCM->NewsCategory,
+            'MstGCM_StatusList'=> $val->MstGCM->ContentStatus,
+            'MstGCM_CategoryList'=> $val->MstGCM->NewsCategory,
             'session'=> $session            
         ]);  
     }
@@ -88,15 +88,15 @@ class MasterContentController extends Controller
     public function create(Request $request)
     {
         // dd($request);
-        if(property_exists($request, 'addMasterContent_MstPicture')) {
+        if($request->addMasterContent_IsUpdatePicture=="true") {
             $file = $request->addMasterContent_MstPicture;
             $getContent = file_get_contents($file);
             $content= base64_encode($getContent);
             $name = $file->getClientOriginalName();
             $type = $file->extension();
             $MstPictureTemp = array(
-                // "Id" => "$request->updatePromo_MstPicture_Id",
-                // "DataId" => "$request->updatePromo_MstPicture_DataId",
+                // "Id" => "$request->updateMasterContent_MstPicture_Id",
+                // "DataId" => "$request->updateMasterContent_MstPicture_DataId",
                 "Type" => "ContentManagement",
                 "Picture" => $content,
                 "FileName" => $name,
@@ -129,30 +129,100 @@ class MasterContentController extends Controller
                 "MstPicture" => $MstPictureTemp,
             )
         );
-        dd($data);
+        // dd($data);
 
-        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CreateOrUpdateMasterContent"; 
-        // $ch = curl_init($url);                   
-        // curl_setopt($ch, CURLOPT_POST, true);                                  
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-        // $result = curl_exec($ch);
-        // $err = curl_error($ch);
-        // curl_close($ch);
-        // $val = json_decode($result);
-        // // dd($val);
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CreateOrUpdateMasterContent"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($val);
 
-        // if(property_exists($val, 'Success') && ($val->Success)) {
-        //     return redirect('/master-content')->with('success',' Add Data Successfully!');
-        // } elseif(property_exists($val, 'Error')) {
-        //     return redirect('/master-content')->with('error', $val->Error);
-        // } elseif(property_exists($val, 'Errors')) {
-        //     return redirect('/master-content')->with('error', $val->Errors);
-        // } else {
-        //     return redirect('/master-content')->with('error',' Add Data Failed!');
-        // }
+        if(property_exists($val, 'Success') && ($val->Success)) {
+            return redirect('/master-content')->with('success',' Add Data Successfully!');
+        } elseif(property_exists($val, 'Error')) {
+            return redirect('/master-content')->with('error', $val->Error);
+        } elseif(property_exists($val, 'Errors')) {
+            return redirect('/master-content')->with('error', $val->Errors);
+        } else {
+            return redirect('/master-content')->with('error',' Add Data Failed!');
+        }
+    }
+
+    public function update(Request $request)
+    {
+        // dd($request);
+        if($request->updateMasterContent_IsUpdatePicture=="true") {
+            $file = $request->updateMasterContent_MstPicture;
+            $getContent = file_get_contents($file);
+            $content= base64_encode($getContent);
+            $name = $file->getClientOriginalName();
+            $type = $file->extension();
+            $MstPictureTemp = array(
+                "Id" => $request->updateMasterContent_MstPicture_Id,
+                "DataId" => $request->updateMasterContent_MstPicture_DataId,
+                "Type" => "ContentManagement",
+                "Picture" => $content,
+                "FileName" => $name,
+                "FileType" => "image/".$type,
+            );
+        } else {
+            $MstPictureTemp = null;
+        }
+        
+        $data = json_encode(
+            array(
+                "MstContent" => array(   
+                    "Id" => $request->updateMasterContent_MstContent_Id,
+                    "ContentType" => $request->updateMasterContent_MstContent_ContentType,
+                    "Order" => $request->updateMasterContent_MstContent_Order,
+                    "Title" => $request->updateMasterContent_MstContent_Title,
+                    "Snippet" => $request->updateMasterContent_MstContent_Snippet,
+                    "Detail" => $request->updateMasterContent_MstContent_Description,
+                    "Category" => $request->updateMasterContent_MstContent_Category,
+                    // "Picture" => $request->updateMasterContent_MstContent_Picture,
+                    // "FileName" => $request->updateMasterContent_MstContent_FileName,
+                    // "FileType" => $request->updateMasterContent_MstContent_FileType,
+                    "Status" => $request->updateMasterContent_MstContent_Status,
+                    "AddedDate" => $request->updateMasterContent_MstContent_AddedDate,
+                    "UserAdded" => $request->updateMasterContent_MstContent_UserAdded,
+                    // "UpdatedDate" => $request->updateMasterContent_MstContent_UpdatedDate,
+                    "UserUpdated" => $request->updateMasterContent_MstContent_UserUpdated,
+                    "ProductOwner" => $request->updateMasterContent_MstContent_ProductOwner,
+                ),
+                "MstPicture" => $MstPictureTemp,
+            )
+        );
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CreateOrUpdateMasterContent"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($val);
+
+        if(property_exists($val, 'Success') && ($val->Success)) {
+            return redirect('/master-content')->with('success',' Update Data Successfully!');
+        } elseif(property_exists($val, 'Error')) {
+            return redirect('/master-content')->with('error', $val->Error);
+        } elseif(property_exists($val, 'Errors')) {
+            return redirect('/master-content')->with('error', $val->Errors);
+        } else {
+            return redirect('/master-content')->with('error',' Update Data Failed!');
+        }
     }
 
     public function checkContentOrder(Request $request)

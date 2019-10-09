@@ -156,10 +156,57 @@
         // Modal Update
         $(document).on('click','.button-masterContent-update',function(){
             var id = $(this).attr('MstContentId');
-            console.log(id);
+            // console.log(id);
+            $.ajax({
+                url:"{{asset('/master-content/show')}}",
+                data: {'Id':id ,'_token':'{{csrf_token()}}'},
+                dataType:'JSON', 
+                type:'GET',
+                success: function (val){
+                    // console.log(val);
+
+                    // MstPicture
+                    if(val.hasOwnProperty('MstPicture')) {
+                        $('[name="updateMasterContent_MstPicture_Id"]').val(val.MstPicture.Id);
+                        $('[name="updateMasterContent_MstPicture_DataId"]').val(val.MstPicture.DataId);
+                        $('[name="updateMasterContent_MstPicture_Picture"]').val(val.MstPicture.Picture);
+                        $('[name="updateMasterContent_MstPicture_FileName"]').val(val.MstPicture.FileName);
+                        $('[name="updateMasterContent_MstPicture_FileType"]').val(val.MstPicture.FileType);
+                        $('[name="updateMasterContent_MstPicture_Type"]').val(val.MstPicture.Type);
+                        $('#placeholder_masterContentModalUpdate_picture').attr('src', "data:image/png;base64," + val.MstPicture.Picture);
+                    }
+                    
+                    
+                    $('[name="updateMasterContent_MstContent_Id"]').val(val.MstContent.Id);
+                    $('[name="updateMasterContent_MstContent_ContentType"]').val(val.MstContent.ContentType);
+                    $('[name="updateMasterContent_MstContent_Order"]').val(val.MstContent.Order);
+                    $('[name="updateMasterContent_MstContent_Title"]').val(val.MstContent.Title);
+                    $('[name="updateMasterContent_MstContent_Snippet"]').val(val.MstContent.Snippet);
+                    $('[name="updateMasterContent_MstContent_Detail"]').val(val.MstContent.Detail);
+                    $('[name="updateMasterContent_MstContent_Category"]').val(val.MstContent.Category);
+                    $('[name="updateMasterContent_MstContent_Status"]').val(val.MstContent.Status);
+                    $('[name="updateMasterContent_MstContent_AddedDate"]').val(val.MstContent.AddedDate);
+                    $('[name="updateMasterContent_MstContent_UserAdded"]').val(val.MstContent.UserAdded);
+                    // $('[name="updateMasterContent_MstContent_UpdatedDate"]').val(val.MstContent.UpdatedDate);
+                    // $('[name="updateMasterContent_MstContent_UserUpdated"]').val(val.MstContent.UserUpdated);
+                    $('[name="updateMasterContent_MstContent_ProductOwner"]').val(val.MstContent.ProductOwner);
+
+                    // CKEditor
+                    CKEDITOR.instances.textarea_masterContentModalUpdate_snippet.setData(val.MstContent.Snippet);
+                    CKEDITOR.instances.textarea_masterContentModalUpdate_description.setData(val.MstContent.Detail);
+
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                    console.log(jqXhr);
+                    console.log( errorThrown );
+                    console.log(textStatus);
+                },
+            });
+            $('#modal_masterContent_update').modal();
         });
     })
 </script>
 
 @include('modal.add_master_content')
+@include('modal.update_master_content')
 @endsection
