@@ -158,6 +158,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('user-mobile','UserMobileController@index');
     Route::get('user-mobile/show','UserMobileController@show');
     Route::post('user-mobile/update','UserMobileController@update');
+    Route::get('user-mobile/download','UserMobileController@download');
 
+    Route::get('user-cms','UserCMSController@index');
    
 });//end group route

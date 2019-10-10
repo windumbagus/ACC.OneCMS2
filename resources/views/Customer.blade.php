@@ -52,15 +52,16 @@
             @foreach ($Customers as $Customer)
 
             <tr>  
-                <td><span>{{$Customer->User->Name}}</span></td>
+                @if (property_exists($Customer->User, 'Name'))
+                    <td><span>{{$Customer->User->Name}}</span></td>
+                @else 
+                    <td></td>
+                @endif
+                {{-- <td><span>{{$Customer->User->Name}}</span></td> --}}
                 <td><span>{{$Customer->MstGCM->CharDesc1}}</span></td>
                 <td><span>{{$Customer->MstBankAccountCustomer->NoRekening}}</span></td>
                 <td><span>{{$Customer->MstBankAccountCustomer->NamaRekening}}</span></td>
-                {{-- @if (property_exists($Customer->MstCustomerDetail, 'Reason'))
-                <td><span>{{$Customer->MstCustomerDetail->Reason}}</span></td>
-                @else 
-                <td></td>
-                @endif --}}
+
                 <td>
                 <span>
                     <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
