@@ -168,5 +168,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('user-mobile/download','UserMobileController@download');
 
     Route::get('user-cms','UserCMSController@index');
+    Route::get('user-cms/show','UserCMSController@show');
    
 });//end group route

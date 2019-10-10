@@ -54,14 +54,14 @@
         <tbody>
             @foreach ($UserCMSs as $UserCMS)
             <tr>  
-                <td><span>{{$UserCMS->User->Id}}</span></td>
-                <td><span>{{$UserCMS->User->Name}}</span></td>
-                <td><span>{{$UserCMS->User->Username}}</span></td>
-                <td><span>{{$UserCMS->User->Email}}</span></td>          
-                <td><span>{{$UserCMS->User->MobilePhone}}</span></td>
+                <td><span>{{$UserCMS->Id}}</span></td>
+                <td><span>{{$UserCMS->Name}}</span></td>
+                <td><span>{{$UserCMS->Username}}</span></td>
+                <td><span>{{$UserCMS->Email}}</span></td>          
+                <td><span>{{$UserCMS->MobilePhone}}</span></td>
 
-                @if (property_exists($UserCMS->User, 'Is_Active'))
-                    @if($UserCMS->User->Is_Active == true)
+                @if (property_exists($UserCMS, 'Is_Active'))
+                    @if($UserCMS->Is_Active == true)
                         <td><span><i class="fa fa-check" style="color:green;"></i></span></td>
                     @else
                         <td><span><i class="fa fa-close" style="color:red;"></i></span></td>
@@ -72,8 +72,8 @@
                             
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $UserCMS->User->Id}}" class="update-user-cms btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
-                    <a href="{{asset('user-cms/delete/'.$UserCMS->User->Id)}}" 
+                    <a href="#" data-id="{{ $UserCMS->Id}}" class="update-user-cms btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
+                    <a href="{{asset('user-cms/delete/'.$UserCMS->Id)}}" 
                         class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this User ?')" >
                         <i class="fa fa-trash"></i>
                     </a> 
@@ -141,59 +141,25 @@
                 type:'GET',
                 success: function (val){
                     console.log(val);
-                    // $('[name="Id"]').val(val.User.Id);
-                    // $('[name="Creation_Date"]').val(val.User.Creation_Date);
-                    // $('[name="Password"]').val(val.User.Password);
-                    // $('[name="External_Id"]').val(val.User.External_Id);
-                    
-                    // $('[name="Name"]').val(val.User.Name);
-                    // $('[name="Username"]').val(val.User.Username);
-                    // $('[name="Email"]').val(val.User.Email);
-                    // $('[name="MobilePhone"]').val(val.User.MobilePhone);
-                    // $('[name="Last_Login"]').val(new Date(val.User.Last_Login).toLocaleDateString());
-                    // $('[name="LastLogin"]').val(val.User.Last_Login);
-                    // $('[name="NIK"]').val(val.MstCustomerDetail.NIK);
-
-                    // if (val.MstCustomerDetail.hasOwnProperty('TanggalLahir')) {
-                    //     $('[name="TanggalLahir"]').val(new Date(val.MstCustomerDetail.TanggalLahir).toLocaleDateString());   
-                    // }else{
-                    //     $('[name="TanggalLahir"]').val("-");        
-                    // }
-
-                    // $('[name="Alamat"]').val(val.MstCustomerDetail.Alamat);
-
-                    // if (val.hasOwnProperty('MstStatus')) {
-                    //     if (val.MstStatus.hasOwnProperty('Label')) {
-                    //         $('[name="Status"]').val(val.MstStatus.Label);   
-                    //     }else{
-                    //         $('[name="Status"]').val("");        
-                    //     }
-                    // }
-
-                    // if (val.MstCustomerDetail.hasOwnProperty('StatusNoHP')) {
-                    //     $('[name="StatusNoHP"]').val(val.MstCustomerDetail.StatusNoHP);   
-                    // }else{
-                    //     $('[name="StatusNoHP"]').val("False");        
-                    // }
-
-                    // if (val.MstCustomerDetail.hasOwnProperty('Subscribe')) {
-                    //     $('[name="Subscribe"]').val(val.MstCustomerDetail.Subscribe);   
-                    // }else{
-                    //     $('[name="Subscribe"]').val("N");        
-                    // }
-
-                    // $('[name="Pekerjaan"]').val(val.MstCustomerDetail.Job);
-                    
-                    // $('[name="FlagCustomer"]').val(val.MstCustomerDetail.FlagCustomer);
-
-                    // if (val.User.hasOwnProperty('Is_Active')) {
-                    //     if(val.User.Is_Active == true){
-                    //         $('[name="Is_Active"]').attr('checked', true);
-                    //     }else{
-                    //         $('[name="Is_Active"]').attr('checked', false);                            
-                    //     }
-                    // }
-
+                    $('[name="Id_update"]').val(val.User.Id);
+                    $('[name="Name_update"]').val(val.User.Name);
+                    $('[name="Username_update"]').val(val.User.Username);
+                    $('[name="Password_update"]').val(val.User.Password);
+                    $('[name="Confirm_Password_update"]').val(val.User.Password);
+                    $('[name="Email_update"]').val(val.User.Email);
+                    $('[name="MobilePhone_update"]').val(val.User.MobilePhone);
+                    if(val.User.Is_Active == true){
+                            $('[name="Is_Active_update"]').attr('checked', true);
+                        }else{
+                            $('[name="Is_Active_update"]').attr('checked', false);                            
+                        }
+                    $('[name="User_Category_update"]').val(val.MstUserDetail.UserCategory);
+                    $('[name="Organization_update"]').val(val.MstUserDetail.Organization);
+                    $('[name="NPK_update"]').val(val.MstUserDetail.NPK);
+                    $('[name="Address_update"]').val(val.MstUserDetail.Address);
+                    $('[name="Role_update"]').val(val.MstUserDetail.RoleId);
+                    $('[name="Expired_Date_update"]').val(val.MstUserDetail.ExpiredDate);
+                   
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                 console.log(jqXhr);
