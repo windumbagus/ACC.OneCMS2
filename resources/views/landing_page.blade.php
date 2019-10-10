@@ -130,38 +130,29 @@
 
                     // MstPicture
                     if(val.hasOwnProperty('MstPicture')) {
-                        $('[name="updateMasterContent_MstPicture_Id"]').val(val.MstPicture.Id);
-                        $('[name="updateMasterContent_MstPicture_DataId"]').val(val.MstPicture.DataId);
-                        $('[name="updateMasterContent_MstPicture_Picture"]').val(val.MstPicture.Picture);
-                        $('[name="updateMasterContent_MstPicture_FileName"]').val(val.MstPicture.FileName);
-                        $('[name="updateMasterContent_MstPicture_FileType"]').val(val.MstPicture.FileType);
-                        $('[name="updateMasterContent_MstPicture_Type"]').val(val.MstPicture.Type);
-                        $('#placeholder_masterContentModalUpdate_picture').attr('src', "data:image/png;base64," + val.MstPicture.Picture);
+                        $('[name="updateLandingPage_MstPicture_Id"]').val(val.MstPicture.Id);
+                        $('[name="updateLandingPage_MstPicture_DataId"]').val(val.MstPicture.DataId);
+                        $('[name="updateLandingPage_MstPicture_Picture"]').val(val.MstPicture.Picture);
+                        $('[name="updateLandingPage_MstPicture_FileName"]').val(val.MstPicture.FileName);
+                        $('[name="updateLandingPage_MstPicture_FileType"]').val(val.MstPicture.FileType);
+                        $('[name="updateLandingPage_MstPicture_Type"]').val(val.MstPicture.Type);
+                        $('#placeholder_landingPageModalUpdate_picture').attr('src', "data:image/png;base64," + val.MstPicture.Picture);
                     }
                     
-                    
-                    $('[name="updateMasterContent_MstContent_Id"]').val(val.MstContent.Id);
-                    $('[name="updateMasterContent_MstContent_ContentType"]').val(val.MstContent.ContentType);
-                    $('[name="updateMasterContent_MstContent_Order"]').val(val.MstContent.Order);
-                    $('[name="updateMasterContent_MstContent_Title"]').val(val.MstContent.Title);
-                    $('[name="updateMasterContent_MstContent_Snippet"]').val(val.MstContent.Snippet);
-                    $('[name="updateMasterContent_MstContent_Detail"]').val(val.MstContent.Detail);
-                    $('[name="updateMasterContent_MstContent_Category"]').val(val.MstContent.Category);
-                    $('[name="updateMasterContent_MstContent_Status"]').val(val.MstContent.Status);
-                    $('[name="updateMasterContent_MstContent_AddedDate"]').val(val.MstContent.AddedDate);
-                    $('[name="updateMasterContent_MstContent_UserAdded"]').val(val.MstContent.UserAdded);
-                    // $('[name="updateMasterContent_MstContent_UpdatedDate"]').val(val.MstContent.UpdatedDate);
-                    // $('[name="updateMasterContent_MstContent_UserUpdated"]').val(val.MstContent.UserUpdated);
-                    $('[name="updateMasterContent_MstContent_ProductOwner"]').val(val.MstContent.ProductOwner);
+                    $('[name="updateLandingPage_MstLandingPage_Id"]').val(val.MstLandingPage.Id);
+                    $('[name="updateLandingPage_MstLandingPage_Category"]').val(val.MstLandingPage.Category);
+                    $('[name="updateLandingPage_MstLandingPage_Description"]').val(val.MstLandingPage.Description);
+                    $('[name="updateLandingPage_MstLandingPage_Type"]').val(val.MstLandingPage.Type);
+                    $('[name="updateLandingPage_MstLandingPage_DtAdded"]').val(val.MstLandingPage.DtAdded);
+                    // $('[name="updateLandingPage_MstLandingPage_DtUpdated"]').val(val.MstLandingPage.DtUpdated);
 
                     // CKEditor
-                    CKEDITOR.instances.textarea_masterContentModalUpdate_snippet.setData(val.MstContent.Snippet);
-                    CKEDITOR.instances.textarea_masterContentModalUpdate_description.setData(val.MstContent.Detail);
+                    CKEDITOR.instances.textarea_landingPageModalUpdate_description.setData(val.MstLandingPage.Description);
 
                 },
-                error: function( jqXhr, textStatus, errorThrown ){
+                error: function(jqXhr, textStatus, errorThrown){
                     console.log(jqXhr);
-                    console.log( errorThrown );
+                    console.log(errorThrown);
                     console.log(textStatus);
                 },
             });
@@ -170,6 +161,6 @@
     })
 </script>
 
-@include('modal.add_master_content')
-@include('modal.update_master_content')
+@include('modal.add_landing_page')
+<!-- @include('modal.update_landing_page') -->
 @endsection

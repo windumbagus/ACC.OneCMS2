@@ -109,8 +109,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/landing-page','LandingPageController@index');
     Route::get('/landing-page/show','LandingPageController@show');
     Route::get('/landing-page/delete/{id}','LandingPageController@delete');
-    Route::post('/landing-page/create','LandingPageController@create');
+    Route::post('/landing-page/add','LandingPageController@create');
     Route::post('/landing-page/update','LandingPageController@update');
+    Route::get('/landing-page/get-sub-category','LandingPageController@getSubCategory');
     
     Route::get('/master-product-accone','MasterProductAccOneController@index');
     Route::get('/master-product-accone/show','MasterProductAccOneController@show');
