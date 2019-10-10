@@ -1,45 +1,34 @@
 @extends('admin.admin') 
 
 @section('content-management', 'active')
-@section('master-content', 'active')
+@section('landing-page', 'active')
 
 @section('content')
 <div class="box box-primary">
     <div class="box-header with-border">
         <div class="row">
             <div class="col-sm-9">
-                <h3 class="box-title">Master Content</h3>
+                <h3 class="box-title">Landing Page</h3>
             </div>
             <div class="col-sm-3">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                    <a href="#" class="button_masterContent_create btn btn-block btn-primary">Create</a>  
+                    <a href="#" class="button_landingPage_create btn btn-block btn-primary">Create</a>  
                 </div>
             </div>
         </div>
     </div>
     <div class="box-body">
-
         <div class="row">
-            <div class="col-sm-4">
-                <select class="form-control select2" id="dropdown_masterContent_contentType" style="width:100%;">
-                    <option value="0" selected>-- Choose Content Type --</option>
-                    @foreach ($MstGCM_ContentTypeList as $MstGCM_ContentType)
-                        <option value="{{$MstGCM_ContentType}}">
-                            {{$MstGCM_ContentType}}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-sm-5">
+            <div class="col-sm-9">
                 <input type="text" placeholder="Search by Order, Title or Category" class="input-search form-control">
             </div>
             <div class="col-sm-3">
                 <div class="col-sm-6">
-                    <a href="#" class="button_masterContent_search btn btn-block btn-info">Search</a>    
+                    <a href="#" class="button_landingPage_search btn btn-block btn-info">Search</a>    
                 </div>
                 <div class="col-sm-6">
-                    <a href="#" class="button_masterContent_resetSearch btn btn-block btn-info">Reset</a>    
+                    <a href="#" class="button_landingPage_resetSearch btn btn-block btn-info">Reset</a>    
                 </div>
             </div>
         </div><br>
@@ -47,19 +36,44 @@
         <table id="datatable_1" class="table table-bordered display nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Order</th>
-                    <th>Title</th>
                     <th>Category</th>
-                    <th>Status</th>
-                    <th>Crated Date</th>
+                    <th>Description</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($MstLandingPageList as $MstLandingPage)
+                    <tr>  
+                        @if (property_exists($MstLandingPage, 'Category'))
+                            <td><span>{{$MstLandingPage->Category}}</span></td>
+                        @else
+                            <td></td>
+                        @endif
+                        
+                        @if (property_exists($MstLandingPage, 'Description'))
+                            @if(strlen($MstLandingPage->Description)>= 20)
+                                <td><span>{{substr($MstLandingPage->Description,0,20)."..."}}</span></td>
+                            @else 
+                                <td><span>{{$MstLandingPage->Description}}</span></td>
+                            @endif
+                        @else
+                            <td></td>
+                        @endif
 
+                        <td>
+                            <span>
+                                <a href="#" MstLandingPage_Id="{{$MstLandingPage->Id}}" class="button_landingPage_update 
+                                    btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                <a href="{{asset('landing-page/delete/'.$MstLandingPage->Id)}}" 
+                                    class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
+                                    <i class="fa fa-trash"></i>
+                                </a> 
+                            </span>
+                        </td>
+                    </tr>              
+                @endforeach       
             </tbody>
         </table>
-
     </div>
 </div>
 
@@ -78,87 +92,36 @@
             sDom: 'lrtip', 
             "columns": [
                 null,
-                null,
-                null,            
-                {"searchable":false},
-                {"searchable":false},                
+                null,                
                 {"searchable":false},
             ]
         })
 
         //Button Search
-        $('.button_masterContent_search').on('click', function(){
+        $('.button_landingPage_search').on('click', function(){
             var searchData = $('.input-search').val()
             var dtable = $('#datatable_1').DataTable()
             dtable.search(searchData).draw()
         })
 
         //Reset Button Search
-        $('.button_masterContent_resetSearch').on('click',function(){
+        $('.button_landingPage_resetSearch').on('click',function(){
             var tab = $('#datatable_1').DataTable()
             tab.search('').draw()
             $('.input-search').val('')
         })
 
-        // ContentType Dropdown
-        $('#dropdown_masterContent_contentType').on('change',function(){
-            var SelectedContentType = $(this).val();
-            // console.log(SelectedContentType);
-            $.ajax({
-                url:'master-content/get-by-content-type',
-                data: {'ContentType':SelectedContentType},
-                dataType:'json',
-                success: function(data){
-                    // console.log(data);
-                    var table = $('#datatable_1').DataTable()
-                    var MstContentList = data.MstContentList;
-                    table.clear().draw()
-                    MstContentList.map(e=>{
-                        table.row.add([
-                            e.Order,
-                            e.Title,
-                            e.Category,
-                            e.Status,
-                            e.AddedDate,
-                            '<span><a href="#" MstContentId="'+e.Id+'" class="button_masterContent_update btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" MstContentId="'+e.Id+'" class="button-masterContent-delete btn btn-danger btn-sm" onclick="return confirm(\'Are you sure want to delete this ?\')" ><i class="fa fa-trash"></i></a></span>',
-                        ]).draw(false)
-                    }) 
-                }
-            })
-        });
-
-        // Delete
-        $(document).on('click','.button-masterContent-delete',function(){
-            var id = $(this).attr('MstContentId');
-            // console.log(id);
-            $.ajax({
-                url:"{{asset('/master-content/delete')}}",
-                data: {'Id':id ,'_token':'{{csrf_token()}}'},
-                dataType:'JSON', 
-                type:'GET',
-                success: function (val){
-                    window.location.assign("{{asset('/master-content')}}");
-                    alert("Delete Master Content Successfully!");
-                },
-                error: function(jqXhr, textStatus, errorThrown){
-                    console.log(jqXhr);
-                    console.log(errorThrown);
-                    console.log(textStatus);
-                },
-            });
-        });
-
         // Modal Add
-        $(document).on('click','.button_masterContent_create',function(){
-            $('#modal_masterContent_add').modal();
+        $(document).on('click','.button_landingPage_create',function(){
+            $('#modal_landingPage_add').modal();
         });
         
         // Modal Update
-        $(document).on('click','.button_masterContent_update',function(){
-            var id = $(this).attr('MstContentId');
+        $(document).on('click','.button_landingPage_update',function(){
+            var id = $(this).attr('MstLandingPage_Id');
             // console.log(id);
             $.ajax({
-                url:"{{asset('/master-content/show')}}",
+                url:"{{asset('/landing-page/show')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}'},
                 dataType:'JSON', 
                 type:'GET',
@@ -202,7 +165,7 @@
                     console.log(textStatus);
                 },
             });
-            $('#modal_masterContent_update').modal();
+            $('#modal_landingPage_update').modal();
         });
     })
 </script>

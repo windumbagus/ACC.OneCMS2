@@ -70,11 +70,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/status-pengajuan-aplikasi/download','StatusPengajuanController@DownloadStatusPengajuan');
     Route::post('/status-pengajuan-aplikasi/status-data/download','StatusPengajuanController@DownloadStatusData');
 
-    Route::get('/push-notification','PushNotificationController@index');
-    Route::get('/push-notification/show','PushNotificationController@show');
-    Route::get('/push-notification/delete/{id}','PushNotificationController@delete');
-    Route::post('/push-notification/update','PushNotificationController@update');
-
     Route::get('/holiday-gcm','HolidayGCMController@index');
     Route::post('/holiday-gcm/add','HolidayGCMController@add');
     Route::get('/holiday-gcm/show','HolidayGCMController@show');
@@ -96,15 +91,26 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/promo/update','PromoController@update');
     Route::post('/promo/update-order','PromoController@UpdateOrder');
 
+    Route::get('/push-notification','PushNotificationController@index');
+    Route::get('/push-notification/show','PushNotificationController@show');
+    Route::get('/push-notification/delete/{id}','PushNotificationController@delete');
+    Route::post('/push-notification/update','PushNotificationController@update');
+
     Route::get('/master-content','MasterContentController@index');
-    Route::get('/master-content/get-by-content-type','MasterContentController@getByContentType');
     Route::get('/master-content/show','MasterContentController@show');
     Route::get('/master-content/delete','MasterContentController@delete');
     Route::post('/master-content/add','MasterContentController@create');
     Route::post('/master-content/update','MasterContentController@update');
+    Route::get('/master-content/get-by-content-type','MasterContentController@getByContentType');
     Route::post('/master-content/check-content-order','MasterContentController@checkContentOrder');
     Route::post('/master-content/check-content-title','MasterContentController@checkContentTitle');
     Route::post('/master-content/check-content-status','MasterContentController@checkContentStatus');
+
+    Route::get('/landing-page','LandingPageController@index');
+    Route::get('/landing-page/show','LandingPageController@show');
+    Route::get('/landing-page/delete/{id}','LandingPageController@delete');
+    Route::post('/landing-page/create','LandingPageController@create');
+    Route::post('/landing-page/update','LandingPageController@update');
     
     Route::get('/master-product-accone','MasterProductAccOneController@index');
     Route::get('/master-product-accone/show','MasterProductAccOneController@show');
