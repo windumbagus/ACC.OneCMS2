@@ -26,11 +26,31 @@ class UserCMSController extends Controller
          $err = curl_error($ch);
          curl_close($ch);
          $Hasils= json_decode($result);
-        //  dd($Hasils);
+        //  dd($Hasils->User);
 
         return view('user_cms',[
-            'UserCMSs'=>$Hasils,
+            'UserCMSs'=>$Hasils->User,
+            'Roles'=>$Hasils->Role,
+            'UserCategories'=>$Hasils->UserCategory,
             'session' => $session            
             ]);    
+    }
+
+    public function show(Request $request)
+    {
+         //API GET
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetUser?UserId=".$request->Id; 
+         // dd($url);
+         $ch = curl_init($url);                                                     
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+         $result = curl_exec($ch);
+         $err = curl_error($ch);
+         curl_close($ch);
+         $val= json_decode($result);
+         // dd($val);
+ 
+        return json_encode($val);
     }
 }

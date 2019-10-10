@@ -13,6 +13,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="Id_update" >
+                    </div>
+                    <div class="form-group">
                         <label>Name</label>
                         <input type="text" class="form-control" name="Name_update" >
                     </div>
@@ -44,9 +47,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                         <label>User Category</label>
                         <select name="User_Category_update" id="User_Category_update" class="form-control">
                             <option selected disabled value="">--Silahkan Pilih--</option>
-                            {{-- @foreach ($MenuItems as $MenuItem)
-                                <option value="{{$MenuItem->Caption}}">{{$MenuItem->Caption}}</option>
-                            @endforeach --}}
+                            @foreach ($UserCategories as $UserCategory)
+                                <option value="{{$UserCategory}}">{{$UserCategory}}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -70,9 +73,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                         <label>Role</label>
                         <select name="Role_update" id="Role_update" class="form-control">
                             <option selected disabled value="">--Silahkan Pilih--</option>
-                            {{-- @foreach ($Screens as $Screen)
-                                <option value="{{$Screen->Label}}">{{$Screen->Label}}</option>
-                            @endforeach --}}
+                            @foreach ($Roles as $Role)
+                                <option value="{{$Role->Id}}">{{$Role->RoleName}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
