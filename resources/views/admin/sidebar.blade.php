@@ -14,7 +14,7 @@
             </a>
             <ul class="treeview-menu">
             <li class="@yield('user-mobile')"><a href="{{asset("user-mobile")}}"><i class="fa fa-circle-o"></i> User Mobile</a></li>
-            <li class="@yield('user-cms')"><a href="#"><i class="fa fa-circle-o"></i> User CMS</a></li>
+            <li class="@yield('user-cms')"><a href="{{asset("user-cms")}}"><i class="fa fa-circle-o"></i> User CMS</a></li>
             <li class="@yield('role-management')"><a href="#"><i class="fa fa-circle-o"></i> Role Management</a></li>
             <li class="@yield('acc-yes-migration')"><a href="#"><i class="fa fa-circle-o"></i> ACCYes Migration</a></li>
             </ul>

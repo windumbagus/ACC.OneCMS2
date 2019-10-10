@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserMobileExport;
 
 class UserMobileController extends Controller
 {
@@ -85,5 +87,106 @@ class UserMobileController extends Controller
         $Hasils= json_decode($result); 
         // dd($Hasils);
             return redirect("user-mobile")->with('success','Data User Mobile Update Successfull !!!');
+    }
+
+    public function download(Request $request)
+    {
+         //API GET
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/GetAllUser"; 
+         $ch = curl_init($url);                                                     
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+         $result = curl_exec($ch);
+         $err = curl_error($ch);
+         curl_close($ch);
+         $Hasils= json_decode($result);
+        //  dd($Hasils);
+        $data=[];
+        foreach ($Hasils as $Hasil) {
+
+           
+           if (property_exists($Hasil->User, 'Username')){
+               $Username= $Hasil->User->Username;
+           }else{
+               $Username= "";
+           }
+           if (property_exists($Hasil->User, 'Email')){
+                $Email= $Hasil->User->Email;
+            }else{
+                $Email= "";
+            }
+
+            if (property_exists($Hasil->User, 'MobilePhone')){
+                $MobilePhone= $Hasil->User->MobilePhone;
+            }else{
+                $MobilePhone= "";
+            }
+
+            if (property_exists($Hasil->User, 'NamaNIK')){
+                $NamaNIK= $Hasil->User->NamaNIK;
+            }else{
+                $NamaNIK= "";
+            }
+
+            if (property_exists($Hasil->MstCustomerDetail, 'StatusNoHP')){
+                $StatusNoHP= $Hasil->MstCustomerDetail->StatusNoHP;
+            }else{
+                $StatusNoHP= "FALSE";
+            }
+
+            if (property_exists($Hasil->MstCustomerDetail, 'Subscribe')){
+                $Subscribe= $Hasil->MstCustomerDetail->Subscribe;
+            }else{
+                $Subscribe= "N";
+            }
+
+            if (property_exists($Hasil->MstCustomerDetail, 'Job')){
+                $Job= $Hasil->MstCustomerDetail->Job;
+            }else{
+                $Job= "";
+            }
+
+            if (property_exists($Hasil->User, 'Last_Login')){
+                $Last_Login= $Hasil->User->Last_Login;
+            }else{
+                $Last_Login= "";
+            }
+
+            if (property_exists($Hasil->User, 'Name')){
+                $Name= $Hasil->User->Name;
+            }else{
+                $Name= "";
+            }
+ 
+            if(property_exists($Hasil, 'MstStatus')){
+                if (property_exists($Hasil->MstStatus, 'Label')){
+                    $Label= $Hasil->MstStatus->Label;
+                }else{
+                    $Label= "";
+                }
+            }else{
+                $Label= "";
+            }
+
+          array_push($data,[
+              "Name"=>$Name,
+              "Username"=>$Username,
+              "Email"=>$Email,
+              "MobilePhone"=>$MobilePhone,
+              "Is_Active"=>$Hasil->User->Is_Active,
+              "NamaNIK"=>$NamaNIK,
+              "TanggalLahir"=>$Hasil->MstCustomerDetail->TanggalLahir,
+              "Alamat"=>$Hasil->MstCustomerDetail->Alamat,
+              "Status"=>$Label,
+              "StatusNoHP"=>$StatusNoHP,
+              "Subscribe"=>$Subscribe,
+              "Job"=>$Job,
+              "Last_Login"=>$Last_Login
+          ]);
+        }
+       // dd($data);
+       return Excel::download(new UserMobileExport($data), 'accone User Mobile '. date("Y-m-d") .'.xlsx');
+
     }
 }
