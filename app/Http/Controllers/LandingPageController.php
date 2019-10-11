@@ -30,8 +30,8 @@ class LandingPageController extends Controller
 
         return view('landing_page',[
             'MstLandingPageList' => $val->MstLandingPageList,
-            'MstGCM_LandingPageCategoryList'=> $val->LandingPageCategoryList,   
-            // 'MstGCM_LandingPageSubCategoryList'=> $val->LandingPageSubCategoryList,
+            'LandingPageCategoryList'=> $val->LandingPageCategoryList,   
+            'LandingPageSubCategoryList'=> array(null),
             'session'=> $session     
         ]);  
     }
@@ -94,18 +94,16 @@ class LandingPageController extends Controller
         $name = $file->getClientOriginalName();
         $type = $file->extension();
         $MstPicture = array(
-            // "Id" => "$request->updateMasterContent_MstPicture_Id",
-            // "DataId" => "$request->updateMasterContent_MstPicture_DataId",
+            // "Id" => $request->updateMasterContent_MstPicture_Id,
+            // "DataId" => $request->updateMasterContent_MstPicture_DataId,
             "Type" => "LandingPage",
             "Picture" => $content,
             "FileName" => $name,
             "FileType" => "image/".$type,
         );
-
         date_default_timezone_set('Asia/Jakarta');
         $currDate = date('Y/m/d', time());
         $tempCategory = $request->addLandingPage_MstLandingPage_Category."/".$request->addLandingPage_MstLandingPage_SubCategory;
-
         $data = json_encode(
             array(
                 "MstLandingPage" => array(   
@@ -119,30 +117,118 @@ class LandingPageController extends Controller
                 "MstPicture" => $MstPicture,
             )
         );
-        dd($data);
+        // dd($data);
 
-        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CreateOrUpdateMasterContent"; 
-        // $ch = curl_init($url);                   
-        // curl_setopt($ch, CURLOPT_POST, true);                                  
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-        // $result = curl_exec($ch);
-        // $err = curl_error($ch);
-        // curl_close($ch);
-        // $val = json_decode($result);
-        // // dd($val);
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/CreateOrUpdateLandingPage"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($val);
 
-        // if(property_exists($val, 'Success') && ($val->Success)) {
-        //     return redirect('/master-content')->with('success',' Add Data Successfully!');
-        // } elseif(property_exists($val, 'Error')) {
-        //     return redirect('/master-content')->with('error', $val->Error);
-        // } elseif(property_exists($val, 'Errors')) {
-        //     return redirect('/master-content')->with('error', $val->Errors);
-        // } else {
-        //     return redirect('/master-content')->with('error',' Add Data Failed!');
-        // }
+        if(property_exists($val, 'Success') && ($val->Success)) {
+            return redirect('/landing-page')->with('success',' Add Data Successfully!');
+        } elseif(property_exists($val, 'Error')) {
+            return redirect('/landing-page')->with('error', $val->Error);
+        } elseif(property_exists($val, 'Errors')) {
+            return redirect('/landing-page')->with('error', $val->Errors);
+        } else {
+            return redirect('/landing-page')->with('error',' Add Data Failed!');
+        }
+    }
+
+    public function update(Request $request)
+    {
+        // dd($request);
+        if($request->updateLandingPage_IsUpdatePicture=="true") {
+            $file = $request->updateLandingPage_MstPicture;
+            $getContent = file_get_contents($file);
+            $content= base64_encode($getContent);
+            $name = $file->getClientOriginalName();
+            $type = $file->extension();
+            $tempMstPicture = array(
+                "Id" => $request->updateMasterContent_MstPicture_Id,
+                "DataId" => $request->updateMasterContent_MstPicture_DataId,
+                "Type" => "LandingPage",
+                "Picture" => $content,
+                "FileName" => $name,
+                "FileType" => "image/".$type,
+            );
+        } else {
+            $tempMstPicture = null;
+        }
+        date_default_timezone_set('Asia/Jakarta');
+        $currDate = date('Y/m/d', time());
+        $tempCategory = $request->updateLandingPage_MstLandingPage_Category."/".$request->updateLandingPage_MstLandingPage_SubCategory;
+        $data = json_encode(
+            array(
+                "MstLandingPage" => array(   
+                    "Id" => $request->updateLandingPage_MstLandingPage_Id,
+                    "Category" => $tempCategory,
+                    "Description" => $request->updateLandingPage_MstLandingPage_Description,
+                    "Type" => $request->updateLandingPage_MstLandingPage_Type,
+                    "DtAdded" => $request->updateLandingPage_MstLandingPage_DtAdded,
+                    "DtUpdated" => $currDate,
+                ),
+                "MstPicture" => $tempMstPicture,
+            )
+        );
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/CreateOrUpdateLandingPage"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($val);
+
+        if(property_exists($val, 'Success') && ($val->Success)) {
+            return redirect('/landing-page')->with('success',' Update Data Successfully!');
+        } elseif(property_exists($val, 'Error')) {
+            return redirect('/landing-page')->with('error', $val->Error);
+        } elseif(property_exists($val, 'Errors')) {
+            return redirect('/landing-page')->with('error', $val->Errors);
+        } else {
+            return redirect('/landing-page')->with('error',' Update Data Failed!');
+        }
+    }
+
+    public function checkCategory(Request $request)
+    {
+        $data = json_encode(
+            array(
+                "MstLandingPage_Id" => "$request->MstLandingPage_Id",
+                "MstLandingPage_Category" => "$request->MstLandingPage_Category",
+            )
+        ); 
+        // dd($data);
+        
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/CheckLandingPageCategory"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($val);
+
+        return json_encode($val); 
     }
 
 }

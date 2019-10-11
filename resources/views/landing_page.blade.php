@@ -140,15 +140,29 @@
                     }
                     
                     $('[name="updateLandingPage_MstLandingPage_Id"]').val(val.MstLandingPage.Id);
-                    $('[name="updateLandingPage_MstLandingPage_Category"]').val(val.MstLandingPage.Category);
+                    // $('[name="updateLandingPage_MstLandingPage_Category"]').val(val.MstLandingPage.Category);
                     $('[name="updateLandingPage_MstLandingPage_Description"]').val(val.MstLandingPage.Description);
                     $('[name="updateLandingPage_MstLandingPage_Type"]').val(val.MstLandingPage.Type);
                     $('[name="updateLandingPage_MstLandingPage_DtAdded"]').val(val.MstLandingPage.DtAdded);
                     // $('[name="updateLandingPage_MstLandingPage_DtUpdated"]').val(val.MstLandingPage.DtUpdated);
 
+                    $('[name="updateLandingPage_MstLandingPage_Category"]').val(val.MstLandingPage_Category);
+                    $('[name="updateLandingPage_MstLandingPage_SubCategory"]').val(val.MstLandingPage_SubCategory);
+                    $('#dropdown_landingPageModalUpdate_subCategory').empty();
+                    $('#dropdown_landingPageModalUpdate_subCategory')
+                        .append('<option value="">Silahkan Pilih Sub-Category</option>')
+                    val.LandingPageSubCategoryList.map(SubCategory=>{
+                        if (SubCategory == val.MstLandingPage_SubCategory) {
+                            $('#dropdown_landingPageModalUpdate_subCategory')
+                                .append('<option value="'+SubCategory+'" selected>'+SubCategory+'</option>')
+                        } else {
+                            $('#dropdown_landingPageModalUpdate_subCategory')
+                                .append('<option value="'+SubCategory+'">'+SubCategory+'</option>')
+                        }
+                    })
+
                     // CKEditor
                     CKEDITOR.instances.textarea_landingPageModalUpdate_description.setData(val.MstLandingPage.Description);
-
                 },
                 error: function(jqXhr, textStatus, errorThrown){
                     console.log(jqXhr);
@@ -162,5 +176,5 @@
 </script>
 
 @include('modal.add_landing_page')
-<!-- @include('modal.update_landing_page') -->
+@include('modal.update_landing_page')
 @endsection

@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="modal_landingPage_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
     aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
@@ -17,21 +16,24 @@
 
                     <div class="form-group">
                         <label>Category:</label>
-                        <select class="form-control select2 " style="width:100%;" required
-                            name="addLandingPage_MstLandingPage_Category" id='dropdown_landingPageModalAdd_category'>
+                        <select class="form-control select2 dropdown_landingPageModalAdd_categoryAndSubCategory"
+                            name="addLandingPage_MstLandingPage_Category" id='dropdown_landingPageModalAdd_category'
+                            style="width:100%;" required>
                             <option selected value="">Silahkan Pilih Category</option>
-                            @foreach ($MstGCM_LandingPageCategoryList as $MstGCM_LandingPageCategory)
-                                <option value="{{$MstGCM_LandingPageCategory}}">
-                                    {{$MstGCM_LandingPageCategory}}
+                            @foreach ($LandingPageCategoryList as $LandingPageCategory)
+                                <option value="{{$LandingPageCategory}}">
+                                    {{$LandingPageCategory}}
                                 </option>
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="form-group" id="div_landingPageModalAdd_subCategory" hidden>
+                    <div class="form-group" id="div_landingPageModalAdd_subCategory" 
+                        hidden>
                         <label>Sub Category:</label>
-                        <select class="form-control select2 " style="width:100%;" required
-                            name="addLandingPage_MstLandingPage_SubCategory" id='dropdown_landingPageModalAdd_subCategory'>
+                        <select class="form-control select2 dropdown_landingPageModalAdd_categoryAndSubCategory"
+                            name="addLandingPage_MstLandingPage_SubCategory" id='dropdown_landingPageModalAdd_subCategory'
+                            style="width:100%;" required>
                         </select>
                     </div>
                     
@@ -51,11 +53,6 @@
                         <input type="file" class="form-control" name="addLandingPage_MstPicture" 
                             id="input_landingPageModalAdd_picture" required>
                     </div>
-                    <!-- <div class="form-group" hidden>
-                        <label>Is Update Picture:</label><br>
-                        <input type="hidden" class="form-control" name="addLandingPage_IsUpdatePicture" value="false"
-                            id="input_landingPageModalAdd_isUpdarePicture">
-                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"
@@ -100,13 +97,48 @@
                 type:'GET',
                 success: function (val){
                     // console.log(val);
-                    $('#dropdown_landingPageModalAdd_subCategory').empty()
+                    $('[name="addLandingPage_MstLandingPage_SubCategory"]').val("");
+                    $('#dropdown_landingPageModalAdd_subCategory').empty();
                     $('#dropdown_landingPageModalAdd_subCategory')
-                        .append('<option value="" selected>Silahkan Pilih Sub-Category</option>')
+                        .append('<option value="" selected>Silahkan Pilih Sub-Category</option>');
                     val.map(SubCategory=>{
                         $('#dropdown_landingPageModalAdd_subCategory')
-                            .append('<option value="'+SubCategory+'">'+SubCategory+'</option>')
+                            .append('<option value="'+SubCategory+'">'+SubCategory+'</option>');
                     })
+                },
+                error: function(jqXhr, textStatus, errorThrown){
+                    console.log(jqXhr);
+                    console.log(errorThrown);
+                    console.log(textStatus);
+                },
+            });
+        }
+    });
+    
+    // Sub-Category Dropdown
+    $(document).on('change','.dropdown_landingPageModalAdd_categoryAndSubCategory',function(){
+        var SelectedCategory = $('#dropdown_landingPageModalAdd_category').val();
+        var SelectedSubCategory = $('#dropdown_landingPageModalAdd_subCategory').val();
+        var SelectedFullCategory = SelectedCategory + "/" + SelectedSubCategory;
+        // console.log(SelectedFullCategory);
+        if ((SelectedSubCategory!="") && (SelectedCategory!="")) {
+            $.ajax({
+                url:"{{asset('/landing-page/check-category')}}",
+                data: {
+                    'MstLandingPage_Id':0,
+                    'MstLandingPage_Category':SelectedFullCategory,
+                    '_token':'{{csrf_token()}}'
+                },
+                dataType:'JSON', 
+                type:'POST',
+                success: function (isNotSameCategory){
+                    // console.log(isNotSameCategory);
+                    if(!isNotSameCategory) {
+                        alert('Category Sudah Diisi!');
+                        $('[name="addLandingPage_MstLandingPage_Category"]').val("");
+                        $('[name="addLandingPage_MstLandingPage_SubCategory"]').val("");
+                        document.getElementById("div_landingPageModalAdd_subCategory").setAttribute("hidden", "");
+                    }
                 },
                 error: function(jqXhr, textStatus, errorThrown){
                     console.log(jqXhr);
@@ -141,7 +173,4 @@
             readerPictureAdd.readAsDataURL(input.files[0]);
         }
     }
-    // $(document).on('change','#input_landingPageModalAdd_picture',function(){
-    //     document.getElementById("input_landingPageModalAdd_isUpdarePicture").setAttribute("value","true");
-    // });
 </Script>

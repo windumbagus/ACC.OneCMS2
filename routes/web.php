@@ -112,6 +112,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/landing-page/add','LandingPageController@create');
     Route::post('/landing-page/update','LandingPageController@update');
     Route::get('/landing-page/get-sub-category','LandingPageController@getSubCategory');
+    Route::post('/landing-page/check-category','LandingPageController@checkCategory');
     
     Route::get('/master-product-accone','MasterProductAccOneController@index');
     Route::get('/master-product-accone/show','MasterProductAccOneController@show');
