@@ -169,5 +169,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('user-cms','UserCMSController@index');
     Route::get('user-cms/show','UserCMSController@show');
+    Route::post('user-cms/add','UserCMSController@add');
+    Route::post('user-cms/update','UserCMSController@update');
+    Route::get('user-cms/delete/{id}','UserCMSController@delete');
    
 });//end group route

@@ -14,27 +14,29 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     @csrf
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="Name_add" >
+                        <input type="text" class="form-control" name="Name_add" required>
                     </div>
                     <div class="form-group">
                         <label>Username </label>
-                        <input type="text" class="form-control" name="Username_add" >
+                        <input type="text" class="form-control" name="Username_add" required>
                     </div>
                     <div class="form-group">
-                        <label>Password </label>
-                        <input type="password" class="form-control" name="Password_add" >
+                        <label>Password </label><br>
+                        <span id='message_pass'></span>
+                        <input type="password" class="form-control" name="Password_add" id="Password_add"  onkeyup='check();'required>
                     </div>
                     <div class="form-group">
-                        <label>Confirm Password </label>
-                        <input type="password" class="form-control" name="Confirm_Password_add" >
+                        <label>Confirm Password </label><br>
+                        <span id='message_confirm_pass'></span>
+                        <input type="password" class="form-control" name="Confirm_Password_add" id="Confirm_Password_add"  onkeyup='check();' required>
                     </div>
                     <div class="form-group">
                         <label>Email </label>
-                        <input type="text" class="form-control" name="Email_add" >
+                        <input type="text" class="form-control" name="Email_add" required>
                     </div>
                     <div class="form-group">
                         <label>Mobile Phone </label>
-                        <input type="text" class="form-control" name="MobilePhone_add" >
+                        <input type="text" class="form-control" name="MobilePhone_add" required>
                     </div>
                     <div class="form-group">
                         <label>Is Active </label><br>
@@ -52,19 +54,19 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
 
                     <div class="form-group">
                         <label>Organization</label>
-                        <input type="text" class="form-control" name="Organization_add" >
+                        <input type="text" class="form-control" name="Organization_add" required>
                     </div>
                     <div class="form-group">
                         <label>NPK</label>
-                        <input type="text" class="form-control" name="NPK_add" >
+                        <input type="text" class="form-control" name="NPK_add" required>
                     </div>
                     <div class="form-group">
                         <label>Expired Date</label>
-                        <input type="text" class="form-control" name="Expired_Date_add" >
+                    <input type="date" class="form-control" name="Expired_Date_add" value="{{date("Y-m-d")}}" required>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <input type="text" class="form-control" name="Address_add" >
+                        <input type="text" class="form-control" name="Address_add" required>
                     </div>
                     <div class="form-group">
                         <label>Role</label>
@@ -92,5 +94,21 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
             $('#form-add-user-cms')[0].reset();  
         });      
     });
+
+    //confirm pass check
+    var check = function() {
+        if (document.getElementById('Password_add').value == document.getElementById('Confirm_Password_add').value && document.getElementById('Password_add').value != "") {
+            document.getElementById('message_confirm_pass').style.color = 'green';
+            document.getElementById('message_confirm_pass').innerHTML = 'Password Matching';
+        }else if (document.getElementById('Password_add').value == "") {
+            document.getElementById('message_pass').style.color = 'red';
+            document.getElementById('message_pass').innerHTML = 'Password Required';
+            document.getElementById('message_confirm_pass').innerHTML = '';
+        }else{
+            document.getElementById('message_pass').innerHTML = '';
+            document.getElementById('message_confirm_pass').style.color = 'red';
+            document.getElementById('message_confirm_pass').innerHTML = 'Password Not Matching';
+        }
+    }
 
 </Script>

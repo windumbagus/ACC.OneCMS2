@@ -142,6 +142,8 @@
                 success: function (val){
                     console.log(val);
                     $('[name="Id_update"]').val(val.User.Id);
+                    $('[name="IdUserDetail_update"]').val(val.MstUserDetail.Id);
+                    $('[name="Creation_Date_update"]').val(val.User.Creation_Date);
                     $('[name="Name_update"]').val(val.User.Name);
                     $('[name="Username_update"]').val(val.User.Username);
                     $('[name="Password_update"]').val(val.User.Password);

@@ -145,6 +145,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'Password_add' => 'Password',
+        'Confirm_Password_add' => 'Password Confirmation',
+    ],
 
 ];

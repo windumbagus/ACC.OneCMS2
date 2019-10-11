@@ -16,6 +16,12 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                         <input type="hidden" class="form-control" name="Id_update" >
                     </div>
                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="IdUserDetail_update" >
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="Creation_Date_update" >
+                    </div>
+                    <div class="form-group">
                         <label>Name</label>
                         <input type="text" class="form-control" name="Name_update" >
                     </div>
@@ -63,7 +69,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     </div>
                     <div class="form-group">
                         <label>Expired Date</label>
-                        <input type="text" class="form-control" name="Expired_Date_update" >
+                        <input type="date" class="form-control" name="Expired_Date_update" >
                     </div>
                     <div class="form-group">
                         <label>Address</label>
