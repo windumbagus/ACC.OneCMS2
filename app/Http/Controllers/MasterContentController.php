@@ -229,6 +229,7 @@ class MasterContentController extends Controller
     {
         $data = json_encode(
             array(
+                "MstContent_Id" => "$request->MstContent_Id",
                 "MstContent_Order" => "$request->MstContent_Order",
                 "MstContent_ContentType" => "$request->MstContent_ContentType",
             )
@@ -255,6 +256,7 @@ class MasterContentController extends Controller
     {
         $data = json_encode(
             array(
+                "MstContent_Id" => "$request->MstContent_Id",
                 "MstContent_Title" => "$request->MstContent_Title",
                 "MstContent_ContentType" => "$request->MstContent_ContentType",
             )
@@ -281,6 +283,7 @@ class MasterContentController extends Controller
     {
         $data = json_encode(
             array(
+                "MstContent_Id" => "$request->MstContent_Id",
                 "MstContent_Status" => "$request->MstContent_Status",
                 "MstContent_ContentType" => "$request->MstContent_ContentType",
             )

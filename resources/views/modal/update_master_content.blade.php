@@ -17,7 +17,8 @@
 
                     <div class="form-group" hidden>
                         <label>Content Id:</label><br>
-                        <input type="hidden" class="form-control" name="updateMasterContent_MstContent_Id">
+                        <input type="hidden" class="form-control" name="updateMasterContent_MstContent_Id"
+                            id='input_masterContentModalUpdate_Id'>
                     </div>
                     <div class="form-group" hidden>
                         <label>Added Date:</label><br>
@@ -169,14 +170,14 @@
     // Order Input
     // ContentType Dropdown
     $(document).on('change','.input_masterContentModalUpdate_contentTypeAndOrder',function(){
+        var MstContent_Id = $('#input_masterContentModalUpdate_Id').val();
         var MstContent_Order = $('#input_masterContentModalUpdate_order').val();
         var MstContent_ContentType = $('#dropdown_masterContentModalUpdate_contentType').val();
-        // console.log(MstContent_Order);
-        // console.log(MstContent_ContentType);
         if((MstContent_Order>0) && (MstContent_ContentType!="")) {
             $.ajax({
                 url:"{{asset('/master-content/check-content-order')}}",
                 data: {
+                    'MstContent_Id':MstContent_Id,
                     'MstContent_Order':MstContent_Order,
                     'MstContent_ContentType':MstContent_ContentType,
                     '_token':'{{csrf_token()}}'
@@ -201,14 +202,14 @@
 
     // Title Input
     $(document).on('change','.input_masterContentModalUpdate_contentTypeAndTitle',function(){
+        var MstContent_Id = $('#input_masterContentModalUpdate_Id').val();
         var MstContent_Title = $('#input_masterContentModalUpdate_title').val();
         var MstContent_ContentType = $('#dropdown_masterContentModalUpdate_contentType').val();
-        // console.log(MstContent_Title);
-        // console.log(MstContent_ContentType);
         if((MstContent_Title!="") && (MstContent_ContentType!="")) {
             $.ajax({
                 url:"{{asset('/master-content/check-content-title')}}",
                 data: {
+                    'MstContent_Id':MstContent_Id,
                     'MstContent_Title':MstContent_Title,
                     'MstContent_ContentType':MstContent_ContentType,
                     '_token':'{{csrf_token()}}'
@@ -233,14 +234,14 @@
 
     // Status Dropdown
     $(document).on('change','.input_masterContentModalUpdate_contentTypeAndStatus',function(){
+        var MstContent_Id = $('#input_masterContentModalUpdate_Id').val();
         var MstContent_Status = $('#dropdown_masterContentModalUpdate_status').val();
         var MstContent_ContentType = $('#dropdown_masterContentModalUpdate_contentType').val();
-        // console.log(MstContent_Status);
-        // console.log(MstContent_ContentType);
         if((MstContent_Status!="") && (MstContent_ContentType!="")) {
             $.ajax({
                 url:"{{asset('/master-content/check-content-status')}}",
                 data: {
+                    'MstContent_Id':MstContent_Id,
                     'MstContent_Status':MstContent_Status,
                     'MstContent_ContentType':MstContent_ContentType,
                     '_token':'{{csrf_token()}}'
