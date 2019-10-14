@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserCMSExport;
 
 class UserCMSController extends Controller
 {
@@ -26,12 +28,24 @@ class UserCMSController extends Controller
          $err = curl_error($ch);
          curl_close($ch);
          $Hasils= json_decode($result);
-        //  dd($Hasils->User);
+        //  dd($Hasils);
+
+        //API GET
+        $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetUserCategoryRoles"; 
+        $ch2 = curl_init($url2);                                                     
+        curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result2 = curl_exec($ch2);
+        $err2 = curl_error($ch2);
+        curl_close($ch2);
+        $Hasils2= json_decode($result2);
+        // dd($Hasils2);
 
         return view('user_cms',[
-            'UserCMSs'=>$Hasils->User,
-            'Roles'=>$Hasils->Role,
-            'UserCategories'=>$Hasils->UserCategory,
+            'UserCMSs'=>$Hasils,
+            'Roles'=>$Hasils2->Roles,
+            'UserCategories'=>$Hasils2->UserCategory,
             'session' => $session            
             ]);    
     }
@@ -199,20 +213,60 @@ class UserCMSController extends Controller
         }
     }
 
-    // public function delete($id=null,Request $request)
-    // {
-    //     $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/DeleteUser/".$id;
-    //     dd($url);        
-    //     $ch = curl_init();
-    //     curl_setopt($ch, CURLOPT_URL, $url);
-    //     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //     $result = curl_exec($ch);
-    //     $err = curl_error($ch);
-    //     curl_close($ch);
-    //     $data = json_decode($result);
-    //     dd($result);
+    public function download(Request $request)
+    {
+         //API GET
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/DownloadUserCMS"; 
+         $ch = curl_init($url);                                                     
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+         $result = curl_exec($ch);
+         $err = curl_error($ch);
+         curl_close($ch);
+         $Hasils= json_decode($result);
+        //  dd($Hasils);
 
-    //     return redirect('/user-cms')->with('success',' Delete Data Successfully!');
-    // }
+         $data=[];
+         foreach ($Hasils as $Hasil) {
+ 
+             if (property_exists($Hasil->User, 'Last_Login')){
+                 $Last_Login = $Hasil->User->Last_Login;
+             }else{
+                 $Last_Login = "";
+             }
+ 
+             array_push($data,[
+                 "Name"=>$Hasil->User->Name,
+                 "Username"=>$Hasil->User->Username,
+                 "Email"=>$Hasil->User->Email,
+                 "MobilePhone"=>$Hasil->User->MobilePhone,
+                 "CreationDate"=>$Hasil->User->Creation_Date,
+                 "LastLogin"=>$Last_Login,
+                 "IsActive"=>$Hasil->User->Is_Active,
+                 "Organization"=>$Hasil->MstUserDetail->Organization,
+                 "NPK"=>$Hasil->MstUserDetail->NPK,
+                 "Address"=>$Hasil->MstUserDetail->Address,
+            ]);
+         }
+        //  dd($data);
+         return Excel::download(new UserCMSExport($data), 'User CMS '. date("Y-m-d His") .'.xlsx');
+    }
+
+    public function delete($Id=null,$UserDetailId=null,Request $request)
+    {
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/DeleteUser?UserId=".$Id."&MstUserDetailId=".$UserDetailId;
+        // dd($url);        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/user-cms')->with('success',' User CMS Delete Successfully!');
+    }
 }

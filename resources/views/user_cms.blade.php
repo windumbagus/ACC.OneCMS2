@@ -48,20 +48,21 @@
             <th>Email</th>
             <th>Mobile Phone</th>
             <th>Is Active</th>
+            {{-- <th>MstUserDetailId</th> --}}
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
             @foreach ($UserCMSs as $UserCMS)
             <tr>  
-                <td><span>{{$UserCMS->Id}}</span></td>
-                <td><span>{{$UserCMS->Name}}</span></td>
-                <td><span>{{$UserCMS->Username}}</span></td>
-                <td><span>{{$UserCMS->Email}}</span></td>          
-                <td><span>{{$UserCMS->MobilePhone}}</span></td>
+                <td><span>{{$UserCMS->User->Id}}</span></td>
+                <td><span>{{$UserCMS->User->Name}}</span></td>
+                <td><span>{{$UserCMS->User->Username}}</span></td>
+                <td><span>{{$UserCMS->User->Email}}</span></td>          
+                <td><span>{{$UserCMS->User->MobilePhone}}</span></td>
 
-                @if (property_exists($UserCMS, 'Is_Active'))
-                    @if($UserCMS->Is_Active == true)
+                @if (property_exists($UserCMS->User, 'Is_Active'))
+                    @if($UserCMS->User->Is_Active == true)
                         <td><span><i class="fa fa-check" style="color:green;"></i></span></td>
                     @else
                         <td><span><i class="fa fa-close" style="color:red;"></i></span></td>
@@ -69,11 +70,13 @@
                 @else 
                 <td>-</td>
                 @endif
+
+                {{-- <td><span>{{$UserCMS->MstUserDetail->Id}}</span></td> --}}
                             
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $UserCMS->Id}}" class="update-user-cms btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
-                    <a href="{{asset('user-cms/delete/'.$UserCMS->Id)}}" 
+                    <a href="#" data-id="{{ $UserCMS->User->Id}}" class="update-user-cms btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
+                    <a href="{{asset('user-cms/delete/'.$UserCMS->User->Id.'&'.$UserCMS->MstUserDetail->Id)}}" 
                         class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this User ?')" >
                         <i class="fa fa-trash"></i>
                     </a> 
@@ -106,6 +109,7 @@
                 {"searchable":false},
                 null,
                 {"searchable":false},
+                // {"searchable":false},
                 {"searchable":false},
             ]
       })
