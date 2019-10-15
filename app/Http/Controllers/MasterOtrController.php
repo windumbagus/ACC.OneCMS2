@@ -276,6 +276,18 @@ class MasterOtrController extends Controller
                 $DT_ADDED = "";
             }
 
+            if (property_exists($Hasil->MstOtr, 'DT_UPDATED')){
+                $DT_UPDATED = $Hasil->MstOtr->DT_UPDATED;
+            }else{
+                $DT_UPDATED = "";
+            }
+
+            if (property_exists($Hasil->MstOtr, 'DEVIASI')){
+                $DEVIASI = $Hasil->MstOtr->DEVIASI;
+            }else{
+                $DEVIASI = "";
+            }
+
           array_push($data,[
               "Id"=>$Hasil->MstOtr->Id,
               "CD_BRAND"=>$Hasil->MstOtr->CD_BRAND,
@@ -288,8 +300,10 @@ class MasterOtrController extends Controller
               "CD_SP"=>$CD_SP,
               "CD_AREA"=>$CD_AREA,
               "OTR"=>$OTR,
+              "DEVIASI"=>$DEVIASI,
               "FLAG_ACTIVE"=>$Hasil->MstOtr->FLAG_ACTIVE,
               "DT_ADDED"=>$DT_ADDED,
+              "DT_UPDATED"=>$DT_UPDATED,
               "FLAG_NEW_USED"=>$Hasil->MstOtr->FLAG_NEW_USED,
           ]);
         }
@@ -331,37 +345,4 @@ class MasterOtrController extends Controller
 
         return json_encode($data);
     }
-
-    // public function upload(Request $request)
-    // {
-    //     $request->validate([
-    //         'upload_master_otr' => 'required',
-    //     ]);
-
-    //     $file = $request->upload_master_otr;
-    //     $x= file_get_contents($file);
-    //     $y= base64_encode($x);
-
-    //     $name = $file->getClientOriginalName();
-    //     $data = json_encode(array(
-    //         "Filename" => "$name",
-    //         "Content" => $y,
-    //     ));
-    //     // dd($data);  
-
-    //     $url = "https://acc-dev1.outsystemsenterprise.com//ACCWorldCMS/rest/MasterOtrAPI/UploadMasterOtr"; 
-    //     $ch = curl_init($url);                   
-    //     curl_setopt($ch, CURLOPT_POST, true);                                  
-    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-    //     $result = curl_exec($ch);
-    //     $err = curl_error($ch);
-    //     curl_close($ch);
-    //     $data = json_decode($result);
-    //     // dd($result);
-
-    //     return redirect('/master-otr')->with('success','Data Master Otr Upload Successfull !!!');
-    // }
 }

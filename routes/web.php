@@ -134,6 +134,12 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/master-otr/add','MasterOtrController@add');
     Route::get('/master-otr/show','MasterOtrController@show');
     Route::post('/master-otr/update','MasterOtrController@update');
+    Route::get('/master-otr/upload-page','MasterOtrUploadController@index')->name('master-otr/upload-page');
+    Route::post('/master-otr/upload','MasterOtrUploadController@upload');
+    Route::get('/master-otr/cancel','MasterOtrUploadController@cancel');
+    Route::get('/master-otr/proceed','MasterOtrUploadController@proceed');
+
+
 
     Route::get('/history-pembayaran-asuransi-jiwa','HistoryPembayaranAsuransiJiwaController@index');
     Route::get('/history-pembayaran-asuransi-jiwa/show','HistoryPembayaranAsuransiJiwaController@show');

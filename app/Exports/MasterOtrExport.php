@@ -34,8 +34,10 @@ class MasterOtrExport implements FromArray, WithHeadings
             "CD_SP",
             "CD_AREA",
             "OTR",
+            "DEVIASI",
             "FLAG_ACTIVE",
             "DT_ADDED",
+            "DT_UPDATED",
             "FLAG_NEW_USED",
         ];
     }

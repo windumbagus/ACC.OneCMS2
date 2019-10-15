@@ -17,7 +17,7 @@
                     <a href="#" class="add-master-otr btn btn-block btn-primary">Create New Master OTR</a>  
                 </div>
                 <div class="col-sm-3">
-                    <a href="#" class="upload-master-otr btn btn-block btn-primary">Upload</a>
+                    <a href="{{route('master-otr/upload-page')}}" class="btn btn-block btn-primary">Upload</a>
                 </div>
                 <div class="col-sm-3">
                     <a href="{{asset('/master-otr/download')}}" class="btn btn-block btn-primary">Download</a>
@@ -121,7 +121,7 @@
                         @endif
 
                         @if (property_exists($otr->MstOtr, 'OTR'))
-                            <td><span>{{$otr->MstOtr->OTR}}</span></td>
+                            <td><span>{{ "Rp " . number_format($otr->MstOtr->OTR,2,',','.')}}</span></td>
                         @else
                         <td><span>-</span></td>
                         @endif
@@ -196,9 +196,9 @@
         });
         
         //Upload
-        $(document).on('click','.upload-master-otr',function(){
-        $('#upload-master-otr').modal();     
-        });
+        // $(document).on('click','.upload-master-otr',function(){
+        // $('#upload-master-otr').modal();     
+        // });
 
         // get by id to modal
         $(document).on('click','.update-master-otr',function(){
@@ -278,5 +278,5 @@
 </script>
 @include('modal.add_master_otr')
 @include('modal.update_master_otr')
-@include('modal.upload_master_otr')
+{{-- @include('modal.upload_master_otr') --}}
 @endsection

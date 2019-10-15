@@ -92,7 +92,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
 
                 <div class="modal-footer">
                     <button type="button" class="close-modal-update btn btn-default">Close</button>	
-                    <button type="submit" class="btn btn-success">Create</button>		
+                    <button type="submit" class="btn btn-warning">Update</button>		
                 </div>	
             </form>
         </div>
