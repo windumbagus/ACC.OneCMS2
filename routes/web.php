@@ -181,5 +181,12 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('user-cms/delete/{Id}&{UserDetail}','UserCMSController@delete');
     Route::get('user-cms/download','UserCMSController@download');
 
-   
+    Route::get('acc-yes-migration','AccYesMigrationController@index');
+    Route::get('acc-yes-migration/delete/{Id}','AccYesMigrationController@delete');    
+
+    Route::get('/acc-yes-migration/upload-page','UploadAccYesMigrationController@index')->name('acc-yes-migration/upload-page');
+    Route::get('/acc-yes-migration/cancel','UploadAccYesMigrationController@Cancel');
+    Route::get('/acc-yes-migration/proceed','UploadAccYesMigrationController@proceed');
+    Route::post('/acc-yes-migration/upload','UploadAccYesMigrationController@upload');
+
 });//end group route

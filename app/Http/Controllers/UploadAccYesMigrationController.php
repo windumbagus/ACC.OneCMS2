@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MasterOtrUploadController extends Controller
+class UploadAccYesMigrationController extends Controller
 {
     public function index(Request $request)
     {
@@ -16,31 +16,31 @@ class MasterOtrUploadController extends Controller
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId')
         ]);
-         //API GET MstOTR
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetTmpOTRUpload"; 
-         $ch = curl_init($url);                                                     
-         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $Hasils= json_decode($result);
-        //  dd($Hasils);
-
-        return view('modal/upload_master_otr',[
-            'TmpOTRs'=>$Hasils,
-            'session' => $session                        
+        //API GET
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/GetTmpUserAccYes"; 
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result);
+        // dd($Hasils);
+        
+        return view('modal/upload_acc_yes_migration',[
+            'UploadMigrations' =>$Hasils,
+            'session' => $session
             ]);    
     }
 
     public function upload(Request $request)
     {
         $request->validate([
-            'upload_master_otr' => 'required',
+            'upload_acc_yes_migration' => 'required',
         ]);
 
-        $file = $request->upload_master_otr;
+        $file = $request->upload_acc_yes_migration;
         $x= file_get_contents($file);
         $y= base64_encode($x);
 
@@ -51,7 +51,7 @@ class MasterOtrUploadController extends Controller
         ));
         // dd($data);  
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/UploadMasterOtr"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/UploadTmpUserAccYes"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -64,15 +64,16 @@ class MasterOtrUploadController extends Controller
         $Hasils = json_decode($result);
         // dd($Hasils);
         if(property_exists($Hasils, 'Success')){
-            return redirect('/master-otr/upload-page')->with('success','Data Master Otr Upload Successfull !!!');
+            return redirect('/acc-yes-migration/upload-page')->with('success','Data ACC Yes Migration Upload Successfull !!!');
         }else{
-            return redirect('/master-otr/upload-page')->with('warning', $Hasils->ErrorMessage);
+            return redirect('/acc-yes-migration/upload-page')->with('warning', $Hasils->ErrorMessage);
         }
     }
 
-    public function cancel(Request $request)
+    public function Cancel(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/UploadCancelMstTmpOtr"; 
+         //API GET
+         $url = "https://acc-dev1.outsystemsenterprise.com//ACCWorldCMS/rest/ACCYesMigrationAPI/UploadCancelTmpUserAccYes"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -80,14 +81,15 @@ class MasterOtrUploadController extends Controller
          $result = curl_exec($ch);
          $err = curl_error($ch);
          curl_close($ch);
+         // dd($Hasils);
 
-        return redirect('/master-otr');
+        return redirect('acc-yes-migration');
 
     }
 
     public function proceed(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/UploadProceedMstOtr"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/UploadProceedTmpUserAccYes"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -96,7 +98,7 @@ class MasterOtrUploadController extends Controller
          $err = curl_error($ch);
          curl_close($ch);
 
-        return redirect('/master-otr/upload-page');
+        return redirect('/acc-yes-migration');
 
     }
 }
