@@ -5,7 +5,6 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
 
-<<<<<<< HEAD
         <li class="@yield('user-management') treeview">
             <a href="#">
             <i class="fa fa-users"></i> <span>User Management</span>
@@ -20,22 +19,6 @@
             <li class="@yield('acc-yes-migration')"><a href="{{asset('acc-yes-migration')}}"><i class="fa fa-circle-o"></i> ACCYes Migration</a></li>
             </ul>
         </li>
-=======
-            <li class="@yield('user-management') treeview">
-                <a href="#">
-                <i class="fa fa-users"></i> <span>User Management</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                </a>
-                <ul class="treeview-menu">
-                <li class="@yield('user-mobile')"><a href="{{asset("user-mobile")}}"><i class="fa fa-circle-o"></i> User Mobile</a></li>
-                <li class="@yield('user-cms')"><a href="{{asset("user-cms")}}"><i class="fa fa-circle-o"></i> User CMS</a></li>
-                <li class="@yield('role-management')"><a href="#"><i class="fa fa-circle-o"></i> Role Management</a></li>
-                <li class="@yield('acc-yes-migration')"><a href="#"><i class="fa fa-circle-o"></i> ACCYes Migration</a></li>
-                </ul>
-            </li>
->>>>>>> 7985fb00bcbfcbc2970af42ee4facdfd53bc850d
 
             <li class="@yield('account-verification') treeview">
                 <a href="#">

@@ -179,7 +179,12 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('user-cms/delete/{Id}&{UserDetail}','UserCMSController@delete');
     Route::get('user-cms/download','UserCMSController@download');
 
-<<<<<<< HEAD
+    Route::get('new-car', 'NewCarController@index');
+    Route::post('new-car/get-by-condition', 'NewCarController@getByCondition');
+    Route::get('new-car/show', 'NewCarController@show');
+    Route::get('new-car/delete/{id}', 'NewCarController@delete');
+    Route::post('new-car/follow-up', 'NewCarController@followUp');
+
     Route::get('acc-yes-migration','AccYesMigrationController@index');
     Route::get('acc-yes-migration/delete/{Id}','AccYesMigrationController@delete');    
 
@@ -187,12 +192,4 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/acc-yes-migration/cancel','UploadAccYesMigrationController@Cancel');
     Route::get('/acc-yes-migration/proceed','UploadAccYesMigrationController@proceed');
     Route::post('/acc-yes-migration/upload','UploadAccYesMigrationController@upload');
-
-=======
-    Route::get('new-car', 'NewCarController@index');
-    Route::post('new-car/get-by-condition', 'NewCarController@getByCondition');
-    Route::get('new-car/show', 'NewCarController@show');
-    Route::get('new-car/delete/{id}', 'NewCarController@delete');
-    Route::post('new-car/follow-up', 'NewCarController@followUp');
->>>>>>> 7985fb00bcbfcbc2970af42ee4facdfd53bc850d
 });//end group route
