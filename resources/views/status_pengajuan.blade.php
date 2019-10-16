@@ -50,7 +50,12 @@
             <tbody>
                 @foreach ($Status_pengajuans as $Status_Pengajuan)
                 <tr>  
-                    <td><span>{{$Status_Pengajuan->User_Name}}</span></td>
+                    @if (property_exists($Status_Pengajuan, 'User_Name'))
+                        <td><span>{{$Status_Pengajuan->User_Name}}</span></td>
+                    @else
+                        <td></td>
+                    @endif
+                    
                     <td><span>{{$Status_Pengajuan->MstStatusPengajuan->RegistrationNo}}</span></td>
                     <td><span>{{$Status_Pengajuan->MstStatusPengajuan->Name}}</span></td>
 

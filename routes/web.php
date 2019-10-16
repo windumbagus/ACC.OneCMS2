@@ -139,8 +139,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-otr/cancel','MasterOtrUploadController@cancel');
     Route::get('/master-otr/proceed','MasterOtrUploadController@proceed');
 
-
-
     Route::get('/history-pembayaran-asuransi-jiwa','HistoryPembayaranAsuransiJiwaController@index');
     Route::get('/history-pembayaran-asuransi-jiwa/show','HistoryPembayaranAsuransiJiwaController@show');
     Route::get('/history-pembayaran-asuransi-jiwa/delete/{id}','HistoryPembayaranAsuransiJiwaController@delete');
@@ -181,5 +179,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('user-cms/delete/{Id}&{UserDetail}','UserCMSController@delete');
     Route::get('user-cms/download','UserCMSController@download');
 
-   
+    Route::get('new-car', 'NewCarController@index');
+    Route::post('new-car/get-by-condition', 'NewCarController@getByCondition');
+    Route::get('new-car/show', 'NewCarController@show');
+    Route::get('new-car/delete/{id}', 'NewCarController@delete');
+    Route::post('new-car/follow-up', 'NewCarController@followUp');
 });//end group route

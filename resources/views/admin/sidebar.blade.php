@@ -3,55 +3,55 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+            <li class="header">MAIN NAVIGATION</li>
 
-        <li class="@yield('user-management') treeview">
-            <a href="#">
-            <i class="fa fa-users"></i> <span>User Management</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-            </a>
-            <ul class="treeview-menu">
-            <li class="@yield('user-mobile')"><a href="{{asset("user-mobile")}}"><i class="fa fa-circle-o"></i> User Mobile</a></li>
-            <li class="@yield('user-cms')"><a href="{{asset("user-cms")}}"><i class="fa fa-circle-o"></i> User CMS</a></li>
-            <li class="@yield('role-management')"><a href="#"><i class="fa fa-circle-o"></i> Role Management</a></li>
-            <li class="@yield('acc-yes-migration')"><a href="#"><i class="fa fa-circle-o"></i> ACCYes Migration</a></li>
-            </ul>
-        </li>
+            <li class="@yield('user-management') treeview">
+                <a href="#">
+                <i class="fa fa-users"></i> <span>User Management</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                <li class="@yield('user-mobile')"><a href="{{asset("user-mobile")}}"><i class="fa fa-circle-o"></i> User Mobile</a></li>
+                <li class="@yield('user-cms')"><a href="{{asset("user-cms")}}"><i class="fa fa-circle-o"></i> User CMS</a></li>
+                <li class="@yield('role-management')"><a href="#"><i class="fa fa-circle-o"></i> Role Management</a></li>
+                <li class="@yield('acc-yes-migration')"><a href="#"><i class="fa fa-circle-o"></i> ACCYes Migration</a></li>
+                </ul>
+            </li>
 
-        <li class="@yield('account-verification') treeview">
-            <a href="#">
-            <i class="fa fa-check-square"></i> <span>Account Verification</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-            </a>
-            <ul class="treeview-menu">
-            <li class="@yield('pending')"><a href="{{ asset('pending') }}"><i class="fa fa-circle-o"></i> Pending List</a></li>
-            <li class="@yield('approve')"><a href="{{ asset('approve') }}"><i class="fa fa-circle-o"></i> Approve List</a></li>
-            <li class="@yield('rejected')"><a href="{{ asset('rejected') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
-            </ul>
-        </li>
-    
-        <li class="@yield('master-management') treeview">
-            <a href="#">
-            <i class="fa fa-sitemap"></i> <span>Master Management</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-            </a>
-            <ul class="treeview-menu">
-            <li class="master-gcm"><a href="#"><i class="fa fa-circle-o"></i> Master GCM</a></li>
-            <li class="@yield('master-kota')"><a href="{{asset('master-kota')}}"><i class="fa fa-circle-o"></i> Master Kota</a></li>
-            <li class="@yield('master-searching')"><a href="{{asset('master-searching')}}"><i class="fa fa-circle-o"></i> Master Searching</a></li>
-            <li class="@yield('master-otr')"><a href="{{asset('master-otr')}}"><i class="fa fa-circle-o"></i> Master OTR</a></li>
-            <li class="@yield('master-holiday')"><a href="{{ asset('holiday-gcm') }}"><i class="fa fa-circle-o"></i> Holiday GCM</a></li>
-            <li class="@yield('master-product-accone')"><a href="{{asset('master-product-accone')}}"><i class="fa fa-circle-o"></i> Master Product ACCOne</a></li>
-            </ul>
-        </li>
+            <li class="@yield('account-verification') treeview">
+                <a href="#">
+                <i class="fa fa-check-square"></i> <span>Account Verification</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                <li class="@yield('pending')"><a href="{{ asset('pending') }}"><i class="fa fa-circle-o"></i> Pending List</a></li>
+                <li class="@yield('approve')"><a href="{{ asset('approve') }}"><i class="fa fa-circle-o"></i> Approve List</a></li>
+                <li class="@yield('rejected')"><a href="{{ asset('rejected') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
+                </ul>
+            </li>
+        
+            <li class="@yield('master-management') treeview">
+                <a href="#">
+                <i class="fa fa-sitemap"></i> <span>Master Management</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                <li class="master-gcm"><a href="#"><i class="fa fa-circle-o"></i> Master GCM</a></li>
+                <li class="@yield('master-kota')"><a href="{{asset('master-kota')}}"><i class="fa fa-circle-o"></i> Master Kota</a></li>
+                <li class="@yield('master-searching')"><a href="{{asset('master-searching')}}"><i class="fa fa-circle-o"></i> Master Searching</a></li>
+                <li class="@yield('master-otr')"><a href="{{asset('master-otr')}}"><i class="fa fa-circle-o"></i> Master OTR</a></li>
+                <li class="@yield('master-holiday')"><a href="{{ asset('holiday-gcm') }}"><i class="fa fa-circle-o"></i> Holiday GCM</a></li>
+                <li class="@yield('master-product-accone')"><a href="{{asset('master-product-accone')}}"><i class="fa fa-circle-o"></i> Master Product ACCOne</a></li>
+                </ul>
+            </li>
 
-        {{-- <li class="@yield('car') treeview">
+            <li class="@yield('car') treeview">
                 <a href="#">
                 <i class="fa fa-car"></i> <span>Car</span>
                 <span class="pull-right-container">
@@ -59,10 +59,10 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                <li class="@yield('new-car')"><a href="#"><i class="fa fa-circle-o"></i> New Car</a></li>
+                <li class="@yield('new-car')"><a href="{{asset('new-car')}}"><i class="fa fa-circle-o"></i> New Car</a></li>
                 <li class="@yield('lease')"><a href="#"><i class="fa fa-circle-o"></i> Lease</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             {{-- <li class="@yield('fund') treeview">
                 <a href="#">
