@@ -185,8 +185,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('new-car/delete/{id}', 'NewCarController@delete');
     Route::post('new-car/follow-up', 'NewCarController@followUp');
 
-    Route::get('acc-yes-migration','AccYesMigrationController@index');
-    Route::get('acc-yes-migration/delete/{Id}','AccYesMigrationController@delete');    
+    Route::get('/acc-yes-migration','AccYesMigrationController@index');
+    Route::get('/acc-yes-migration/delete/{Id}','AccYesMigrationController@delete');  
+    Route::get('/acc-yes-migration/migrate','AccYesMigrationController@migrate');
 
     Route::get('/acc-yes-migration/upload-page','UploadAccYesMigrationController@index')->name('acc-yes-migration/upload-page');
     Route::get('/acc-yes-migration/cancel','UploadAccYesMigrationController@Cancel');
