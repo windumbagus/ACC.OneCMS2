@@ -193,4 +193,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/acc-yes-migration/cancel','UploadAccYesMigrationController@Cancel');
     Route::get('/acc-yes-migration/proceed','UploadAccYesMigrationController@proceed');
     Route::post('/acc-yes-migration/upload','UploadAccYesMigrationController@upload');
+
+    Route::get('/role-management','RoleManagementController@index');
+    Route::post('/role-management/add','RoleManagementController@add');
+    Route::post('/role-management/update','RoleManagementController@update');
+    Route::get('/role-management/show','RoleManagementController@show');
+    Route::get('/role-management/delete/{Id}','RoleManagementController@delete');  
+
 });//end group route
