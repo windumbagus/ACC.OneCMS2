@@ -39,12 +39,12 @@ class NewCarController extends Controller
     {
         $data = json_encode(
             array(
-                "Status" => '',
-                "EndDate" => '',
-                "StartDate" => '',
+                "Status" => $request->Status,
+                "EndDate" => $request->StartDate,
+                "StartDate" => $request->EndDate,
             )
         );
-        dd($data);
+        // dd($data);
 
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetAllNewCarByCondition"; 
         $ch = curl_init($url);                   
@@ -59,9 +59,6 @@ class NewCarController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-        return view('new_car',[
-            'MstTransaksiList' => $val->MstTransaksiList,
-            'MstTrsansaksi_StatusList'=> $val->MstTrsansaksi_StatusList,   
-        ]);  
+        return json_encode($val);  
     }
 }

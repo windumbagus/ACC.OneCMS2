@@ -21,8 +21,9 @@
     <div class="box-body">
         <div class="row">
             <div class="col-sm-4">
-                <select class="form-control select2" id="dropdown_newCar_statusTransaksi" style="width:100%;">
-                    <option value="0" selected>-- Choose Condition --</option>
+                <select class="form-control select2 groupInput_newCar_statusTransaksiStartEndDate" style="width:100%;"
+                    id="dropdown_newCar_statusTransaksi">
+                    <option value="" selected>-- Choose Condition --</option>
                     @foreach ($MstTrsansaksi_StatusList as $MstTrsansaksi_Status)
                         <option value="{{$MstTrsansaksi_Status}}">
                             {{$MstTrsansaksi_Status}}
@@ -42,8 +43,32 @@
                 </div>
             </div>
         </div><br>
+        <div class="row">
+                <div class="col-sm-1">Start Date:</div>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <input type="text" id="datepicker_newCar_startDate" 
+                            class="form-control groupInput_newCar_statusTransaksiStartEndDate">
+                        <div class="input-group-addon" id="button_newCar_resetStartDate">
+                            <i class="fa fa-repeat"></i>
+                        </div>
+                    </div>
+                </div>
+        </div><br>
+        <div class="row">
+                <div class="col-sm-1">End Date:</div>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <input type="text" id="datepicker_newCar_endDate"
+                            class="form-control groupInput_newCar_statusTransaksiStartEndDate">
+                        <div class="input-group-addon" id="button_newCar_resetEndDate">
+                            <i class="fa fa-repeat"></i>
+                        </div>
+                    </div>
+                </div>
+        </div><br>
         
-        <table id="datatable_1" class="table table-bordered display nowrap" style="width:100%">
+        <table id="datatable_newCar_neCarData" class="table table-bordered display nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -78,26 +103,25 @@
                         <td><span>
                             @if (property_exists($MstTransaksi->MstTransaksi, 'Brand'))
                                 {{$MstTransaksi->MstTransaksi->Brand}}
-                            @endif
-                            @if ((property_exists($MstTransaksi->MstTransaksi, 'Brand')) && 
-                                (property_exists($MstTransaksi->MstTransaksi, 'Type')))
-                                {{" "}}
+                                @if (property_exists($MstTransaksi->MstTransaksi, 'Type'))
+                                    {{" "}}
+                                @endif
                             @endif
                             @if (property_exists($MstTransaksi->MstTransaksi, 'Type'))
                                 {{$MstTransaksi->MstTransaksi->Type}}
                             @endif
 
-                            @if ((property_exists($MstTransaksi->MstTransaksi, 'Model')) || 
-                                (property_exists($MstTransaksi->MstTransaksi, 'Tahun')))
+
+                            @if ((property_exists($MstTransaksi->MstTransaksi, 'Brand')) || 
+                                (property_exists($MstTransaksi->MstTransaksi, 'Type')))
                                 <br>
                             @endif
 
                             @if (property_exists($MstTransaksi->MstTransaksi, 'Model'))
                                 {{$MstTransaksi->MstTransaksi->Model}}
-                            @endif
-                            @if ((property_exists($MstTransaksi->MstTransaksi, 'Model')) && 
-                                (property_exists($MstTransaksi->MstTransaksi, 'Tahun')))
-                                {{" "}}
+                                @if (property_exists($MstTransaksi->MstTransaksi, 'Tahun'))
+                                    {{" "}}
+                                @endif
                             @endif
                             @if (property_exists($MstTransaksi->MstTransaksi, 'Tahun'))
                                 {{$MstTransaksi->MstTransaksi->Tahun}}
@@ -122,8 +146,8 @@
                         @if (property_exists($MstTransaksi->MstTransaksi, 'Status'))
                             @if ($MstTransaksi->MstTransaksi->Status == 'Followed_Up')
                                 @if (property_exists($MstTransaksi->MstTransaksi, 'Notes'))
-                                    @if(strlen($MstTransaksi->MstTransaksi->Notes) >= 20)
-                                        <td><span>{{substr($MstTransaksi->MstTransaksi->Notes,0,20)."..."}}</span></td>
+                                    @if(strlen($MstTransaksi->MstTransaksi->Notes) >= 35)
+                                        <td><span>{{substr($MstTransaksi->MstTransaksi->Notes,0,35)."..."}}</span></td>
                                     @else 
                                         <td><span>{{$MstTransaksi->MstTransaksi->Notes}}</span></td>
                                     @endif
@@ -134,14 +158,12 @@
                                 <td>
                                     <form id="form_newCar_followUp" action="{{asset('new-car/follow-up')}}" method="post">
                                         @csrf
-                                        <div class="form-group">
-                                            <input type="hidden" name="followUpNewCar_MstTransaksi_Id" 
-                                                value="{{$MstTransaksi->MstTransaksi->Id}}">
+                                        <div hidden>
+                                            <input type="hidden" name="followUpNewCar_MstTransaksi_Id" value="{{$MstTransaksi->MstTransaksi->Id}}">
                                         </div>
-                                        <div class="form-group">
-                                            <input type="text" class="col-xs-6" name="followUpNewCar_MstTransaksi_Notes">
-                                            &nbsp;
-                                            <button type="submit" class="btn btn-primary"
+                                        <div>
+                                            <input type="text" class="form-control" name="followUpNewCar_MstTransaksi_Notes">
+                                            <button type="submit" class="btn btn-primary form-control"
                                                 onclick="return confirm('Are you sure want to Follow Up this data?')">
                                                 Followed Up
                                             </button>
@@ -183,7 +205,7 @@
 <!-- page script -->
 <script>
     $(document).ready(function () {
-        $('#datatable_1').DataTable({
+        $('#datatable_newCar_neCarData').DataTable({
             'deferRender' : true,
             'paging'      : true,
             'lengthChange': false,
@@ -208,16 +230,151 @@
         //Button Search
         $('.button_newCar_search').on('click', function(){
             var searchData = $('.input-search').val()
-            var dtable = $('#datatable_1').DataTable()
+            var dtable = $('#datatable_newCar_neCarData').DataTable()
             dtable.search(searchData).draw()
         })
 
         //Reset Button Search
         $('.button_newCar_resetSearch').on('click',function(){
-            var tab = $('#datatable_1').DataTable()
+            var tab = $('#datatable_newCar_neCarData').DataTable()
             tab.search('').draw()
             $('.input-search').val('')
         })
+
+        // Start-End Datepicker
+        $('#datepicker_newCar_startDate').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+        }).on('changeDate', function(selected){
+            if ($('#datepicker_newCar_startDate').datepicker('getDate') != null) {
+                selectedStartDate = new Date(selected.date.valueOf());
+                if ((selectedStartDate > $('#datepicker_newCar_endDate').datepicker('getDate')) && 
+                    ($('#datepicker_newCar_endDate').datepicker('getDate') != null)) {
+                    $('#datepicker_newCar_endDate').datepicker('setDate', null);
+                }
+            }
+        });
+        $('#datepicker_newCar_endDate').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+        }).on('changeDate', function(selected){
+            if ($('#datepicker_newCar_endDate').datepicker('getDate') != null) {
+                selectedEndDate = new Date(selected.date.valueOf());
+                if ((selectedEndDate < $('#datepicker_newCar_startDate').datepicker('getDate')) && 
+                    ($('#datepicker_newCar_startDate').datepicker('getDate') != null)) {
+                    $('#datepicker_newCar_startDate').datepicker('setDate', null);
+                }
+            }
+        });
+
+        // ResetDatePicker Button
+        $('#button_newCar_resetStartDate').on('click',function(){
+            if ($('#datepicker_newCar_startDate').datepicker('getDate') != null) {
+                $('#datepicker_newCar_startDate').datepicker('setDate', null);
+            }
+        })
+        $('#button_newCar_resetEndDate').on('click',function(){
+            if ($('#datepicker_newCar_endDate').datepicker('getDate') != null) {
+                $('#datepicker_newCar_endDate').datepicker('setDate', null);
+            }
+        })
+
+        // StatusTransaksi Dropdown
+        $('.groupInput_newCar_statusTransaksiStartEndDate').on('change',function(){
+            var SelectedStatus = $('#dropdown_newCar_statusTransaksi').val();
+            var SelectedStartDate = $('#datepicker_newCar_startDate').val();
+            var SelectedEndDate = $('#datepicker_newCar_endDate').val();
+            var SelectedStartDateFormat = 
+                new Date(SelectedStartDate.substring(3,5)+'/'+SelectedStartDate.substring(0,2)+'/'+SelectedStartDate.substring(7,10));
+            var SelectedEndDateFormat = 
+                new Date(SelectedEndDate.substring(3,5)+'/'+SelectedEndDate.substring(0,2)+'/'+SelectedEndDate.substring(7,10));
+            
+            if (new Date(SelectedStartDateFormat) < new Date(SelectedEndDateFormat)) {
+                console.log(SelectedStatus);
+                console.log(SelectedStartDate);
+                console.log(SelectedEndDate);
+                $.ajax({
+                    url:'new-car/get-by-condition',
+                    data: {
+                        'Status':SelectedStatus,
+                        'StartDate':SelectedStartDate,
+                        'EndDate':SelectedEndDate,
+                        '_token':'{{csrf_token()}}'
+                    },
+                    dataType:'json',
+                    type:'POST',
+                    success: function(output){
+                        console.log(output);
+                        var table = $('#datatable_newCar_neCarData').DataTable()
+                        var MstTransaksiList = output.MstTransaksiList;
+                        table.clear().draw();
+                        MstTransaksiList.map(MstTransaksi=>{
+                            if (typeof MstTransaksi.User.Name === 'undefined') {
+                                MstTransaksi.User.Name = "";
+                            }
+                            if (typeof MstTransaksi.MstTransaksi.TransactionDate === 'undefined') {
+                                MstTransaksi.MstTransaksi.TransactionDate = "";
+                            }
+                            if (typeof MstTransaksi.MstTransaksi.Brand === 'undefined') {
+                                MstTransaksi.MstTransaksi.Brand = "";
+                                if (typeof MstTransaksi.MstTransaksi.Type === 'undefined') {
+                                    MstTransaksi.MstTransaksi.Type = "";
+                                }
+                            } else {
+                                if (typeof MstTransaksi.MstTransaksi.Type === 'undefined') {
+                                    MstTransaksi.MstTransaksi.Type = "";
+                                } else {
+                                    MstTransaksi.MstTransaksi.Brand += " ";
+                                }
+                            }
+                            if (typeof MstTransaksi.MstTransaksi.Model === 'undefined') {
+                                MstTransaksi.MstTransaksi.Model = "";
+                                if (typeof MstTransaksi.MstTransaksi.Tahun === 'undefined') {
+                                    MstTransaksi.MstTransaksi.Tahun = "";
+                                }
+                            } else {
+                                if (typeof MstTransaksi.MstTransaksi.Tahun === 'undefined') {
+                                    MstTransaksi.MstTransaksi.Tahun = "";
+                                } else {
+                                    MstTransaksi.MstTransaksi.Model += " ";
+                                }
+                            }
+
+                            if (typeof MstTransaksi.MstCustomerDetail.FlagCustomer === 'undefined') {
+                                MstTransaksi.MstCustomerDetail.FlagCustomer = "";
+                            }
+                        
+                            table.row.add([
+                                '<span>'+MstTransaksi.User.Name+'</span>',
+                                '<span>'+
+                                    MstTransaksi.MstTransaksi.TransactionDate.substring(8, 10)+'-'+
+                                    MstTransaksi.MstTransaksi.TransactionDate.substring(5, 7)+'-'+
+                                    MstTransaksi.MstTransaksi.TransactionDate.substring(0, 4)+
+                                '</span>',
+                                '<span>'+
+                                    MstTransaksi.MstTransaksi.Brand+
+                                    MstTransaksi.MstTransaksi.Type+
+                                    '<br>'+
+                                    MstTransaksi.MstTransaksi.Model+
+                                    MstTransaksi.MstTransaksi.Tahun+
+                                '</span>',
+
+                                '<span>'+MstTransaksi.MstCustomerDetail.FlagCustomer+'</span>',
+                                '<span>'+MstTransaksi.MstCustomerDetail.FlagCustomer+'</span>',
+                                '<span>'+MstTransaksi.MstCustomerDetail.FlagCustomer+'</span>',
+                                '<span>'+MstTransaksi.MstCustomerDetail.FlagCustomer+'</span>',
+                                '<span>'+MstTransaksi.MstCustomerDetail.FlagCustomer+'</span>',
+                            ]).draw(false)
+                        }) 
+                    },
+                    error: function(jqXhr, textStatus, errorThrown){
+                        console.log(jqXhr);
+                        console.log(errorThrown);
+                        console.log(textStatus);
+                    },
+                })
+            }
+        });
 
         // Modal Download
         // $(document).on('click','.button_newCar_download',function(){
