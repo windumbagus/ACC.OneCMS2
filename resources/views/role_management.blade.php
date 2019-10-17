@@ -27,7 +27,7 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <input type="text" placeholder="Search by Star or User" class="InputSearch form-control">
+                <input type="text" placeholder="Search by Role Name" class="InputSearch form-control">
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
