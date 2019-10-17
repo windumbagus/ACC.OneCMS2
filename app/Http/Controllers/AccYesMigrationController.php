@@ -52,4 +52,26 @@ class AccYesMigrationController extends Controller
          return redirect('/acc-yes-migration')->with('success','Data ACC Yes Migration Delete Successfull !!!');
 
     }
+
+    public function migrate(Request $request)
+    {
+         //API GET
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/MigrateAccYes"; 
+         $ch = curl_init($url);                                                     
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+         $result = curl_exec($ch);
+         $err = curl_error($ch);
+         curl_close($ch);
+         $Hasils= json_decode($result);
+        //  dd($Hasils);
+
+         if(property_exists($Hasils, 'Success')){
+            return redirect('/acc-yes-migration')->with('success', $Hasils->Message);
+        }else{
+            return redirect('/acc-yes-migration')->with('error', $Hasils->Message);
+        }
+    }
+    
 }

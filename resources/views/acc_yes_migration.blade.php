@@ -93,7 +93,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="col-sm-6">
-                    <a href="#" class="btn btn-block btn-success">Migrate</a>                     
+                <a href="{{asset('/acc-yes-migration/migrate')}}" class="btn btn-block btn-success">Migrate</a>                     
                 </div>  
                 <div class="col-sm-6"></div>
             </div>
