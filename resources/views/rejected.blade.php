@@ -43,19 +43,40 @@
             @foreach ($Rejected as $Reject)
 
             <tr>  
+                @if (property_exists($Reject->User, 'Name'))
                 <td><span>{{$Reject->User->Name}}</span></td>
+                @else 
+                <td></td>
+                @endif
+
+                @if (property_exists($Reject->User, 'Username'))
                 <td><span>{{$Reject->User->Username}}</span></td>
+                @else 
+                <td></td>
+                @endif
+
+                @if (property_exists($Reject->User, 'Email'))
                 <td><span>{{$Reject->User->Email}}</span></td>
+                @else 
+                <td></td>
+                @endif
+
+                @if (property_exists($Reject->User, 'MobilePhone'))
                 <td><span>{{$Reject->User->MobilePhone}}</span></td>
+                @else 
+                <td></td>
+                @endif
+
                 @if (property_exists($Reject->MstCustomerDetail, 'Reason'))
                 <td><span>{{$Reject->MstCustomerDetail->Reason}}</span></td>
                 @else 
                 <td></td>
                 @endif
+
                 <td>
-                <span>
-                    <a href="#" data-id="{{ $Reject->User->Id}}" class="view-rejected btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
-                </span>
+                    <span>
+                        <a href="#" data-id="{{ $Reject->User->Id}}" class="view-rejected btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
+                    </span>
                 </td>
             </tr>   
                             
