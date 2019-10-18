@@ -199,5 +199,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/role-management/update','RoleManagementController@update');
     Route::get('/role-management/show','RoleManagementController@show');
     Route::get('/role-management/delete/{Id}','RoleManagementController@delete');  
+    Route::get('/setting-role-management/{Id}&{RoleName}','SettingRoleManagementController@index');
+
 
 });//end group route

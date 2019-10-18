@@ -53,7 +53,7 @@
                         <td>
                             <span>
                                 <a href="#" data-id="{{ $Role->Id}}" class="update-role-management btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                                <a href="{{asset('setting-role-management')}}" data-id="{{ $Role->Id}}" class="btn btn-info btn-sm"><i class="fa fa-gear"></i></a> &nbsp; 
+                                <a href="{{asset('setting-role-management/'.$Role->Id.'&'.$Role->RoleName)}}"class="btn btn-info btn-sm"><i class="fa fa-gear"></i></a> &nbsp; 
                                 <a href="{{asset('role-management/delete/'.$Role->Id)}}" class=" btn btn-danger btn-sm" 
                                     onclick="return confirm('Are you sure want to delete this data?')" ><i class="fa fa-trash"></i>
                                 </a> 
