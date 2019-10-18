@@ -141,7 +141,13 @@
                     $('[name="rejected_Last_Login_view"]').val(val.User.Last_Login);
                     $('[name="rejected_Is_Active_view"]').val(val.User.Is_Active);
                     $('[name="rejected_TanggalLahir_view"]').val(val.MstCustomerDetail.TanggalLahir);
-                    $('[name="rejected_Status_view"]').val(val.MstStatus.Label);
+                    
+                    if(val.MstStatus.Label=="Waiting for Payment Type Confirmation"){
+                        $('[name="rejected_Status_view"]').val("Menunggu Verifikasi");
+                    }else{
+                        $('[name="rejected_Status_view"]').val(val.MstStatus.Label);
+                    }
+
                     //StatusNoHP
                     if (val.MstCustomerDetail.hasOwnProperty('StatusNoHP')) {
                         $('[name="rejected_StatusNoHP_view"]').val(val.MstCustomerDetail.StatusNoHP);   
