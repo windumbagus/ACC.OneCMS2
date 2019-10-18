@@ -40,8 +40,8 @@ class NewCarController extends Controller
         $data = json_encode(
             array(
                 "Status" => $request->Status,
-                "EndDate" => $request->StartDate,
-                "StartDate" => $request->EndDate,
+                "EndDate" => $request->EndDate,
+                "StartDate" => $request->StartDate,
             )
         );
         // dd($data);
