@@ -10,7 +10,7 @@
         <h4 class="box-title">Setting Role ACC.One for User "{{$RoleName}}"</h4> 
     </div>
     <div class="box-body">
-        <table id="table_upload_otr" class="table table-bordered display nowrap" style="width:100%">
+        <table id="example1" class="table table-bordered display nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Menu Name</th>
@@ -30,58 +30,60 @@
                         <td><span>
                             @if (property_exists($Setting->MstRoleDetail, 'IsView'))
                                 @if($Setting->MstRoleDetail->IsView == true)
-                                    <input type="checkbox" name="ViewSearch" checked="checked">
+                                    <input class="OnChangeView" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="ViewSearch" checked="checked">
                                 @else
-                                    <input type="checkbox" name="ViewSearch" >
+                                    <input class="OnChangeView" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="ViewSearch" >
                                 @endif
                             @else
-                                <input type="checkbox" name="ViewSearch" >
+                                <input class="OnChangeView" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="ViewSearch" >
                             @endif
                         </span></td>  
 
                         <td><span>
                             @if (property_exists($Setting->MstRoleDetail, 'IsCreate'))
                                 @if($Setting->MstRoleDetail->IsCreate == true)
-                                   <input type="checkbox" name="CreateUpload" checked="checked">
+                                   <input class="OnChangeCreate" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="CreateUpload" checked="checked">
                                 @else
-                                   <input type="checkbox" name="CreateUpload" >
+                                   <input class="OnChangeCreate" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="CreateUpload" >
                                 @endif
                             @else
-                                <input type="checkbox" name="CreateUpload" >
+                                <input class="OnChangeCreate" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="CreateUpload" >
                             @endif
                         </span></td>  
 
                         <td><span>
                             @if (property_exists($Setting->MstRoleDetail, 'IsUpdate'))
                                 @if($Setting->MstRoleDetail->IsUpdate == true)
-                                    <input type="checkbox" name="Update" checked="checked">
+                                    <input class="OnChangeUpdate" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Update" checked="checked">
                                 @else
-                                    <input type="checkbox" name="Update" >
+                                    <input class="OnChangeUpdate" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Update" >
                                 @endif
                             @else
-                                <input type="checkbox" name="Update" >
+                                <input class="OnChangeUpdate" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Update" >
                             @endif
                         </span></td>
                   
                         <td><span>
                             @if (property_exists($Setting->MstRoleDetail, 'IsDownload'))
                                 @if($Setting->MstRoleDetail->IsDownload == true)
-                                <input type="checkbox" name="Download" checked="checked">
+                                    <input class="OnChangeDownload" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Download" checked="checked">
+                                @else
+                                    <input class="OnChangeDownload" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Download" >      
                                 @endif
                             @else
-                              <input type="checkbox" name="Download" >
+                              <input class="OnChangeDownload" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Download" >
                             @endif
                         </span></td>
 
                         <td><span>
                             @if (property_exists($Setting->MstRoleDetail, 'IsDelete'))
                                 @if($Setting->MstRoleDetail->IsDelete == true)
-                                   <input type="checkbox" name="Delete" checked="checked">
+                                   <input class="OnChangeDelete" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Delete" checked="checked">
                                 @else
-                                   <input type="checkbox" name="Delete" >
+                                   <input class="OnChangeDelete" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Delete" >
                                 @endif
                             @else
-                               <input type="checkbox" name="Delete" >
+                               <input class="OnChangeDelete" data-id="{{ $Setting->MstRoleDetail->Id}}" type="checkbox" name="Delete" >
                             @endif
                         </span></td>                 
                     </tr>                  
@@ -104,7 +106,7 @@
 
 <Script>
     $(document).ready(function () {
-        $('#table_upload_otr').DataTable({
+        $('#example1').DataTable({
             'deferRender': true,
             'paging'      : false,
             'lengthChange': false,
@@ -112,6 +114,66 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : true,
+        })
+    })
+
+    $('.OnChangeView').change(function(){
+        var Id = $(this).attr('data-id');
+        
+        $.ajax({
+            url: '/setting-role-management/OnChangeView/'+Id,
+            dataType: 'json',
+            success: function(val){
+                console.log(val);
+            }
+        })
+    })
+
+    $('.OnChangeCreate').change(function(){
+        var Id = $(this).attr('data-id');
+        
+        $.ajax({
+            url: '/setting-role-management/OnChangeCreate/'+Id,
+            dataType: 'json',
+            success: function(val){
+                console.log(val);
+            }
+        })
+    })
+
+    $('.OnChangeUpdate').change(function(){
+        var Id = $(this).attr('data-id');
+        
+        $.ajax({
+            url: '/setting-role-management/OnChangeUpdate/'+Id,
+            dataType: 'json',
+            success: function(val){
+                console.log(val);
+            }
+        })
+    })
+
+    $('.OnChangeDownload').change(function(){
+        var Id = $(this).attr('data-id');
+        
+        $.ajax({
+            url: '/setting-role-management/OnChangeDownload/'+Id,
+            dataType: 'json',
+            success: function(val){
+                console.log(val);
+            }
+        })
+    })
+
+    $('.OnChangeDelete').change(function(){
+        var Id = $(this).attr('data-id');
+        
+        $.ajax({
+            url: '/setting-role-management/OnChangeDelete/'+Id,
+            dataType: 'json',
+            success: function(val){
+                console.log(val);
+            }
         })
     })
 </Script>
