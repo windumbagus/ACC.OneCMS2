@@ -65,7 +65,7 @@
                 </div>
         </div><br>
         
-        <table id="datatable_newCar_neCarData" class="table table-bordered display nowrap" style="width:100%">
+        <table id="datatable_newCar_newCarData" class="table table-bordered display nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -141,8 +141,8 @@
                         @if (property_exists($MstTransaksi->MstTransaksi, 'Status'))
                             @if ($MstTransaksi->MstTransaksi->Status == 'Followed_Up')
                                 @if (property_exists($MstTransaksi->MstTransaksi, 'Notes'))
-                                    @if(strlen($MstTransaksi->MstTransaksi->Notes) >= 35)
-                                        <td><span>{{substr($MstTransaksi->MstTransaksi->Notes,0,35)."..."}}</span></td>
+                                    @if(strlen($MstTransaksi->MstTransaksi->Notes) >= 25)
+                                        <td><span>{{substr($MstTransaksi->MstTransaksi->Notes,0,25)."..."}}</span></td>
                                     @else 
                                         <td><span>{{$MstTransaksi->MstTransaksi->Notes}}</span></td>
                                     @endif
@@ -150,21 +150,7 @@
                                     <td></td>
                                 @endif
                             @else
-                                <td>
-                                    <form id="form_newCar_followUp" action="{{asset('new-car/follow-up')}}" method="post">
-                                        @csrf
-                                        <div hidden>
-                                            <input type="hidden" name="followUpNewCar_MstTransaksi_Id" value="{{$MstTransaksi->MstTransaksi->Id}}">
-                                        </div>
-                                        <div>
-                                            <input type="text" class="form-control" name="followUpNewCar_MstTransaksi_Notes">
-                                            <button type="submit" class="btn btn-primary form-control"
-                                                onclick="return confirm('Are you sure want to Follow Up this data?')">
-                                                Followed Up
-                                            </button>
-                                        </div>
-                                    </form>
-                                </td>
+                                <td></td>
                             @endif
                         @else
                             <td></td>
@@ -200,7 +186,7 @@
 <!-- page script -->
 <script>
     $(document).ready(function () {
-        $('#datatable_newCar_neCarData').DataTable({
+        $('#datatable_newCar_newCarData').DataTable({
             'deferRender' : true,
             'paging'      : true,
             'lengthChange': false,
@@ -211,28 +197,28 @@
             'scrollX': true,
             sDom: 'lrtip', 
             "columns": [
-                null,                
-                {"searchable":false},
-                null,        
-                {"searchable":false},
-                {"searchable":false},
-                {"searchable":false},
-                {"searchable":false},        
-                {"searchable":false},
+                {name: "Name"},                
+                {name: "Date", "searchable":false},
+                {name: "Car_Detail"},       
+                {name: "Email_Phone", "searchable":false},
+                {name: "Status", "searchable":false},
+                {name: "Notes", "searchable":false},
+                {name: "Cust_Type", "searchable":false},        
+                {name: "Action", "searchable":false, "orderable":false},
             ]
         })
 
         // Search Button 
         $('.button_newCar_search').on('click', function(){
             var searchData = $('.input-search').val()
-            var dtable = $('#datatable_newCar_neCarData').DataTable()
-            dtable.search(searchData).draw()
+            var dataTable = $('#datatable_newCar_newCarData').DataTable()
+            dataTable.search(searchData).draw()
         })
 
         // Reset-Search Button 
         $('.button_newCar_resetSearch').on('click',function(){
-            var tab = $('#datatable_newCar_neCarData').DataTable()
-            tab.search('').draw()
+            var dataTable = $('#datatable_newCar_newCarData').DataTable()
+            dataTable.search('').draw()
             $('.input-search').val('')
         })
 
@@ -320,8 +306,8 @@
                 dataType:'json',
                 type:'POST',
                 success: function(output){
-                    console.log(output);
-                    var table = $('#datatable_newCar_neCarData').DataTable()
+                    // console.log(output);
+                    var table = $('#datatable_newCar_newCarData').DataTable()
                     var MstTransaksiList = output.MstTransaksiList;
                     table.clear().draw();
                     if (typeof MstTransaksiList !== 'undefined') {
@@ -370,14 +356,13 @@
                                     if (typeof MstTransaksi.MstTransaksi.Notes === 'undefined') {
                                         MstTransaksi.MstTransaksi.Notes = "";
                                     } else {
-                                        if(MstTransaksi.MstTransaksi.Notes.length >= 35) {
-                                            MstTransaksi.MstTransaksi.Notes = MstTransaksi.MstTransaksi.Notes.substring(0, 35);
+                                        if(MstTransaksi.MstTransaksi.Notes.length >= 25) {
+                                            MstTransaksi.MstTransaksi.Notes = MstTransaksi.MstTransaksi.Notes.substring(0, 25);
                                         }
                                     }
                                 } 
                                 else {
                                     MstTransaksi.MstTransaksi.Notes = "";
-                                    
                                 }
                             }
                             if (typeof MstTransaksi.MstCustomerDetail.FlagCustomer === 'undefined') {
@@ -404,7 +389,14 @@
                                 '<span>'+MstTransaksi.MstTransaksi.Status+'</span>',
                                 '<span>'+MstTransaksi.MstTransaksi.Notes+'</span>',
                                 '<span>'+MstTransaksi.MstCustomerDetail.FlagCustomer+'</span>',
-                                '<span>action</span>',
+                                '<span>'+
+                                    '<a href="#" MstTransaksi_Id="'+MstTransaksi.MstTransaksi.Id+'" class="button_newCar_view '+
+                                        'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;'+
+                                    `<a href="{{asset('new-car/delete/${MstTransaksi.MstTransaksi.Id}')}}"`+
+                                        `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
+                                        '<i class="fa fa-trash"></i>'+
+                                    '</a>'+
+                                '</span>',
                             ]).draw(false)
                         })
                     }
