@@ -61,4 +61,38 @@ class NewCarController extends Controller
 
         return json_encode($val);  
     }
+
+    public function show(Request $request)
+    {
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetNewCarById?Input=".$request->Id; 
+        // dd($url);  
+        $ch = curl_init($url);                                                     
+        //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val= json_decode($result);
+        // dd($val);
+
+        return json_encode($val);
+    }
+
+    public function delete($id=null, Request $request)
+    {
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/DeleteNewCarById?Input=".$id;
+        // dd($url);        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $data = json_decode($result);
+        // dd($result);
+
+        return redirect('/new-car')->with('success',' Delete Data Successfully!');
+    }
 }

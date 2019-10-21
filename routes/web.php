@@ -183,7 +183,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('new-car/get-by-condition', 'NewCarController@getByCondition');
     Route::get('new-car/show', 'NewCarController@show');
     Route::get('new-car/delete/{id}', 'NewCarController@delete');
-    Route::post('new-car/follow-up', 'NewCarController@followUp');
 
     Route::get('/acc-yes-migration','AccYesMigrationController@index');
     Route::get('/acc-yes-migration/delete/{Id}','AccYesMigrationController@delete');  
