@@ -199,6 +199,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/role-management/show','RoleManagementController@show');
     Route::get('/role-management/delete/{Id}','RoleManagementController@delete');  
     Route::get('/setting-role-management/{Id}&{RoleName}','SettingRoleManagementController@index');
+    Route::get('/setting-role-management/OnChangeView/{Id}','SettingRoleManagementController@OnChangeView');
+    Route::get('/setting-role-management/OnChangeCreate/{Id}','SettingRoleManagementController@OnChangeCreate');
+    Route::get('/setting-role-management/OnChangeUpdate/{Id}','SettingRoleManagementController@OnChangeUpdate');
+    Route::get('/setting-role-management/OnChangeDownload/{Id}','SettingRoleManagementController@OnChangeDownload');
+    Route::get('/setting-role-management/OnChangeDelete/{Id}','SettingRoleManagementController@OnChangeDelete');
 
 
 });//end group route

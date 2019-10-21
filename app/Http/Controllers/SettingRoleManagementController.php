@@ -34,4 +34,90 @@ class SettingRoleManagementController extends Controller
             'RoleName'=>$request->RoleName           
             ]);  
     }
+
+    public function OnChangeView($Id=null, Request $request)
+    { 
+        //API GET
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeView?Input=".$Id; 
+        // dd($url);
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+
+        return json_encode($val);
+    }
+
+    public function OnChangeCreate($Id=null, Request $request)
+    { 
+        //API GET
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeCreate?Input=".$Id; 
+        // dd($url);
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+
+        return json_encode($val);
+    }
+
+    public function OnChangeUpdate($Id=null, Request $request)
+    { 
+        //API GET
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeUpdate?Input=".$Id; 
+        // dd($url);
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+
+        return json_encode($val);
+    }
+
+    public function OnChangeDownload($Id=null, Request $request)
+    { 
+        //API GET
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeDownload?Input=".$Id; 
+        // dd($url);
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+
+        return json_encode($val);
+    }
+
+    public function OnChangeDelete($Id=null, Request $request)
+    { 
+        //API GET
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeDelete?Input=".$Id; 
+        // dd($url);
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+
+        return json_encode($val);
+    }
 }
+
