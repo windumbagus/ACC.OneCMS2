@@ -14,7 +14,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
-                    <a href="#" class="sync-role-management btn btn-block btn-primary">Sync</a>
+                    <a href="{{asset('/role-management/SyncRole')}}" class="btn btn-block btn-primary">Sync</a>
                 </div>
                 <div class="col-sm-6">
                     <a href="#" class="add-role-management btn btn-block btn-primary">Create New Role</a>

@@ -124,4 +124,25 @@ class RoleManagementController extends Controller
         return redirect('/role-management')->with('success',' Role Delete Successfully!');
     }
 
+    public function SyncRole(Request $request)
+    {
+        // API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/SyncRole"; 
+        $ch = curl_init($url);                                                     
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val= json_decode($result);
+        // dd($val);
+
+        if(property_exists($val, 'Success')){
+            return redirect('/role-management')->with('success',' SyncRole Successfully!');
+        }else{
+            return redirect('/role-management')->with('error', $val->Error);
+        }
+    }
+
 }
