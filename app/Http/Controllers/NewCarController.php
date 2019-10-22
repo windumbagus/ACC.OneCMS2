@@ -95,4 +95,37 @@ class NewCarController extends Controller
 
         return redirect('/new-car')->with('success',' Delete Data Successfully!');
     }
+    
+    public function update(Request $request)
+    {
+        // dd($request);
+        $data = json_encode(
+            array(
+                "MstTransaksi_Id" => $request->updateNewCar_MstTransaksi_Id,
+                "MstTransaksi_Notes" => $request->updateNewCar_MstTransaksi_Notes,
+            )
+        );
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/FollowUpNewCar"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val = json_decode($result);
+        // dd($val);
+
+        if(property_exists($val, 'IsSuccess') && ($val->IsSuccess)) {
+            return redirect('/new-car')->with('success',' Follow Up Data Successfully!');
+        } elseif(property_exists($val, 'ErrorMessage')) {
+            return redirect('/new-car')->with('error', $val->ErrorMessage);
+        } else {
+            return redirect('/new-car')->with('error',' Follow Up Data Failed!');
+        }
+    }
 }

@@ -220,6 +220,10 @@
             var dataTable = $('#datatable_newCar_newCarData').DataTable()
             dataTable.search('').draw()
             $('.input-search').val('')
+            $('#dropdown_newCar_statusTransaksi').val('');
+            $('#datepicker_newCar_startDate').datepicker('setDate', null);
+            $('#datepicker_newCar_endDate').datepicker('setDate', null);
+            startEndDateCondition();
         })
 
         // StatusTransaksi Dropdown
@@ -414,7 +418,7 @@
         //     $('#modal_newCar_download').modal();
         // });
         
-        // Modal View
+        // Modal View/Update
         $(document).on('click','.button_newCar_view',function(){
             var id = $(this).attr('MstTransaksi_Id');
             // console.log(id);
@@ -424,33 +428,66 @@
                 dataType:'JSON', 
                 type:'GET',
                 success: function (val){
-                    console.log(val);
+                    // console.log(val);
                     
-                    $('[name="viewNewCar_User_Name"]').val(val.User_Name);
+                    $('[name="updateNewCar_User_UserName"]').val(val.User_UserName);
 
-                    $('[name="viewNewCar_MstTransaksi_Id"]').val(val.MstTransaksi.Id);
-                    $('[name="viewNewCar_MstTransaksi_UserId"]').val(val.MstTransaksi.UserId);
-                    $('[name="viewNewCar_MstTransaksi_TransactionDate"]').val(val.MstTransaksi.TransactionDate);
-                    $('[name="viewNewCar_MstTransaksi_Brand"]').val(val.MstTransaksi.Brand);
-                    $('[name="viewNewCar_MstTransaksi_KodeBrand"]').val(val.MstTransaksi.KodeBrand);
-                    $('[name="viewNewCar_MstTransaksi_Type"]').val(val.MstTransaksi.Type);
-                    $('[name="viewNewCar_MstTransaksi_KodeType"]').val(val.MstTransaksi.KodeType);
-                    $('[name="viewNewCar_MstTransaksi_Model"]').val(val.MstTransaksi.Model);
-                    $('[name="viewNewCar_MstTransaksi_KodeModel"]').val(val.MstTransaksi.KodeModel);
-                    $('[name="viewNewCar_MstTransaksi_Tahun"]').val(val.MstTransaksi.Tahun);
-                    $('[name="viewNewCar_MstTransaksi_Installment"]').val(val.MstTransaksi.Installment);
-                    $('[name="viewNewCar_MstTransaksi_OTR"]').val(val.MstTransaksi.OTR);
-                    $('[name="viewNewCar_MstTransaksi_DP"]').val(val.MstTransaksi.DP);
-                    $('[name="viewNewCar_MstTransaksi_AmountDP"]').val(val.MstTransaksi.AmountDP);
-                    $('[name="viewNewCar_MstTransaksi_Area"]').val(val.MstTransaksi.Area);
-                    $('[name="viewNewCar_MstTransaksi_Cabang"]').val(val.MstTransaksi.Cabang);
-                    $('[name="viewNewCar_MstTransaksi_TDP"]').val(val.MstTransaksi.TDP);
-                    $('[name="viewNewCar_MstTransaksi_FlagACP"]').val(val.MstTransaksi.FlagACP);
-                    $('[name="viewNewCar_MstTransaksi_FlagNewExist"]').val(val.MstTransaksi.FlagNewExist);
-                    $('[name="viewNewCar_MstTransaksi_FlagAsuransi"]').val(val.MstTransaksi.FlagAsuransi);
-                    $('[name="viewNewCar_MstTransaksi_FlagTransaksi"]').val(val.MstTransaksi.FlagTransaksi);
-                    $('[name="viewNewCar_MstTransaksi_Status"]').val(val.MstTransaksi.Status);
-                    $('[name="viewNewCar_MstTransaksi_Tenors"]').val(val.MstTransaksi.Tenors);
+                    $('[name="updateNewCar_MstTransaksi_Id"]').val(val.MstTransaksi.Id);
+                    $('[name="updateNewCar_MstTransaksi_UserId"]').val(val.MstTransaksi.UserId);
+                    $('[name="updateNewCar_MstTransaksi_Brand"]').val(val.MstTransaksi.Brand);
+                    $('[name="updateNewCar_MstTransaksi_KodeBrand"]').val(val.MstTransaksi.KodeBrand);
+                    $('[name="updateNewCar_MstTransaksi_Type"]').val(val.MstTransaksi.Type);
+                    $('[name="updateNewCar_MstTransaksi_KodeType"]').val(val.MstTransaksi.KodeType);
+                    $('[name="updateNewCar_MstTransaksi_Model"]').val(val.MstTransaksi.Model);
+                    $('[name="updateNewCar_MstTransaksi_KodeModel"]').val(val.MstTransaksi.KodeModel);
+                    $('[name="updateNewCar_MstTransaksi_Tahun"]').val(val.MstTransaksi.Tahun);
+                    $('[name="updateNewCar_MstTransaksi_Tenors"]').val(val.MstTransaksi.Tenors);
+                    $('[name="updateNewCar_MstTransaksi_DP"]').val(val.MstTransaksi.DP);
+                    $('[name="updateNewCar_MstTransaksi_Area"]').val(val.MstTransaksi.Area);
+                    $('[name="updateNewCar_MstTransaksi_Cabang"]').val(val.MstTransaksi.Cabang);
+
+                    $('[name="updateNewCar_MstTransaksi_Installment"]').val(currencyFormat(val.MstTransaksi.Installment));
+                    $('[name="updateNewCar_MstTransaksi_OTR"]').val(currencyFormat(val.MstTransaksi.OTR));
+                    $('[name="updateNewCar_MstTransaksi_AmountDP"]').val(currencyFormat(val.MstTransaksi.AmountDP.toString()));
+                    $('[name="updateNewCar_MstTransaksi_TDP"]').val(currencyFormat(val.MstTransaksi.TDP));
+
+                    if(val.MstTransaksi.FlagACP) {
+                        $('[name="updateNewCar_MstTransaksi_FlagACP"]').val('Ya');
+                    } else {
+                        $('[name="updateNewCar_MstTransaksi_FlagACP"]').val('Tidak');
+                    }
+                    if(val.MstTransaksi.FlagAsuransi) {
+                        $('[name="updateNewCar_MstTransaksi_FlagAsuransi"]').val('Tunai');
+                    } else {
+                        $('[name="updateNewCar_MstTransaksi_FlagAsuransi"]').val('Kredit');
+                    }
+
+                    var TransactionDate = 
+                        val.MstTransaksi.TransactionDate.substr(8,2) + "-" +
+                        val.MstTransaksi.TransactionDate.substr(5,2) + "-" +
+                        val.MstTransaksi.TransactionDate.substr(0,4);
+                    $('[name="updateNewCar_MstTransaksi_TransactionDate"]').val(TransactionDate);
+
+                    if(val.MstTransaksi.Status == 'Followed_Up') {
+                        $('[name="updateNewCar_MstTransaksi_Status"]').val("Followed Up");
+                        $('#button_newCarModalUpdate_save').hide();
+                        document.getElementById("textarea_newCarModalUpdate_notes").setAttribute("readonly", "")
+                        document.getElementById("textarea_newCarModalUpdate_notes").removeAttribute("required");
+                        if(val.MstTransaksi.hasOwnProperty('Notes')) {
+                            $('[name="updateNewCar_MstTransaksi_Notes"]').val(val.MstTransaksi.Notes);
+                        } else {
+                            $('[name="updateNewCar_MstTransaksi_Notes"]').val("");
+                        }
+                    } else {
+                        $('[name="updateNewCar_MstTransaksi_Status"]').val(val.MstTransaksi.Status);
+                        $('#button_newCarModalUpdate_save').show();
+                        $('[name="updateNewCar_MstTransaksi_Notes"]').val("");
+                        document.getElementById("textarea_newCarModalUpdate_notes").setAttribute("required", "")
+                        document.getElementById("textarea_newCarModalUpdate_notes").removeAttribute("readonly");
+                    }
+
+                    $('[name="updateNewCar_MstTransaksi_FlagNewExist"]').val(val.MstTransaksi.FlagNewExist);
+                    $('[name="updateNewCar_MstTransaksi_FlagTransaksi"]').val(val.MstTransaksi.FlagTransaksi);
                 },
                 error: function(jqXhr, textStatus, errorThrown){
                     console.log(jqXhr);
@@ -458,9 +495,16 @@
                     console.log(textStatus);
                 },
             });
-            // $('#modal_newCar_view').modal();
+            $('#modal_newCar_update').modal();
         });
+
+        window.currencyFormat = function(n) {
+            return n.replace(/./g, function(c, i, a) {
+                return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;
+            });
+        }
     })
 </script>
 
+@include('modal.update_new_car')
 @endsection
