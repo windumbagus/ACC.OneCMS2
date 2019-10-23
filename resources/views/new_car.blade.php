@@ -13,7 +13,8 @@
             <div class="col-sm-3">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                    <a href="#" class="button_newCar_download btn btn-block btn-primary">Download</a>  
+                    <a href="{{asset('new-car/download')}}" class="btn btn-block btn-primary" 
+                        id="button_newCar_download">Download</a>  
                 </div>
             </div>
         </div>
@@ -185,6 +186,7 @@
 
 <!-- page script -->
 <script>
+    $(document).ajaxStart(function() { Pace.restart(); });
     $(document).ready(function () {
         $('#datatable_newCar_newCarData').DataTable({
             'deferRender' : true,
@@ -290,15 +292,42 @@
 
         window.getByCondition = function(){
             var Status = $('#dropdown_newCar_statusTransaksi').val();
-            var StartDate_dMy = $('#datepicker_newCar_startDate').val();
-            var EndDate_dMy = $('#datepicker_newCar_endDate').val();
-            var StartDate = 
-                StartDate_dMy.substring(6,10)+'-'+StartDate_dMy.substring(3,5)+'-'+StartDate_dMy.substring(0,2);
-            var EndDate = 
-                EndDate_dMy.substring(6,10)+'-'+EndDate_dMy.substring(3,5)+'-'+EndDate_dMy.substring(0,2);
+            var StartDate_DateFormat = $('#datepicker_newCar_startDate').val();
+            var EndDate_DateFormat = $('#datepicker_newCar_endDate').val();
+            if (StartDate_DateFormat !== "") {
+                var StartDate = 
+                    StartDate_DateFormat.substring(6,10)+'-'+StartDate_DateFormat.substring(3,5)+'-'+StartDate_DateFormat.substring(0,2);
+            } else {
+                StartDate = "";
+            }
+            if (EndDate_DateFormat !== "") {
+                var EndDate = 
+                    EndDate_DateFormat.substring(6,10)+'-'+EndDate_DateFormat.substring(3,5)+'-'+EndDate_DateFormat.substring(0,2);
+            } else {
+                EndDate = "";
+            }
             // console.log(Status);
             // console.log(StartDate);
             // console.log(EndDate);
+
+            // Function Download
+            if ((Status == "") && (StartDate == "") && (EndDate == "") ){
+                document.getElementById('button_newCar_download').setAttribute("href", "");
+                document.getElementById('button_newCar_download').setAttribute("href", "{{asset('new-car/download')}}");
+            } else {
+                var tempStatus = Status;
+                var tempStartDate = StartDate;
+                var tempEndDate = EndDate;
+                if (Status == "")
+                    tempStatus = "null";
+                if (StartDate == "")
+                    tempStartDate = "null";
+                if (EndDate == "")
+                    tempEndDate = "null";
+                document.getElementById('button_newCar_download').setAttribute("href", "");
+                document.getElementById('button_newCar_download').setAttribute("href", `{{asset('new-car/download-by-condition/${tempStatus}&${tempStartDate}&${tempEndDate}')}}`);
+            }
+
             $.ajax({
                 url:'new-car/get-by-condition',
                 data: {
@@ -310,7 +339,8 @@
                 dataType:'json',
                 type:'POST',
                 success: function(output){
-                    // console.log(output);
+                    console.log(output);
+
                     var table = $('#datatable_newCar_newCarData').DataTable()
                     var MstTransaksiList = output.MstTransaksiList;
                     table.clear().draw();
@@ -413,11 +443,6 @@
             })
         };
 
-        // Modal Download
-        // $(document).on('click','.button_newCar_download',function(){
-        //     $('#modal_newCar_download').modal();
-        // });
-        
         // Modal View/Update
         $(document).on('click','.button_newCar_view',function(){
             var id = $(this).attr('MstTransaksi_Id');
@@ -428,7 +453,7 @@
                 dataType:'JSON', 
                 type:'GET',
                 success: function (val){
-                    // console.log(val);
+                    console.log(val);
                     
                     $('[name="updateNewCar_User_UserName"]').val(val.User_UserName);
 

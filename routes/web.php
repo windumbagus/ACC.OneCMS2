@@ -180,9 +180,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('user-cms/download','UserCMSController@download');
 
     Route::get('new-car', 'NewCarController@index');
-    Route::post('new-car/get-by-condition', 'NewCarController@getByCondition');
     Route::get('new-car/show', 'NewCarController@show');
     Route::get('new-car/delete/{id}', 'NewCarController@delete');
+    Route::get('new-car/download', 'NewCarController@download');
+    Route::get('new-car/download-by-condition/{Status}&amp;{StartDate}&amp;{EndDate}', 'NewCarController@downloadByCondition');
+    Route::post('new-car/get-by-condition', 'NewCarController@getByCondition');
     Route::post('new-car/update', 'NewCarController@update');
 
     Route::get('/acc-yes-migration','AccYesMigrationController@index');
