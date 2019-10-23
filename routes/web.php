@@ -209,5 +209,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/setting-role-management/OnChangeDownload/{Id}','SettingRoleManagementController@OnChangeDownload');
     Route::get('/setting-role-management/OnChangeDelete/{Id}','SettingRoleManagementController@OnChangeDelete');
 
+    Route::get('/trade-in','TradeInController@index');
+    Route::post('/trade-in/get-by-condition','TradeInController@getByCondition');
+    Route::get('/trade-in/delete/{Id}','TradeInController@delete');
+    Route::get('/trade-in/show','TradeInController@show');
+    Route::get('/trade-in/approve','TradeInController@approve');
+
 
 });//end group route

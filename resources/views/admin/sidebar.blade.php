@@ -15,7 +15,7 @@
             <ul class="treeview-menu">
             <li class="@yield('user-mobile')"><a href="{{asset("user-mobile")}}"><i class="fa fa-circle-o"></i> User Mobile</a></li>
             <li class="@yield('user-cms')"><a href="{{asset("user-cms")}}"><i class="fa fa-circle-o"></i> User CMS</a></li>
-            <li class="@yield('role-management')"><a href="{{asset("role-management")}}"><i class="fa fa-circle-o"></i> Role Management</a></li>
+            <li class="@yield('role-management')"><a href="{{asset("role-management ")}}"><i class="fa fa-circle-o"></i> Role Management</a></li>
             <li class="@yield('acc-yes-migration')"><a href="{{asset('acc-yes-migration')}}"><i class="fa fa-circle-o"></i> ACCYes Migration</a></li>
             </ul>
         </li>
@@ -64,7 +64,7 @@
                 </ul>
             </li>
 
-            {{-- <li class="@yield('fund') treeview">
+            <li class="@yield('fund') treeview">
                 <a href="#">
                 <i class="fa fa-credit-card"></i> <span>Fund</span>
                 <span class="pull-right-container">
@@ -72,10 +72,10 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                <li class="@yield('trade-in')"><a href="#"><i class="fa fa-circle-o"></i> Trade In</a></li>
-                <li class="@yield('Multipurpose')"><a href="#"><i class="fa fa-circle-o"></i> Multipurpose</a></li>
+                <li class="@yield('trade-in')"><a href="{{asset('trade-in')}}"><i class="fa fa-circle-o"></i> Trade In</a></li>
+                <li class="@yield('multipurpose')"><a href="{{asset('multipurpose')}}"><i class="fa fa-circle-o"></i> Multipurpose</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             <li class="@yield('service') treeview">
                 <a href="#">
