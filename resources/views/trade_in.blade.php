@@ -173,6 +173,7 @@
 
 <!-- page script -->
 <script>
+    $(document).ajaxStart(function() { Pace.restart(); });
     $(document).ready(function () {
         $('#trade_in_table').DataTable({
             'deferRender' : true,
@@ -420,64 +421,59 @@
                 success: function (val){
                     console.log(val);
                     
-                    // $('[name="updateNewCar_User_UserName"]').val(val.User_UserName);
+                    $('[name="MappingTransaksiId"]').val(val.MappingTransaksi.Id);
+                    
+                    $('[name="Name"]').val(val.User.Name);
+                    $('[name="Username"]').val(val.User.Username);
+                    $('[name="Email"]').val(val.User.Email);
+                    $('[name="MobilePhone"]').val(val.User.MobilePhone);
 
-                    // $('[name="updateNewCar_MstTransaksi_Id"]').val(val.MstTransaksi.Id);
-                    // $('[name="updateNewCar_MstTransaksi_UserId"]').val(val.MstTransaksi.UserId);
-                    // $('[name="updateNewCar_MstTransaksi_Brand"]').val(val.MstTransaksi.Brand);
-                    // $('[name="updateNewCar_MstTransaksi_KodeBrand"]').val(val.MstTransaksi.KodeBrand);
-                    // $('[name="updateNewCar_MstTransaksi_Type"]').val(val.MstTransaksi.Type);
-                    // $('[name="updateNewCar_MstTransaksi_KodeType"]').val(val.MstTransaksi.KodeType);
-                    // $('[name="updateNewCar_MstTransaksi_Model"]').val(val.MstTransaksi.Model);
-                    // $('[name="updateNewCar_MstTransaksi_KodeModel"]').val(val.MstTransaksi.KodeModel);
-                    // $('[name="updateNewCar_MstTransaksi_Tahun"]').val(val.MstTransaksi.Tahun);
-                    // $('[name="updateNewCar_MstTransaksi_Tenors"]').val(val.MstTransaksi.Tenors);
-                    // $('[name="updateNewCar_MstTransaksi_DP"]').val(val.MstTransaksi.DP);
-                    // $('[name="updateNewCar_MstTransaksi_Area"]').val(val.MstTransaksi.Area);
-                    // $('[name="updateNewCar_MstTransaksi_Cabang"]').val(val.MstTransaksi.Cabang);
+                    $('[name="transaction_date_pribadi"]').val(val.MstTransaksiPribadi.TransactionDate);
+                    $('[name="brand_pribadi"]').val(val.MstTransaksiPribadi.Brand);
+                    $('[name="kode_brand_pribadi"]').val(val.MstTransaksiPribadi.KodeBrand);
+                    $('[name="type_pribadi"]').val(val.MstTransaksiPribadi.Type);
+                    $('[name="kode_type_pribadi"]').val(val.MstTransaksiPribadi.KodeType);
+                    $('[name="model_pribadi"]').val(val.MstTransaksiPribadi.Model);
+                    $('[name="kode_model_pribadi"]').val(val.MstTransaksiPribadi.KodeModel);
+                    $('[name="tahun_pribadi"]').val(val.MstTransaksiPribadi.Tahun);
+                    // $('[name="MRP_pribadi"]').val(currencyFormat(val.MstTransaksiPribadi.MRP));
+                    if (val.MstTransaksiPribadi.hasOwnProperty('MRP')) {
+                            $('[name="MRP_pribadi"]').val(currencyFormat(val.MstTransaksiPribadi.MRP));
+                    }else{
+                        $('[name="MRP_pribadi"]').val("");
+                    }
+                    $('[name="lokasi_pribadi"]').val(val.MstTransaksiPribadi.Lokasi);
+                    $('[name="unit_pribadi"]').val(val.MstTransaksiPribadi.UnitId);
+                    $('[name="flag_BPKB_pribadi"]').val(val.MstTransaksiPribadi.FlagBPKB);
+                    if (val.MstTransaksiPribadi.hasOwnProperty('FlagNewExist')) {
+                        if (val.MstTransaksiPribadi.FlagNewExist == true) {
+                            $('[name="flag_new_exist_pribadi"]').attr('checked', true);
+                        }
+                    }else{
+                        $('[name="flag_new_exist_pribadi"]').attr('checked', false);   
+                    }
 
-                    // $('[name="updateNewCar_MstTransaksi_Installment"]').val(currencyFormat(val.MstTransaksi.Installment));
-                    // $('[name="updateNewCar_MstTransaksi_OTR"]').val(currencyFormat(val.MstTransaksi.OTR));
-                    // $('[name="updateNewCar_MstTransaksi_AmountDP"]').val(currencyFormat(val.MstTransaksi.AmountDP.toString()));
-                    // $('[name="updateNewCar_MstTransaksi_TDP"]').val(currencyFormat(val.MstTransaksi.TDP));
+                    $('[name="transaction_date_masa_depan"]').val(val.MstTransaksiMasaDepan.TransactionDate);
+                    $('[name="brand_masa_depan"]').val(val.MstTransaksiMasaDepan.Brand);
+                    $('[name="kode_brand_masa_depan"]').val(val.MstTransaksiMasaDepan.KodeBrand);
+                    $('[name="type_masa_depan"]').val(val.MstTransaksiMasaDepan.Type);
+                    $('[name="kode_type_masa_depan"]').val(val.MstTransaksiMasaDepan.KodeType);
+                    $('[name="model_masa_depan"]').val(val.MstTransaksiMasaDepan.Model);
+                    $('[name="kode_model_masa_depan"]').val(val.MstTransaksiMasaDepan.KodeModel);
+                    $('[name="tahun_masa_depan"]').val(val.MstTransaksiMasaDepan.Tahun);
+                    // $('[name="MRP_masa_depan"]').val(currencyFormat(val.MstTransaksiMasaDepan.MRP));
+                    if (val.MstTransaksiMasaDepan.hasOwnProperty('MRP')) {
+                            $('[name="MRP_masa_depan"]').val(currencyFormat(val.MstTransaksiMasaDepan.MRP));
+                    }else{
+                        $('[name="MRP_masa_depan"]').val("");
+                    }
+                    $('[name="lokasi_masa_depan"]').val(val.MstTransaksiMasaDepan.Lokasi);
 
-                    // if(val.MstTransaksi.FlagACP) {
-                    //     $('[name="updateNewCar_MstTransaksi_FlagACP"]').val('Ya');
-                    // } else {
-                    //     $('[name="updateNewCar_MstTransaksi_FlagACP"]').val('Tidak');
-                    // }
-                    // if(val.MstTransaksi.FlagAsuransi) {
-                    //     $('[name="updateNewCar_MstTransaksi_FlagAsuransi"]').val('Tunai');
-                    // } else {
-                    //     $('[name="updateNewCar_MstTransaksi_FlagAsuransi"]').val('Kredit');
-                    // }
-
-                    // var TransactionDate = 
-                    //     val.MstTransaksi.TransactionDate.substr(8,2) + "-" +
-                    //     val.MstTransaksi.TransactionDate.substr(5,2) + "-" +
-                    //     val.MstTransaksi.TransactionDate.substr(0,4);
-                    // $('[name="updateNewCar_MstTransaksi_TransactionDate"]').val(TransactionDate);
-
-                    // if(val.MstTransaksi.Status == 'Followed_Up') {
-                    //     $('[name="updateNewCar_MstTransaksi_Status"]').val("Followed Up");
-                    //     $('#button_newCarModalUpdate_save').hide();
-                    //     document.getElementById("textarea_newCarModalUpdate_notes").setAttribute("readonly", "")
-                    //     document.getElementById("textarea_newCarModalUpdate_notes").removeAttribute("required");
-                    //     if(val.MstTransaksi.hasOwnProperty('Notes')) {
-                    //         $('[name="updateNewCar_MstTransaksi_Notes"]').val(val.MstTransaksi.Notes);
-                    //     } else {
-                    //         $('[name="updateNewCar_MstTransaksi_Notes"]').val("");
-                    //     }
-                    // } else {
-                    //     $('[name="updateNewCar_MstTransaksi_Status"]').val(val.MstTransaksi.Status);
-                    //     $('#button_newCarModalUpdate_save').show();
-                    //     $('[name="updateNewCar_MstTransaksi_Notes"]').val("");
-                    //     document.getElementById("textarea_newCarModalUpdate_notes").setAttribute("required", "")
-                    //     document.getElementById("textarea_newCarModalUpdate_notes").removeAttribute("readonly");
-                    // }
-
-                    // $('[name="updateNewCar_MstTransaksi_FlagNewExist"]').val(val.MstTransaksi.FlagNewExist);
-                    // $('[name="updateNewCar_MstTransaksi_FlagTransaksi"]').val(val.MstTransaksi.FlagTransaksi);
+                    if(val.MstTransaksiPribadi.Status == 'Pending' && val.MstTransaksiMasaDepan.Status == 'Pending') {
+                        $('#button_approve_save').show();
+                    } else {
+                        $('#button_approve_save').hide();
+                    }
                 },
                 error: function(jqXhr, textStatus, errorThrown){
                     console.log(jqXhr);
@@ -485,7 +481,7 @@
                     console.log(textStatus);
                 },
             });
-            // $('#update-trade-in').modal();
+            $('#update-trade-in').modal();
         });
 
         window.currencyFormat = function(n) {
@@ -496,5 +492,5 @@
     })
 </script>
 
-{{-- @include('modal.update_trade_in') --}}
+@include('modal.update_trade_in')
 @endsection
