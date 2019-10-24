@@ -216,4 +216,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/trade-in/approve','TradeInController@approve');
     Route::get('/trade-in/download/{Status}/{StartDate}~{EndDate}','TradeInController@download');
 
+    Route::get('/multipurpose','MultipurposeController@index');
+    Route::post('/multipurpose/get-by-condition','MultipurposeController@getByCondition');
+    Route::get('/multipurpose/show','MultipurposeController@show');
+    Route::get('/multipurpose/delete/{Id}','MultipurposeController@delete');
+
 });//end group route
