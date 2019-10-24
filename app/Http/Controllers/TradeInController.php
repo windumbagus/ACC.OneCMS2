@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TradeInExport;
 
 class TradeInController extends Controller
 {
@@ -130,5 +132,196 @@ class TradeInController extends Controller
         }else{
             return redirect('/trade-in')->with('error',$val->Message);
         }
+    }
+
+    public function download($Status=null,$StartDate=null,$EndDate=null, Request $request)
+    {
+        if ($Status === "null"){
+            $Status = "";
+        }
+        if ($StartDate === "null"){
+            $StartDate = "";            
+        }
+        if ($EndDate === "null"){
+            $EndDate = "";
+        }
+
+        $data = json_encode(array(
+            "Status"=> "$Status",
+            "StartDate"=> "$StartDate",
+            "EndDate"=> "$EndDate"
+        ));
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/TradeInListAPI/GetAllTradeInListByCondition"; 
+        // dd($url);
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
+
+        $data=[];
+        foreach ($Hasils as $Hasil) {
+         
+            if (property_exists($Hasil->User, 'Name')){
+                $Name = $Hasil->User->Name;
+            }else{
+                $Name = "";
+            }
+
+
+            if (property_exists($Hasil->MstTransaksiPribadi, 'TransactionDate')){
+                $TransactionDatePribadi = $Hasil->MstTransaksiPribadi->TransactionDate;
+            }else{
+                $TransactionDatePribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'Brand')){
+                $BrandPribadi = $Hasil->MstTransaksiPribadi->Brand;
+            }else{
+                $BrandPribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'KodeBrand')){
+                $KodeBrandPribadi = $Hasil->MstTransaksiPribadi->KodeBrand;
+            }else{
+                $KodeBrandPribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'Type')){
+                $TypePribadi = $Hasil->MstTransaksiPribadi->Type;
+            }else{
+                $TypePribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'KodeType')){
+                $KodeTypePribadi = $Hasil->MstTransaksiPribadi->KodeType;
+            }else{
+                $KodeTypePribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'Model')){
+                $ModelPribadi = $Hasil->MstTransaksiPribadi->Model;
+            }else{
+                $ModelPribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'KodeModel')){
+                $KodeModelPribadi = $Hasil->MstTransaksiPribadi->KodeModel;
+            }else{
+                $KodeModelPribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'Tahun')){
+                $TahunPribadi = $Hasil->MstTransaksiPribadi->Tahun;
+            }else{
+                $TahunPribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'MRP')){
+                $MRPPribadi = $Hasil->MstTransaksiPribadi->MRP;
+            }else{
+                $MRPPribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'Lokasi')){
+                $LokasiPribadi = $Hasil->MstTransaksiPribadi->Lokasi;
+            }else{
+                $LokasiPribadi = "";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'UnitId')){
+                $UnitIdPribadi = $Hasil->MstTransaksiPribadi->UnitId;
+            }else{
+                $UnitIdPribadi = "0";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'FlagNewExist')){
+                $FlagNewExistPribadi = $Hasil->MstTransaksiPribadi->FlagNewExist;
+            }else{
+                $FlagNewExistPribadi = "FALSE";
+            }
+            if (property_exists($Hasil->MstTransaksiPribadi, 'FlagBPKB')){
+                $FlagBPKBPribadi = $Hasil->MstTransaksiPribadi->FlagBPKB;
+            }else{
+                $FlagBPKBPribadi = "N";
+            }
+            
+            
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'TransactionDate')){
+                $TransactionDateMasaDepan = $Hasil->MstTransaksiMasaDepan->TransactionDate;
+            }else{
+                $TransactionDateMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'Brand')){
+                $BrandMasaDepan = $Hasil->MstTransaksiMasaDepan->Brand;
+            }else{
+                $BrandMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'KodeBrand')){
+                $KodeBrandMasaDepan = $Hasil->MstTransaksiMasaDepan->KodeBrand;
+            }else{
+                $KodeBrandMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'Type')){
+                $TypeMasaDepan = $Hasil->MstTransaksiMasaDepan->Type;
+            }else{
+                $TypeMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'KodeType')){
+                $KodeTypeMasaDepan = $Hasil->MstTransaksiMasaDepan->KodeType;
+            }else{
+                $KodeTypeMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'Model')){
+                $ModelMasaDepan = $Hasil->MstTransaksiMasaDepan->Model;
+            }else{
+                $ModelMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'KodeModel')){
+                $KodeModelMasaDepan = $Hasil->MstTransaksiMasaDepan->KodeModel;
+            }else{
+                $KodeModelMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'Tahun')){
+                $TahunMasaDepan = $Hasil->MstTransaksiMasaDepan->Tahun;
+            }else{
+                $TahunMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'MRP')){
+                $MRPMasaDepan = $Hasil->MstTransaksiMasaDepan->MRP;
+            }else{
+                $MRPMasaDepan = "";
+            }
+            if (property_exists($Hasil->MstTransaksiMasaDepan, 'Lokasi')){
+                $LokasiMasaDepan = $Hasil->MstTransaksiMasaDepan->Lokasi;
+            }else{
+                $LokasiMasaDepan = "";
+            }
+            array_push($data,[
+                "Username"=>$Name,
+                "TransactionDate"=>$TransactionDatePribadi,
+                "Brand"=>$BrandPribadi,
+                "KodeBrand"=>$KodeBrandPribadi,
+                "Type"=>$TypePribadi,
+                "KodeType"=>$KodeTypePribadi,
+                "Model"=>$ModelPribadi,
+                "KodeModel"=>$KodeModelPribadi,
+                "Tahun"=>$TahunPribadi,
+                "MRP"=>$MRPPribadi,
+                "Lokasi"=>$LokasiPribadi,
+                "UnitId"=>$UnitIdPribadi,
+                "FlagNewExist"=>$FlagNewExistPribadi,
+                "FlagBPKB"=>$FlagBPKBPribadi,
+                "TransactionDateMasaDepan"=>$TransactionDateMasaDepan,
+                "BrandMasaDepan"=>$BrandMasaDepan,
+                "KodeBrandMasaDepan"=>$KodeBrandMasaDepan,
+                "TypeMasaDepan"=>$TypeMasaDepan,
+                "KodeTypeMasaDepan"=>$KodeTypeMasaDepan,
+                "ModelMasaDepan"=>$ModelMasaDepan,
+                "KodeModelMasaDepan"=>$KodeModelMasaDepan,
+                "TahunMasaDepan"=>$TahunMasaDepan,
+                "MRPMasaDepan"=>$MRPMasaDepan,
+                "LokasiMasaDepan"=>$LokasiMasaDepan,
+            ]);
+        }
+        // dd($data);
+        return Excel::download(new TradeInExport($data), 'ACCOne Trade In '. date("Y-m-d") .'.xlsx');
     }
 }

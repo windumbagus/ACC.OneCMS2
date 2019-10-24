@@ -13,7 +13,7 @@
             <div class="col-sm-3">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                    <a href="#" class="btn btn-block btn-primary">Download</a>  
+                    <a href="{{asset('/trade-in/download/null/null~null')}}" class="btn btn-block btn-primary" id="button-download">Download</a>  
                 </div>
             </div>
         </div>
@@ -286,6 +286,26 @@
             // console.log(Status);
             // console.log(StartDate);
             // console.log(EndDate);
+
+            // Function Download
+            if ((Status == "") && (StartDate == "") && (EndDate == "") ){
+                document.getElementById('button-download').setAttribute("href", "");
+                document.getElementById('button-download').setAttribute("href", `{{asset('/trade-in/download/${tempStatus}/${tempStartDate}~${tempEndDate}')}}`);
+            } else {
+                var tempStatus = Status;
+                var tempStartDate = StartDate;
+                var tempEndDate = EndDate;
+                
+                if (Status == "")
+                    tempStatus = "null";
+                if (StartDate == "--")
+                    tempStartDate = "null";
+                if (EndDate == "--")
+                    tempEndDate = "null";
+                document.getElementById('button-download').setAttribute("href", "");
+                document.getElementById('button-download').setAttribute("href", `{{asset('/trade-in/download/${tempStatus}/${tempStartDate}~${tempEndDate}')}}`);
+            }
+
             $.ajax({
                 url:'trade-in/get-by-condition',
                 data: {
