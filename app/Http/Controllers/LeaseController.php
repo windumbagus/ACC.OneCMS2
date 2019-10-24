@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Exports\NewCarExport;
+use App\Exports\LeaseExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class NewCarController extends Controller
+class LeaseController extends Controller
 {
     public function index(Request $request)
     {
@@ -19,7 +19,7 @@ class NewCarController extends Controller
             'RoleId'=>$request->session()->get('RoleId')
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetAllNewCar"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLease"; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -30,7 +30,7 @@ class NewCarController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-        return view('new_car',[
+        return view('lease',[
             'MstTransaksiList' => $val->MstTransaksiList,
             'MstTrsansaksi_StatusList'=> $val->MstTrsansaksi_StatusList,
             'session'=> $session     
@@ -48,7 +48,7 @@ class NewCarController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetAllNewCarByCondition"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLeaseByCondition"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -66,7 +66,7 @@ class NewCarController extends Controller
 
     public function show(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetNewCarById?Input=".$request->Id; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetLeaseById?Input=".$request->Id; 
         // dd($url);  
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -83,7 +83,7 @@ class NewCarController extends Controller
 
     public function delete($id=null, Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/DeleteNewCarById?Input=".$id;
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/DeleteLeaseById?Input=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -95,20 +95,20 @@ class NewCarController extends Controller
         $data = json_decode($result);
         // dd($result);
 
-        return redirect('/new-car')->with('success',' Delete Data Successfully!');
+        return redirect('/lease')->with('success',' Delete Data Successfully!');
     }
     
     public function update(Request $request)
     {
         $data = json_encode(
             array(
-                "MstTransaksi_Id" => $request->updateNewCar_MstTransaksi_Id,
-                "MstTransaksi_Notes" => $request->updateNewCar_MstTransaksi_Notes,
+                "MstTransaksi_Id" => $request->updateLease_MstTransaksi_Id,
+                "MstTransaksi_Notes" => $request->updateLease_MstTransaksi_Notes,
             )
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/FollowUpNewCar"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/FollowUpLease"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -122,11 +122,11 @@ class NewCarController extends Controller
         // dd($val);
 
         if(property_exists($val, 'IsSuccess') && ($val->IsSuccess)) {
-            return redirect('/new-car')->with('success',' Follow Up Data Successfully!');
+            return redirect('/lease')->with('success',' Follow Up Data Successfully!');
         } elseif(property_exists($val, 'ErrorMessage')) {
-            return redirect('/new-car')->with('error', $val->ErrorMessage);
+            return redirect('/lease')->with('error', $val->ErrorMessage);
         } else {
-            return redirect('/new-car')->with('error',' Follow Up Data Failed!');
+            return redirect('/lease')->with('error',' Follow Up Data Failed!');
         }
     }
 
@@ -151,7 +151,7 @@ class NewCarController extends Controller
         // dd($data_Input);
 
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetAllNewCarByCondition"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLeaseByCondition"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_Input);
@@ -165,11 +165,13 @@ class NewCarController extends Controller
         // dd($val);
 
         $data_Output=[];
-        $data_Output_fileName='accone New Car Transaction '.date("Y-m-d").'.xls';
+        $data_Output_fileName='accone Lease Transaction '.date("Y-m-d").'.xls';
         if (property_exists($val, 'MstTransaksiList')) {
             foreach ($val->MstTransaksiList as $MstTransaksi) {
 
                 $tmp_User_Username = "";
+                $tmp_User_Name = "";
+                $tmp_User_MobilePhone = "";
                 $tmp_MstTransaksi_TransactionDate = "";
                 $tmp_MstTransaksi_Brand = "";
                 $tmp_MstTransaksi_KodeBrand = "";
@@ -178,22 +180,21 @@ class NewCarController extends Controller
                 $tmp_MstTransaksi_Model = "";
                 $tmp_MstTransaksi_KodeModel = "";
                 $tmp_MstTransaksi_Tahun = "";
-                $tmp_MstTransaksi_Area = "";
-                $tmp_MstTransaksi_Cabang = "";
-                $tmp_MstTransaksi_FlagACP = "";
-                $tmp_MstTransaksi_FlagAsuransi = "";
+                $tmp_MstTransaksi_Tenors = "0";
+                $tmp_MstTransaksi_Tujuan = "";
+                $tmp_MstTransaksi_FlagNewUsed = 'FALSE';
                 $tmp_MstTransaksi_Status = "";
                 $tmp_MstTransaksi_Status_Detail = "";
                 $tmp_MstTransaksi_Notes = "";
-                $tmp_MstTransaksi_Tenors = "0";
-                $tmp_MstTransaksi_DP = "0";
-                $tmp_MstTransaksi_Installment = "Rp. ";
-                $tmp_MstTransaksi_OTR = "Rp. ";
-                $tmp_MstTransaksi_AmountDP = "Rp. ";
-                $tmp_MstTransaksi_TDP = "Rp. ";
 
-                if (property_exists($MstTransaksi, 'User')) 
-                    $tmp_User_Username = $MstTransaksi->User->Username;
+                if (property_exists($MstTransaksi, 'User')) {
+                    if (property_exists($MstTransaksi->User, 'Username')) 
+                        $tmp_User_Username = $MstTransaksi->User->Username;
+                    if (property_exists($MstTransaksi->User, 'Name')) 
+                        $tmp_User_Name = $MstTransaksi->User->Name;
+                    if (property_exists($MstTransaksi->User, 'MobilePhone')) 
+                        $tmp_User_MobilePhone = $MstTransaksi->User->MobilePhone;
+                }
                 if (property_exists($MstTransaksi->MstTransaksi, 'TransactionDate')) 
                     $tmp_MstTransaksi_TransactionDate = date('d-m-Y', strtotime($MstTransaksi->MstTransaksi->TransactionDate));
                 if (property_exists($MstTransaksi->MstTransaksi, 'Brand')) 
@@ -210,10 +211,17 @@ class NewCarController extends Controller
                     $tmp_MstTransaksi_KodeModel = $MstTransaksi->MstTransaksi->KodeModel;
                 if (property_exists($MstTransaksi->MstTransaksi, 'Tahun')) 
                     $tmp_MstTransaksi_Tahun = $MstTransaksi->MstTransaksi->Tahun;
-                if (property_exists($MstTransaksi->MstTransaksi, 'Area')) 
-                    $tmp_MstTransaksi_Area = $MstTransaksi->MstTransaksi->Area;
-                if (property_exists($MstTransaksi->MstTransaksi, 'Cabang')) 
-                    $tmp_MstTransaksi_Cabang = $MstTransaksi->MstTransaksi->Cabang;
+                if (property_exists($MstTransaksi->MstTransaksi, 'Tenors'))  
+                    if (!($MstTransaksi->MstTransaksi->Tenors == 0) || ($MstTransaksi->MstTransaksi->Tenors == ""))  
+                        $tmp_MstTransaksi_Tenors = (double)$MstTransaksi->MstTransaksi->Tenors;
+                if (property_exists($MstTransaksi->MstTransaksi, 'Tujuan')) 
+                    $tmp_MstTransaksi_Tujuan = $MstTransaksi->MstTransaksi->Tujuan;
+                if (property_exists($MstTransaksi->MstTransaksi, 'FlagNewUsed')) {
+                    if ($MstTransaksi->MstTransaksi->FlagNewUsed) 
+                        $tmp_MstTransaksi_FlagNewUsed = 'TRUE';
+                    else 
+                        $tmp_MstTransaksi_FlagNewUsed = 'FALSE';
+                }
                 if (property_exists($MstTransaksi->MstTransaksi, 'Status')) 
                     $tmp_MstTransaksi_Status = $MstTransaksi->MstTransaksi->Status;
                 if (property_exists($MstTransaksi->MstTransaksi, 'Status_Detail')) 
@@ -221,46 +229,10 @@ class NewCarController extends Controller
                 if (property_exists($MstTransaksi->MstTransaksi, 'Notes')) 
                     $tmp_MstTransaksi_Notes = $MstTransaksi->MstTransaksi->Notes;
                 
-                if (property_exists($MstTransaksi->MstTransaksi, 'Tenors'))  
-                    if (!($MstTransaksi->MstTransaksi->Tenors == 0) || ($MstTransaksi->MstTransaksi->Tenors == ""))  
-                        $tmp_MstTransaksi_Tenors = (double)$MstTransaksi->MstTransaksi->Tenors;
-                if (property_exists($MstTransaksi->MstTransaksi, 'DP')) 
-                    if (!($MstTransaksi->MstTransaksi->DP == 0) || ($MstTransaksi->MstTransaksi->DP == ""))  
-                        $tmp_MstTransaksi_DP = $MstTransaksi->MstTransaksi->DP;
-                
-                if ((property_exists($MstTransaksi->MstTransaksi, 'Installment')) 
-                    && !(($MstTransaksi->MstTransaksi->Installment == "0") || ($MstTransaksi->MstTransaksi->Installment == ""))) 
-                    $tmp_MstTransaksi_Installment .= number_format($MstTransaksi->MstTransaksi->Installment);
-                else   
-                    $tmp_MstTransaksi_Installment .= "0";
-                if ((property_exists($MstTransaksi->MstTransaksi, 'OTR')) 
-                    && !(($MstTransaksi->MstTransaksi->OTR == "0") || ($MstTransaksi->MstTransaksi->OTR == "")))
-                    $tmp_MstTransaksi_OTR .= number_format($MstTransaksi->MstTransaksi->OTR);
-                else   
-                    $tmp_MstTransaksi_OTR .= "0";
-                if ((property_exists($MstTransaksi->MstTransaksi, 'AmountDP')) 
-                    && !(($MstTransaksi->MstTransaksi->AmountDP == 0) || ($MstTransaksi->MstTransaksi->AmountDP == "")))
-                    $tmp_MstTransaksi_AmountDP .= number_format($MstTransaksi->MstTransaksi->AmountDP);
-                else   
-                    $tmp_MstTransaksi_AmountDP .= "0";
-                if ((property_exists($MstTransaksi->MstTransaksi, 'TDP')) 
-                    && !(($MstTransaksi->MstTransaksi->TDP == "0") || ($MstTransaksi->MstTransaksi->TDP == "")))
-                    $tmp_MstTransaksi_TDP .= number_format((double) $MstTransaksi->MstTransaksi->TDP);
-                else   
-                    $tmp_MstTransaksi_TDP .= "0";
-
-                if ((property_exists($MstTransaksi->MstTransaksi, 'FlagACP')) && ($MstTransaksi->MstTransaksi->FlagACP))
-                    $tmp_MstTransaksi_FlagACP = "Ya";
-                else
-                    $tmp_MstTransaksi_FlagACP = "Tidak";
-                if ((property_exists($MstTransaksi->MstTransaksi, 'FlagAsuransi')) && ($MstTransaksi->MstTransaksi->FlagAsuransi))
-                    $tmp_MstTransaksi_FlagAsuransi = "Tunai";
-                else
-                    $tmp_MstTransaksi_FlagAsuransi = "Kredit";
-
-                
                 array_push($data_Output,[
                     "Username"=>$tmp_User_Username,
+                    "Name"=>$tmp_User_Name,
+                    "MobilePhone"=>$tmp_User_MobilePhone,
                     "TransactionDate"=>$tmp_MstTransaksi_TransactionDate,
                     "Brand"=>$tmp_MstTransaksi_Brand,
                     "KodeBrand"=>$tmp_MstTransaksi_KodeBrand,
@@ -270,15 +242,8 @@ class NewCarController extends Controller
                     "KodeModel"=>$tmp_MstTransaksi_KodeModel,
                     "Tahun"=>$tmp_MstTransaksi_Tahun,
                     "Tenors"=>$tmp_MstTransaksi_Tenors,
-                    "Installment"=>$tmp_MstTransaksi_Installment,
-                    "OTR"=>$tmp_MstTransaksi_OTR,
-                    "DP"=>$tmp_MstTransaksi_DP,
-                    "AmountDP"=>$tmp_MstTransaksi_AmountDP,
-                    "Area"=>$tmp_MstTransaksi_Area,
-                    "Cabang"=>$tmp_MstTransaksi_Cabang,
-                    "TDP"=>$tmp_MstTransaksi_TDP,
-                    "FlagACP"=>$tmp_MstTransaksi_FlagACP,
-                    "FlagAsuransi"=>$tmp_MstTransaksi_FlagAsuransi,
+                    "Tujuan"=>$tmp_MstTransaksi_Tujuan,
+                    "FlagNewUsed"=>$tmp_MstTransaksi_FlagNewUsed,
                     "Status"=>$tmp_MstTransaksi_Status,
                     "Status_Detail"=>$tmp_MstTransaksi_Status_Detail,
                     "Notes"=>$tmp_MstTransaksi_Notes,
@@ -286,6 +251,6 @@ class NewCarController extends Controller
             }
         }
         // dd($data_Output);
-        return Excel::download(new NewCarExport($data_Output), $data_Output_fileName);
+        return Excel::download(new LeaseExport($data_Output), $data_Output_fileName);
     }
 }

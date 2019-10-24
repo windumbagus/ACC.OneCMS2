@@ -17,19 +17,6 @@
                         <input type="hidden" class="form-control" name="updateNewCar_MstTransaksi_Id"
                             id='input_newCarModalUpdate_id'>
                     </div>
-                    <div class="form-group" hidden>
-                        <label>FlagNewExist:</label><br>
-                        <input type="hidden" class="form-control" name="updateNewCar_MstTransaksi_FlagNewExist">
-                    </div>
-                    <div class="form-group" hidden>
-                        <label>FlagTransaksi:</label><br>
-                        <input type="hidden" class="form-control" name="updateNewCar_MstTransaksi_FlagTransaksi">
-                    </div>
-
-                    <div class="form-group" hidden>
-                        <label>User Id:</label><br>
-                        <input type="hidden" class="form-control" name="updateNewCar_MstTransaksi_UserId">
-                    </div>
 
                     <div class="form-group">
                         <label>User:</label><br>

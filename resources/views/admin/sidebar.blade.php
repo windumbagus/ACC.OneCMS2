@@ -60,7 +60,7 @@
                 </a>
                 <ul class="treeview-menu">
                 <li class="@yield('new-car')"><a href="{{asset('new-car')}}"><i class="fa fa-circle-o"></i> New Car</a></li>
-                <li class="@yield('lease')"><a href="#"><i class="fa fa-circle-o"></i> Lease</a></li>
+                <li class="@yield('lease')"><a href="{{asset('lease')}}"><i class="fa fa-circle-o"></i> Lease</a></li>
                 </ul>
             </li>
 

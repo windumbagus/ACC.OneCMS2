@@ -182,10 +182,16 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('new-car', 'NewCarController@index');
     Route::get('new-car/show', 'NewCarController@show');
     Route::get('new-car/delete/{id}', 'NewCarController@delete');
-    Route::get('new-car/download', 'NewCarController@download');
-    Route::get('new-car/download-by-condition/{Status}&amp;{StartDate}&amp;{EndDate}', 'NewCarController@downloadByCondition');
+    Route::get('new-car/download/{Status}&amp;{StartDate}&amp;{EndDate}', 'NewCarController@download');
     Route::post('new-car/get-by-condition', 'NewCarController@getByCondition');
     Route::post('new-car/update', 'NewCarController@update');
+
+    Route::get('lease', 'LeaseController@index');
+    Route::get('lease/show', 'LeaseController@show');
+    Route::get('lease/delete/{id}', 'LeaseController@delete');
+    Route::get('lease/download/{Status}&amp;{StartDate}&amp;{EndDate}', 'LeaseController@download');
+    Route::post('lease/get-by-condition', 'LeaseController@getByCondition');
+    Route::post('lease/update', 'LeaseController@update');
 
     Route::get('/acc-yes-migration','AccYesMigrationController@index');
     Route::get('/acc-yes-migration/delete/{Id}','AccYesMigrationController@delete');  
