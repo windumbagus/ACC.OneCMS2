@@ -110,4 +110,25 @@ class MultipurposeController extends Controller
             return redirect('/multipurpose')->with('error',$val->Message);
         }
     }
+
+    public function FollowUp(Request $request)
+    {
+        //API GET
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MultipurposeAPI/FollowedUp?MstTransaksiId=".$request->MstTransaksiId; 
+        // dd($url);
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val= json_decode($result);
+        // dd($val);
+        if(property_exists($val, 'Success')){
+            return redirect('/multipurpose')->with('success',$val->Message);
+        }else{
+            return redirect('/multipurpose')->with('error',$val->Message);
+        }
+    }
 }

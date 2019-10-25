@@ -345,7 +345,7 @@
                                 '</span>',
                                 '<span>'+x.MstCustomerDetail.FlagCustomer+'</span>',
                                 '<span>'+
-                                    '<a href="#" data-Id="'+x.MstTransaksi.Id+'" class="update-multipurpose'+
+                                    '<a href="#" data-Id="'+x.MstTransaksi.Id+'" class="update-multipurpose '+
                                         'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;'+
                                     `<a href="{{asset('multipurpose/delete/${x.MstTransaksi.Id}')}}"`+
                                         `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
@@ -367,7 +367,7 @@
         // Modal View/Update
         $(document).on('click','.update-multipurpose',function(){
             var id = $(this).attr('data-Id');
-            // console.log(id);
+            console.log(id);
             $.ajax({
                 url:"{{asset('/multipurpose/show')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}'},
@@ -376,59 +376,131 @@
                 success: function (val){
                     console.log(val);
                     
-                    // $('[name="MappingTransaksiId"]').val(val.MappingTransaksi.Id);
+                    $('[name="MstTransaksiId"]').val(val.MstTransaksi.Id);
                     
-                    // $('[name="Name"]').val(val.User.Name);
-                    // $('[name="Username"]').val(val.User.Username);
-                    // $('[name="Email"]').val(val.User.Email);
-                    // $('[name="MobilePhone"]').val(val.User.MobilePhone);
+                    $('[name="Name"]').val(val.User.Name);
+                    $('[name="Email"]').val(val.User.Email);
+                    $('[name="MobilePhone"]').val(val.User.MobilePhone);
 
-                    // $('[name="transaction_date_pribadi"]').val(val.MstTransaksiPribadi.TransactionDate);
-                    // $('[name="brand_pribadi"]').val(val.MstTransaksiPribadi.Brand);
-                    // $('[name="kode_brand_pribadi"]').val(val.MstTransaksiPribadi.KodeBrand);
-                    // $('[name="type_pribadi"]').val(val.MstTransaksiPribadi.Type);
-                    // $('[name="kode_type_pribadi"]').val(val.MstTransaksiPribadi.KodeType);
-                    // $('[name="model_pribadi"]').val(val.MstTransaksiPribadi.Model);
-                    // $('[name="kode_model_pribadi"]').val(val.MstTransaksiPribadi.KodeModel);
-                    // $('[name="tahun_pribadi"]').val(val.MstTransaksiPribadi.Tahun);
-                    // // $('[name="MRP_pribadi"]').val(currencyFormat(val.MstTransaksiPribadi.MRP));
-                    // if (val.MstTransaksiPribadi.hasOwnProperty('MRP')) {
-                    //         $('[name="MRP_pribadi"]').val(currencyFormat(val.MstTransaksiPribadi.MRP));
-                    // }else{
-                    //     $('[name="MRP_pribadi"]').val("");
-                    // }
-                    // $('[name="lokasi_pribadi"]').val(val.MstTransaksiPribadi.Lokasi);
-                    // $('[name="unit_pribadi"]').val(val.MstTransaksiPribadi.UnitId);
-                    // $('[name="flag_BPKB_pribadi"]').val(val.MstTransaksiPribadi.FlagBPKB);
-                    // if (val.MstTransaksiPribadi.hasOwnProperty('FlagNewExist')) {
-                    //     if (val.MstTransaksiPribadi.FlagNewExist == true) {
-                    //         $('[name="flag_new_exist_pribadi"]').attr('checked', true);
-                    //     }
-                    // }else{
-                    //     $('[name="flag_new_exist_pribadi"]').attr('checked', false);   
-                    // }
+                    $('[name="TransactionDate"]').val(val.MstTransaksi.TransactionDate.substring(0,10));
+                    $('[name="Brand"]').val(val.MstTransaksi.Brand);
+                    $('[name="KodeBrand"]').val(val.MstTransaksi.KodeBrand);
+                    $('[name="Type"]').val(val.MstTransaksi.Type);
+                    $('[name="KodeType"]').val(val.MstTransaksi.KodeType);
+                    $('[name="Model"]').val(val.MstTransaksi.Model);
+                    $('[name="KodeModel"]').val(val.MstTransaksi.KodeModel);
+                    $('[name="Tahun"]').val(val.MstTransaksi.Tahun);
+                    $('[name="Tujuan"]').val(val.MstTransaksi.Tujuan);
+                    $('[name="Installment"]').val(val.MstTransaksi.Installment);
+                    $('[name="Cabang"]').val(val.MstTransaksi.Cabang);
+                    $('[name="Area"]').val(val.MstTransaksi.Area);
 
-                    // $('[name="transaction_date_masa_depan"]').val(val.MstTransaksiMasaDepan.TransactionDate);
-                    // $('[name="brand_masa_depan"]').val(val.MstTransaksiMasaDepan.Brand);
-                    // $('[name="kode_brand_masa_depan"]').val(val.MstTransaksiMasaDepan.KodeBrand);
-                    // $('[name="type_masa_depan"]').val(val.MstTransaksiMasaDepan.Type);
-                    // $('[name="kode_type_masa_depan"]').val(val.MstTransaksiMasaDepan.KodeType);
-                    // $('[name="model_masa_depan"]').val(val.MstTransaksiMasaDepan.Model);
-                    // $('[name="kode_model_masa_depan"]').val(val.MstTransaksiMasaDepan.KodeModel);
-                    // $('[name="tahun_masa_depan"]').val(val.MstTransaksiMasaDepan.Tahun);
-                    // // $('[name="MRP_masa_depan"]').val(currencyFormat(val.MstTransaksiMasaDepan.MRP));
-                    // if (val.MstTransaksiMasaDepan.hasOwnProperty('MRP')) {
-                    //         $('[name="MRP_masa_depan"]').val(currencyFormat(val.MstTransaksiMasaDepan.MRP));
-                    // }else{
-                    //     $('[name="MRP_masa_depan"]').val("");
-                    // }
-                    // $('[name="lokasi_masa_depan"]').val(val.MstTransaksiMasaDepan.Lokasi);
+                    $('[name="Tenors"]').val(val.MstTransaksi.Tenors);
+                    $('[name="Installment"]').val(val.MstTransaksi.Installment);
+                    $('[name="Dana"]').val(val.MstTransaksi.Dana);
+                    $('[name="MRP"]').val(val.MstTransaksi.MRP);
 
-                    // if(val.MstTransaksiPribadi.Status == 'Pending' && val.MstTransaksiMasaDepan.Status == 'Pending') {
-                    //     $('#button_approve_save').show();
-                    // } else {
-                    //     $('#button_approve_save').hide();
-                    // }
+                    if (val.MstTransaksi.hasOwnProperty('FlagNewExist')) {
+                        if (val.MstTransaksi.FlagNewExist == true) {
+                            $('[name="FlagNewExist"]').val("New Customer"); 
+                        }
+                    }else{
+                        $('[name="FlagNewExist"]').val("Existing Customer");  
+                    }
+
+                    if (val.MstTransaksi.hasOwnProperty('FlagBPKB')) {
+                        if (val.MstTransaksi.FlagBPKB == "Y") {
+                            $('[name="FlagBPKB"]').val("BPKB di ACC");
+                        }else{
+                            $('[name="FlagBPKB"]').val("BPKB tidak di ACC");   
+                        }
+                    }
+
+                    if (val.hasOwnProperty('Foto1')) {
+                        if (val.Foto1.hasOwnProperty('Foto')) {
+                            $('[name="picture1"]').attr("src","data:image/jpeg;base64,"+val.Foto1.Foto);   
+                        }else{
+                            $('[name="picture1"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    if (val.hasOwnProperty('Foto2')) {
+                        if (val.Foto2.hasOwnProperty('Foto')) {
+                            $('[name="picture2"]').attr("src","data:image/jpeg;base64,"+val.Foto2.Foto);   
+                        }else{
+                            $('[name="picture2"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    if (val.hasOwnProperty('Foto3')) {
+                        if (val.Foto3.hasOwnProperty('Foto')) {
+                            $('[name="picture3"]').attr("src","data:image/jpeg;base64,"+val.Foto3.Foto);   
+                        }else{
+                            $('[name="picture3"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    if (val.hasOwnProperty('Foto4')) {
+                        if (val.Foto4.hasOwnProperty('Foto')) {
+                            $('[name="picture4"]').attr("src","data:image/jpeg;base64,"+val.Foto4.Foto);   
+                        }else{
+                            $('[name="picture4"]').val("");        
+                        }
+                    }else{
+
+                    }   
+
+                    if (val.hasOwnProperty('Foto5')) {
+                        if (val.Foto5.hasOwnProperty('Foto')) {
+                            $('[name="picture5"]').attr("src","data:image/jpeg;base64,"+val.Foto5.Foto);   
+                        }else{
+                            $('[name="picture5"]').val("");        
+                        }
+                    }else{
+
+                    }    
+
+                    if (val.hasOwnProperty('Foto6')) {
+                        if (val.Foto6.hasOwnProperty('Foto')) {
+                            $('[name="picture6"]').attr("src","data:image/jpeg;base64,"+val.Foto6.Foto);   
+                        }else{
+                            $('[name="picture6"]').val("");        
+                        }
+                    }else{
+
+                    }             
+
+                    if (val.hasOwnProperty('Foto7')) {
+                        if (val.Foto7.hasOwnProperty('Foto')) {
+                            $('[name="picture7"]').attr("src","data:image/jpeg;base64,"+val.Foto7.Foto);   
+                        }else{
+                            $('[name="picture7"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    if (val.hasOwnProperty('Foto8')) {
+                        if (val.Foto8.hasOwnProperty('Foto')) {
+                            $('[name="picture8"]').attr("src","data:image/jpeg;base64,"+val.Foto8.Foto);   
+                        }else{
+                            $('[name="picture8"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    if(val.MstTransaksi.Status == 'Pending' ) {
+                        $('#button_Follow_up').show();
+                    } else {
+                        $('#button_Follow_up').hide();
+                    }
                 },
                 error: function(jqXhr, textStatus, errorThrown){
                     console.log(jqXhr);
@@ -436,16 +508,11 @@
                     console.log(textStatus);
                 },
             });
-            // $('#update-trade-in').modal();
+            $('#update-multipurpose').modal();
         });
 
-        window.currencyFormat = function(n) {
-            return n.replace(/./g, function(c, i, a) {
-                return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;
-            });
-        }
     })
 </script>
 
-{{-- @include('modal.update_trade_in') --}}
+@include('modal.update_multipurpose')
 @endsection

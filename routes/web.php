@@ -226,5 +226,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/multipurpose/get-by-condition','MultipurposeController@getByCondition');
     Route::get('/multipurpose/show','MultipurposeController@show');
     Route::get('/multipurpose/delete/{Id}','MultipurposeController@delete');
+    Route::get('/multipurpose/FollowUp','MultipurposeController@FollowUp');
 
 });//end group route
