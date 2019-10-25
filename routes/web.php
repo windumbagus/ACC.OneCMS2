@@ -227,5 +227,6 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/multipurpose/show','MultipurposeController@show');
     Route::get('/multipurpose/delete/{Id}','MultipurposeController@delete');
     Route::get('/multipurpose/FollowUp','MultipurposeController@FollowUp');
+    Route::get('/multipurpose/download/{Status}/{StartDate}~{EndDate}','MultipurposeController@download');
 
 });//end group route
