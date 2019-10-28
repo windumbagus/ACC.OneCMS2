@@ -82,12 +82,14 @@
             <tbody>
                 @foreach ($MstTransaksiList as $MstTransaksi)
                     <tr>  
-                        @if (property_exists($MstTransaksi->User, 'Name'))
-                            <td><span>{{$MstTransaksi->User->Name}}</span></td>
-                        @else
-                            <td></td>
+                        @if (property_exists($MstTransaksi, 'User'))
+                            @if (property_exists($MstTransaksi->User, 'Name'))
+                                <td><span>{{$MstTransaksi->User->Name}}</span></td>
+                            @else
+                                <td></td>
+                            @endif
                         @endif
-                        
+
                         @if (property_exists($MstTransaksi->MstTransaksi, 'TransactionDate'))
                             <td><span>{{
                                 date('Y-m-d', strtotime($MstTransaksi->MstTransaksi->TransactionDate))
@@ -342,8 +344,10 @@
                     table.clear().draw();
                     if (typeof MstTransaksiList !== 'undefined') {
                         MstTransaksiList.map(MstTransaksi=>{
-                            if (typeof MstTransaksi.User.Name === 'undefined') {
-                                MstTransaksi.User.Name = "";
+                            if (typeof MstTransaksi.User === 'undefined') {    
+                                if (typeof MstTransaksi.User.Name === 'undefined') {
+                                    MstTransaksi.User.Name = "";
+                                }
                             }
                             if (typeof MstTransaksi.MstTransaksi.TransactionDate === 'undefined') {
                                 MstTransaksi.MstTransaksi.TransactionDate = "";

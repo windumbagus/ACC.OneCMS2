@@ -16,10 +16,12 @@ class DataPemegangPolisController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"33" // "33" untuk SubMenu DataPemegangPolis
+
         ]);
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataPemegangPolisAPI/GetAllDataPemegangPolis"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataPemegangPolisAPI/GetAllDataPemegangPolis?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -30,11 +32,15 @@ class DataPemegangPolisController extends Controller
         $data = json_decode($result);
         // dd($data);
 
-        return view(
-            'data_pemegang_polis',[
-                'Poliss' => $data,
-                'session' => $session
-        ]);    
+        if(property_exists($data,"IsSuccess")){
+            return view(
+                'data_pemegang_polis',[
+                    'Poliss' => $data->Data,
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }   
     }
 
     public function show(Request $request)
