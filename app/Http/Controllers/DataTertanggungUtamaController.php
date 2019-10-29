@@ -17,7 +17,7 @@ class DataTertanggungUtamaController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"34" // "34" untuk SubMenu DataTertanggungUtama
+            'SubMenuId'=>"32" // "32" untuk SubMenu DataTertanggungUtama
         ]);
 
          //API

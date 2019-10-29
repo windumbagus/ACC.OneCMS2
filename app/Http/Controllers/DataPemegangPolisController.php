@@ -17,7 +17,7 @@ class DataPemegangPolisController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"33" // "33" untuk SubMenu DataPemegangPolis
+            'SubMenuId'=>"34" // "34" untuk SubMenu DataPemegangPolis
 
         ]);
         // API

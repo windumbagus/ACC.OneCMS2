@@ -15,7 +15,7 @@ class ApproveController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"5" // "5" untuk SubMenu Approve
+            'SubMenuId'=>"8" // "8" untuk SubMenu Approve
 
         ]);
         //API GET
