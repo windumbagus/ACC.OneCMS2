@@ -14,10 +14,11 @@ class MasterPernyataanController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"38" // "38" untuk SubMenu MasterPernyataan
         ]);
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllMasterPernyataan"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllMasterPernyataan?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -76,15 +77,19 @@ class MasterPernyataanController extends Controller
         $data5 = json_decode($result5);
         // dd($data5);
 
-        return view(
-            'master_pernyataan',[
-                'Pernyataans' => $data,
-                'Perlindungans' => $data2,
-                'Proteksis' => $data3,
-                'Products' => $data4,
-                'Hubungans' => $data5,
-                'session' => $session
-        ]);    
+        if(property_exists($data,"IsSuccess")){
+            return view(
+                'master_pernyataan',[
+                    'Pernyataans' => $data->Data,
+                    'Perlindungans' => $data2,
+                    'Proteksis' => $data3,
+                    'Products' => $data4,
+                    'Hubungans' => $data5,
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function show(Request $request)

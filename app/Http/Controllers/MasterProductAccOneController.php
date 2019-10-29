@@ -14,10 +14,12 @@ class MasterProductAccOneController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"36" // "36" untuk SubMenu MasterProductAccOne
+
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAccOneAPI/GetAllProductAccOne"; 
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAccOneAPI/GetAllProductAccOne?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -28,10 +30,15 @@ class MasterProductAccOneController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        return view('master_product_accone',[
-            'ProductsAccOne'=>$Hasils,
-            'session' => $session                        
-            ]);    
+        if(property_exists($Hasils,"IsSuccess")){
+            return view(
+                'master_product_accone',[
+                    'ProductsAccOne'=>$Hasils->Data,
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function show(Request $request)
