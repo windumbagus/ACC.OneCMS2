@@ -17,7 +17,7 @@ class LeaseController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"11" // "11" untuk SubMenu Lease
+            'SubMenuId'=>"10" // "10" untuk SubMenu Lease
         ]);
         
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLease?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 

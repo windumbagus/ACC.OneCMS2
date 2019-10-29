@@ -15,7 +15,7 @@ class MasterKotaController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"7" // "7" untuk SubMenu MasterKota
+            'SubMenuId'=>"13" // "13" untuk SubMenu MasterKota
         ]);
          //API GET
          $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterKotaAPI/GetAllMasterKota?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 

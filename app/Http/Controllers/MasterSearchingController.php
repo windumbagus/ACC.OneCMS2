@@ -15,7 +15,7 @@ class MasterSearchingController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"8" // "8" untuk SubMenu MasterSearching,
+            'SubMenuId'=>"14" // "14" untuk SubMenu MasterSearching,
         ]);
          //API GET
          $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/GetAllMasterSearching?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];
@@ -35,10 +35,10 @@ class MasterSearchingController extends Controller
                 'MenuItems'=>$Hasils->Data->MenuItem,
                 'Screens'=>$Hasils->Data->Screen,
                 'session' => $session                        
-            ]);
-        }else{
-            return redirect('/invalid-permission');
-        }      
+                ]);
+            }else{
+                return redirect('/invalid-permission');
+            }      
     }
 
     public function show(Request $request)

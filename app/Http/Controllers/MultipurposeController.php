@@ -17,7 +17,7 @@ class MultipurposeController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"13" // "13" untuk SubMenu Multipurpose,
+            'SubMenuId'=>"11" // "11" untuk SubMenu Multipurpose,
         ]);
 
          //API GET

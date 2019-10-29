@@ -17,7 +17,7 @@ class MasterTransactionMobilController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"32" // "32" untuk SubMenu MasterTransactionMobil,
+            'SubMenuId'=>"31" // "31" untuk SubMenu MasterTransactionMobil,
         ]);
 
          //API GET
