@@ -29,7 +29,7 @@ class UserMobileController extends Controller
          $err = curl_error($ch);
          curl_close($ch);
          $Hasils= json_decode($result);
-         dd($Hasils);
+        //  dd($Hasils);
 
         if(property_exists($Hasils,"IsSuccess")){
             return view(
