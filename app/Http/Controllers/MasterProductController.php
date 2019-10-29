@@ -15,7 +15,7 @@ class MasterProductController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"31" // "31" untuk SubMenu MasterProduct
+            'SubMenuId'=>"33" // "33" untuk SubMenu MasterProduct
         ]);
          //API GET
          $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAPI/GetAllMasterProduct?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
