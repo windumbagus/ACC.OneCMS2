@@ -16,11 +16,12 @@ class DataTertanggungUtamaController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"34" // "34" untuk SubMenu DataTertanggungUtama
         ]);
 
          //API
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataTertanggungUtamaAPI/GetAllDataTertanggungUtama"; 
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataTertanggungUtamaAPI/GetAllDataTertanggungUtama?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -30,11 +31,16 @@ class DataTertanggungUtamaController extends Controller
          curl_close($ch);
          $data = json_decode($result);
          // dd($data);
-
-        return view('data_tertanggung_utama',[
-            'Utamas'=> $data,
-            'session' => $session            
+            
+        if(property_exists($data,"IsSuccess")){
+            return view(
+                'data_tertanggung_utama',[
+                    'Utamas' => $data->Data,
+                    'session' => $session
             ]);
+        }else{
+            return redirect('/invalid-permission');
+        }   
     }
 
     public function show(Request $request)

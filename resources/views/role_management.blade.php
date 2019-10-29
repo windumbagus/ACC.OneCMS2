@@ -1,7 +1,7 @@
 @extends('admin.admin') 
 
-@section('survey', 'active')
-@section('feedback', 'active')
+@section('user-management', 'active')
+@section('role-management', 'active')
 
 @section('content')
 

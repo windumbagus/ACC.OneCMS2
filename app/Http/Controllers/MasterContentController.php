@@ -14,10 +14,12 @@ class MasterContentController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"16" // "16" untuk SubMenu MasterContent
+
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -28,12 +30,17 @@ class MasterContentController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-        return view('master_content',[
-            'MstGCM_ContentTypeList'=> $val->Data->MstGCM->ContentType,
-            'MstGCM_StatusList'=> $val->Data->MstGCM->ContentStatus,
-            'MstGCM_CategoryList'=> $val->Data->MstGCM->NewsCategory,
-            'session'=> $session            
-        ]);  
+        if(property_exists($val,"IsSuccess")){
+            return view(
+                'master_content',[
+                    'MstGCM_ContentTypeList'=> $val->Data->MstGCM->ContentType,
+                    'MstGCM_StatusList'=> $val->Data->MstGCM->ContentStatus,
+                    'MstGCM_CategoryList'=> $val->Data->MstGCM->NewsCategory,
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }
     }
     
     public function getByContentType(Request $request)

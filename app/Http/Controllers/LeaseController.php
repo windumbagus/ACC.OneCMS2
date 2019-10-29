@@ -16,10 +16,11 @@ class LeaseController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"11" // "11" untuk SubMenu Lease
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLease"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLease?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -30,11 +31,16 @@ class LeaseController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-        return view('lease',[
-            'MstTransaksiList' => $val->MstTransaksiList,
-            'MstTrsansaksi_StatusList'=> $val->MstTrsansaksi_StatusList,
-            'session'=> $session     
-        ]);  
+        if(property_exists($val,"IsSuccess")){
+            return view(
+                'lease',[
+                    'MstTransaksiList' => $val->Data->MstTransaksiList,
+                    'MstTrsansaksi_StatusList'=> $val->Data->MstTrsansaksi_StatusList,
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function getByCondition(Request $request)

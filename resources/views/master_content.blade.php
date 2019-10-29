@@ -105,7 +105,7 @@
             var SelectedContentType = $(this).val();
             // console.log(SelectedContentType);
             $.ajax({
-                url:'master-content/get-by-content-type',
+                url:'/master-content/get-by-content-type',
                 data: {'ContentType':SelectedContentType},
                 dataType:'json',
                 success: function(data){

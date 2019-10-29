@@ -14,10 +14,13 @@ class LandingPageController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"40" // "40" untuk SubMenu MasterLandingPage
+
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/GetAllLandingPage"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/GetAllLandingPage?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+    //    dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -28,12 +31,17 @@ class LandingPageController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-        return view('landing_page',[
-            'MstLandingPageList' => $val->MstLandingPageList,
-            'LandingPageCategoryList'=> $val->LandingPageCategoryList,   
-            'LandingPageSubCategoryList'=> array(null),
-            'session'=> $session     
-        ]);  
+        if(property_exists($val,"IsSuccess")){
+            return view(
+                'landing_page',[
+                    'MstLandingPageList' => $val->Data->MstLandingPageList,
+                    'LandingPageCategoryList'=> $val->Data->LandingPageCategoryList,  
+                    'LandingPageSubCategoryList'=> array(null),
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function show(Request $request)
