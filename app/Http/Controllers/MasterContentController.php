@@ -29,9 +29,9 @@ class MasterContentController extends Controller
         // dd($val);
 
         return view('master_content',[
-            'MstGCM_ContentTypeList'=> $val->MstGCM->ContentType,
-            'MstGCM_StatusList'=> $val->MstGCM->ContentStatus,
-            'MstGCM_CategoryList'=> $val->MstGCM->NewsCategory,
+            'MstGCM_ContentTypeList'=> $val->Data->MstGCM->ContentType,
+            'MstGCM_StatusList'=> $val->Data->MstGCM->ContentStatus,
+            'MstGCM_CategoryList'=> $val->Data->MstGCM->NewsCategory,
             'session'=> $session            
         ]);  
     }
@@ -49,7 +49,7 @@ class MasterContentController extends Controller
         $val = json_decode($result);
         // dd($val);
 
-        return json_encode($val); 
+        return json_encode($val->Data); 
     }
 
     public function show(Request $request)
