@@ -16,10 +16,11 @@ class UserCMSController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS"; 
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -42,12 +43,17 @@ class UserCMSController extends Controller
         $Hasils2= json_decode($result2);
         // dd($Hasils2);
 
-        return view('user_cms',[
-            'UserCMSs'=>$Hasils,
-            'Roles'=>$Hasils2->Roles,
-            'UserCategories'=>$Hasils2->UserCategory,
-            'session' => $session            
-            ]);    
+        if(property_exists($Hasils,"IsSuccess")){
+            return view(
+                'user_cms',[
+                    'UserCMSs'=>$Hasils->Data,
+                    'Roles'=>$Hasils2->Roles,
+                    'UserCategories'=>$Hasils2->UserCategory, 
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function show(Request $request)

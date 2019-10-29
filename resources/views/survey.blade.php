@@ -51,7 +51,12 @@
                 @foreach ($Surveys as $Survey)
 
                     <tr>  
+                        @if (property_exists($Survey->User, 'Name'))
                         <td><span>{{$Survey->User->Name}}</span></td>
+                        @else
+                        <td><span></span></td>
+                        @endif
+
                         <td><span>{{$Survey->MstSurveyRating->Bintang}}</span></td>
 
                         @if (property_exists($Survey->MstSurveyRating, 'Komentar'))
