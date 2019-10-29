@@ -15,7 +15,7 @@ class MasterContentController extends Controller
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
-            'SubMenuId'=>"16" // "16" untuk SubMenu MasterContent
+            'SubMenuId'=>"5" // "5" untuk SubMenu MasterContent
 
         ]);
         
