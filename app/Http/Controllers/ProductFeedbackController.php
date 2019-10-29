@@ -16,10 +16,11 @@ class ProductFeedbackController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"23"
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ProductFeedbackAPI/GetAllProductFeedback"; 
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ProductFeedbackAPI/GetAllProductFeedback?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];   
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -30,10 +31,14 @@ class ProductFeedbackController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        return view('product_feedback',[
-            'Feedbacks'=>$Hasils,
-            'session' => $session            
-            ]);    
+        if(property_exists($Hasils,"IsSuccess")){
+            return view('product_feedback',[
+                'Feedbacks'=>$Hasils->Data,
+                'session' => $session            
+            ]);      
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function show(Request $request)

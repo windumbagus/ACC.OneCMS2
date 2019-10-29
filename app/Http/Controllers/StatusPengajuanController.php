@@ -17,10 +17,11 @@ class StatusPengajuanController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"28"
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusPengajuan"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusPengajuan?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -31,10 +32,14 @@ class StatusPengajuanController extends Controller
         $Hasils = json_decode($result);
         //  dd($Hasils);
 
-        return view('status_pengajuan',[
-            'Status_pengajuans'=>$Hasils,
-            'session' => $session            
-            ]);  
+        if(property_exists($Hasils,"IsSuccess")){
+            return view('status_pengajuan',[
+                'Status_pengajuans'=>$Hasils->Data,
+                'session' => $session            
+            ]);          
+        }else{
+            return redirect('/invalid-permission');
+        }   
     }
 
     public function show(Request $request)

@@ -14,10 +14,11 @@ class PushNotificationController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"6"
         ]);
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PushNotificationAPI/GetAllPushNotification"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PushNotificationAPI/GetAllPushNotification?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];   
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -25,13 +26,17 @@ class PushNotificationController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $data = json_decode($result);
-        // dd($data);
+        $Hasil = json_decode($result);
+        // dd($Hasil);
         
-        return view('push_notification',[
-            'Push_Notifications' => $data,
-            'session' => $session            
-            ]);    
+        if(property_exists($Hasil,"IsSuccess")){
+            return view('push_notification',[
+                'Push_Notifications' => $Hasil->Data,
+                'session' => $session            
+            ]);          
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function show(Request $request)
