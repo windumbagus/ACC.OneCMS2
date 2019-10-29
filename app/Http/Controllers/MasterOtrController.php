@@ -15,10 +15,12 @@ class MasterOtrController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"9" // "9" untuk SubMenu MasterOTR
+
         ]);
          //API GET MstOTR
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetAllMasterOtr"; 
+         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetAllMasterOtr?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -39,13 +41,18 @@ class MasterOtrController extends Controller
          $err2 = curl_error($ch2);
          curl_close($ch2);
          $Hasils2= json_decode($result2);
-        //  dd($Hasils2);
+        //  dd($Hasils2);  
 
-        return view('master_otr',[
-            'OTRs'=>$Hasils,
-            'GetMstGCMSBrands'=>$Hasils2,
-            'session' => $session                        
-            ]);    
+        if(property_exists($Hasils,"IsSuccess")){
+            return view(
+                'master_otr',[
+                    'OTRs' => $Hasils->Data,
+                    'GetMstGCMSBrands'=>$Hasils2,
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function show(Request $request)

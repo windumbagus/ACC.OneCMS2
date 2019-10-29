@@ -17,10 +17,11 @@ class HolidayGCMController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-            'RoleId'=>$request->session()->get('RoleId')
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"27" // "27" untuk SubMenu HolidayGCM
         ]);
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday"; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -30,11 +31,16 @@ class HolidayGCMController extends Controller
         curl_close($ch);
         $data = json_decode($result);
         // dd($data);
-        
-        return view('holiday_gcm',[
-            'Holidays' => $data,
-            'session' => $session            
-            ]);    
+
+        if(property_exists($data,"IsSuccess")){
+            return view(
+                'holiday_gcm',[
+                    'Holidays' => $data->Data,
+                    'session' => $session
+            ]);
+        }else{
+            return redirect('/invalid-permission');
+        }  
     }
 
     public function add(Request $request)
