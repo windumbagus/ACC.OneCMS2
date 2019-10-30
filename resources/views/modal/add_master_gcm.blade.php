@@ -15,7 +15,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     <div class="form-group">
                         <label>Condition</label>
                         {{-- <input type="text" class="form-control" name="Condition_Add" > --}}
-                        <select class="form-control select2" id="Condition" style="width:100%;">
+                        <select class="form-control select2" id="Condition_Add" name="Condition_Add" style="width:100%;">
                             <option value="0" selected>-- Choose Condition --</option>
                             @foreach ($Conditions as $C)
                                 <option value="{{$C}}">

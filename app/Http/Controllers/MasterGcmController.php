@@ -165,7 +165,7 @@ class MasterGcmController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $hasils = json_decode($result);
-        dd($result);
+        // dd($result);
 
         return redirect('/master-gcm')->with('success','Master GCM Successfully Added !!!');
     }
