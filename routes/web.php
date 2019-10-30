@@ -233,6 +233,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-gcm/get-by-condition','MasterGcmController@GetByCondition');
     Route::get('/master-gcm/delete','MasterGcmController@delete');
     Route::get('/master-gcm/show','MasterGcmController@show');
+    Route::post('/master-gcm/add','MasterGcmController@add');
+
 
     Route::get('/invalid-permission','InvalidPermissionController@index');
 });//end group route

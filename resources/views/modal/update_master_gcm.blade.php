@@ -90,11 +90,11 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     </div>
                     <div class="form-group">
                         <label>TimeStamp1</label>
-                        <input type="text" class="form-control" name="TimeStamp1_Update" >
+                        <input type="text" class="form-control" name="TimeStamp1_Update" readonly>
                     </div>
                     <div class="form-group">
                         <label>TimeStamp2</label>
-                        <input type="text" class="form-control" name="TimeStamp2_Update" >
+                        <input type="text" class="form-control" name="TimeStamp2_Update" readonly>
                     </div>
                 </div>
                 <div class="modal-footer">

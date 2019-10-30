@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <select class="form-control select2" id="Condition" style="width:100%;">
-                    <option value="0" selected>-- Choose Content Type --</option>
+                    <option value="0" selected>-- Choose Condition --</option>
                     @foreach ($Conditions as $C)
                         <option value="{{$C}}">
                             {{$C}}
@@ -228,8 +228,10 @@
                     $('[name="CharDesc4_Update"]').val(val.MstGCM.CharDesc4);
                     $('[name="CharValue5_Update"]').val(val.MstGCM.CharValue5);
                     $('[name="CharDesc5_Update"]').val(val.MstGCM.CharDesc5);
-                    $('[name="TimeStamp1_Update"]').val(val.MstGCM.TimeStamp1);
-                    $('[name="TimeStamp2_Update"]').val(val.MstGCM.TimeStamp2);
+                    
+                    $('[name="TimeStamp1_Update"]').val(val.MstGCM.TimeStamp1.substring(8,10)+"-"+val.MstGCM.TimeStamp1.substring(5,7)+"-"+val.MstGCM.TimeStamp1.substring(0,4));
+                    
+                    $('[name="TimeStamp2_Update"]').val(val.MstGCM.TimeStamp2.substring(8,10)+"-"+val.MstGCM.TimeStamp2.substring(5,7)+"-"+val.MstGCM.TimeStamp2.substring(0,4));
                     
                     if (val.MstGCM.hasOwnProperty('IsActive')) {
                         if(val.MstGCM.IsActive == "Y"){
@@ -246,6 +248,14 @@
             });
             $('#update-master-gcm').modal();
         });
+
+        //AutoComplete
+            // var x = {!! json_encode($Conditions) !!}
+            // $('#autocomplete').autocomplete({
+            // source: x
+            // });
+            // console.log(x);
+
     })
 </script>
 

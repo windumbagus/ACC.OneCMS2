@@ -14,7 +14,15 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     @csrf
                     <div class="form-group">
                         <label>Condition</label>
-                        <input type="text" class="form-control" name="Condition_Add" >
+                        {{-- <input type="text" class="form-control" name="Condition_Add" > --}}
+                        <select class="form-control select2" id="Condition" style="width:100%;">
+                            <option value="0" selected>-- Choose Condition --</option>
+                            @foreach ($Conditions as $C)
+                                <option value="{{$C}}">
+                                    {{$C}}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Char Value 1</label>
@@ -68,11 +76,23 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     </div>
                     <div class="form-group">
                         <label>TimeStamp1</label>
-                        <input type="date" class="form-control" name="TimeStamp1_Add" >
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" id="TimeStamp1_Add" 
+                                name="TimeStamp1_Add" value="{{ date('d/m/Y') }}" >
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>TimeStamp2</label>
-                        <input type="date" class="form-control" name="TimeStamp2_Add" >
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" id="TimeStamp2_Add" 
+                                name="TimeStamp2_Add" value="{{ date('d/m/Y') }}" >
+                        </div>    
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -91,4 +111,14 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
             $('#form-add-master-gcm')[0].reset();  
         });      
     });
+
+    $('#TimeStamp1_Add').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    })
+
+    $('#TimeStamp2_Add').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    })
 </Script>
