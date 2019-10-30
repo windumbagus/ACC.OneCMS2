@@ -229,5 +229,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/multipurpose/FollowUp','MultipurposeController@FollowUp');
     Route::get('/multipurpose/download/{Status}/{StartDate}~{EndDate}','MultipurposeController@download');
 
+    Route::get('/master-gcm','MasterGcmController@index');
+    Route::get('/master-gcm/get-by-condition','MasterGcmController@GetByCondition');
+    Route::get('/master-gcm/delete','MasterGcmController@delete');
+    Route::get('/master-gcm/show','MasterGcmController@show');
+
     Route::get('/invalid-permission','InvalidPermissionController@index');
 });//end group route
