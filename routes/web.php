@@ -234,6 +234,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-gcm/delete','MasterGcmController@delete');
     Route::get('/master-gcm/show','MasterGcmController@show');
     Route::post('/master-gcm/add','MasterGcmController@add');
+    Route::post('/master-gcm/update','MasterGcmController@update');
+    Route::get('/master-gcm/edit-gcm-access','EditGcmAccessController@index');
+    Route::get('/master-gcm/edit-gcm-access/OnChangeAccWorld/{Id}&{Condition}&{AccWorld}','EditGcmAccessController@OnChangeAccWorld');
 
 
     Route::get('/invalid-permission','InvalidPermissionController@index');

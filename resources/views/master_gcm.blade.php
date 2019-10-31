@@ -21,7 +21,7 @@
                     <a href="#" class=" btn btn-block btn-primary">Download </a>  
                 </div>
                 <div class="col-sm-3">
-                    <a href="#" class=" btn btn-block btn-primary">Edit GCM Access </a>  
+                <a href="{{asset('/master-gcm/edit-gcm-access')}}" class=" btn btn-block btn-primary">Edit GCM Access </a>  
                 </div>
             </div>
         </div>

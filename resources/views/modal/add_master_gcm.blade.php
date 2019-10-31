@@ -9,7 +9,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 </button>
                 <h4 class="box-title">Create New Master GCM</h4> 
             </div>
-            <form id="form-add-master-gcm" action="{{ asset('master-gcm/add') }}" method="post"> 
+            <form id="form-add-master-gcm" action="{{ asset('master-gcm/add') }}" method="post" enctype="multipart/form-data" novalidate> 
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
@@ -68,7 +68,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                         <label>Picture:</label><br>
                         <img style="width: 300px; height: 200px;" name="Picture_Add" alt=""
                             id="Picture_Add"/><br><br>
-                        <input type="file" class="form-control" name="input_picture_Add" id="input_picture_Add">
+                        <input type="file" class="form-control" name="Input_Picture_Add" id="Input_Picture_Add">
                     </div>
                     <div class="form-group">
                         <label>IsActive</label> &nbsp;

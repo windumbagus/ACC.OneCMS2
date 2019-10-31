@@ -9,7 +9,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 </button>
                 <h4 class="box-title">Update Master GCM</h4> 
             </div>
-            <form id="form-update-master-gcm" action="{{ asset('master-gcm/update') }}" method="post"> 
+            <form id="form-update-master-gcm" action="{{ asset('master-gcm/update') }}" method="post" enctype="multipart/form-data" novalidate> 
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
@@ -82,7 +82,7 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                         <label>Picture:</label><br>
                         <img style="width: 300px; height: 200px;" name="Picture_Update" alt=""
                             id="Picture_Update"/><br><br>
-                        <input type="file" class="form-control" name="input_picture_Update" id="input_picture_Update">
+                        <input type="file" class="form-control" name="Input_Picture_Update" id="Input_Picture_Update">
                     </div>
                     <div class="form-group">
                         <label>IsActive</label> &nbsp;
@@ -90,11 +90,23 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     </div>
                     <div class="form-group">
                         <label>TimeStamp1</label>
-                        <input type="text" class="form-control" name="TimeStamp1_Update" readonly>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" id="TimeStamp1_Update" 
+                                name="TimeStamp1_Update" value="{{ date('d/m/Y') }}" >
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>TimeStamp2</label>
-                        <input type="text" class="form-control" name="TimeStamp2_Update" readonly>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" id="TimeStamp2_Update" 
+                                name="TimeStamp2_Update" value="{{ date('d/m/Y') }}" >
+                        </div>    
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -113,4 +125,14 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
             $('#form-update-master-gcm')[0].reset();  
         });      
     });
+
+    $('#TimeStamp1_Update').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    })
+
+    $('#TimeStamp2_Update').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    })
 </Script>

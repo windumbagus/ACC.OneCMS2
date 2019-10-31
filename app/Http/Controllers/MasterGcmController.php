@@ -95,7 +95,7 @@ class MasterGcmController extends Controller
         //     "CD_BRAND_master_otr_add"=>'required',         
         // ]);
 
-        if (property_exists($request, 'file')){
+        if ($request->Input_Picture_Add != null){
             $file = $request->Input_Picture_Add;
             $getContent = file_get_contents($file);
             $content= base64_encode($getContent);
@@ -168,5 +168,84 @@ class MasterGcmController extends Controller
         // dd($result);
 
         return redirect('/master-gcm')->with('success','Master GCM Successfully Added !!!');
+    }
+
+    public function update(Request $request)
+    {
+        // dd($request->Input_Picture_Update);
+        if ($request->Input_Picture_Update != null){
+            $file = $request->Input_Picture_Update;
+            // dd($file);
+            $getContent = file_get_contents($file);
+            $content= base64_encode($getContent);
+            $name = $file->getClientOriginalName();
+            $filetype = $file->extension();
+
+            $filetype = "image/".$filetype;
+            $type = "MasterGCM";
+        }else{
+            $content = $request->Picture;
+            $name = $request->Picture_FileName;
+            $type = $request->Picture_Type;
+            $filetype = $request->Picture_FileType;
+        }
+        
+        if($request->IsActive_Update== "on"){
+            $IsActive_Update = "Y";
+        }else{
+            $IsActive_Update = "N";
+        }
+
+        $data = json_encode(array(
+            "MstPicture" => array(   
+                "Id" => $request->Picture_Id,
+                "DataId" => $request->Picture_DataId,
+                "Picture" => $content,
+                "FileName" => $name,
+                "FileType" => $filetype,
+                "Type" => $type,
+            ),
+            "MstGCM" => array(
+                "Id" => $request->Id,
+                "Condition" => $request->Condition_Update,
+                "CharValue1" => $request->CharValue1_Update,
+                "CharDesc1" => $request->CharDesc1_Update,
+                "CharValue2" => $request->CharValue2_Update,
+                "CharDesc2" => $request->CharDesc2_Update,
+                "CharValue3" => $request->CharValue3_Update,
+                "CharDesc3" => $request->CharDesc3_Update,
+                "CharValue4" => $request->CharValue4_Update,
+                "CharDesc4" => $request->CharDesc4_Update,
+                "CharValue5" => $request->CharValue5_Update,
+                "CharDesc5" => $request->CharDesc5_Update,
+                // "AddedDate" => now(),
+                // "UserAdded" => $request->session()->get('Id'),
+                "UpdatedDate" => now(),
+                "UserUpdated" => $request->session()->get('Id'),
+                "IsActive" => $IsActive_Update,
+                // "TimeStamp1" => $request->TimeStamp1_Update,
+                // "TimeStamp2" => $request->TimeStamp2_Update,
+            ),
+            "User_Username" =>  $request->session()->get('Id'),
+            "MstGCM_TimeStamp1" => $request->TimeStamp1_Update,
+            "MstGCM_TimeStamp2" => $request->TimeStamp2_Update,
+
+        ));
+        // dd($data);
+
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/CreateOrUpdateMasterGcm"; 
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $hasils = json_decode($result);
+        // dd($result);
+
+        return redirect('/master-gcm')->with('success','Master GCM Successfully Updated !!!');
     }
 }
