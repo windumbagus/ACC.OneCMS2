@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MasterGcmExport;
 use Illuminate\Http\Request;
 
 class MasterGcmController extends Controller
@@ -52,7 +53,7 @@ class MasterGcmController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $val = json_decode($result);
-        // dd($val);
+        // dd($val->Data);
 
         return json_encode($val->Data); 
     }
@@ -247,5 +248,146 @@ class MasterGcmController extends Controller
         // dd($result);
 
         return redirect('/master-gcm')->with('success','Master GCM Successfully Updated !!!');
+    }
+
+    public function download($Condition=null, Request $request)
+    {
+        // API
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/GetAllMasterGcmByCondition?Condition=".urlencode($Condition); 
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
+        
+        $data=[];
+        if(property_exists($Hasils->Data,'MstGCM')){
+            foreach ($Hasils->Data->MstGCM as $Hasil) {
+
+                if (property_exists($Hasil, 'Id')){
+                    $Id = $Hasil->Id;
+                }else{
+                    $Id = "";
+                }
+                if (property_exists($Hasil, 'Condition')){
+                    $Condition = $Hasil->Condition;
+                }else{
+                    $Condition = "";
+                }
+                if (property_exists($Hasil, 'CharValue1')){
+                    $CharValue1 = $Hasil->CharValue1;
+                }else{
+                    $CharValue1 = "";
+                }
+                if (property_exists($Hasil, 'CharDesc1')){
+                    $CharDesc1 = $Hasil->CharDesc1;
+                }else{
+                    $CharDesc1 = "";
+                }
+                if (property_exists($Hasil, 'CharValue2')){
+                    $CharValue2 = $Hasil->CharValue2;
+                }else{
+                    $CharValue2 = "";
+                }
+                if (property_exists($Hasil, 'CharDesc2')){
+                    $CharDesc2 = $Hasil->CharDesc2;
+                }else{
+                    $CharDesc2 = "";
+                }
+                if (property_exists($Hasil, 'CharValue3')){
+                    $CharValue3 = $Hasil->CharValue3;
+                }else{
+                    $CharValue3 = "";
+                }
+                if (property_exists($Hasil, 'CharDesc3')){
+                    $CharDesc3 = $Hasil->CharDesc3;
+                }else{
+                    $CharDesc3 = "";
+                }
+                if (property_exists($Hasil, 'CharValue4')){
+                    $CharValue4 = $Hasil->CharValue4;
+                }else{
+                    $CharValue4 = "";
+                }
+                if (property_exists($Hasil, 'CharDesc4')){
+                    $CharDesc4 = $Hasil->CharDesc4;
+                }else{
+                    $CharDesc4 = "";
+                }
+                if (property_exists($Hasil, 'CharValue5')){
+                    $CharValue5 = $Hasil->CharValue5;
+                }else{
+                    $CharValue5 = "";
+                }
+                if (property_exists($Hasil, 'CharDesc5')){
+                    $CharDesc5 = $Hasil->CharDesc5;
+                }else{
+                    $CharDesc5 = "";
+                }
+                if (property_exists($Hasil, 'AddedDate')){
+                    $AddedDate = $Hasil->AddedDate;
+                }else{
+                    $AddedDate = "";
+                }
+                if (property_exists($Hasil, 'UserAdded')){
+                    $UserAdded = $Hasil->UserAdded;
+                }else{
+                    $UserAdded = "";
+                }
+                if (property_exists($Hasil, 'UpdatedDate')){
+                    $UpdatedDate = $Hasil->UpdatedDate;
+                }else{
+                    $UpdatedDate = "";
+                }
+                if (property_exists($Hasil, 'UserUpdated')){
+                    $UserUpdated = $Hasil->UserUpdated;
+                }else{
+                    $UserUpdated = "";
+                }
+                if (property_exists($Hasil, 'IsActive')){
+                    $IsActive = $Hasil->IsActive;
+                }else{
+                    $IsActive = "";
+                }
+                if (property_exists($Hasil, 'TimeStamp1')){
+                    $TimeStamp1 = $Hasil->TimeStamp1;
+                }else{
+                    $TimeStamp1 = "";
+                }
+                if (property_exists($Hasil, 'TimeStamp2')){
+                    $TimeStamp2 = $Hasil->TimeStamp2;
+                }else{
+                    $TimeStamp2 = "";
+                }
+
+                array_push($data,[
+                    "Id"=>$Id,
+                    "Condition"=>$Condition,
+                    "CharValue1"=>$CharValue1,
+                    "CharDesc1"=>$CharDesc1,
+                    "CharValue2"=>$CharValue2,
+                    "CharDesc2"=>$CharDesc2,
+                    "CharValue3"=>$CharValue3,
+                    "CharDesc3"=>$CharDesc3,
+                    "CharValue4"=>$CharValue4,
+                    "CharDesc4"=>$CharDesc4,
+                    "CharValue5"=>$CharValue5,
+                    "CharDesc5"=>$CharDesc5,
+                    "AddedDate"=>$AddedDate,
+                    "UserAdded"=>$UserAdded,
+                    "UpdatedDate"=>$UpdatedDate,
+                    "UserUpdated"=>$UserUpdated,
+                    "IsActive"=>$IsActive,
+                    "TimeStamp1"=>$TimeStamp1,
+                    "TimeStamp2"=>$TimeStamp2,
+            ]);
+            }
+        }
+        // dd($data2);
+        return Excel::download(new MasterGcmExport($data), 'ACC One GCM '.  date("Y-m-d") .'.xlsx');
     }
 }

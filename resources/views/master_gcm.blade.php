@@ -18,10 +18,10 @@
                     <a href="#" class=" btn btn-block btn-primary">Upload</a>  
                 </div>
                 <div class="col-sm-3">
-                    <a href="#" class=" btn btn-block btn-primary">Download </a>  
+                    <a href="{{asset('/master-gcm/download/null')}}" class=" btn btn-block btn-primary" id="button-download">Download </a>  
                 </div>
                 <div class="col-sm-3">
-                <a href="{{asset('/master-gcm/edit-gcm-access')}}" class=" btn btn-block btn-primary">Edit GCM Access </a>  
+                    <a href="{{asset('/master-gcm/edit-gcm-access')}}" class=" btn btn-block btn-primary">Edit GCM Access </a>  
                 </div>
             </div>
         </div>
@@ -116,6 +116,20 @@
         $('#Condition').on('change',function(){
             var Condition = $(this).val();
             // console.log(Condition);
+
+            // Function Download
+            if (Condition == "" ){
+                document.getElementById('button-download').setAttribute("href", "");
+                document.getElementById('button-download').setAttribute("href", `{{asset('/master-gcm/download/${tempCondition}')}}`);
+            } else {
+                var tempCondition = Condition;
+                
+                if (Condition == "")
+                    tempCondition = "null";
+                document.getElementById('button-download').setAttribute("href", "");
+                document.getElementById('button-download').setAttribute("href", `{{asset('/master-gcm/download/${tempCondition}')}}`);
+            }
+
             $.ajax({
                 url:'/master-gcm/get-by-condition',
                 data: {'Condition':Condition,'_token':'{{csrf_token()}}'},
