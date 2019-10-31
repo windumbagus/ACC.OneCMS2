@@ -236,6 +236,12 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/master-gcm/add','MasterGcmController@add');
     Route::post('/master-gcm/update','MasterGcmController@update');
     Route::get('/master-gcm/download/{Condition}','MasterGcmController@download');
+
+    Route::get('/master-gcm/upload-page','UploadMasterGcmUpload@index');
+    Route::get('/master-gcm/cancel','UploadMasterGcmUpload@cancel');
+    Route::get('/master-gcm/proceed','UploadMasterGcmUpload@proceed');
+    Route::post('/master-gcm/upload','UploadMasterGcmUpload@upload');
+
     Route::get('/master-gcm/edit-gcm-access','EditGcmAccessController@index');
     Route::get('/master-gcm/edit-gcm-access/OnChangeAccWorld/{Id}&{Condition}&{AccWorld}','EditGcmAccessController@OnChangeAccWorld');
 

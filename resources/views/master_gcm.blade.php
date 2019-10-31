@@ -15,7 +15,7 @@
                     <a href="#" class="create-master-gcm btn btn-block btn-primary">Create Master GCM </a>  
                 </div>
                 <div class="col-sm-3">
-                    <a href="#" class=" btn btn-block btn-primary">Upload</a>  
+                    <a href="{{asset('/master-gcm/upload-page')}}" class=" btn btn-block btn-primary">Upload</a>  
                 </div>
                 <div class="col-sm-3">
                     <a href="{{asset('/master-gcm/download/null')}}" class=" btn btn-block btn-primary" id="button-download">Download </a>  
