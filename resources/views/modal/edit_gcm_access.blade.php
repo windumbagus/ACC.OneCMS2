@@ -31,7 +31,7 @@
                                     <input class="OnChangeAccWorld" data-id="{{ $GcmAccess->Id}}" data-Condition="{{ $GcmAccess->Condition}}" data-AccWorld="{{ $GcmAccess->AccWorld}}" type="checkbox" name="AccWorld" >
                                 @endif
                             @else
-                                <input class="OnChangeAccWorld" data-id="{{ $GcmAccess->Id}}" data-Condition="{{ $GcmAccess->Condition}}" data-AccWorld="{{ false }}" type="checkbox" name="AccWorld" >
+                                <input class="OnChangeAccWorld" data-id="{{ $GcmAccess->Id}}" data-Condition="{{ $GcmAccess->Condition}}" data-AccWorld="false" type="checkbox" name="AccWorld" >
                             @endif
                         </span></td>  
                     </tr>                  

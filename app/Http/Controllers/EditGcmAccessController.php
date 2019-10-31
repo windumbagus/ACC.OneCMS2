@@ -44,7 +44,7 @@ class EditGcmAccessController extends Controller
         }
 
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/OnChangeBidmart?MstGCMAccess_Id=".$Id."&MstGCMAccess_Condition=".$Condition."&MstGCMAccess_AccWorld=".$AccWorld; 
+        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/OnChangeAccWorld?MstGCMAccess_Id=".$Id."&MstGCMAccess_Condition=".$Condition."&MstGCMAccess_AccWorld=".$AccWorld; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
