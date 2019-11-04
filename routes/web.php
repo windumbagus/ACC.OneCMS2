@@ -14,9 +14,11 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-Route::get('/login','LoginController@index');
-Route::post('/login-process','LoginController@LoginSession');
+Route::group(['middleware' => 'revalidate'],function()
+{
+    Route::get('/login','LoginController@index');
+    Route::post('/login-process','LoginController@LoginSession');
+});
 
 Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 {//start group
