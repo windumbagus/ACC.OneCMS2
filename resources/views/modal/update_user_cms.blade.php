@@ -7,7 +7,11 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <button type="button" class="close-modal-update close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="box-title">Update New User CMS</h4> 
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                    <h4 class="box-title">Update New User CMS</h4> 
+                @else 
+                    <h4 class="box-title">View New User CMS</h4>                 
+                @endif
             </div>
             <form id="form-update-user-cms" action="{{ asset('user-cms/update') }}" method="post"> 
                 <div class="modal-body">
@@ -87,7 +91,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="close-modal-update btn btn-default" >Close</button>	
-                    <button type="submit" class="btn btn-warning">Update</button>		
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <button type="submit" class="btn btn-warning">Update</button>		
+                    @endif
                 </div>	
             </form>
         </div>

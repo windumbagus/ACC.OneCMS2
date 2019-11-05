@@ -13,7 +13,9 @@
             <div class="col-sm-3">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                    <a href="{{asset('/trade-in/download/null/null~null')}}" class="btn btn-block btn-primary" id="button-download">Download</a>  
+                    @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                        <a href="{{asset('/trade-in/download/null/null~null')}}" class="btn btn-block btn-primary" id="button-download">Download</a>  
+                    @endif
                 </div>
             </div>
         </div>
@@ -156,12 +158,19 @@
 
                         <td>
                             <span>
+                                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                    <a href="#" data-Id="{{$TradeIn->MappingTransaksi->Id}}" class="update-trade-in 
+                                        btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                @else 
                                 <a href="#" data-Id="{{$TradeIn->MappingTransaksi->Id}}" class="update-trade-in 
-                                    btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                        btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
+                                @endif
+                                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
                                 <a href="{{asset('trade-in/delete/'.$TradeIn->MappingTransaksi->Id)}}" 
                                     class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
                                     <i class="fa fa-trash"></i>
                                 </a> 
+                                @endif
                             </span>
                         </td>
                     </tr>              
@@ -288,22 +297,26 @@
             // console.log(EndDate);
 
             // Function Download
-            if ((Status == "") && (StartDate == "") && (EndDate == "") ){
-                document.getElementById('button-download').setAttribute("href", "");
-                document.getElementById('button-download').setAttribute("href", `{{asset('/trade-in/download/${tempStatus}/${tempStartDate}~${tempEndDate}')}}`);
-            } else {
-                var tempStatus = Status;
-                var tempStartDate = StartDate;
-                var tempEndDate = EndDate;
-                
-                if (Status == "")
-                    tempStatus = "null";
-                if (StartDate == "--")
-                    tempStartDate = "null";
-                if (EndDate == "--")
-                    tempEndDate = "null";
-                document.getElementById('button-download').setAttribute("href", "");
-                document.getElementById('button-download').setAttribute("href", `{{asset('/trade-in/download/${tempStatus}/${tempStartDate}~${tempEndDate}')}}`);
+            var Role = {!! json_encode($Role) !!}
+            // console.log(Role);
+            if (Role.IsDownload){
+                if ((Status == "") && (StartDate == "") && (EndDate == "") ){
+                    document.getElementById('button-download').setAttribute("href", "");
+                    document.getElementById('button-download').setAttribute("href", `{{asset('/trade-in/download/${tempStatus}/${tempStartDate}~${tempEndDate}')}}`);
+                } else {
+                    var tempStatus = Status;
+                    var tempStartDate = StartDate;
+                    var tempEndDate = EndDate;
+                    
+                    if (Status == "")
+                        tempStatus = "null";
+                    if (StartDate == "--")
+                        tempStartDate = "null";
+                    if (EndDate == "--")
+                        tempEndDate = "null";
+                    document.getElementById('button-download').setAttribute("href", "");
+                    document.getElementById('button-download').setAttribute("href", `{{asset('/trade-in/download/${tempStatus}/${tempStartDate}~${tempEndDate}')}}`);
+                }
             }
 
             $.ajax({
@@ -388,7 +401,23 @@
                             if (typeof x.MstCustomerDetail.FlagCustomer === 'undefined') {
                                 x.MstCustomerDetail.FlagCustomer = "";
                             }
-                        
+
+                            var ElementUpdate = "";
+                            var ElementDelete = "";
+
+                            if (Role.IsUpdate){
+                              ElementUpdate = 'btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;';
+                            }else{
+                              ElementUpdate = 'btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp;';
+                            }
+
+                            if (Role.IsDelete){
+                              ElementDelete =    `<a href="{{asset('trade-in/delete/${x.MappingTransaksi.Id}')}}"`+
+                                                    `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
+                                                    '<i class="fa fa-trash"></i>'+
+                                                    '</a>';
+                            }
+                            
                             table.row.add([
                                 '<span>'+x.User.Name+'</span>',
                                 '<span>'+
@@ -410,13 +439,10 @@
                                 '</span>',
                                 '<span>'+x.MstCustomerDetail.FlagCustomer+'</span>',
                                 '<span>'+
-                                    '<a href="#" data-Id="'+x.MappingTransaksi.Id+'" class="update-trade-in '+
-                                        'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;'+
-                                    `<a href="{{asset('trade-in/delete/${x.MappingTransaksi.Id}')}}"`+
-                                        `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
-                                        '<i class="fa fa-trash"></i>'+
-                                    '</a>'+
+                                    '<a href="#" data-Id="'+x.MappingTransaksi.Id+'" class="update-trade-in '+ElementUpdate+
+                                    ElementDelete+
                                 '</span>',
+
                             ]).draw(false)
                         })
                     }
