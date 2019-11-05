@@ -144,12 +144,13 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="button_approve_save"
-                    onclick="return confirm('Are you sure want to Approve this data?')">
-                    Approve
-                </button>
-
-                <button type="button" class="btn btn-warning button-close-modal">
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                    <button type="submit" class="btn btn-primary" id="button_approve_save"
+                        onclick="return confirm('Are you sure want to Approve this data?')">
+                        Approve
+                    </button>
+                @endif
+                <button type="button" class="btn btn button-close-modal">
                     Back
                 </button>		
             </div>

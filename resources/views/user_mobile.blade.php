@@ -17,7 +17,9 @@
                 <div class="col-sm-6">
                 </div>
                 <div class="col-sm-6">
-                    <a href="{{asset('/user-mobile/download')}}" class="btn btn-block btn-primary">Download</a>
+                    @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                        <a href="{{asset('/user-mobile/download')}}" class="btn btn-block btn-primary">Download</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -88,8 +90,12 @@
                                 
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $UserMobile->User->Id}}" class="update-user-mobile btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                </span>
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <a href="#" data-id="{{ $UserMobile->User->Id}}" class="update-user-mobile btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                    @else 
+                        <a href="#" data-id="{{ $UserMobile->User->Id}}" class="update-user-mobile btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                    @endif
+                    </span>
                 </td>
             </tr>   
                             

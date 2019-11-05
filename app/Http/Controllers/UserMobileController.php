@@ -31,9 +31,10 @@ class UserMobileController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'user_mobile',[
+                    'Role' => $Hasils->Role,
                     'UserMobiles'=>$Hasils->Data, 
                     'session' => $session
             ]);

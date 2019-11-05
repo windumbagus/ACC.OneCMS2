@@ -15,10 +15,14 @@
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
-                    <a href="#" class="add-user-cms btn btn-block btn-primary">Create a New User</a>
+                    @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                        <a href="#" class="add-user-cms btn btn-block btn-primary">Create a New User</a>
+                    @endif
                 </div>
                 <div class="col-sm-6">
-                    <a href="{{asset('/user-cms/download')}}" class="btn btn-block btn-primary">Download</a>
+                    @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                        <a href="{{asset('/user-cms/download')}}" class="btn btn-block btn-primary">Download</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -75,11 +79,14 @@
                             
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $UserCMS->User->Id}}" class="update-user-cms btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
-                    <a href="{{asset('user-cms/delete/'.$UserCMS->User->Id.'&'.$UserCMS->MstUserDetail->Id)}}" 
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <a href="#" data-id="{{ $UserCMS->User->Id}}" class="update-user-cms btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
+                    @endif
+                    @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                        <a href="{{asset('user-cms/delete/'.$UserCMS->User->Id.'&'.$UserCMS->MstUserDetail->Id)}}" 
                         class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this User ?')" >
-                        <i class="fa fa-trash"></i>
-                    </a> 
+                        <i class="fa fa-trash"></i></a>
+                    @endif 
                 </span>
                 </td>
             </tr>                              
