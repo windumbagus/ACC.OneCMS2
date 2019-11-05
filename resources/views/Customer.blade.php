@@ -14,10 +14,12 @@
                 <h3 class="box-title">Customer</h3>
             </div>
             <div class="col-sm-4">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                <a href="{{asset('/customer/download')}}" class="btn btn-block btn-primary">Download</a>
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                    <a href="{{asset('/customer/download')}}" class="btn btn-block btn-primary">Download</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -50,29 +52,33 @@
         </thead>
         <tbody>
             @foreach ($Customers as $Customer)
+                <tr>  
+                    @if (property_exists($Customer->User, 'Name'))
+                        <td><span>{{$Customer->User->Name}}</span></td>
+                    @else 
+                        <td></td>
+                    @endif
+                    {{-- <td><span>{{$Customer->User->Name}}</span></td> --}}
+                    <td><span>{{$Customer->MstGCM->CharDesc1}}</span></td>
+                    <td><span>{{$Customer->MstBankAccountCustomer->NoRekening}}</span></td>
+                    <td><span>{{$Customer->MstBankAccountCustomer->NamaRekening}}</span></td>
 
-            <tr>  
-                @if (property_exists($Customer->User, 'Name'))
-                    <td><span>{{$Customer->User->Name}}</span></td>
-                @else 
-                    <td></td>
-                @endif
-                {{-- <td><span>{{$Customer->User->Name}}</span></td> --}}
-                <td><span>{{$Customer->MstGCM->CharDesc1}}</span></td>
-                <td><span>{{$Customer->MstBankAccountCustomer->NoRekening}}</span></td>
-                <td><span>{{$Customer->MstBankAccountCustomer->NamaRekening}}</span></td>
-
-                <td>
-                <span>
-                    <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                    <a  href="{{asset('customer/delete/'.$Customer->MstBankAccountCustomer->Id)}}" 
-                        data-id2="{{ $Customer->MstBankAccountCustomer->Id}}" class=" btn btn-danger btn-sm" 
-                        onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
-                    </a> 
-                </span>
-                </td>
-            </tr>   
-                            
+                    <td>
+                        <span>
+                            @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-warning btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </a> &nbsp; 
+                            @endif
+                            @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                <a  href="{{asset('customer/delete/'.$Customer->MstBankAccountCustomer->Id)}}" 
+                                    data-id2="{{ $Customer->MstBankAccountCustomer->Id}}" class=" btn btn-danger btn-sm" 
+                                    onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
+                                </a> 
+                            @endif
+                        </span>
+                    </td>
+                </tr>        
             @endforeach       
         </tbody>
         </table>

@@ -29,9 +29,10 @@ class AccYesMigrationController extends Controller
         $Hasils= json_decode($result);
         // dd($Hasils);
 
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'acc_yes_migration',[
+                    'Role' => $Hasils->Role,
                     'Migrations' => $Hasils->Data,
                     'session' => $session
             ]);

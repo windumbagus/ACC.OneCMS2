@@ -12,10 +12,12 @@
                 <h3 class="box-title">Bug Report</h3>
             </div>
             <div class="col-sm-4">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                <a href="{{asset('/bug-report/download')}}" class="btn btn-block btn-primary">Download</a>
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                    <a href="{{asset('/bug-report/download')}}" class="btn btn-block btn-primary">Download</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -49,27 +51,29 @@
         <tbody>
             @foreach ($Bugs as $Bug)
 
-            <tr>  
-                <td><span>{{$Bug->User->Name}}</span></td>
+                <tr>  
+                    <td><span>{{$Bug->User->Name}}</span></td>
 
-                {{-- @if (property_exists($Bug->MstKritikSaranBug, 'Report')) --}}
-                @if( strlen($Bug->MstKritikSaranBug->Report)>= 100)
-                    <td><span>{{substr($Bug->MstKritikSaranBug->Report,0,100)."..."}}</span></td>
-                @else 
-                    <td><span>{{$Bug->MstKritikSaranBug->Report}}</span></td>
-                @endif
+                    {{-- @if (property_exists($Bug->MstKritikSaranBug, 'Report')) --}}
+                    @if( strlen($Bug->MstKritikSaranBug->Report)>= 100)
+                        <td><span>{{substr($Bug->MstKritikSaranBug->Report,0,100)."..."}}</span></td>
+                    @else 
+                        <td><span>{{$Bug->MstKritikSaranBug->Report}}</span></td>
+                    @endif
 
-                <td><span>{{$Bug->MstKritikSaranBug->Flag}}</span></td>
-                <td>
-                <span>
-                    <a href="#" data-id="{{ $Bug->MstKritikSaranBug->Id}}" class="view-bug-report btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
-                    <a  href="{{asset('bug-report/delete/'.$Bug->MstKritikSaranBug->Id)}}" 
-                        data-id2="{{ $Bug->MstKritikSaranBug->Id}}" class=" btn btn-danger btn-sm" 
-                        onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
-                    </a> 
-                </span>
-                </td>
-            </tr>   
+                    <td><span>{{$Bug->MstKritikSaranBug->Flag}}</span></td>
+                    <td>
+                    <span>
+                        <a href="#" data-id="{{ $Bug->MstKritikSaranBug->Id}}" class="view-bug-report btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
+                        @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                            <a  href="{{asset('bug-report/delete/'.$Bug->MstKritikSaranBug->Id)}}" 
+                                data-id2="{{ $Bug->MstKritikSaranBug->Id}}" class=" btn btn-danger btn-sm" 
+                                onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
+                            </a> 
+                        @endif
+                    </span>
+                    </td>
+                </tr>   
                             
             @endforeach       
         </tbody>

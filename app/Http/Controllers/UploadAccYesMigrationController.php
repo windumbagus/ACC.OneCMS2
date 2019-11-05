@@ -31,7 +31,7 @@ class UploadAccYesMigrationController extends Controller
         return view('modal/upload_acc_yes_migration',[
             'UploadMigrations' =>$Hasils,
             'session' => $session
-            ]);    
+        ]);    
     }
 
     public function upload(Request $request)

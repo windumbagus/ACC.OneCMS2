@@ -14,10 +14,12 @@
                 <h3 class="box-title">ACC Yes Migration</h3>
             </div>
             <div class="col-sm-4">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                    <a href="{{route('acc-yes-migration/upload-page')}}" class="btn btn-block btn-primary">Upload</a> 
-                </div>   
+                @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <a href="{{route('acc-yes-migration/upload-page')}}" class="btn btn-block btn-primary">Upload</a> 
+                    </div> 
+                @endif
             </div>
         </div>
     </div>
@@ -81,7 +83,10 @@
                 
                 <td>
                 <span>
-                    <a href="{{asset('/acc-yes-migration/delete/'.$Migration->Id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')"><i class="fa fa-trash"></i></a> 
+                    @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                        <a href="{{asset('/acc-yes-migration/delete/'.$Migration->Id)}}" class="btn btn-danger btn-sm" 
+                            onclick="return confirm('Are you sure want to delete this ?')"><i class="fa fa-trash"></i></a> 
+                    @endif
                 </span>
                 </td>
             </tr>   
@@ -93,7 +98,9 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="col-sm-6">
-                <a href="{{asset('/acc-yes-migration/migrate')}}" class="btn btn-block btn-success">Migrate</a>                     
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <a href="{{asset('/acc-yes-migration/migrate')}}" class="btn btn-block btn-success">Migrate</a>     
+                    @endif                
                 </div>  
                 <div class="col-sm-6"></div>
             </div>
