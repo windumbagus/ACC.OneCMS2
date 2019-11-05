@@ -27,15 +27,16 @@ class MasterContentController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $val = json_decode($result);
-        // dd($val);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
 
-        if(property_exists($val,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'master_content',[
-                    'MstGCM_ContentTypeList'=> $val->Data->MstGCM->ContentType,
-                    'MstGCM_StatusList'=> $val->Data->MstGCM->ContentStatus,
-                    'MstGCM_CategoryList'=> $val->Data->MstGCM->NewsCategory,
+                    'Role' => $Hasils->Role,
+                    'MstGCM_ContentTypeList'=> $Hasils->Data->MstGCM->ContentType,
+                    'MstGCM_StatusList'=> $Hasils->Data->MstGCM->ContentStatus,
+                    'MstGCM_CategoryList'=> $Hasils->Data->MstGCM->NewsCategory,
                     'session' => $session
             ]);
         }else{

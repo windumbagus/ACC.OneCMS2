@@ -7,7 +7,13 @@
                 <button type="button" class="close button_leaseModalUpdate_closeModal" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="box-title">Update Lease</h4> 
+                <h4 class="box-title">
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        Update Lease
+                    @else
+                        View Lease
+                    @endif
+                </h4> 
             </div>
             <form id="form_leaseModalUpdate_update" action="{{asset('lease/update')}}" method="post">
                 <div class="modal-body"> 
@@ -99,14 +105,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="button_leaseModalUpdate_save"
-                        onclick="return confirm('Are you sure want to Follow Up this data?')">
-                        Follow Up
-                    </button>
-
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <button type="submit" class="btn btn-primary" id="button_leaseModalUpdate_save"
+                            onclick="return confirm('Are you sure want to Follow Up this data?')">
+                            Follow Up
+                        </button>
+                    @endif	
                     <button type="button" class="btn btn-warning button_leaseModalUpdate_closeModal">
                         Back
-                    </button>		
+                    </button>
                 </div>
             </form>		
         </div>

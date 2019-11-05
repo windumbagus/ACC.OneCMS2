@@ -69,6 +69,10 @@
                                 <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-warning btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a> &nbsp; 
+                            @else
+                                <a href="#" data-id="{{ $Customer->MstBankAccountCustomer->Id}}" class="update-customer btn btn-info btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </a> &nbsp; 
                             @endif
                             @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
                                 <a  href="{{asset('customer/delete/'.$Customer->MstBankAccountCustomer->Id)}}" 

@@ -11,11 +11,12 @@
                 <h3 class="box-title">Lease</h3>
             </div>
             <div class="col-sm-3">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                    <a href="{{asset('lease/download/null&amp;null&amp;null')}}" class="btn btn-block btn-primary" 
-                        id="button_lease_download">Download</a>  
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <a href="{{asset('lease/download/null&amp;null&amp;null')}}" class="btn btn-block btn-primary" id="button_lease_download">Download</a>  
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -171,12 +172,19 @@
 
                         <td>
                             <span>
-                                <a href="#" MstTransaksi_Id="{{$MstTransaksi->MstTransaksi->Id}}" class="button_lease_view 
-                                    btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                                <a href="{{asset('lease/delete/'.$MstTransaksi->MstTransaksi->Id)}}" 
-                                    class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
-                                    <i class="fa fa-trash"></i>
-                                </a> 
+                                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                    <a href="#" MstTransaksi_Id="{{$MstTransaksi->MstTransaksi->Id}}" class="button_lease_view 
+                                        btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
+                                @else
+                                    <a href="#" MstTransaksi_Id="{{$MstTransaksi->MstTransaksi->Id}}" class="button_lease_view 
+                                        btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp;
+                                @endif 
+                                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                    <a href="{{asset('lease/delete/'.$MstTransaksi->MstTransaksi->Id)}}" 
+                                        class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
+                                        <i class="fa fa-trash"></i>
+                                    </a> 
+                                @endif
                             </span>
                         </td>
                     </tr>              
@@ -296,6 +304,7 @@
             var Status = $('#dropdown_lease_statusTransaksi').val();
             var StartDate_DateFormat = $('#datepicker_lease_startDate').val();
             var EndDate_DateFormat = $('#datepicker_lease_endDate').val();
+            var Role = {!! json_encode($Role) !!}
             if (StartDate_DateFormat !== "") {
                 var StartDate = 
                     StartDate_DateFormat.substring(6,10)+'-'+StartDate_DateFormat.substring(3,5)+'-'+StartDate_DateFormat.substring(0,2);
@@ -402,7 +411,21 @@
                             if (typeof MstTransaksi.MstCustomerDetail.FlagCustomer === 'undefined') {
                                 MstTransaksi.MstCustomerDetail.FlagCustomer = "";
                             }
-                        
+                            
+                            var ElementUpdate = '';
+                            var ElementDelete = '';
+                            if (Role.IsUpdate) {
+                                ElementUpdate = 'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;';
+                            } else {
+                                ElementUpdate = 'btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp;';
+                            }
+                            if (Role.IsDelete) {
+                                ElementDelete = `<a href="{{asset('lease/delete/${MstTransaksi.MstTransaksi.Id}')}}"`+
+                                    `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
+                                    '<i class="fa fa-trash"></i>'+
+                                '</a>';
+                            }
+
                             table.row.add([
                                 '<span>'+MstTransaksi.User.Name+'</span>',
                                 '<span>'+
@@ -424,12 +447,8 @@
                                 '<span>'+MstTransaksi.MstTransaksi.Notes+'</span>',
                                 '<span>'+MstTransaksi.MstCustomerDetail.FlagCustomer+'</span>',
                                 '<span>'+
-                                    '<a href="#" MstTransaksi_Id="'+MstTransaksi.MstTransaksi.Id+'" class="button_lease_view '+
-                                        'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;'+
-                                    `<a href="{{asset('lease/delete/${MstTransaksi.MstTransaksi.Id}')}}"`+
-                                        `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
-                                        '<i class="fa fa-trash"></i>'+
-                                    '</a>'+
+                                    '<a href="#" MstTransaksi_Id="'+MstTransaksi.MstTransaksi.Id+'" class="button_lease_view '+ElementUpdate+
+                                    ElementDelete+
                                 '</span>',
                             ]).draw(false)
                         })

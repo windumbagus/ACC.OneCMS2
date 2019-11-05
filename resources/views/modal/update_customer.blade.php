@@ -6,7 +6,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="box-title">Update Customer</h4> 
+                <h4 class="box-title">
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        Update Customer
+                    @else
+                        View Customer
+                    @endif
+                </h4> 
             </div>
         <form id="form-update-customer" action="{{ asset('customer/update') }}" method="post"> 
             <div class="modal-body">
@@ -71,8 +77,10 @@
                     </div>	
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="close-modal">Close</button>		
-                <button type="submit" class="btn btn-success">OK</button>		
+                <button type="button" class="btn btn-default" id="close-modal">Close</button>
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))		
+                    <button type="submit" class="btn btn-success">OK</button>		
+                @endif
             </div>	
         </form>
         </div>

@@ -14,10 +14,12 @@
                 <h3 class="box-title">Data Tertanggung Utama</h3>
             </div>
             <div class="col-sm-4">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                <a href="{{asset('/data-tertanggung-utama/download')}}" class="btn btn-block btn-primary">Download</a>
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                    <a href="{{asset('/data-tertanggung-utama/download')}}" class="btn btn-block btn-primary">Download</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

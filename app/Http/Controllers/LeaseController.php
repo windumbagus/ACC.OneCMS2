@@ -28,14 +28,15 @@ class LeaseController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $val = json_decode($result);
-        // dd($val);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
 
-        if(property_exists($val,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'lease',[
-                    'MstTransaksiList' => $val->Data->MstTransaksiList,
-                    'MstTrsansaksi_StatusList'=> $val->Data->MstTrsansaksi_StatusList,
+                    'Role' => $Hasils->Role,
+                    'MstTransaksiList' => $Hasils->Data->MstTransaksiList,
+                    'MstTrsansaksi_StatusList'=> $Hasils->Data->MstTrsansaksi_StatusList,
                     'session' => $session
             ]);
         }else{

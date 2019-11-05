@@ -28,14 +28,15 @@ class LandingPageController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $val = json_decode($result);
-        // dd($val);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
 
-        if(property_exists($val,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'landing_page',[
-                    'MstLandingPageList' => $val->Data->MstLandingPageList,
-                    'LandingPageCategoryList'=> $val->Data->LandingPageCategoryList,  
+                    'Role' => $Hasils->Role,
+                    'MstLandingPageList' => $Hasils->Data->MstLandingPageList,
+                    'LandingPageCategoryList'=> $Hasils->Data->LandingPageCategoryList,  
                     'LandingPageSubCategoryList'=> array(null),
                     'session' => $session
             ]);

@@ -14,15 +14,17 @@
                 <h3 class="box-title">Data Pemegang Polis</h3>
             </div>
             <div class="col-sm-6">
-                <div class="col-sm-4">
-                    <a href="{{asset('/data-pemegang-polis/download-simulasi')}}" class="btn btn-block btn-primary">Download Simulasi</a>
-                </div>
-                <div class="col-sm-4">
-                    <a href="{{asset('/data-pemegang-polis/download-summary')}}" class="btn btn-block btn-primary">Download Summary</a>
-                </div>
-                <div class="col-sm-4">
-                    <a href="{{asset('/data-pemegang-polis/download-golive')}}" class="btn btn-block btn-primary">Download Go Live</a>
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-4">
+                        <a href="{{asset('/data-pemegang-polis/download-simulasi')}}" class="btn btn-block btn-primary">Download Simulasi</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="{{asset('/data-pemegang-polis/download-summary')}}" class="btn btn-block btn-primary">Download Summary</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="{{asset('/data-pemegang-polis/download-golive')}}" class="btn btn-block btn-primary">Download Go Live</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

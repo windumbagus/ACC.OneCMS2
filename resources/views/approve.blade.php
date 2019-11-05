@@ -67,7 +67,9 @@
                     @endif
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Approve->User->Id}}" class="view-approved btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
+                    <a href="#" data-id="{{ $Approve->User->Id}}" class="view-approved btn btn-info btn-sm">
+                        <i class="fa fa-eye"></i>
+                    </a> 
                 </span>
                 </td>
             </tr>   

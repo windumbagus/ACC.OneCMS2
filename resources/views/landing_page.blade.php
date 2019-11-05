@@ -11,10 +11,12 @@
                 <h3 class="box-title">Landing Page</h3>
             </div>
             <div class="col-sm-3">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                    <a href="#" class="button_landingPage_create btn btn-block btn-primary">Create</a>  
-                </div>
+                @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <a href="#" class="button_landingPage_create btn btn-block btn-primary">Create</a>  
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -62,12 +64,19 @@
 
                         <td>
                             <span>
-                                <a href="#" MstLandingPage_Id="{{$MstLandingPage->Id}}" class="button_landingPage_update 
-                                    btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                                <a href="{{asset('landing-page/delete/'.$MstLandingPage->Id)}}" 
-                                    class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
-                                    <i class="fa fa-trash"></i>
-                                </a> 
+                                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                    <a href="#" MstLandingPage_Id="{{$MstLandingPage->Id}}" class="button_landingPage_update 
+                                        btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                @else
+                                    <a href="#" MstLandingPage_Id="{{$MstLandingPage->Id}}" class="button_landingPage_update 
+                                        btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
+                                @endif
+                                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                    <a href="{{asset('landing-page/delete/'.$MstLandingPage->Id)}}" 
+                                        class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
+                                        <i class="fa fa-trash"></i>
+                                    </a> 
+                                @endif
                             </span>
                         </td>
                     </tr>              

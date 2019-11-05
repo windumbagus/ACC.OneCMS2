@@ -59,10 +59,12 @@
                 <td>
                 <span>
                     <a href="#" data-id="{{ $A->MstHistoryPembayaranAsuransiJiwa->Id}}" class="view-history-pembayaran-asuransi-jiwa btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
-                    <a  href="{{asset('history-pembayaran-asuransi-jiwa/delete/'.$A->MstHistoryPembayaranAsuransiJiwa->Id)}}" 
-                        data-id2="{{ $A->MstHistoryPembayaranAsuransiJiwa->Id}}" class=" btn btn-danger btn-sm" 
-                        onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
-                    </a> 
+                    @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                        <a  href="{{asset('history-pembayaran-asuransi-jiwa/delete/'.$A->MstHistoryPembayaranAsuransiJiwa->Id)}}" 
+                            data-id2="{{ $A->MstHistoryPembayaranAsuransiJiwa->Id}}" class=" btn btn-danger btn-sm" 
+                            onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
+                        </a> 
+                    @endif
                 </span>
                 </td>
             </tr>   

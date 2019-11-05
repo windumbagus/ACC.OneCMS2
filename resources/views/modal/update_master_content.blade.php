@@ -4,11 +4,22 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close button_masterContentModalUpdate_closeModal" data-dismiss="modal" aria-label="Close"
-                    onclick="return confirm('Are you sure want to cancel?')">
-                    <span aria-hidden="true">&times;</span>
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                    <button type="button" class="close button_masterContentModalUpdate_closeModal" data-dismiss="modal" aria-label="Close"
+                        onclick="return confirm('Are you sure want to cancel?')">
+                        <span aria-hidden="true">&times;</span>
+                @else
+                    <button type="button" class="close button_masterContentModalUpdate_closeModal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                @endif
                 </button>
-                <h4 class="box-title">Update Master Content</h4> 
+                <h4 class="box-title">
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        Update Master Content
+                    @else
+                        View Master Content
+                    @endif
+                </h4> 
             </div>
             <form id="form_masterContentModalUpdate_add" action="{{ asset('master-content/update') }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body"> 
@@ -142,10 +153,14 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"
-                        onclick="return confirm('Are you sure want to save this data?')">Save</button>	
-                    <button type="button" class="btn btn-warning button_masterContentModalUpdate_closeModal"
-                        onclick="return confirm('Are you sure want to cancel?')">Cancel</button>		
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <button type="submit" class="btn btn-primary"
+                            onclick="return confirm('Are you sure want to save this data?')">Save</button>	
+                        <button type="button" class="btn btn-warning button_masterContentModalUpdate_closeModal"
+                            onclick="return confirm('Are you sure want to cancel?')">Cancel</button>	
+                    @else
+                        <button type="button" class="btn btn-warning button_masterContentModalUpdate_closeModal">Close</button>
+                    @endif	
                 </div>
             </form>		
         </div>

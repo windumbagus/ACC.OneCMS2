@@ -28,13 +28,14 @@ class HistoryPembayaranAsuransiJiwaController extends Controller
          $result = curl_exec($ch);
          $err = curl_error($ch);
          curl_close($ch);
-         $data = json_decode($result);
-         // dd($data);
+         $Hasils = json_decode($result);
+         // dd($Hasils);
 
-        if(property_exists($data,"IsSuccess")){
+         if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'history_pembayaran_asuransi_jiwa',[
-                    'As' => $data->Data,
+                    'Role' => $Hasils->Role,
+                    'As' => $Hasils->Data,
                     'session' => $session
             ]);
         }else{

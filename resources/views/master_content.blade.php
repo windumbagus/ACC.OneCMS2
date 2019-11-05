@@ -11,10 +11,12 @@
                 <h3 class="box-title">Master Content</h3>
             </div>
             <div class="col-sm-3">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                    <a href="#" class="button_masterContent_create btn btn-block btn-primary">Create</a>  
-                </div>
+                @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <a href="#" class="button_masterContent_create btn btn-block btn-primary">Create</a>  
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -103,6 +105,7 @@
         // ContentType Dropdown
         $('#dropdown_masterContent_contentType').on('change',function(){
             var SelectedContentType = $(this).val();
+            var Role = {!! json_encode($Role) !!}
             // console.log(SelectedContentType);
             $.ajax({
                 url:'/master-content/get-by-content-type',
@@ -114,13 +117,28 @@
                     var MstContentList = data.MstContentList;
                     table.clear().draw()
                     MstContentList.map(e=>{
+                        var ElementUpdate = '';
+                        var ElementDelete = '';
+                        if (Role.IsUpdate) {
+                            ElementUpdate = 'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;';
+                        } else {
+                            ElementUpdate = 'btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp;';
+                        }
+                        if (Role.IsDelete) {
+                            ElementDelete = '<a href="#" MstContentId="'+e.Id+'" class="button-masterContent-delete btn btn-danger btn-sm" '+
+                                'onclick="return confirm(\'Are you sure want to delete this ?\')" ><i class="fa fa-trash"></i></a>';
+                        }
+
                         table.row.add([
                             e.Order,
                             e.Title,
                             e.Category,
                             e.Status,
                             e.AddedDate,
-                            '<span><a href="#" MstContentId="'+e.Id+'" class="button_masterContent_update btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" MstContentId="'+e.Id+'" class="button-masterContent-delete btn btn-danger btn-sm" onclick="return confirm(\'Are you sure want to delete this ?\')" ><i class="fa fa-trash"></i></a></span>',
+                            '<span>'+
+                                '<a href="#" MstContentId="'+e.Id+'" class="button_masterContent_update '+ElementUpdate+
+                                ElementDelete+
+                            '</span>',
                         ]).draw(false)
                     }) 
                 }
