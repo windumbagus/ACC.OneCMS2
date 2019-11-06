@@ -14,10 +14,14 @@
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
-                    <a href="{{asset('/role-management/SyncRole')}}" class="btn btn-block btn-primary">Sync</a>
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <a href="{{asset('/role-management/SyncRole')}}" class="btn btn-block btn-primary">Sync</a>
+                    @Endif
                 </div>
                 <div class="col-sm-6">
-                    <a href="#" class="add-role-management btn btn-block btn-primary">Create New Role</a>
+                    @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                        <a href="#" class="add-role-management btn btn-block btn-primary">Create New Role</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -47,16 +51,20 @@
             </tr>
         </thead>
             <tbody>
-                @foreach ($Roles as $Role)
+                @foreach ($Roles as $R)
                     <tr>  
-                        <td><span>{{$Role->RoleName}}</span></td>
+                        <td><span>{{$R->RoleName}}</span></td>
                         <td>
                             <span>
-                                <a href="#" data-id="{{ $Role->Id}}" class="update-role-management btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                                <a href="{{asset('setting-role-management/'.$Role->Id.'&'.$Role->RoleName)}}"class="btn btn-info btn-sm"><i class="fa fa-gear"></i></a> &nbsp; 
-                                <a href="{{asset('role-management/delete/'.$Role->Id)}}" class=" btn btn-danger btn-sm" 
+                                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                    <a href="#" data-id="{{ $R->Id}}" class="update-role-management btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                    <a href="{{asset('setting-role-management/'.$R->Id.'&'.$R->RoleName)}}"class="btn btn-info btn-sm"><i class="fa fa-gear"></i></a> &nbsp; 
+                                @endif
+                                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                    <a href="{{asset('role-management/delete/'.$R->Id)}}" class=" btn btn-danger btn-sm" 
                                     onclick="return confirm('Are you sure want to delete this data?')" ><i class="fa fa-trash"></i>
-                                </a> 
+                                    </a>
+                                @endif 
                             </span>
                         </td>
                     </tr>   

@@ -26,12 +26,13 @@ class PushNotificationController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $Hasil = json_decode($result);
-        // dd($Hasil);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
         
-        if(property_exists($Hasil,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view('push_notification',[
-                'Push_Notifications' => $Hasil->Data,
+                'Role' => $Hasils->Role,
+                'Push_Notifications' => $Hasils->Data,
                 'session' => $session            
             ]);          
         }else{

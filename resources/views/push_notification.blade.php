@@ -68,13 +68,18 @@
                     
                     <td>
                         <span>
-                            <a href="#" data-id="{{ $Push_Notification->MplNotifikasiUser->Id }}" 
-                                class="pushnotification_updateonclick btn btn-primary btn-sm"><i class="fa fa-edit"></i>
-                            </a>
-                            <a href="{{asset('push-notification/delete/'.$Push_Notification->MplNotifikasiUser->Id)}}" 
-                                class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
-                                <i class="fa fa-trash"></i>
-                            </a> 
+                            @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                <a href="#" data-id="{{ $Push_Notification->MplNotifikasiUser->Id }}" 
+                                    class="pushnotification_updateonclick btn btn-primary btn-sm"><i class="fa fa-edit"></i>
+                                </a>
+                            @endif
+                            
+                            @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                <a href="{{asset('push-notification/delete/'.$Push_Notification->MplNotifikasiUser->Id)}}" 
+                                    class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
+                                    <i class="fa fa-trash"></i>
+                                </a> 
+                            @endif
                         </span>
                     </td>
                 </tr>            
