@@ -32,12 +32,13 @@ class SurveyController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
    
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'survey',[
-                'Surveys'=>$Hasils->Data, 
+                    'Role' => $Hasils->Role,
+                    'Surveys'=>$Hasils->Data, 
                     'session' => $session
-            ]);
+                ]);
         }else{
             return redirect('/invalid-permission');
         }  

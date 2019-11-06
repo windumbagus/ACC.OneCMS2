@@ -29,8 +29,9 @@ class RoleManagementController extends Controller
         $Hasils = json_decode($result);
         //  dd($Hasils);
 
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view('role_management',[
+                'Role' => $Hasils->Role,
                 'Roles'=>$Hasils->Data,
                 'session' => $session            
             ]);           

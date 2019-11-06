@@ -32,8 +32,9 @@ class RegisteredContractController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view('registered_contract',[
+                'Role' => $Hasils->Role,
                 'Contracts'=>$Hasils->Data,
                 'session' => $session            
             ]);           

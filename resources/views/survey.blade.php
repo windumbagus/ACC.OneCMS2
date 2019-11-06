@@ -15,7 +15,9 @@
             <div class="col-sm-4">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                <a href="{{asset('/survey/download')}}" class="btn btn-block btn-primary">Download</a>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <a href="{{asset('/survey/download')}}" class="btn btn-block btn-primary">Download</a>
+                @endif
                 </div>
             </div>
         </div>
@@ -74,9 +76,11 @@
                         <td>
                             <span>
                                 <a href="#" data-id="{{ $Survey->MstSurveyRating->Id}}" class="view-survey btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
-                                <a href="{{asset('survey/delete/'.$Survey->MstSurveyRating->Id)}}" class=" btn btn-danger btn-sm" 
+                                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                    <a href="{{asset('survey/delete/'.$Survey->MstSurveyRating->Id)}}" class=" btn btn-danger btn-sm" 
                                     onclick="return confirm('Are you sure want to delete this data?')" ><i class="fa fa-trash"></i>
-                                </a> 
+                                    </a> 
+                                @endif
                             </span>
                         </td>
                     </tr>   

@@ -32,8 +32,9 @@ class StatusPengajuanController extends Controller
         $Hasils = json_decode($result);
         //  dd($Hasils);
 
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view('status_pengajuan',[
+                'Role' => $Hasils->Role,
                 'Status_pengajuans'=>$Hasils->Data,
                 'session' => $session            
             ]);          
