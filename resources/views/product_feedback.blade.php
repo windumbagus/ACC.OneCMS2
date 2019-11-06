@@ -15,7 +15,9 @@
             <div class="col-sm-4">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                <a href="{{asset('/product-feedback/download')}}" class="btn btn-block btn-primary">Download</a>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <a href="{{asset('/product-feedback/download')}}" class="btn btn-block btn-primary">Download</a>
+                @endif
                 </div>
             </div>
         </div>
@@ -64,10 +66,12 @@
                 <td>
                 <span>
                     <a href="#" data-id="{{ $Feedback->MstKritikSaranBug->Id}}" class="view-product-feedback btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
-                    <a  href="{{asset('product-feedback/delete/'.$Feedback->MstKritikSaranBug->Id)}}" 
+                    @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                        <a  href="{{asset('product-feedback/delete/'.$Feedback->MstKritikSaranBug->Id)}}" 
                         data-id2="{{ $Feedback->MstKritikSaranBug->Id}}" class=" btn btn-danger btn-sm" 
                         onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
-                    </a> 
+                        </a> 
+                    @endif
                 </span>
                 </td>
             </tr>   

@@ -13,7 +13,9 @@
             <div class="col-sm-3">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                    <a href="#" class="button-promo-add btn btn-block btn-primary">Create</a>  
+                    @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                        <a href="#" class="button-promo-add btn btn-block btn-primary">Create</a>  
+                    @endif
                 </div>
             </div>
         </div>
@@ -88,37 +90,66 @@
                     @endif
 
                     <td>
-                        <select class="form-control select2 dropdown-promo-ordername" style="width:100%;" data-id2="{{$Promo->Id}}" >
-                            @for($promo_OrderName_dropdownVal=0; $promo_OrderName_dropdownVal<=5; $promo_OrderName_dropdownVal++)
-                                @if (property_exists($Promo, 'OrderName'))
-                                    @if ($promo_OrderName_dropdownVal==$Promo->OrderName)
-                                        <option value="{{$promo_OrderName_dropdownVal}}" selected>{{$promo_OrderName_dropdownVal}}</option>
+                        @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                            <select class="form-control select2 dropdown-promo-ordername" style="width:100%;" data-id2="{{$Promo->Id}}" >
+                                @for($promo_OrderName_dropdownVal=0; $promo_OrderName_dropdownVal<=5; $promo_OrderName_dropdownVal++)
+                                    @if (property_exists($Promo, 'OrderName'))
+                                        @if ($promo_OrderName_dropdownVal==$Promo->OrderName)
+                                            <option value="{{$promo_OrderName_dropdownVal}}" selected>{{$promo_OrderName_dropdownVal}}</option>
+                                        @else
+                                            @if ($promo_OrderName_dropdownVal==0)
+                                                <option value="{{$promo_OrderName_dropdownVal}}">-</option>
+                                            @else
+                                                <option value="{{$promo_OrderName_dropdownVal}}">{{$promo_OrderName_dropdownVal}}</option>
+                                            @endif 
+                                        @endif
                                     @else
                                         @if ($promo_OrderName_dropdownVal==0)
-                                            <option value="{{$promo_OrderName_dropdownVal}}">-</option>
+                                            <option value="{{$promo_OrderName_dropdownVal}}" selected>-</option>
                                         @else
                                             <option value="{{$promo_OrderName_dropdownVal}}">{{$promo_OrderName_dropdownVal}}</option>
-                                        @endif 
+                                        @endif                                   
                                     @endif
-                                @else
-                                    @if ($promo_OrderName_dropdownVal==0)
-                                        <option value="{{$promo_OrderName_dropdownVal}}" selected>-</option>
+                                @endfor
+                            </select>
+                        @else 
+                            <select class="form-control select2 dropdown-promo-ordername" style="width:100%;" data-id2="{{$Promo->Id}}" disabled>
+                                @for($promo_OrderName_dropdownVal=0; $promo_OrderName_dropdownVal<=5; $promo_OrderName_dropdownVal++)
+                                    @if (property_exists($Promo, 'OrderName'))
+                                        @if ($promo_OrderName_dropdownVal==$Promo->OrderName)
+                                            <option value="{{$promo_OrderName_dropdownVal}}" selected>{{$promo_OrderName_dropdownVal}}</option>
+                                        @else
+                                            @if ($promo_OrderName_dropdownVal==0)
+                                                <option value="{{$promo_OrderName_dropdownVal}}">-</option>
+                                            @else
+                                                <option value="{{$promo_OrderName_dropdownVal}}">{{$promo_OrderName_dropdownVal}}</option>
+                                            @endif 
+                                        @endif
                                     @else
-                                        <option value="{{$promo_OrderName_dropdownVal}}">{{$promo_OrderName_dropdownVal}}</option>
-                                    @endif                                   
-                                @endif
-                            @endfor
-                        </select>
+                                        @if ($promo_OrderName_dropdownVal==0)
+                                            <option value="{{$promo_OrderName_dropdownVal}}" selected>-</option>
+                                        @else
+                                            <option value="{{$promo_OrderName_dropdownVal}}">{{$promo_OrderName_dropdownVal}}</option>
+                                        @endif                                   
+                                    @endif
+                                @endfor
+                            </select>
+                        @endif
+
                     </td>
 
                     <td>
                         <span>
-                            <a href="#" data-id="{{ $Promo->Id }}" class="button-promo-update 
-                                btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                            <a href="{{asset('promo/delete/'.$Promo->Id)}}" 
-                                class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
-                                <i class="fa fa-trash"></i>
-                            </a> 
+                            @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                <a href="#" data-id="{{ $Promo->Id }}" class="button-promo-update 
+                                    btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                            @endif
+                            @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                <a href="{{asset('promo/delete/'.$Promo->Id)}}" 
+                                    class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
+                                    <i class="fa fa-trash"></i>
+                                </a> 
+                            @endif
                         </span>
                     </td>
                 </tr>              

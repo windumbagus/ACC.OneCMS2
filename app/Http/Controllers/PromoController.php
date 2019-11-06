@@ -27,13 +27,14 @@ class PromoController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $Hasil = json_decode($result);
+        $Hasils = json_decode($result);
         //  dd($Hasil);
 
-        if(property_exists($Hasil,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view('promo',[
-                'Promos'=> $Hasil->Data->MstPromo,
-                'PromoTypes'=> $Hasil->Data->PromoTypes,
+                'Role' => $Hasils->Role,
+                'Promos'=> $Hasils->Data->MstPromo,
+                'PromoTypes'=> $Hasils->Data->PromoTypes,
                 'session'=> $session            
             ]);        
         }else{
