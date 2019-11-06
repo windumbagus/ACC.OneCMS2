@@ -14,12 +14,16 @@
                 <h3 class="box-title">Holiday GCM</h3>
             </div>
             <div class="col-sm-4">
-                <div class="col-sm-6">
-                    <a href="#" class="add-holiday-gcm btn btn-block btn-primary">Create New Holiday</a>  
-                </div>
-                <div class="col-sm-6">
-                    <a href="{{asset('/holiday-gcm/download')}}" class="btn btn-block btn-primary">Download</a>
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-6 pull-right">
+                        <a href="{{asset('/holiday-gcm/download')}}" class="btn btn-block btn-primary">Download</a>
+                    </div>
+                @endif
+                @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                    <div class="col-sm-6 pull-right">
+                        <a href="#" class="add-holiday-gcm btn btn-block btn-primary">Create New Holiday</a>  
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -60,10 +64,20 @@
                 @endif --}}
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Holiday->HolidayCMS->Id}}" class="update-holiday-gcm btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                    <a  href="{{asset('holiday-gcm/delete/'.$Holiday->HolidayCMS->Id)}}" class=" btn btn-danger btn-sm" 
-                        onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
-                    </a> 
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <a href="#" data-id="{{ $Holiday->HolidayCMS->Id}}" class="update-holiday-gcm btn btn-warning btn-sm">
+                            <i class="fa fa-edit"></i>
+                        </a> &nbsp; 
+                    @else
+                        <a href="#" data-id="{{ $Holiday->HolidayCMS->Id}}" class="update-holiday-gcm btn btn-info btn-sm">
+                            <i class="fa fa-eye"></i>
+                        </a> &nbsp; 
+                    @endif
+                    @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                        <a  href="{{asset('holiday-gcm/delete/'.$Holiday->HolidayCMS->Id)}}" class=" btn btn-danger btn-sm" 
+                            onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
+                        </a> 
+                    @endif
                 </span>
                 </td>
             </tr>   

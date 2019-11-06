@@ -11,18 +11,24 @@
                 <h3 class="box-title">Master GCM</h3>
             </div>
             <div class="col-sm-9">
-                <div class="col-sm-3">
-                    <a href="#" class="create-master-gcm btn btn-block btn-primary">Create Master GCM </a>  
-                </div>
-                <div class="col-sm-3">
-                    <a href="{{asset('/master-gcm/upload-page')}}" class=" btn btn-block btn-primary">Upload</a>  
-                </div>
-                <div class="col-sm-3">
-                    <a href="{{asset('/master-gcm/download/null')}}" class=" btn btn-block btn-primary" id="button-download">Download </a>  
-                </div>
-                <div class="col-sm-3">
-                    <a href="{{asset('/master-gcm/edit-gcm-access')}}" class=" btn btn-block btn-primary">Edit GCM Access </a>  
-                </div>
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                    <div class="col-sm-3 pull-right">
+                        <a href="{{asset('/master-gcm/edit-gcm-access')}}" class=" btn btn-block btn-primary">Edit GCM Access </a>  
+                    </div>
+                @endif
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-3 pull-right">
+                        <a href="{{asset('/master-gcm/download/null')}}" class=" btn btn-block btn-primary" id="button-download">Download </a>  
+                    </div>
+                @endif
+                @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                    <div class="col-sm-3 pull-right">
+                        <a href="{{asset('/master-gcm/upload-page')}}" class=" btn btn-block btn-primary">Upload</a>  
+                    </div>
+                    <div class="col-sm-3 pull-right">
+                        <a href="#" class="create-master-gcm btn btn-block btn-primary">Create Master GCM </a>  
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -115,6 +121,7 @@
         // Condition Dropdown
         $('#Condition').on('change',function(){
             var Condition = $(this).val();
+            var Role = {!! json_encode($Role) !!}
             // console.log(Condition);
 
             // Function Download
@@ -164,6 +171,18 @@
                             e.IsActive = "";
                         }
 
+                        var ElementUpdate = '';
+                        var ElementDelete = '';
+                        if (Role.IsUpdate) {
+                            ElementUpdate = 'btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;';
+                        } else {
+                            ElementUpdate = 'btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp;';
+                        }
+                        if (Role.IsDelete) {
+                            ElementDelete = '<a href="#" MstGcmId="'+e.Id+'" class="delete-mst-gcm btn btn-danger btn-sm"'+
+                                'onclick="return confirm(\'Are you sure want to delete this ?\')"><i class="fa fa-trash"></i></a>';
+                        }
+
                         table.row.add([
                             e.CharValue1,
                             e.CharDesc1,
@@ -172,7 +191,10 @@
                             e.CharValue3,
                             e.CharDesc3,
                             e.IsActive,
-                            '<span><a href="#" MstGcmId="'+e.Id+'" class="update-mst-gcm btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" MstGcmId="'+e.Id+'" class="delete-mst-gcm btn btn-danger btn-sm" onclick="return confirm(\'Are you sure want to delete this ?\')" ><i class="fa fa-trash"></i></a></span>',
+                            '<span>'+
+                                '<a href="#" MstGcmId="'+e.Id+'" class="update-mst-gcm btn '+ElementUpdate+
+                                ElementDelete+
+                            '</span>',
                         ]).draw(false)
                     }) 
                 }

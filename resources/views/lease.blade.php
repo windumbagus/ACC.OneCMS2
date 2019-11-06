@@ -305,6 +305,7 @@
             var StartDate_DateFormat = $('#datepicker_lease_startDate').val();
             var EndDate_DateFormat = $('#datepicker_lease_endDate').val();
             var Role = {!! json_encode($Role) !!}
+            
             if (StartDate_DateFormat !== "") {
                 var StartDate = 
                     StartDate_DateFormat.substring(6,10)+'-'+StartDate_DateFormat.substring(3,5)+'-'+StartDate_DateFormat.substring(0,2);

@@ -17,7 +17,6 @@ class MasterGcmController extends Controller
             'Id'=>$request->session()->get('Id'),
             'RoleId'=>$request->session()->get('RoleId'),
             'SubMenuId'=>"3" // "3" untuk SubMenu MasterContent
-
         ]);
         
         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/GetAllMasterGcmByCondition?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
@@ -28,13 +27,14 @@ class MasterGcmController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $val = json_decode($result);
-        // dd($val);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
 
-        if(property_exists($val,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'master_gcm',[
-                    'Conditions'=> $val->Data->Condition,
+                    'Role' => $Hasils->Role,
+                    'Conditions'=> $Hasils->Data->Condition,
                     'session' => $session
             ]);
         }else{

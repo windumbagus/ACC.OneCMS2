@@ -108,7 +108,7 @@
     $(document).ready(function () {
         $('#example1').DataTable({
             'deferRender': true,
-            'paging'      : false,
+            'paging'      : true,
             'lengthChange': false,
             'searching'   : false,
             'ordering'    : true,

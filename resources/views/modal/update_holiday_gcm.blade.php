@@ -7,7 +7,13 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="box-title">Update Holiday GCM</h4> 
+                <h4 class="box-title">
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        Update Holiday GCM
+                    @else
+                        View Holiday GCM
+                    @endif
+                </h4> 
             </div>
             <form id="form-update-holiday-gcm" action="{{ asset('holiday-gcm/update') }}" method="post"> 
                 <div class="modal-body">
@@ -26,7 +32,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" id="close-modal-update">Close</button>	
-                    <button type="submit" class="btn btn-warning">Update</button>		
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <button type="submit" class="btn btn-warning">Update</button>
+                    @endif	
                 </div>	
             </form>
         </div>
