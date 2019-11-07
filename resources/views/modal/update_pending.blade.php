@@ -85,8 +85,9 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-warning"
-                    onclick="return confirm('Are you sure want to update this data?')">Save</button>	
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                    <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure want to update this data?')">Save</button>	
+                @endif
                 <button type="button" class="btn btn-primary" id="close-modal">Close</button>	
             </div>
                 </form>		

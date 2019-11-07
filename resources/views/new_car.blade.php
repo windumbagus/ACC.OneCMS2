@@ -13,8 +13,10 @@
             <div class="col-sm-3">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
-                    <a href="{{asset('new-car/download/null&amp;null&amp;null')}}" class="btn btn-block btn-primary" 
-                        id="button_newCar_download">Download</a>  
+                    @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))    
+                        <a href="{{asset('new-car/download/null&amp;null&amp;null')}}" class="btn btn-block btn-primary" 
+                            id="button_newCar_download">Download</a>  
+                    @endif
                 </div>
             </div>
         </div>
@@ -169,12 +171,20 @@
 
                         <td>
                             <span>
-                                <a href="#" MstTransaksi_Id="{{$MstTransaksi->MstTransaksi->Id}}" class="button_newCar_view 
-                                    btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                                <a href="{{asset('new-car/delete/'.$MstTransaksi->MstTransaksi->Id)}}" 
+                                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                    <a href="#" MstTransaksi_Id="{{$MstTransaksi->MstTransaksi->Id}}" class="button_newCar_view 
+                                        btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                                @else
+                                    <a href="#" MstTransaksi_Id="{{$MstTransaksi->MstTransaksi->Id}}" class="button_newCar_view 
+                                        btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
+                                @endif
+
+                                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                    <a href="{{asset('new-car/delete/'.$MstTransaksi->MstTransaksi->Id)}}" 
                                     class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
                                     <i class="fa fa-trash"></i>
-                                </a> 
+                                    </a> 
+                                @endif
                             </span>
                         </td>
                     </tr>              
@@ -311,18 +321,22 @@
             // console.log(EndDate);
 
             // Function Download
-            var tempStatus_Donwload = Status;
-            var tempStartDate_Donwload = StartDate;
-            var tempEndDate_Donwload = EndDate;
-            if (Status == "")
-                tempStatus_Donwload = "null";
-            if (StartDate == "")
-                tempStartDate_Donwload = "null";
-            if (EndDate == "")
-                tempEndDate_Donwload = "null";
-            document.getElementById('button_newCar_download').setAttribute("href", "");
-            document.getElementById('button_newCar_download')
-                .setAttribute("href", `{{asset('new-car/download/${tempStatus_Donwload}&${tempStartDate_Donwload}&${tempEndDate_Donwload}')}}`);
+            var Role = {!! json_encode($Role) !!}
+             // console.log(Role);
+             if (Role.IsDownload){
+                var tempStatus_Donwload = Status;
+                var tempStartDate_Donwload = StartDate;
+                var tempEndDate_Donwload = EndDate;
+                if (Status == "")
+                    tempStatus_Donwload = "null";
+                if (StartDate == "")
+                    tempStartDate_Donwload = "null";
+                if (EndDate == "")
+                    tempEndDate_Donwload = "null";
+                document.getElementById('button_newCar_download').setAttribute("href", "");
+                document.getElementById('button_newCar_download')
+                    .setAttribute("href", `{{asset('new-car/download/${tempStatus_Donwload}&${tempStartDate_Donwload}&${tempEndDate_Donwload}')}}`);
+             }
 
             $.ajax({
                 url:'new-car/get-by-condition',
@@ -398,6 +412,22 @@
                             if (typeof MstTransaksi.MstCustomerDetail.FlagCustomer === 'undefined') {
                                 MstTransaksi.MstCustomerDetail.FlagCustomer = "";
                             }
+
+                            var ElementUpdate = "";
+                            var ElementDelete = "";
+
+                            if (Role.IsUpdate){
+                              ElementUpdate = 'btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;';
+                            }else{
+                              ElementUpdate = 'btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp;';
+                            }
+
+                            if (Role.IsDelete){
+                              ElementDelete =   `<a href="{{asset('new-car/delete/${MstTransaksi.MstTransaksi.Id}')}}"`+
+                                                `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
+                                                '<i class="fa fa-trash"></i>'+
+                                                '</a>';
+                            }
                         
                             table.row.add([
                                 '<span>'+MstTransaksi.User.Name+'</span>',
@@ -420,12 +450,8 @@
                                 '<span>'+MstTransaksi.MstTransaksi.Notes+'</span>',
                                 '<span>'+MstTransaksi.MstCustomerDetail.FlagCustomer+'</span>',
                                 '<span>'+
-                                    '<a href="#" MstTransaksi_Id="'+MstTransaksi.MstTransaksi.Id+'" class="button_newCar_view '+
-                                        'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;'+
-                                    `<a href="{{asset('new-car/delete/${MstTransaksi.MstTransaksi.Id}')}}"`+
-                                        `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
-                                        '<i class="fa fa-trash"></i>'+
-                                    '</a>'+
+                                    '<a href="#" MstTransaksi_Id="'+MstTransaksi.MstTransaksi.Id+'" class="button_newCar_view '+ ElementUpdate +
+                                    ElementDelete +
                                 '</span>',
                             ]).draw(false)
                         })

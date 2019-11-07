@@ -27,12 +27,13 @@ class PendingController extends Controller
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        $val = json_decode($result);
-        // dd($val);
+        $Hasils = json_decode($result);
+        // dd($Hasils);
         
-        if(property_exists($val,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view('pending',[
-                'Pendings' => $val->Data,
+                'Role' => $Hasils->Role,
+                'Pendings' => $Hasils->Data,
                 'session' => $session            
             ]);  
         }else{
