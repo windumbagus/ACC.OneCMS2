@@ -7,7 +7,13 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
             <button type="button" class="close button-close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="box-title">Multipurpose</h4> 
+            <h4 class="box-title">
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                    Update Multipurpose
+                @else
+                    View Multipurpose
+                @endif
+            </h4> 
         </div>
         <form id="form-update-multipurpose" action="{{asset('multipurpose/FollowUp')}}" method="get">
             <div class="modal-body"> 
@@ -148,11 +154,12 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="button_Follow_up"
-                    onclick="return confirm('Are you sure want to Follow Up this data?')">
-                    Follow Up
-                </button>
-
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                    <button type="submit" class="btn btn-primary" id="button_Follow_up"
+                        onclick="return confirm('Are you sure want to Follow Up this data?')">
+                        Follow Up
+                    </button>
+                @endif
                 <button type="button" class="btn btn-warning button-close">
                     Back
                 </button>		

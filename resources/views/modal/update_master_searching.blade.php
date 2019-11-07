@@ -7,7 +7,13 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <button type="button" class="close-modal-update close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="box-title">Update Master Searching</h4> 
+                <h4 class="box-title">
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        Update Master Searching
+                    @else
+                        View Master Searching
+                    @endif
+                </h4> 
             </div>
             <form id="form-update-master-searching" action="{{ asset('master-searching/update') }}" method="post"> 
                 <div class="modal-body">
@@ -45,7 +51,9 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="close-modal-update btn btn-default" >Close</button>	
-                    <button type="submit" class="btn btn-warning">Update</button>		
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <button type="submit" class="btn btn-warning">Update</button>	
+                    @endif	
                 </div>	
             </form>
         </div>

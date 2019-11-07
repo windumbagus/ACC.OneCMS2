@@ -29,8 +29,9 @@ class MasterSearchingController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view('master_searching',[
+                'Role' => $Hasils->Role,
                 'Searching'=>$Hasils->Data->MstSearch,
                 'MenuItems'=>$Hasils->Data->MenuItem,
                 'Screens'=>$Hasils->Data->Screen,

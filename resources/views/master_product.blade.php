@@ -14,10 +14,12 @@
                 <h3 class="box-title">Master Product</h3>
             </div>
             <div class="col-sm-4">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                <a href="{{asset('/master-product/sync-api-product')}}" class="btn btn-block btn-primary">Sync API to Product</a>
-                </div>
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                    <a href="{{asset('/master-product/sync-api-product')}}" class="btn btn-block btn-primary">Sync API to Product</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -56,7 +58,13 @@
                 <td><span>{{$Product->Description}}</span></td>
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Product->Id}}" class="update-master-product btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <a href="#" data-id="{{ $Product->Id}}" class="update-master-product btn btn-warning btn-sm">
+                            <i class="fa fa-edit"></i></a>
+                    @else
+                        <a href="#" data-id="{{ $Product->Id}}" class="update-master-product btn btn-info btn-sm">
+                            <i class="fa fa-eye"></i></a>
+                    @endif
                 </span>
                 </td>
             </tr>              

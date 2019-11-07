@@ -6,7 +6,11 @@
                 <button type="button" class="close-modal close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="box-title">Update Master Product</h4> 
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        Update Master Product
+                    @else
+                        View Master Product
+                    @endif
             </div>
         <form id="form-update-master-product" action="{{ asset('master-product/update') }}" method="post" enctype="multipart/form-data"> 
             <div class="modal-body">
@@ -83,8 +87,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close-modal btn btn-default" >Close</button>		
-                <button type="submit" class="btn btn-success">Save</button>		
+                <button type="button" class="close-modal btn btn-default" >Close</button>
+                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))		
+                    <button type="submit" class="btn btn-success">Save</button>		
+                @endif
             </div>	
         </form>
         </div>

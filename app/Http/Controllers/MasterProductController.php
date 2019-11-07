@@ -29,9 +29,10 @@ class MasterProductController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
             
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'master_product',[
+                    'Role' => $Hasils->Role,
                     'Products'=>$Hasils->Data->MstProduct,
                     'CharDescs'=>$Hasils->Data->CharDesc,
                     'CharValues'=>$Hasils->Data->CharValue,  

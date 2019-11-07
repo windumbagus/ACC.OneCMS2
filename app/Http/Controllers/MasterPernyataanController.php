@@ -77,9 +77,10 @@ class MasterPernyataanController extends Controller
         $data5 = json_decode($result5);
         // dd($data5);
 
-        if(property_exists($data,"IsSuccess")){
+        if((property_exists($data,"Role")) && ($data->Role->IsView == True)){
             return view(
                 'master_pernyataan',[
+                    'Role' => $data->Role,
                     'Pernyataans' => $data->Data,
                     'Perlindungans' => $data2,
                     'Proteksis' => $data3,

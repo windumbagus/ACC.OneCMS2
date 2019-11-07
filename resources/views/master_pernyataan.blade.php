@@ -14,10 +14,12 @@
                 <h3 class="box-title">Master Pernyataan</h3>
             </div>
             <div class="col-sm-4">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                    <a href="#" class="add-master-pernyataan btn btn-block btn-primary">Create</a>  
-                </div>
+                @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <a href="#" class="add-master-pernyataan btn btn-block btn-primary">Create</a>  
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -67,10 +69,17 @@
 
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Pernyataan->Id}}" class="update-master-pernyataan btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                    <a href="{{asset('master-pernyataan/delete/'.$Pernyataan->Id)}}" class=" btn btn-danger btn-sm" 
-                        onclick="return confirm('Are you sure want to delete this data?')" ><i class="fa fa-trash"></i>
-                    </a>
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <a href="#" data-id="{{ $Pernyataan->Id}}" class="update-master-pernyataan btn btn-warning btn-sm">
+                            <i class="fa fa-edit"></i></a> &nbsp;
+                    @else
+                        <a href="#" data-id="{{ $Pernyataan->Id}}" class="update-master-pernyataan btn btn-info btn-sm">
+                            <i class="fa fa-eye"></i></a> &nbsp;
+                    @endif
+                    @if ((property_exists($Role,'IsDelete')) && ($Role->IsDownload == True)) 
+                        <a href="{{asset('master-pernyataan/delete/'.$Pernyataan->Id)}}" class=" btn btn-danger btn-sm" 
+                            onclick="return confirm('Are you sure want to delete this data?')"><i class="fa fa-trash"></i></a>
+                    @endif
                 </span>
                 </td>
             </tr>   

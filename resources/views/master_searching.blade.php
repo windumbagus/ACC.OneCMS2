@@ -13,12 +13,14 @@
                 <h3 class="box-title">Master Searching</h3>
             </div>
             <div class="col-sm-5">
-                <div class="col-sm-8">
-                    <a href="#" class="add-master-searching btn btn-block btn-primary">Create New Master GCM Searching</a>  
-                </div>
-                <div class="col-sm-4">
-                <a href="#" class="upload-master-searching btn btn-block btn-primary">Upload</a>
-                </div>
+                @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                    <div class="col-sm-8">
+                        <a href="#" class="add-master-searching btn btn-block btn-primary">Create New Master GCM Searching</a>  
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#" class="upload-master-searching btn btn-block btn-primary">Upload</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -64,10 +66,18 @@
                                                
                         <td>
                             <span>
-                                <a href="#" data-id="{{$Search->Id}}" class="update-master-searching btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
-                                <a href="{{asset('master-searching/delete/'.$Search->Id)}}" class=" btn btn-danger btn-sm" 
-                                    onclick="return confirm('Are you sure want to delete this data?')" ><i class="fa fa-trash"></i>
-                                </a> 
+                                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                    <a href="#" data-id="{{$Search->Id}}" class="update-master-searching btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i></a> &nbsp; 
+                                @else
+                                    <a href="#" data-id="{{$Search->Id}}" class="update-master-searching btn btn-info btn-sm">
+                                        <i class="fa fa-eye"></i></a> &nbsp; 
+                                @endif
+                                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                    <a href="{{asset('master-searching/delete/'.$Search->Id)}}" class=" btn btn-danger btn-sm" 
+                                        onclick="return confirm('Are you sure want to delete this data?')"><i class="fa fa-trash">
+                                        </i></a> 
+                                @endif
                             </span>
                         </td>
                     </tr>   

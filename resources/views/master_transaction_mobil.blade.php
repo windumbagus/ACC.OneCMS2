@@ -13,10 +13,12 @@
                 <h3 class="box-title">Master Transaction Mobil</h3>
             </div>
             <div class="col-sm-4">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                <a href="{{asset('/master-transaction-mobil/download')}}" class="btn btn-block btn-primary">Download</a>
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                    <a href="{{asset('/master-transaction-mobil/download')}}" class="btn btn-block btn-primary">Download</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -54,9 +56,7 @@
         </thead>
         <tbody>
             @foreach ($Transactions as $Transaction)
-
             <tr>  
-
                 @if (property_exists($Transaction->User, 'Name'))
                     <td><span>{{$Transaction->User->Name}}</span></td>
                 @else 
@@ -94,15 +94,17 @@
 
                 <td>
                 <span>
-                    <a href="#" data-id="{{ $Transaction->MstTransactionMobil->Id}}" class="view-master-transaction-mobil btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
-                    <a  href="{{asset('master-transaction-mobil/delete/'.$Transaction->MstTransactionMobil->Id)}}" 
-                        data-id2="{{ $Transaction->MstTransactionMobil->Id}}" class=" btn btn-danger btn-sm" 
-                        onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
-                    </a> 
+                    <a href="#" data-id="{{ $Transaction->MstTransactionMobil->Id}}" class="view-master-transaction-mobil 
+                        btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
+                    @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                        <a href="{{asset('master-transaction-mobil/delete/'.$Transaction->MstTransactionMobil->Id)}}" 
+                            data-id2="{{ $Transaction->MstTransactionMobil->Id}}" class=" btn btn-danger btn-sm" 
+                            onclick="return confirm('Are you sure want to delete this ?')" ><i class="fa fa-trash"></i>
+                        </a> 
+                    @endif
                 </span>
                 </td>
-            </tr>   
-                            
+            </tr>          
             @endforeach       
         </tbody>
         </table>

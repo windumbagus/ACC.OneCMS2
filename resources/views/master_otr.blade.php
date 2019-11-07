@@ -13,15 +13,19 @@
                 <h3 class="box-title">Master OTR</h3>
             </div>
             <div class="col-sm-6">
-                <div class="col-sm-6">
-                    <a href="#" class="add-master-otr btn btn-block btn-primary">Create New Master OTR</a>  
-                </div>
-                <div class="col-sm-3">
-                    <a href="{{route('master-otr/upload-page')}}" class="btn btn-block btn-primary">Upload</a>
-                </div>
-                <div class="col-sm-3">
-                    <a href="{{asset('/master-otr/download')}}" class="btn btn-block btn-primary">Download</a>
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-3 pull-right">
+                        <a href="{{asset('/master-otr/download')}}" class="btn btn-block btn-primary">Download</a>
+                    </div>
+                @endif
+                @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+                    <div class="col-sm-3 pull-right">
+                        <a href="{{route('master-otr/upload-page')}}" class="btn btn-block btn-primary">Upload</a>
+                    </div>
+                    <div class="col-sm-6 pull-right">
+                        <a href="#" class="add-master-otr btn btn-block btn-primary">Create New Master OTR</a>  
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -128,17 +132,23 @@
                                                
                         <td>
                             <span>
-                                <a href="#" data-id="{{$otr->MstOtr->Id}} " 
-                                    data-brand="{{$otr->MstOtr->DESC_BRAND}}" 
-                                    data-type="{{$otr->MstOtr->DESC_TYPE}}" 
-                                    class="update-master-otr btn btn-warning btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                </a> &nbsp; 
-                                <a href="{{asset('master-otr/delete/'.$otr->MstOtr->Id)}}" 
-                                    class=" btn btn-danger btn-sm" 
-                                    onclick="return confirm('Are you sure want to delete this data?')" >
-                                    <i class="fa fa-trash"></i>
-                                </a> 
+                                @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                    <a href="#" data-id="{{$otr->MstOtr->Id}}" data-brand="{{$otr->MstOtr->DESC_BRAND}}" 
+                                        data-type="{{$otr->MstOtr->DESC_TYPE}}" class="update-master-otr btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a> &nbsp; 
+                                @else
+                                    <a href="#" data-id="{{$otr->MstOtr->Id}}" data-brand="{{$otr->MstOtr->DESC_BRAND}}" 
+                                        data-type="{{$otr->MstOtr->DESC_TYPE}}" class="update-master-otr btn btn-info btn-sm">
+                                        <i class="fa fa-eye"></i>
+                                    </a> &nbsp;
+                                @endif
+                                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                                    <a href="{{asset('master-otr/delete/'.$otr->MstOtr->Id)}}" class=" btn btn-danger btn-sm" 
+                                        onclick="return confirm('Are you sure want to delete this data?')" >
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                @endif 
                             </span>
                         </td>
                     </tr>                   

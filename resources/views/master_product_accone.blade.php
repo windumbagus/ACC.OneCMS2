@@ -13,10 +13,13 @@
                 <h3 class="box-title">Master Product AccOne</h3>
             </div>
             <div class="col-sm-5">
-                <div class="col-sm-8"></div>
-                <div class="col-sm-4">
-                <a href="{{asset('/master-product-accone/deleteAll')}}" class="btn btn-block btn-danger" onclick="return confirm('Are you sure want to delete this ?')">Delete All</a>
-                </div>
+                @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4">
+                    <a href="{{asset('/master-product-accone/deleteAll')}}" class="btn btn-block btn-danger" 
+                        onclick="return confirm('Are you sure want to delete this ?')">Delete All</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -57,7 +60,8 @@
                         <td><span>{{$ProductAccOne->MstProductAccone->AMT_OTR}}</span></td>                        
                         <td>
                             <span>
-                                <a href="#" data-id="{{$ProductAccOne->MstProductAccone->Id}}" class="view-master-product-accone btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
+                                <a href="#" data-id="{{$ProductAccOne->MstProductAccone->Id}}" 
+                                    class="view-master-product-accone btn btn-info btn-sm"><i class="fa fa-eye"></i></a> 
                             </span>
                         </td>
                     </tr>                  
@@ -66,23 +70,25 @@
         </table>
         <br>
 
-        <form id="form-add-master-kota" action="{{ asset('master-product-accone/upload') }}" method="post" enctype="multipart/form-data"> 
-            @csrf
-            <label>Upload Excel</label>
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="form-group">
-                        <input type="file" class="form-control" name="upload_master_product_accone"  >
+        @if ((property_exists($Role,'IsCreate')) && ($Role->IsCreate == True))
+            <form id="form-add-master-kota" action="{{ asset('master-product-accone/upload') }}" method="post" 
+                enctype="multipart/form-data"> 
+                @csrf
+                <label>Upload Excel</label>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="upload_master_product_accone"  >
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Upload</button>		
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Upload</button>		
-                    </div>
-                </div>
-            </div>
-        </form>
-
+            </form>
+        @endif
     </div>
  </div>
 

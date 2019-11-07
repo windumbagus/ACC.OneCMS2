@@ -43,9 +43,10 @@ class MasterOtrController extends Controller
          $Hasils2= json_decode($result2);
         //  dd($Hasils2);  
 
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'master_otr',[
+                    'Role' => $Hasils->Role,
                     'OTRs' => $Hasils->Data,
                     'GetMstGCMSBrands'=>$Hasils2,
                     'session' => $session

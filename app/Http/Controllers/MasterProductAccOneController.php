@@ -30,9 +30,10 @@ class MasterProductAccOneController extends Controller
          $Hasils= json_decode($result);
         //  dd($Hasils);
 
-        if(property_exists($Hasils,"IsSuccess")){
+        if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
             return view(
                 'master_product_accone',[
+                    'Role' => $Hasils->Role,
                     'ProductsAccOne'=>$Hasils->Data,
                     'session' => $session
             ]);

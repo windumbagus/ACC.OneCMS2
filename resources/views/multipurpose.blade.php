@@ -11,10 +11,13 @@
                 <h3 class="box-title">Multipurpose</h3>
             </div>
             <div class="col-sm-3">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6">
-                    <a href="{{asset('/multipurpose/download/null/null~null')}}" class="btn btn-block btn-primary" id="button-download">Download</a>  
-                </div>
+                @if ((property_exists($Role,'IsDownload')) && ($Role->IsDownload == True))
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <a href="{{asset('/multipurpose/download/null/null~null')}}" class="btn btn-block btn-primary" 
+                            id="button-download">Download</a>  
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -127,12 +130,18 @@
                         
                         <td>
                             <span>
+                            @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
                                 <a href="#" data-Id="{{$Multipurpose->MstTransaksi->Id}}" class="update-multipurpose 
                                     btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp; 
+                            @else
+                                <a href="#" data-Id="{{$Multipurpose->MstTransaksi->Id}}" class="update-multipurpose 
+                                    btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
+                            @endif
+                            @if ((property_exists($Role,'IsDelete')) && ($Role->IsDelete == True))
                                 <a href="{{asset('multipurpose/delete/'.$Multipurpose->MstTransaksi->Id)}}" 
                                     class=" btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')" >
-                                    <i class="fa fa-trash"></i>
-                                </a> 
+                                    <i class="fa fa-trash"></i></a>
+                            @endif 
                             </span>
                         </td>
                     </tr>              
@@ -246,6 +255,7 @@
         };
 
         window.getByCondition = function(){
+            var Role = {!! json_encode($Role) !!}
             var Status = $('#dropdown_multipurpose_statusTransaksi').val();
             var StartDate_dMy = $('#datepicker_multipurpose_startDate').val();
             var EndDate_dMy = $('#datepicker_multipurpose_endDate').val();
@@ -332,6 +342,19 @@
                             if (typeof x.MstCustomerDetail.FlagCustomer === 'undefined') {
                                 x.MstCustomerDetail.FlagCustomer = "";
                             }
+
+                            var ElementUpdate = '';
+                            var ElementDelete = '';
+                            if (Role.IsUpdate) {
+                                ElementUpdate = 'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;';
+                            } else {
+                                ElementUpdate = 'btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp;';
+                            }
+                            if (Role.IsDelete) {
+                                ElementDelete = `<a href="{{asset('multipurpose/delete/${x.MstTransaksi.Id}')}}"`+
+                                    `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
+                                    '<i class="fa fa-trash"></i></a>';
+                            }
                         
                             table.row.add([
                                 '<span>'+x.User.Name+'</span>',
@@ -345,12 +368,8 @@
                                 '</span>',
                                 '<span>'+x.MstCustomerDetail.FlagCustomer+'</span>',
                                 '<span>'+
-                                    '<a href="#" data-Id="'+x.MstTransaksi.Id+'" class="update-multipurpose '+
-                                        'btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> &nbsp;'+
-                                    `<a href="{{asset('multipurpose/delete/${x.MstTransaksi.Id}')}}"`+
-                                        `class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')">`+
-                                        '<i class="fa fa-trash"></i>'+
-                                    '</a>'+
+                                    '<a href="#" data-Id="'+x.MstTransaksi.Id+'" class="update-multipurpose '+ElementUpdate+
+                                    ElementDelete+
                                 '</span>',
                             ]).draw(false)
                         })
