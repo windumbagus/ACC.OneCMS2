@@ -122,11 +122,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="button_newCarModalUpdate_save"
-                        onclick="return confirm('Are you sure want to Follow Up this data?')">
-                        Follow Up
-                    </button>
-
+                    @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                        <button type="submit" class="btn btn-primary" id="button_newCarModalUpdate_save"
+                            onclick="return confirm('Are you sure want to Follow Up this data?')">
+                            Follow Up
+                        </button>
+                    @endif
+                    
                     <button type="button" class="btn btn-warning button_newCarModalUpdate_closeModal">
                         Back
                     </button>		

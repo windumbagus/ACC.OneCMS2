@@ -70,9 +70,15 @@
                     <td>
                         <span>
                             <!-- button update -->
-                            <a href="#" data-userid="{{ $Pending->User->Id }}" class="pendinglist_updateonclick btn btn-primary btn-sm">
-                                <i class="fa fa-edit"></i>
-                            </a> 
+                            @if ((property_exists($Role,'IsUpdate')) && ($Role->IsUpdate == True))
+                                <a href="#" data-userid="{{ $Pending->User->Id }}" class="pendinglist_updateonclick btn btn-warning btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            @else
+                                <a href="#" data-userid="{{ $Pending->User->Id }}" class="pendinglist_updateonclick btn btn-info btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            @endif
                         </span>
                     </td>
                 </tr>            
