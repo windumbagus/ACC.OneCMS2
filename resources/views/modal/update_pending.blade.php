@@ -45,6 +45,11 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
                         placeholder="Is Active" readonly>
                     </div>
                     <div class="form-group">
+                        <label>NIK:</label>
+                        <input type="text" class="form-control" name="pendinglist_NIK_update_data"
+                        placeholder="NIK" readonly>
+                    </div>
+                    <div class="form-group">
                         <label>Tanggal Lahir:</label>
                         <input type="text" class="form-control" name="pendinglist_TanggalLahir_update_data" readonly>
                     </div>
@@ -71,6 +76,10 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
                     <div class="form-group">
                         <label>Foto KK:</label><br>
                         <img style="width: 150px; height: 200px;" id="pendinglist_KK_update_data" name="pendinglist_KK_update_data" alt=""/><br>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto Selfie:</label><br>
+                        <img style="width: 150px; height: 200px;" id="pendinglist_Selfie_update_data" name="pendinglist_Selfie_update_data" alt=""/><br>
                     </div>
                     <div class="form-group">
                         <label> Approve/Reject:</label><br>
@@ -104,6 +113,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" dat
             $('#pendinglist_KTP_update_data').attr('src', "");
             $('#pendinglist_NPWP_update_data').attr('src', "");
             $('#pendinglist_KK_update_data').attr('src', "");
+            $('#pendinglist_Selfie_update_data').attr('src', "");
         }); 
     });
 

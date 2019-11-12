@@ -154,6 +154,7 @@
                     $('[name="pendinglist_MobilePhone_update_data"]').val(val.User.MobilePhone);
                     $('[name="pendinglist_Last_Login_update_data"]').val(val.User.Last_Login);
                     $('[name="pendinglist_Is_Active_update_data"]').val(val.User.Is_Active);
+                    $('[name="pendinglist_NIK_update_data"]').val(val.MstCustomerDetail.NIK);
                     $('[name="pendinglist_TanggalLahir_update_data"]').val(val.MstCustomerDetail.TanggalLahir);
                     $('[name="pendinglist_Status_update_data"]').val(val.MstStatus.Label);
                     
@@ -203,6 +204,18 @@
                     }else{
 
                     }
+
+                    // FotoSelfie
+                    if (val.hasOwnProperty('FotoSelfie_MstPictures')) {
+                        if (val.FotoSelfie_MstPictures.hasOwnProperty('Picture')) {
+                            $('[name="pendinglist_Selfie_update_data"]').attr("src","data:image/jpeg;base64,"+val.FotoSelfie_MstPictures.Picture);   
+                        }else{
+                            $('[name="pendinglist_Selfie_update_data"]').val("");        
+                        }
+                    }else{
+
+                    }
+
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
                 console.log(jqXhr);

@@ -19,7 +19,7 @@
                         <label>Name :</label>
                         <input type="text" class="form-control" name="approve_Name_view"
                         placeholder="Name">
-                    </div>
+                    </div> 
                     <div class="form-group">
                         <label>Username :</label>
                         <input type="text" class="form-control" name="approve_Username_view"
@@ -44,6 +44,11 @@
                         <label>Is Active:</label>
                         <input type="text" class="form-control" name="approve_Is_Active_view"
                         placeholder="Is Active">
+                    </div>
+                    <div class="form-group">
+                        <label>NIK:</label>
+                        <input type="text" class="form-control" name="approve_NIK_view"
+                        placeholder="NIK">
                     </div>
                     <div class="form-group">
                         <label>Tanggal Lahir:</label>
@@ -77,6 +82,10 @@
                         <label>Foto KK:</label><br>
                         <img style="width: 150px; height: 200px;" id="approve_KK_view" name="approve_KK_view" alt=""/><br>
                     </div>
+                    <div class="form-group">
+                        <label>Foto Selfie:</label><br>
+                        <img style="width: 150px; height: 200px;" id="approve_Selfie_view" name="approve_Selfie_view" alt=""/><br>
+                    </div>
                 </form>	
             </div>
             <div class="modal-footer">
@@ -95,6 +104,7 @@
         $('#approve_KTP_view').attr('src', "");
         $('#approve_NPWP_view').attr('src', "");
         $('#approve_KK_view').attr('src', "");
+        $('#approve_Selfie_view').attr('src', "");
         });      
     });
 </Script>

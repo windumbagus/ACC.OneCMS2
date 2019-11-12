@@ -133,6 +133,7 @@
                     $('[name="approve_MobilePhone_view"]').val(val.User.MobilePhone);
                     $('[name="approve_Last_Login_view"]').val(val.User.Last_Login);
                     $('[name="approve_Is_Active_view"]').val(val.User.Is_Active);
+                    $('[name="approve_NIK_view"]').val(val.MstCustomerDetail.NIK);
                     $('[name="approve_TanggalLahir_view"]').val(val.MstCustomerDetail.TanggalLahir);
                     $('[name="approve_Status_view"]').val(val.MstStatus.Label);
                     //StatusNoHP
@@ -187,6 +188,17 @@
                             $('[name="approve_KK_view"]').attr("src","data:image/jpeg;base64,"+val.FotoKK_MstPictures.Picture);   
                         }else{
                             $('[name="approve_kk_view"]').val("");        
+                        }
+                    }else{
+
+                    }
+
+                    // FotoSelfie
+                    if (val.hasOwnProperty('FotoSelfie_MstPictures')) {
+                        if (val.FotoSelfie_MstPictures.hasOwnProperty('Picture')) {
+                            $('[name="approve_Selfie_view"]').attr("src","data:image/jpeg;base64,"+val.FotoSelfie_MstPictures.Picture);   
+                        }else{
+                            $('[name="approve_Selfie_view"]').val("");        
                         }
                     }else{
 

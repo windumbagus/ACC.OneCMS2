@@ -46,6 +46,11 @@
                         placeholder="Is Active">
                     </div>
                     <div class="form-group">
+                        <label>NIK:</label>
+                        <input type="text" class="form-control" name="rejected_NIK_view"
+                        placeholder="NIK">
+                    </div>
+                    <div class="form-group">
                         <label>Tanggal Lahir:</label>
                         <input type="text" class="form-control" name="rejected_TanggalLahir_view"
                         placeholder="Tanggal Lahir">
@@ -78,9 +83,13 @@
                         <img style="width: 150px; height: 200px;" id="rejected_KK_view" name="rejected_KK_view" alt=""/><br>
                     </div>
                     <div class="form-group">
+                        <label>Foto Selfie:</label><br>
+                        <img style="width: 150px; height: 200px;" id="rejected_Selfie_view" name="rejected_Selfie_view" alt=""/><br>
+                    </div>
+                    <div class="form-group">
                         <label>Reason:</label>
                         <input type="text" class="form-control" name="rejected_Reason_view"
-                        placeholder="Reason">
+                        placeholder="Reason" readonly>
                     </div>
                 </form>	
             </div>
@@ -100,6 +109,7 @@
         $('#rejected_KTP_view').attr('src', "");
         $('#rejected_NPWP_view').attr('src', "");
         $('#rejected_KK_view').attr('src', "");
+        $('#rejected_Selfie_view').attr('src', "");
         });      
     });
 </Script>
