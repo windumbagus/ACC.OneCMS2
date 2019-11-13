@@ -52,9 +52,12 @@
             @foreach ($Bugs as $Bug)
 
                 <tr>  
-                    <td><span>{{$Bug->User->Name}}</span></td>
+                    @if (property_exists($Bug->User, 'Name'))
+                        <td><span>{{$Bug->User->Name}}</span></td>
+                    @else 
+                        <td><span>Anonymous</span></td>
+                    @endif
 
-                    {{-- @if (property_exists($Bug->MstKritikSaranBug, 'Report')) --}}
                     @if( strlen($Bug->MstKritikSaranBug->Report)>= 100)
                         <td><span>{{substr($Bug->MstKritikSaranBug->Report,0,100)."..."}}</span></td>
                     @else 
@@ -127,8 +130,11 @@
                 type:'GET',
                 success: function (val){
                     console.log(val);
-
-                    $('[name="bug_report_User_view"]').val(val.User.Name);
+                    if (val.User.hasOwnProperty('Name')) {
+                        $('[name="bug_report_User_view"]').val(val.User.Name);
+                    }else{
+                        $('[name="bug_report_User_view"]').val("Anonymous");
+                    }
                     $('[name="bug_report_Report_view"]').val(val.MstKritikSaranBug.Report);
                     $('[name="bug_report_Flag_view"]').val(val.MstKritikSaranBug.Flag);
                     
