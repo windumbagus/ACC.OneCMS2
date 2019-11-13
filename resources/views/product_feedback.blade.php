@@ -53,16 +53,24 @@
             @foreach ($Feedbacks as $Feedback)
 
             <tr>  
-                <td><span>{{$Feedback->User->Name}}</span></td>
+                @if (property_exists($Feedback->User, 'Name'))
+                    <td><span>{{$Feedback->User->Name}}</span></td>
+                @else
+                    <td><span>Anonymous</span></td>
+                @endif
 
-                {{-- @if (property_exists($Feedback->MstKritikSaranBug, 'Report')) --}}
-                @if( strlen($Feedback->MstKritikSaranBug->Report)>= 100)
-                    <td><span>{{substr($Feedback->MstKritikSaranBug->Report,0,100)."..."}}</span></td>
+                @if( strlen($Feedback->MstKritikSaranBug->Report)>= 50)
+                    <td><span>{{substr($Feedback->MstKritikSaranBug->Report,0,50)."..."}}</span></td>
                 @else 
                     <td><span>{{$Feedback->MstKritikSaranBug->Report}}</span></td>
                 @endif
 
-                <td><span>{{$Feedback->MstKritikSaranBug->Flag}}</span></td>
+                @if (property_exists($Feedback->User, 'Name'))
+                    <td><span>{{$Feedback->MstKritikSaranBug->Flag}}</span></td>
+                @else
+                <td><span></span></td>
+                @endif
+
                 <td>
                 <span>
                     <a href="#" data-id="{{ $Feedback->MstKritikSaranBug->Id}}" class="view-product-feedback btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; 
@@ -128,8 +136,11 @@
                 type:'GET',
                 success: function (val){
                     console.log(val);
-
-                    $('[name="product_feedback_User_view"]').val(val.User.Name);
+                    if (val.User.hasOwnProperty('Name')) {
+                        $('[name="product_feedback_User_view"]').val(val.User.Name);                    
+                    }else{
+                        $('[name="product_feedback_User_view"]').val("Anonymous");                    
+                    }
                     $('[name="product_feedback_Report_view"]').val(val.MstKritikSaranBug.Report);
                     $('[name="product_feedback_Flag_view"]').val(val.MstKritikSaranBug.Flag);
                     
