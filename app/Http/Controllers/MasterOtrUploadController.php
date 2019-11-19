@@ -99,4 +99,21 @@ class MasterOtrUploadController extends Controller
         return redirect('/master-otr/upload-page');
 
     }
+
+    // public function OnChangeIsAlreadyUse($Id=null, Request $request)
+    // { 
+    //     //API GET
+    //     $url = "https://acc-dev1.outsystemsenterprise.com/".$Id; 
+    //     // dd($url);
+    //     $ch = curl_init($url);                                                     
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+    //     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+    //     $result = curl_exec($ch);
+    //     $err = curl_error($ch);
+    //     curl_close($ch);
+    //     $val = json_decode($result);
+
+    //     return json_encode($val);
+    // }
 }

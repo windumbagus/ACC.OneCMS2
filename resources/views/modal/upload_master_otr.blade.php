@@ -43,6 +43,7 @@
         <table id="table_upload_otr" class="table table-bordered display nowrap" style="width:100%">
             <thead>
                 <tr>
+                    {{-- <th></th> --}}
                     <th>Brand</th>
                     <th>Type</th>
                     <th>Model</th>
@@ -55,9 +56,14 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @dd($TmpOTRs); --}}
+                {{-- @dd($TmpOTRs);   --}}
                 @foreach ($TmpOTRs as $TmpOTR)
-                    <tr>  
+                    <tr>
+                        {{-- <td>
+                            @if(!(property_exists($TmpOTR,'ISALREADYUSE')))
+                            <input type="checkbox" class="OnChangeIsAlreadyUse" name="FLAG_NEW_USED" data-id="{{$TmpOTR->TmpOtr->Id}}" checked="checked" disabled>
+                            @endif    
+                        </td>   --}}
                         <td>
                             <span style="font-size:12px">{{$TmpOTR->TmpOtr->CD_BRAND}}</span><br>
                             <span>{{$TmpOTR->TmpOtr->DESC_BRAND}}</span>
@@ -76,9 +82,19 @@
                             <span style="font-size:12px">{{$TmpOTR->TmpOtr->CD_AREA}}</span><br>
                             <span>{{$TmpOTR->TmpOtr->CD_SP}}</span>
                         </td>                                                
-                        <td><span>{{$TmpOTR->TmpOtr->OTR}}</span></td>                        
-                        <td><span>{{$TmpOTR->TmpOtr->DEVIASI}}</span></td>                        
-                        <td><span>{{$TmpOTR->TmpOtr->FLAG_ACTIVE}}</span></td>                        
+                        <td><span>{{$TmpOTR->TmpOtr->OTR}}</span></td>     
+
+                        @if (property_exists($TmpOTR->TmpOtr, 'DEVIASI'))                   
+                            <td><span>{{$TmpOTR->TmpOtr->DEVIASI}}</span></td>     
+                        @else 
+                            <td> </td>     
+                        @endif
+
+                        @if (property_exists($TmpOTR, 'ISALREADYUSE'))                   
+                        <td><span>Already Exist!</span></td>
+                        @else 
+                        <td><span>New!</span></td>     
+                        @endif                  
                     </tr>                  
                 @endforeach     
             </tbody>
@@ -111,5 +127,17 @@
             //     ]
         })
     })
+
+    // $('.OnChangeIsAlreadyUse').change(function(){
+    //     var Id = $(this).attr('data-id');
+        
+    //     $.ajax({
+    //         url: '/master-otr/OnChangeIsAlreadyUse/'+Id,
+    //         dataType: 'json',
+    //         success: function(val){
+    //             console.log(val);
+    //         }
+    //     })
+    // })
 </Script>
 @endsection

@@ -140,6 +140,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/master-otr/upload','MasterOtrUploadController@upload');
     Route::get('/master-otr/cancel','MasterOtrUploadController@cancel');
     Route::get('/master-otr/proceed','MasterOtrUploadController@proceed');
+    // Route::get('/master-otr/OnChangeIsAlreadyUse/{Id}','MasterOtrUploadController@OnChangeIsAlreadyUse');
 
     Route::get('/history-pembayaran-asuransi-jiwa','HistoryPembayaranAsuransiJiwaController@index');
     Route::get('/history-pembayaran-asuransi-jiwa/show','HistoryPembayaranAsuransiJiwaController@show');
