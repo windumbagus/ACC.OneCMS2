@@ -20,7 +20,8 @@ class BugReportController extends Controller
             'SubMenuId'=>"24" // "24" untuk SubMenu bugReport
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/GetAllBugReport?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        //  $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/GetAllBugReport?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/BugReportAPI/GetAllBugReport?RoleId='.$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -46,7 +47,8 @@ class BugReportController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/GetBugReportById?Id=".$request->Id; 
+        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/GetBugReportById?Id=".$request->Id; 
+        $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/BugReportAPI/GetBugReportById?Id='.$request->Id; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -61,7 +63,8 @@ class BugReportController extends Controller
 
     public function delete($id=null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/DeleteBugReportById?Id=".$id;
+        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/DeleteBugReportById?Id=".$id;
+        $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/BugReportAPI/DeleteBugReportById?Id='.$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -79,7 +82,9 @@ class BugReportController extends Controller
     public function download()
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/GetAllBugReport"; 
+        //  $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/BugReportAPI/GetAllBugReport"; 
+         $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/BugReportAPI/GetAllBugReport'; 
+        
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            

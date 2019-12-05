@@ -18,7 +18,9 @@ class AccYesMigrationController extends Controller
             'SubMenuId'=>"25" // "25" untuk SubMenu AccYesMigration
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/GetAllACCYesMigration?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/GetAllACCYesMigration?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/ACCYesMigrationAPI/GetAllACCYesMigration?RoleId='.$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -44,8 +46,10 @@ class AccYesMigrationController extends Controller
     public function delete($Id=null, Request $request)
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/DeleteACCYesMigrationById?MstUserAccYesId=".$request->Id; 
-        //  dd($url);        
+        //  $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/DeleteACCYesMigrationById?MstUserAccYesId=".$request->Id; 
+         $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/ACCYesMigrationAPI/DeleteACCYesMigrationById?MstUserAccYesId='.$request->Id; 
+         
+         //  dd($url);        
          $ch = curl_init();
          curl_setopt($ch, CURLOPT_URL, $url);
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
@@ -63,7 +67,8 @@ class AccYesMigrationController extends Controller
     public function migrate(Request $request)
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/MigrateAccYes"; 
+        //  $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/MigrateAccYes"; 
+         $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/ACCYesMigrationAPI/MigrateAccYes'; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            

@@ -16,7 +16,9 @@ class LoginController extends Controller
             "Password"=>"$request->Password",
         )); 
         // dd($data);
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LoginAPI/Login"; 
+        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LoginAPI/Login"; 
+        $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/LoginAPI/Login'; 
+       
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

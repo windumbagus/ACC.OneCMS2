@@ -248,6 +248,14 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-gcm/edit-gcm-access','EditGcmAccessController@index');
     Route::get('/master-gcm/edit-gcm-access/OnChangeAccWorld/{Id}&{Condition}&{AccWorld}','EditGcmAccessController@OnChangeAccWorld');
 
+    Route::get('/acccash-apply','AccCashApplyController@index');
+    Route::get('/acccash-apply/show','AccCashApplyController@show');
+    Route::get('/acccash-apply/showview','AccCashApplyController@showview');
+    Route::get('/acccash-apply/getbystatus','AccCashApplyController@getbystatus');
+    Route::post('/acccash-apply/changestatus','AccCashApplyController@changestatus');
+    Route::get('/acccash-apply/download','AccCashApplyController@download');
+
+ //   Route::post('/acccash-apply/changestatus/{Guid}','AccCashApplyController@changestatus');
 
     Route::get('/invalid-permission','InvalidPermissionController@index');
 });//end group route

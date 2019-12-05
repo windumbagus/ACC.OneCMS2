@@ -19,7 +19,9 @@ class ApproveController extends Controller
 
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ApproveListAPI/GetAllApproveList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ApproveListAPI/GetAllApproveList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/ApproveListAPI/GetAllApproveList?RoleId='.$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -45,7 +47,9 @@ class ApproveController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ApproveListAPI/GetApproveListByUserid?Userid=".$request->Id; 
+        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ApproveListAPI/GetApproveListByUserid?Userid=".$request->Id; 
+        $url = config('global.base_url_outsystems').'/ACCWorldCMS/rest/ApproveListAPI/GetApproveListByUserid?Userid='.$request->Id; 
+      
         // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RejectedListAPI/GetRejectedListByUserid?Userid=".$request->Id; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
