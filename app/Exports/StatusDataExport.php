@@ -8,11 +8,11 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class StatusDataExport implements FromArray, WithHeadings
 {
 
-    private $data;
+    private $data2;
 
-    public function __construct($data)
+    public function __construct($data2)
     {
-        $this->data = $data;
+        $this->data = $data2;
     }
 
     public function array(): array

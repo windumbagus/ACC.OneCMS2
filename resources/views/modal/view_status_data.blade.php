@@ -50,7 +50,8 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
             $('#view-status-data-modal').on('hidden.bs.modal',function(){
                 $('body').addClass('modal-open');
             })
-            // $('#form-view-survey')[0].reset();  
+            var table2 = $('#example2').DataTable()
+            table2.clear().draw() 
         });      
     });
 

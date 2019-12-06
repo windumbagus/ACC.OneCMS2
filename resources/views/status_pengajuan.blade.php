@@ -58,8 +58,17 @@
                         <td></td>
                     @endif
                     
-                    <td><span>{{$Status_Pengajuan->MstStatusPengajuan->RegistrationNo}}</span></td>
-                    <td><span>{{$Status_Pengajuan->MstStatusPengajuan->Name}}</span></td>
+                    @if (property_exists($Status_Pengajuan->MstStatusPengajuan, 'RegistrationNo'))
+                        <td><span>{{$Status_Pengajuan->MstStatusPengajuan->RegistrationNo}}</span></td>
+                    @else
+                        <td></td>
+                    @endif
+
+                    @if (property_exists($Status_Pengajuan->MstStatusPengajuan, 'Name'))
+                        <td><span>{{$Status_Pengajuan->MstStatusPengajuan->Name}}</span></td>
+                    @else
+                        <td></td>
+                    @endif
 
                     @if (property_exists($Status_Pengajuan->MstStatusPengajuan, 'Brand'))
                         <td><span>{{$Status_Pengajuan->MstStatusPengajuan->Brand}}</span></td>

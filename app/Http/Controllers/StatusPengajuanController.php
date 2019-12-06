@@ -21,7 +21,7 @@ class StatusPengajuanController extends Controller
             'SubMenuId'=>"28"
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusPengajuan?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusPengajuan?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -46,7 +46,7 @@ class StatusPengajuanController extends Controller
     public function show(Request $request)
     {
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI//GetStatusPengajuanById?MstStatusPengajuan_Id=".$request->Id; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/StatusPengajuanAPI//GetStatusPengajuanById?MstStatusPengajuan_Id=".$request->Id; 
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -62,7 +62,7 @@ class StatusPengajuanController extends Controller
 
     public function delete($id=null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI//DeleteStatusPengajuanById?MstStatusPengajuan_Id=".$id;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/StatusPengajuanAPI//DeleteStatusPengajuanById?MstStatusPengajuan_Id=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -80,7 +80,7 @@ class StatusPengajuanController extends Controller
     public function StatusData(Request $request)
     {
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusDataByStatusPengajuanId?MstStatusPengajuan_Id=".$request->Id; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusDataByStatusPengajuanId?MstStatusPengajuan_Id=".$request->Id; 
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -91,16 +91,26 @@ class StatusPengajuanController extends Controller
         $Hasils = json_decode($result);
         // dd($Hasils);
         $val = [
-            "Status_data"=> $Hasils,
+            "Data"=> $Hasils,
+            "MstStatusPengajuan_Id"=>$request->Id,
         ];
 
         return  $val;
     }
 
-    public function DownloadStatusPengajuan()
+    public function DownloadStatusPengajuan(Request $request)
     {
-        //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusPengajuan"; 
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"28"
+        ]);
+        //API GET
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusPengajuan?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -112,7 +122,7 @@ class StatusPengajuanController extends Controller
         //  dd($Hasils);
 
         $data=[];
-        foreach ($Hasils as $Hasil) {
+        foreach ($Hasils->Data as $Hasil) {
 
             if (property_exists($Hasil->MstStatusPengajuan, 'Id')){
                 $Id = $Hasil->MstStatusPengajuan->Id;
@@ -229,8 +239,8 @@ class StatusPengajuanController extends Controller
     public function DownloadStatusData(Request $request)
     {
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusDataByStatusPengajuanId?MstStatusPengajuan_Id=".$request->MstStatusPengajuan_Id; 
-        $ch = curl_init($url);                                                     
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/StatusPengajuanAPI/GetAllStatusDataByStatusPengajuanId?MstStatusPengajuan_Id=".$request->MstStatusPengajuan_Id; 
+        $ch = curl_init($url);                                            
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
@@ -241,6 +251,7 @@ class StatusPengajuanController extends Controller
         // dd($Hasils);
         
         $data2=[];
+        $User_Name = "";
         foreach ($Hasils as $Hasil) {
 
             if (property_exists($Hasil, 'User_Name')){

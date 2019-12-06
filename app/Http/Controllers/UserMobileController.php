@@ -19,16 +19,17 @@ class UserMobileController extends Controller
             'RoleId'=>$request->session()->get('RoleId'),
             'SubMenuId'=>"7" // "7" untuk SubMenu UserMobile
         ]);
-         //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/GetAllUser?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
-         $ch = curl_init($url);                                                     
-         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $Hasils= json_decode($result);
+        //API GET
+        //  $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/GetAllUser?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserMobileAPI/GetAllUser?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result);
         //  dd($Hasils);
 
         if((property_exists($Hasils,"Role")) && ($Hasils->Role->IsView == True)){
@@ -46,7 +47,8 @@ class UserMobileController extends Controller
     public function show(Request $request)
     {
         //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/GetUser?UserId=".$request->Id; 
+        //  $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/GetUser?UserId=".$request->Id;
+         $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserMobileAPI/GetUser?UserId=".$request->Id;
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -67,7 +69,6 @@ class UserMobileController extends Controller
         }else{
             $Is_Active = False;
         }
-
         $data = json_encode(array(
             "Id"=>$request->Id,
             "Name"=> $request->Name,
@@ -81,7 +82,8 @@ class UserMobileController extends Controller
             "Is_Active"=>$Is_Active
             )); 
         // dd($data);
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/UpdateUser"; 
+        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/UpdateUser"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserMobileAPI/UpdateUser"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -93,26 +95,34 @@ class UserMobileController extends Controller
         curl_close($ch);
         $Hasils= json_decode($result); 
         // dd($Hasils);
-            return redirect("user-mobile")->with('success','Data User Mobile Update Successfull !!!');
+        return redirect("user-mobile")->with('success','Data User Mobile Update Successfull !!!');
     }
 
     public function download(Request $request)
     {
-         //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/GetAllUser"; 
-         $ch = curl_init($url);                                                     
-         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $Hasils= json_decode($result);
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"7" // "7" untuk SubMenu UserMobile
+        ]); 
+        //API GET
+        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserMobileAPI/GetAllUser?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserMobileAPI/GetAllUser?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result);
         //  dd($Hasils);
         $data=[];
-        foreach ($Hasils as $Hasil) {
-
-           
+        foreach ($Hasils->Data as $Hasil) {
            if (property_exists($Hasil->User, 'Username')){
                $Username= $Hasil->User->Username;
            }else{

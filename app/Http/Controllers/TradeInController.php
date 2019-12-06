@@ -22,7 +22,7 @@ class TradeInController extends Controller
         ]);
 
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/TradeInListAPI/GetAllTradeInList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/TradeInListAPI/GetAllTradeInList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -34,7 +34,7 @@ class TradeInController extends Controller
         //  dd($Hasils);
 
          //API GET Dropdown
-         $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/TradeInListAPI/GetTransactionStatus"; 
+         $url2 = config('global.base_url_outsystems')."/ACCWorldCMS/rest/TradeInListAPI/GetTransactionStatus"; 
          $ch2 = curl_init($url2);                                                     
          curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -67,7 +67,7 @@ class TradeInController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/TradeInListAPI/GetAllTradeInListByCondition"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/TradeInListAPI/GetAllTradeInListByCondition"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -85,7 +85,7 @@ class TradeInController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/TradeInListAPI/GetTradeInById?MappingTransaksiId=".$request->Id; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/TradeInListAPI/GetTradeInById?MappingTransaksiId=".$request->Id; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -102,7 +102,7 @@ class TradeInController extends Controller
 
     public function delete($id = null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/TradeInListAPI/DeleteTradeIn/?MappingTransaksiId=".$id;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/TradeInListAPI/DeleteTradeIn/?MappingTransaksiId=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -124,7 +124,7 @@ class TradeInController extends Controller
     public function approve(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/TradeInListAPI/Approved?MappingTransaksiId=".$request->MappingTransaksiId; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/TradeInListAPI/Approved?MappingTransaksiId=".$request->MappingTransaksiId; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -161,7 +161,7 @@ class TradeInController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/TradeInListAPI/GetAllTradeInListByCondition"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/TradeInListAPI/GetAllTradeInListByCondition"; 
         // dd($url);
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  

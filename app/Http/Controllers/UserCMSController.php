@@ -19,20 +19,20 @@ class UserCMSController extends Controller
             'RoleId'=>$request->session()->get('RoleId'),
             'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
-         //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
-         $ch = curl_init($url);                                                     
-         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $Hasils= json_decode($result);
+        //API GET
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result);
         //  dd($Hasils);
 
         //API GET
-        $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetUserCategoryRoles"; 
+        $url2 = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserCMSAPI/GetUserCategoryRoles"; 
         $ch2 = curl_init($url2);                                                     
         curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -60,7 +60,7 @@ class UserCMSController extends Controller
     public function show(Request $request)
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetUser?UserId=".$request->Id; 
+         $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserCMSAPI/GetUser?UserId=".$request->Id; 
          // dd($url);
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -127,7 +127,7 @@ class UserCMSController extends Controller
             ),
         )); 
         // dd($data);
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/CreateUpdateUser"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserCMSAPI/CreateUpdateUser"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -200,7 +200,7 @@ class UserCMSController extends Controller
             ),
         )); 
         // dd($data);
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/CreateUpdateUser"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserCMSAPI/CreateUpdateUser"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -222,16 +222,16 @@ class UserCMSController extends Controller
 
     public function download(Request $request)
     {
-         //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/DownloadUserCMS"; 
-         $ch = curl_init($url);                                                     
-         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $Hasils= json_decode($result);
+        //API GET
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserCMSAPI/DownloadUserCMS"; 
+        $ch = curl_init($url);                                                     
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result);
         //  dd($Hasils);
 
          $data=[];
@@ -262,7 +262,7 @@ class UserCMSController extends Controller
 
     public function delete($Id=null,$UserDetailId=null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/DeleteUser?UserId=".$Id."&MstUserDetailId=".$UserDetailId;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/UserCMSAPI/DeleteUser?UserId=".$Id."&MstUserDetailId=".$UserDetailId;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

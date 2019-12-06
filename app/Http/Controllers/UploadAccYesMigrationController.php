@@ -17,7 +17,7 @@ class UploadAccYesMigrationController extends Controller
             'RoleId'=>$request->session()->get('RoleId')
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/GetTmpUserAccYes"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/ACCYesMigrationAPI/GetTmpUserAccYes"; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -51,7 +51,7 @@ class UploadAccYesMigrationController extends Controller
         ));
         // dd($data);  
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/UploadTmpUserAccYes"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/ACCYesMigrationAPI/UploadTmpUserAccYes"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -73,7 +73,7 @@ class UploadAccYesMigrationController extends Controller
     public function Cancel(Request $request)
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com//ACCWorldCMS/rest/ACCYesMigrationAPI/UploadCancelTmpUserAccYes"; 
+         $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/ACCYesMigrationAPI/UploadCancelTmpUserAccYes"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -89,7 +89,7 @@ class UploadAccYesMigrationController extends Controller
 
     public function proceed(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ACCYesMigrationAPI/UploadProceedTmpUserAccYes"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/ACCYesMigrationAPI/UploadProceedTmpUserAccYes"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            

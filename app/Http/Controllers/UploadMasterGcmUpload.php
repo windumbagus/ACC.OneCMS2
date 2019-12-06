@@ -17,7 +17,7 @@ class UploadMasterGcmUpload extends Controller
             'RoleId'=>$request->session()->get('RoleId')
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/GetAllTmpGcm"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/GetAllTmpGcm"; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -51,7 +51,7 @@ class UploadMasterGcmUpload extends Controller
         ));
         // dd($data);  
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/UploadMasterGcm"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/UploadMasterGcm"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -74,7 +74,7 @@ class UploadMasterGcmUpload extends Controller
     public function cancel(Request $request)
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/UploadCancelMstTmpGcm"; 
+         $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/UploadCancelMstTmpGcm"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -90,7 +90,7 @@ class UploadMasterGcmUpload extends Controller
 
     public function proceed(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/UploadProceedMstGcm"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/UploadProceedMstGcm"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            

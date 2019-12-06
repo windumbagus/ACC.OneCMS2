@@ -99,8 +99,8 @@
             type:'GET',
             success: function (val){
                 console.log(val);
-                var Status_data = val.Status_data;
-                var MstStatusPengajuan_Id = val.Status_data[0].MstStatusData.MstStatusPengajuanID;
+                var Status_data = val.Data;
+                var MstStatusPengajuan_Id = val.MstStatusPengajuan_Id;
                 var table = $('#example2').DataTable()
 
                 //send data id for download

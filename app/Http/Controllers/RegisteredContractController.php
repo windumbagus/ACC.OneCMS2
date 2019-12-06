@@ -246,6 +246,7 @@ class RegisteredContractController extends Controller
         // dd($Hasils);
 
         $X=[];
+        $CONTRACT_NO = "";
         foreach ($Hasils as $Hasil) {
 
             if (property_exists($Hasil->MstTransactionHistory, 'AMOUNT_INSTALLMENT_PAID')){
@@ -260,9 +261,15 @@ class RegisteredContractController extends Controller
                 $ACTUALDATE_PAYMENT = "";
             }
 
+            if (property_exists($Hasil->MstTransactionHistory, 'CONTRACT_NO')){
+                $CONTRACT_NO = $Hasil->MstTransactionHistory->CONTRACT_NO;
+            }else{
+                $CONTRACT_NO = "";
+            }
+
             array_push($X,[
-                "Username"=> $request->Username,
-                "CONTRACT_NO"=>$Hasil->MstTransactionHistory->CONTRACT_NO,
+                "Username"=>$request->Username,
+                "CONTRACT_NO"=>$CONTRACT_NO,
                 "NO_INSTALLMENT"=>$Hasil->MstTransactionHistory->NO_INSTALLMENT,
                 "DUEDATE_PAYMENT"=>$Hasil->MstTransactionHistory->DUEDATE_PAYMENT,
                 "AMOUNT_INSTALLMENT"=>$Hasil->MstTransactionHistory->AMOUNT_INSTALLMENT,
@@ -276,7 +283,7 @@ class RegisteredContractController extends Controller
             ]);
         }
         // dd($X);
-        return Excel::download(new TransactionHistoryExport($X), 'accone Transaction History Per '. date("Y-m-d") .'.xlsx');
+        return Excel::download(new TransactionHistoryExport($X), 'accone Transaction History '.$CONTRACT_NO.' Per '. date("Y-m-d") .'.xlsx');
     }
     
 }
