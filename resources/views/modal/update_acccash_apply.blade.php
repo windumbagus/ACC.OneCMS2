@@ -72,6 +72,23 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                         <label>Pefindo Detail </label>
                         <input type="text" class="form-control" name="PEFINDO_DETAIL" disabled>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+
+                            <img style="width: 250px; height: 200px;" alt=""
+                            id="PATH_FILE0" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                            <img style="width: 250px; height: 200px;" alt=""
+                                    id="PATH_FILE1" />
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label>Status </label>
                         <!-- <input type="text" class="form-control" name="STATUS"> -->

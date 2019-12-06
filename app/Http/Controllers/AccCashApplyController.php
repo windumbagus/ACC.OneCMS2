@@ -154,8 +154,9 @@ class ACCCashApplyController extends Controller
             "doTransactionApply" => array(   
                 // "Id"=> $request->Id_add,
                 "P_GUID"=>$request->Id,
+                // "P_NO_AGGR"=>$request->P_NO_AGGR,
                 "TRANSACTION_CODE"=>"GET_APPLY",
-                "P_NO_AGGR"=>"",
+               
             ),
         ));
         
@@ -187,6 +188,7 @@ class ACCCashApplyController extends Controller
             "doTransactionApply" => array(   
                 // "Id"=> $request->Id_add,
                 "P_GUID"=>$request->Id,
+                // "P_NO_AGGR"=>$request->P_NO_AGGR,
                 "TRANSACTION_CODE"=>"GET_APPLY",
                 "P_NO_AGGR"=>"",
             ),

@@ -240,6 +240,8 @@
                     $('[name="NO_CAR_POLICE"]').val(val.OUT_DATA[0].dataApply[0].NO_CAR_POLICE);
                     $('[name="PEFINDO_SCORE"]').val(val.OUT_DATA[0].dataApply[0].PEFINDO_SCORE);
                     $('[name="PEFINDO_DETAIL"]').val(val.OUT_DATA[0].dataApply[0].PEFINDO_DETAIL);
+                    $('#PATH_FILE0').attr('src', val.OUT_DATA[0].dataPicture[0].PATH_FILE);
+                    $('#PATH_FILE1').attr('src', val.OUT_DATA[0].dataPicture[1].PATH_FILE);
                     $('[name="STATUS"]').val(val.OUT_DATA[0].dataApply[0].STATUS);
                     $('[name="REASON"]').val(val.OUT_DATA[0].dataApply[0].REASON);
                    
@@ -283,6 +285,8 @@
                     $('[name="NO_CAR_POLICE"]').val(val.OUT_DATA[0].dataApply[0].NO_CAR_POLICE);
                     $('[name="PEFINDO_SCORE"]').val(val.OUT_DATA[0].dataApply[0].PEFINDO_SCORE);
                     $('[name="PEFINDO_DETAIL"]').val(val.OUT_DATA[0].dataApply[0].PEFINDO_DETAIL);
+                    $('#PATH_FILE0').attr('src', val.OUT_DATA[0].dataPicture[0].PATH_FILE);
+                    $('#PATH_FILE1').attr('src', val.OUT_DATA[0].dataPicture[1].PATH_FILE);
                     $('[name="STATUS"]').val(val.OUT_DATA[0].dataApply[0].STATUS);
                     $('[name="REASON"]').val(val.OUT_DATA[0].dataApply[0].REASON);
                    
