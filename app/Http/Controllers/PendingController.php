@@ -19,7 +19,7 @@ class PendingController extends Controller
             'SubMenuId'=>"2"
         ]);
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PendingListAPI/GetAllPendingList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];  
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PendingListAPI/GetAllPendingList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];  
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -44,7 +44,7 @@ class PendingController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PendingListAPI/GetPendingListByUserid?Userid=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PendingListAPI/GetPendingListByUserid?Userid=".$request->Id; 
         // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PendingListAPI/GetPendingListByUserid?Userid=".$request->Id; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -67,7 +67,7 @@ class PendingController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PendingListAPI/UpdatePendingList"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PendingListAPI/UpdatePendingList"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

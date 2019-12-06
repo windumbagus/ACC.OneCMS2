@@ -21,7 +21,7 @@ class HolidayGCMController extends Controller
             'SubMenuId'=>"27" // "27" untuk SubMenu HolidayGCM
         ]);
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -52,7 +52,7 @@ class HolidayGCMController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/CreateOrUpdateMasterHolidayCMS"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterHolidayAPI/CreateOrUpdateMasterHolidayCMS"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -77,7 +77,7 @@ class HolidayGCMController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/CreateOrUpdateMasterHolidayCMS"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterHolidayAPI/CreateOrUpdateMasterHolidayCMS"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -95,7 +95,7 @@ class HolidayGCMController extends Controller
 
     public function delete($id=null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/DeleteMasterHolidayCMS?HolidayCMSId=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterHolidayAPI/DeleteMasterHolidayCMS?HolidayCMSId=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -113,7 +113,7 @@ class HolidayGCMController extends Controller
     public function show(Request $request)
     {
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetHolidayCMSById?HolidayCMSId=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterHolidayAPI/GetHolidayCMSById?HolidayCMSId=".$request->Id; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -126,10 +126,20 @@ class HolidayGCMController extends Controller
         return json_encode($val);
     }
 
-    public function download()
+    public function download(Request $request)
     {
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday"; 
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"27" // "27" untuk SubMenu HolidayGCM
+        ]);
+        //API
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterHolidayAPI/GetAllMasterHoliday?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -140,7 +150,7 @@ class HolidayGCMController extends Controller
         $Hasils = json_decode($result);
         // dd($Hasils);
         $data=[];
-        foreach ($Hasils as $Hasil) {
+        foreach ($Hasils->Data as $Hasil) {
 
        
           array_push($data,[

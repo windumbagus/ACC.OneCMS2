@@ -18,7 +18,7 @@ class MasterKotaController extends Controller
             'SubMenuId'=>"13" // "13" untuk SubMenu MasterKota
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterKotaAPI/GetAllMasterKota?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterKotaAPI/GetAllMasterKota?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -44,7 +44,7 @@ class MasterKotaController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterKotaAPI/GetMasterKotaById?MstCityId=".$request->Id; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterKotaAPI/GetMasterKotaById?MstCityId=".$request->Id; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -107,7 +107,7 @@ class MasterKotaController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterKotaAPI/CreateOrUpdateMasterKota"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterKotaAPI/CreateOrUpdateMasterKota"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -175,7 +175,7 @@ class MasterKotaController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterKotaAPI/CreateOrUpdateMasterKota"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterKotaAPI/CreateOrUpdateMasterKota"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -194,7 +194,7 @@ class MasterKotaController extends Controller
 
     public function delete($id = null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterKotaAPI/DeleteMasterKota?MstCityId=".$id;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterKotaAPI/DeleteMasterKota?MstCityId=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -226,7 +226,7 @@ class MasterKotaController extends Controller
         ));
         // dd($data);  
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterKotaAPI/UploadMasterKota"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterKotaAPI/UploadMasterKota"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

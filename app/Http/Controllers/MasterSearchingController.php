@@ -18,7 +18,7 @@ class MasterSearchingController extends Controller
             'SubMenuId'=>"14" // "14" untuk SubMenu MasterSearching,
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/GetAllMasterSearching?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterSearchingAPI/GetAllMasterSearching?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -45,7 +45,7 @@ class MasterSearchingController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/GetMasterSearchingById?MstSearchId=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterSearchingAPI/GetMasterSearchingById?MstSearchId=".$request->Id; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -75,7 +75,7 @@ class MasterSearchingController extends Controller
 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/CreateOrUpdateMasterSearching"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterSearchingAPI/CreateOrUpdateMasterSearching"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -107,7 +107,7 @@ class MasterSearchingController extends Controller
 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/CreateOrUpdateMasterSearching"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterSearchingAPI/CreateOrUpdateMasterSearching"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -126,7 +126,7 @@ class MasterSearchingController extends Controller
 
     public function delete($id = null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/DeleteMasterSearching?MstSearchId=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterSearchingAPI/DeleteMasterSearching?MstSearchId=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -160,7 +160,7 @@ class MasterSearchingController extends Controller
         ));
         // dd($data);  
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterSearchingAPI/UploadMasterSearching"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterSearchingAPI/UploadMasterSearching"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

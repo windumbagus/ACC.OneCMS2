@@ -21,7 +21,8 @@ class DataPemegangPolisController extends Controller
 
         ]);
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataPemegangPolisAPI/GetAllDataPemegangPolis?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataPemegangPolisAPI/GetAllDataPemegangPolis?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/DataPemegangPolisAPI/GetAllDataPemegangPolis?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -47,7 +48,8 @@ class DataPemegangPolisController extends Controller
     public function show(Request $request)
     {
          // API
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataPemegangPolisAPI/GetDataPemegangPolisSimulasiById?MstDataPemegangPolisId=".$request->Id; 
+        //  $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataPemegangPolisAPI/GetDataPemegangPolisSimulasiById?MstDataPemegangPolisId=".$request->Id; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/DataPemegangPolisAPI/GetDataPemegangPolisSimulasiById?MstDataPemegangPolisId=".$request->Id; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -64,7 +66,19 @@ class DataPemegangPolisController extends Controller
     public function downloadSimulasi(Request $request)
     {
          // API
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataPemegangPolisAPI/GetAllDataPemegangPolis"; 
+         $session=[];
+         array_push($session,[
+             'LoginSession'=>$request->session()->get('LoginSession'),
+             'Email'=>$request->session()->get('Email'),
+             'Name'=>$request->session()->get('Name'),
+             'Id'=>$request->session()->get('Id'),
+             'RoleId'=>$request->session()->get('RoleId'),
+             'SubMenuId'=>"34" // "34" untuk SubMenu DataPemegangPolis
+ 
+         ]);
+
+        //  $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/DataPemegangPolisAPI/GetAllDataPemegangPolis?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url =  config("global.base_url_outsystems")."/ACCWorldCMS/rest/DataPemegangPolisAPI/GetAllDataPemegangPolis?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -73,10 +87,10 @@ class DataPemegangPolisController extends Controller
          $err = curl_error($ch);
          curl_close($ch);
          $Hasils = json_decode($result);
-         // dd($data);
+        //  dd($Hasils);
 
          $data=[];
-         foreach ($Hasils->Simulasi as $Simulasi) {
+         foreach ($Hasils->Data->Simulasi as $Simulasi) {
  
             if (property_exists($Simulasi,'AddedDate')){
                 $AddedDate = $Simulasi->AddedDate;

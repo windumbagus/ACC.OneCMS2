@@ -20,7 +20,7 @@ class ProductFeedbackController extends Controller
             'SubMenuId'=>"23"
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ProductFeedbackAPI/GetAllProductFeedback?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];   
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/ProductFeedbackAPI/GetAllProductFeedback?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];   
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -45,7 +45,7 @@ class ProductFeedbackController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ProductFeedbackAPI/GetProductFeedbackById?Id=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/ProductFeedbackAPI/GetProductFeedbackById?Id=".$request->Id; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -62,7 +62,7 @@ class ProductFeedbackController extends Controller
 
     public function delete($id=null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ProductFeedbackAPI/DeleteProductFeedbackById?Id=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/ProductFeedbackAPI/DeleteProductFeedbackById?Id=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -77,10 +77,20 @@ class ProductFeedbackController extends Controller
         return redirect('/product-feedback');
     }
 
-    public function download()
+    public function download(Request $request)
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/ProductFeedbackAPI/GetAllProductFeedback"; 
+         $session=[];
+         array_push($session,[
+             'LoginSession'=>$request->session()->get('LoginSession'),
+             'Email'=>$request->session()->get('Email'),
+             'Name'=>$request->session()->get('Name'),
+             'Id'=>$request->session()->get('Id'),
+             'RoleId'=>$request->session()->get('RoleId'),
+             'SubMenuId'=>"23"
+         ]);
+         //API GET
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/ProductFeedbackAPI/GetAllProductFeedback?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];   
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -89,9 +99,9 @@ class ProductFeedbackController extends Controller
          $err = curl_error($ch);
          curl_close($ch);
          $Hasils= json_decode($result);
-        //  dd($Hasils);
+         dd($Hasils);
          $data=[];
-         foreach ($Hasils as $Hasil) {
+         foreach ($Hasils->Data as $Hasil) {
             array_push($data,[
                 "Username"=>$Hasil->User->Username,
                 "Report"=>$Hasil->MstKritikSaranBug->Report,

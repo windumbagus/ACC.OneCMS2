@@ -20,7 +20,7 @@ class NewCarController extends Controller
             'SubMenuId'=>"4" // "4" untuk SubMenu NewCar,
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetAllNewCar?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];  
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/NewCarAPI/GetAllNewCar?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];  
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -54,7 +54,7 @@ class NewCarController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetAllNewCarByCondition"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/NewCarAPI/GetAllNewCarByCondition"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -72,7 +72,7 @@ class NewCarController extends Controller
 
     public function show(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetNewCarById?Input=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/NewCarAPI/GetNewCarById?Input=".$request->Id; 
         // dd($url);  
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -89,7 +89,7 @@ class NewCarController extends Controller
 
     public function delete($id=null, Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/DeleteNewCarById?Input=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/NewCarAPI/DeleteNewCarById?Input=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -114,7 +114,7 @@ class NewCarController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/FollowUpNewCar"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/NewCarAPI/FollowUpNewCar"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -157,7 +157,7 @@ class NewCarController extends Controller
         // dd($data_Input);
 
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/NewCarAPI/GetAllNewCarByCondition"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/NewCarAPI/GetAllNewCarByCondition"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_Input);

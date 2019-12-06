@@ -18,7 +18,7 @@ class MasterPernyataanController extends Controller
             'SubMenuId'=>"38" // "38" untuk SubMenu MasterPernyataan
         ]);
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllMasterPernyataan?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllMasterPernyataan?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -30,7 +30,7 @@ class MasterPernyataanController extends Controller
         // dd($data);
 
         //get Perlindungan Untuk
-        $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllPerlindunganUntuk"; 
+        $url2 = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllPerlindunganUntuk"; 
         $ch2 = curl_init($url2);                                                     
         curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -42,7 +42,7 @@ class MasterPernyataanController extends Controller
         // dd($data2);
 
         //get Jenis Proteksi
-        $url3 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllJenisProteksi"; 
+        $url3 = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllJenisProteksi"; 
         $ch3 = curl_init($url3);                                                     
         curl_setopt($ch3, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch3, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -54,7 +54,7 @@ class MasterPernyataanController extends Controller
         // dd($data3);
 
         //GetAllProduct
-        $url4 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllProduct"; 
+        $url4 = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllProduct"; 
         $ch4 = curl_init($url4);                                                     
         curl_setopt($ch4, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch4, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -66,7 +66,7 @@ class MasterPernyataanController extends Controller
         // dd($data4);
 
         //GetAllHubungan
-        $url5 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllHubungan"; 
+        $url5 = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/GetAllHubungan"; 
         $ch5 = curl_init($url5);                                                     
         curl_setopt($ch5, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch5, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -96,7 +96,7 @@ class MasterPernyataanController extends Controller
     public function show(Request $request)
     {
          //API
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/GetMasterPernyataanById?MstPernyataanID=".$request->Id; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/GetMasterPernyataanById?MstPernyataanID=".$request->Id; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -112,7 +112,7 @@ class MasterPernyataanController extends Controller
 
     public function delete($id = null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/DelateMasterPernyataan?MstPernyataanID=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/DelateMasterPernyataan?MstPernyataanID=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -154,7 +154,7 @@ class MasterPernyataanController extends Controller
 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/CreateOrUpdateMasterPernyataan"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/CreateOrUpdateMasterPernyataan"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -197,7 +197,7 @@ class MasterPernyataanController extends Controller
 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterPernyataanAPI/CreateOrUpdateMasterPernyataan"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterPernyataanAPI/CreateOrUpdateMasterPernyataan"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

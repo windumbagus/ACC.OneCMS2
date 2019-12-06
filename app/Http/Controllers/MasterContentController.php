@@ -19,7 +19,7 @@ class MasterContentController extends Controller
 
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -46,7 +46,7 @@ class MasterContentController extends Controller
     
     public function getByContentType(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?MstGCM_ContentType=".urlencode($request->ContentType); 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/GetMasterContentByContentType?MstGCM_ContentType=".urlencode($request->ContentType); 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -62,7 +62,7 @@ class MasterContentController extends Controller
 
     public function show(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/ViewMasterContentById?MstContent_Id=".$request->Id; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/ViewMasterContentById?MstContent_Id=".$request->Id; 
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -78,7 +78,7 @@ class MasterContentController extends Controller
 
     public function delete(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/DeleteMasterContentById?MstContent_Id=".$request->Id;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/DeleteMasterContentById?MstContent_Id=".$request->Id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -139,7 +139,7 @@ class MasterContentController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CreateOrUpdateMasterContent"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/CreateOrUpdateMasterContent"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -209,7 +209,7 @@ class MasterContentController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CreateOrUpdateMasterContent"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/CreateOrUpdateMasterContent"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -244,7 +244,7 @@ class MasterContentController extends Controller
         ); 
         // dd($data);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CheckMasterContentOrder"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/CheckMasterContentOrder"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -271,7 +271,7 @@ class MasterContentController extends Controller
         ); 
         // dd($data);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CheckMasterContentTitle"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/CheckMasterContentTitle"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -298,7 +298,7 @@ class MasterContentController extends Controller
         ); 
         // dd($data);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterContentAPI/CheckMasterContentStatus"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterContentAPI/CheckMasterContentStatus"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

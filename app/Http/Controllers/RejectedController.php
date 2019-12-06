@@ -18,7 +18,7 @@ class RejectedController extends Controller
             'SubMenuId'=>"26"
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RejectedListAPI/GetAllRejectedList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RejectedListAPI/GetAllRejectedList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -43,7 +43,7 @@ class RejectedController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RejectedListAPI/GetRejectedListByUserid?Userid=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RejectedListAPI/GetRejectedListByUserid?Userid=".$request->Id; 
         // $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RejectedListAPI/GetRejectedListByUserid?Userid=".$request->Id; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  

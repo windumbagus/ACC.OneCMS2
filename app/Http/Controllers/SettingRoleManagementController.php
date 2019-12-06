@@ -17,7 +17,7 @@ class SettingRoleManagementController extends Controller
             'RoleId'=>$request->session()->get('RoleId')
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/GetAllSubMenu?RoleId=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/GetAllSubMenu?RoleId=".$request->Id; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -38,7 +38,7 @@ class SettingRoleManagementController extends Controller
     public function OnChangeView($Id=null, Request $request)
     { 
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeView?Input=".$Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/OnChangeView?Input=".$Id; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -55,7 +55,7 @@ class SettingRoleManagementController extends Controller
     public function OnChangeCreate($Id=null, Request $request)
     { 
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeCreate?Input=".$Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/OnChangeCreate?Input=".$Id; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -72,7 +72,7 @@ class SettingRoleManagementController extends Controller
     public function OnChangeUpdate($Id=null, Request $request)
     { 
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeUpdate?Input=".$Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/OnChangeUpdate?Input=".$Id; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -89,7 +89,7 @@ class SettingRoleManagementController extends Controller
     public function OnChangeDownload($Id=null, Request $request)
     { 
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeDownload?Input=".$Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/OnChangeDownload?Input=".$Id; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -106,7 +106,7 @@ class SettingRoleManagementController extends Controller
     public function OnChangeDelete($Id=null, Request $request)
     { 
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/OnChangeDelete?Input=".$Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/OnChangeDelete?Input=".$Id; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  

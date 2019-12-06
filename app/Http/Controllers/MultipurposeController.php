@@ -21,7 +21,7 @@ class MultipurposeController extends Controller
         ]);
 
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MultipurposeAPI/GetAllMultipurpose?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MultipurposeAPI/GetAllMultipurpose?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -33,7 +33,7 @@ class MultipurposeController extends Controller
         //  dd($Hasils);
 
          //API GET Dropdown
-         $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MultipurposeAPI/GetTransactionStatus"; 
+         $url2 = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MultipurposeAPI/GetTransactionStatus"; 
          $ch2 = curl_init($url2);                                                     
          curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -65,7 +65,7 @@ class MultipurposeController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MultipurposeAPI/GetMultipurposeByCondition"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MultipurposeAPI/GetMultipurposeByCondition"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -83,7 +83,7 @@ class MultipurposeController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MultipurposeAPI/GetMultipurposeById?MstTransaksiId=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MultipurposeAPI/GetMultipurposeById?MstTransaksiId=".$request->Id; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -100,7 +100,7 @@ class MultipurposeController extends Controller
 
     public function delete($Id = null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MultipurposeAPI/Delete/?MstTransaksiId=".$Id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MultipurposeAPI/Delete/?MstTransaksiId=".$Id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -122,7 +122,7 @@ class MultipurposeController extends Controller
     public function FollowUp(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MultipurposeAPI/FollowedUp?MstTransaksiId=".$request->MstTransaksiId; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MultipurposeAPI/FollowedUp?MstTransaksiId=".$request->MstTransaksiId; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -159,7 +159,7 @@ class MultipurposeController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MultipurposeAPI/GetMultipurposeByCondition"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MultipurposeAPI/GetMultipurposeByCondition"; 
         // dd($url);
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  

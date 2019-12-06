@@ -21,7 +21,7 @@ class RegisteredContractController extends Controller
             'SubMenuId'=>"16"
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetAllRegisteredContract?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];  
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RegisteredContractAPI/GetAllRegisteredContract?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];  
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -46,7 +46,7 @@ class RegisteredContractController extends Controller
     public function show(Request $request)
     {
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetRegisteredContractById?Id=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RegisteredContractAPI/GetRegisteredContractById?Id=".$request->Id; 
          $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -61,7 +61,7 @@ class RegisteredContractController extends Controller
 
     public function delete($id=null, Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/DeleteRegisteredContractById?Id=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RegisteredContractAPI/DeleteRegisteredContractById?Id=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -83,7 +83,7 @@ class RegisteredContractController extends Controller
             "ContractNo"=>$request->ContractNo,
             "Username"=>$request->Username,
             )); 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetAllTransactionHistoryRegisteredContractId"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RegisteredContractAPI/GetAllTransactionHistoryRegisteredContractId"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -112,7 +112,7 @@ class RegisteredContractController extends Controller
             "ContractNo"=>$request->ContractNo,
             "Username"=>$request->Username,
             )); 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetTransactionHistoryById"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RegisteredContractAPI/GetTransactionHistoryById"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -127,10 +127,20 @@ class RegisteredContractController extends Controller
         return json_encode($val);
     }
 
-    public function DownloadRegisteredContract()
+    public function DownloadRegisteredContract(Request $request)
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetAllRegisteredContract"; 
+         $session=[];
+         array_push($session,[
+             'LoginSession'=>$request->session()->get('LoginSession'),
+             'Email'=>$request->session()->get('Email'),
+             'Name'=>$request->session()->get('Name'),
+             'Id'=>$request->session()->get('Id'),
+             'RoleId'=>$request->session()->get('RoleId'),
+             'SubMenuId'=>"16"
+         ]);
+         //API GET
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RegisteredContractAPI/GetAllRegisteredContract?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];  
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -142,7 +152,7 @@ class RegisteredContractController extends Controller
         //  dd($Hasils);
 
          $data=[];
-         foreach ($Hasils as $Hasil) {
+         foreach ($Hasils->Data as $Hasil) {
 
             if (property_exists($Hasil->MstRegisteredContract, 'POLIS_INSURANCE')){
                 $POLIS_INSURANCE = $Hasil->MstRegisteredContract->POLIS_INSURANCE;
@@ -222,7 +232,7 @@ class RegisteredContractController extends Controller
             "Username"=>$request->Username,
             )); 
             // dd($data);
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RegisteredContractAPI/GetAllTransactionHistoryRegisteredContractId"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RegisteredContractAPI/GetAllTransactionHistoryRegisteredContractId"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

@@ -19,7 +19,7 @@ class MasterGcmController extends Controller
             'SubMenuId'=>"3" // "3" untuk SubMenu MasterContent
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/GetAllMasterGcmByCondition?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/GetAllMasterGcmByCondition?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -44,7 +44,7 @@ class MasterGcmController extends Controller
 
     public function getByCondition(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/GetAllMasterGcmByCondition?Condition=".urlencode($request->Condition); 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/GetAllMasterGcmByCondition?Condition=".urlencode($request->Condition); 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -60,7 +60,7 @@ class MasterGcmController extends Controller
 
     public function delete(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/DeleteMasterGcmById?MstGCMId=".$request->Id;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/DeleteMasterGcmById?MstGCMId=".$request->Id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -76,7 +76,7 @@ class MasterGcmController extends Controller
 
     public function show(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/GetMasterGcmById?MstGCMId=".$request->Id; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/GetMasterGcmById?MstGCMId=".$request->Id; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -155,7 +155,7 @@ class MasterGcmController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/CreateOrUpdateMasterGcm"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/CreateOrUpdateMasterGcm"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -234,7 +234,7 @@ class MasterGcmController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/CreateOrUpdateMasterGcm"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/CreateOrUpdateMasterGcm"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -253,7 +253,7 @@ class MasterGcmController extends Controller
     public function download($Condition=null, Request $request)
     {
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterGcmAPI/GetAllMasterGcmByCondition?Condition=".urlencode($Condition); 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterGcmAPI/GetAllMasterGcmByCondition?Condition=".urlencode($Condition); 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            

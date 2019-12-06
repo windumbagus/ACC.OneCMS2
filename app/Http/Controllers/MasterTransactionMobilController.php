@@ -21,7 +21,7 @@ class MasterTransactionMobilController extends Controller
         ]);
 
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterTransactionMobilAPI/GetAllMasterTransactionMobil?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterTransactionMobilAPI/GetAllMasterTransactionMobil?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -46,7 +46,7 @@ class MasterTransactionMobilController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterTransactionMobilAPI/GetMasterTransactionMobilById?MstTransactionMobilId=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterTransactionMobilAPI/GetMasterTransactionMobilById?MstTransactionMobilId=".$request->Id; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -61,7 +61,7 @@ class MasterTransactionMobilController extends Controller
 
     public function delete($id = null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterTransactionMobilAPI/DeleteMasterTransactionMobil?MST_TransactionMobilId=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterTransactionMobilAPI/DeleteMasterTransactionMobil?MST_TransactionMobilId=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -76,10 +76,21 @@ class MasterTransactionMobilController extends Controller
         return redirect('/master-transaction-mobil')->with('success','Data Master Transaction Mobil Delete Successfull !!!');
     }
 
-    public function download()
+    public function download(Request $request)
     {
        //API GET
-       $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterTransactionMobilAPI/GetAllMasterTransactionMobil"; 
+       $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"31" // "31" untuk SubMenu MasterTransactionMobil,
+        ]);
+
+       //API GET
+       $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterTransactionMobilAPI/GetAllMasterTransactionMobil?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
        $ch = curl_init($url);                                                     
        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -91,7 +102,7 @@ class MasterTransactionMobilController extends Controller
     //    dd($Hasils);
 
         $data=[];
-        foreach ($Hasils as $Hasil) {
+        foreach ($Hasils->Data as $Hasil) {
 
             if (property_exists($Hasil->User, 'Name')){
                 $Name = $Hasil->User->Name;

@@ -20,7 +20,7 @@ class LeaseController extends Controller
             'SubMenuId'=>"10" // "10" untuk SubMenu Lease
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLease?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LeaseAPI/GetAllLease?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -55,7 +55,7 @@ class LeaseController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLeaseByCondition"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LeaseAPI/GetAllLeaseByCondition"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -73,7 +73,7 @@ class LeaseController extends Controller
 
     public function show(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetLeaseById?Input=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LeaseAPI/GetLeaseById?Input=".$request->Id; 
         // dd($url);  
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -90,7 +90,7 @@ class LeaseController extends Controller
 
     public function delete($id=null, Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/DeleteLeaseById?Input=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LeaseAPI/DeleteLeaseById?Input=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -115,7 +115,7 @@ class LeaseController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/FollowUpLease"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LeaseAPI/FollowUpLease"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -158,7 +158,7 @@ class LeaseController extends Controller
         // dd($data_Input);
 
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LeaseAPI/GetAllLeaseByCondition"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/LeaseAPI/GetAllLeaseByCondition"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_Input);

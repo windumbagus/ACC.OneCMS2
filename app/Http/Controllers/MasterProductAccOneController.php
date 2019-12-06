@@ -19,7 +19,7 @@ class MasterProductAccOneController extends Controller
 
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAccOneAPI/GetAllProductAccOne?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterProductAccOneAPI/GetAllProductAccOne?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -45,7 +45,7 @@ class MasterProductAccOneController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAccOneAPI/GetProductAccOneById?ProductAccOneId=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterProductAccOneAPI/GetProductAccOneById?ProductAccOneId=".$request->Id; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -61,7 +61,7 @@ class MasterProductAccOneController extends Controller
     public function deleteAll(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAccOneAPI/DeleteAllProductAccOne"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterProductAccOneAPI/DeleteAllProductAccOne"; 
         // dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -97,7 +97,7 @@ class MasterProductAccOneController extends Controller
         ));
         // dd($data);  
 
-        $url = "https://acc-dev1.outsystemsenterprise.com//ACCWorldCMS/rest/MasterProductAccOneAPI/UploadProductAccOne"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterProductAccOneAPI/UploadProductAccOne"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

@@ -20,7 +20,7 @@ class MasterOtrController extends Controller
 
         ]);
          //API GET MstOTR
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetAllMasterOtr?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/GetAllMasterOtr?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -32,7 +32,7 @@ class MasterOtrController extends Controller
         //  dd($Hasils);
 
          //API GET GetMstGCMBrand
-         $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmBrand"; 
+         $url2 = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmBrand"; 
          $ch2 = curl_init($url2);                                                     
          curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -58,7 +58,7 @@ class MasterOtrController extends Controller
 
     public function show(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMasterOtrById?MstOtrId=".$request->Id; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/GetMasterOtrById?MstOtrId=".$request->Id; 
         // dd($url); 
         $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -69,7 +69,7 @@ class MasterOtrController extends Controller
          curl_close($ch);
          $val= json_decode($result);
 
-         $url2 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmType?Brand=".$request->Brand;
+         $url2 = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmType?Brand=".$request->Brand;
         //  dd($url);
          $ch2 = curl_init($url2); 
          curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -82,7 +82,7 @@ class MasterOtrController extends Controller
         // dd($val2);
 
         
-        $url3 = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmModel?Type=".urlencode($request->Type);
+        $url3 = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmModel?Type=".urlencode($request->Type);
         //  dd($url3);
          $ch3 = curl_init($url3); 
          curl_setopt($ch3, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -149,7 +149,7 @@ class MasterOtrController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/CreateOrUpdateMasterOtr"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/CreateOrUpdateMasterOtr"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -211,7 +211,7 @@ class MasterOtrController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/CreateOrUpdateMasterOtr"; 
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/CreateOrUpdateMasterOtr"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -229,7 +229,7 @@ class MasterOtrController extends Controller
 
     public function delete($id = null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/DeleteMasterOtr?Id=".$id;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/DeleteMasterOtr?Id=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -244,12 +244,23 @@ class MasterOtrController extends Controller
         return redirect('/master-otr')->with('success','Data Master OTR Delete Successfull !!!');
     }
 
-    public function download()
+    public function download(Request $request)
     {// ubah -> memory_limit=256M di php.ini
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetAllMasterOtr"; 
+        $session=[];
+        array_push($session,[
+            'LoginSession'=>$request->session()->get('LoginSession'),
+            'Email'=>$request->session()->get('Email'),
+            'Name'=>$request->session()->get('Name'),
+            'Id'=>$request->session()->get('Id'),
+            'RoleId'=>$request->session()->get('RoleId'),
+            'SubMenuId'=>"9" // "9" untuk SubMenu MasterOTR
+
+        ]);
+         //API GET MstOTR
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/GetAllMasterOtr?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
         $result = curl_exec($ch);
@@ -258,7 +269,7 @@ class MasterOtrController extends Controller
         $Hasils = json_decode($result);
         // dd($Hasils);
         $data=[];
-        foreach ($Hasils as $Hasil) {
+        foreach ($Hasils->Data as $Hasil) {
 
             if (property_exists($Hasil->MstOtr, 'CD_SP')){
                 $CD_SP = $Hasil->MstOtr->CD_SP;
@@ -322,7 +333,7 @@ class MasterOtrController extends Controller
 
     public function GetMstGcmType($Brand = null ,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmType?Brand=".$Brand;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmType?Brand=".$Brand;
         // dd($url);
         $ch = curl_init($url); 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -339,7 +350,7 @@ class MasterOtrController extends Controller
 
     public function GetMstGcmModel($Type = null ,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmModel?Type=".$Type;
+        $url = config('global.base_url_outsystems')."/ACCWorldCMS/rest/MasterOtrAPI/GetMstGcmModel?Type=".$Type;
         // dd($url);
         $ch = curl_init($url); 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  

@@ -17,7 +17,7 @@ class MasterOtrUploadController extends Controller
             'RoleId'=>$request->session()->get('RoleId')
         ]);
          //API GET MstOTR
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/GetTmpOTRUpload"; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterOtrAPI/GetTmpOTRUpload"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -51,7 +51,7 @@ class MasterOtrUploadController extends Controller
         ));
         // dd($data);  
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/UploadMasterOtr"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterOtrAPI/UploadMasterOtr"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -72,7 +72,7 @@ class MasterOtrUploadController extends Controller
 
     public function cancel(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/UploadCancelMstTmpOtr"; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterOtrAPI/UploadCancelMstTmpOtr"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -87,7 +87,7 @@ class MasterOtrUploadController extends Controller
 
     public function proceed(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterOtrAPI/UploadProceedMstOtr"; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterOtrAPI/UploadProceedMstOtr"; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            

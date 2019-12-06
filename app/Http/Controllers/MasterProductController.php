@@ -18,7 +18,7 @@ class MasterProductController extends Controller
             'SubMenuId'=>"33" // "33" untuk SubMenu MasterProduct
         ]);
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAPI/GetAllMasterProduct?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterProductAPI/GetAllMasterProduct?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -46,7 +46,7 @@ class MasterProductController extends Controller
     public function show(Request $request)
     {
          //API GET
-         $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAPI/GetMasterProductById?MstProductId=".$request->Id; 
+         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterProductAPI/GetMasterProductById?MstProductId=".$request->Id; 
          $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -102,7 +102,7 @@ class MasterProductController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAPI/CreateOrUpdateMasterProduct"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterProductAPI/CreateOrUpdateMasterProduct"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -121,7 +121,7 @@ class MasterProductController extends Controller
     public function SyncApiProduct(Request $request )
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/MasterProductAPI/SyncProduct"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/MasterProductAPI/SyncProduct"; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            

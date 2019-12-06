@@ -19,7 +19,7 @@ class LandingPageController extends Controller
 
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/GetAllLandingPage?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LandingPageAPI/GetAllLandingPage?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
     //    dd($url);
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
@@ -47,7 +47,7 @@ class LandingPageController extends Controller
 
     public function show(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/GetLandingPageById?Input=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LandingPageAPI/GetLandingPageById?Input=".$request->Id; 
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -63,7 +63,7 @@ class LandingPageController extends Controller
 
     public function getSubCategory(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/GetLandingPageSubCategoryByCategory?Input=".$request->Category; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LandingPageAPI/GetLandingPageSubCategoryByCategory?Input=".$request->Category; 
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -79,7 +79,7 @@ class LandingPageController extends Controller
 
     public function delete($id=null, Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/DeleteLandingPageById?Input=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LandingPageAPI/DeleteLandingPageById?Input=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -128,7 +128,7 @@ class LandingPageController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/CreateOrUpdateLandingPage"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LandingPageAPI/CreateOrUpdateLandingPage"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -190,7 +190,7 @@ class LandingPageController extends Controller
         );
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/CreateOrUpdateLandingPage"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LandingPageAPI/CreateOrUpdateLandingPage"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -224,7 +224,7 @@ class LandingPageController extends Controller
         ); 
         // dd($data);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/LandingPageAPI/CheckLandingPageCategory"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/LandingPageAPI/CheckLandingPageCategory"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

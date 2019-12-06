@@ -19,7 +19,7 @@ class PromoController extends Controller
             'SubMenuId'=>"1"
         ]);
         
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/GetAllPromo?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];    
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PromoAPI/GetAllPromo?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];    
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -44,7 +44,7 @@ class PromoController extends Controller
 
     public function show(Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/ViewPromoById?MstPromo_Id=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PromoAPI/ViewPromoById?MstPromo_Id=".$request->Id; 
         $ch = curl_init($url);                                                     
         //  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -60,7 +60,7 @@ class PromoController extends Controller
 
     public function delete($id=null, Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/DeletePromoById?MstPromo_Id=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PromoAPI/DeletePromoById?MstPromo_Id=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -140,7 +140,7 @@ class PromoController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePromo"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePromo"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -238,7 +238,7 @@ class PromoController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePromo"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PromoAPI/CreateOrUpdatePromo"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -270,7 +270,7 @@ class PromoController extends Controller
         )); 
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PromoAPI/UpdatePromoOrderById"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PromoAPI/UpdatePromoOrderById"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

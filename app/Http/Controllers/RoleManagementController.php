@@ -18,7 +18,7 @@ class RoleManagementController extends Controller
             'SubMenuId'=>"17"
         ]);
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/GetAllRole?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/GetAllRole?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -43,7 +43,7 @@ class RoleManagementController extends Controller
     public function show(Request $request)
     {
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/GetRole?Id=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/GetRole?Id=".$request->Id; 
         $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -69,7 +69,7 @@ class RoleManagementController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/CreateOrUpdateRole"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/CreateOrUpdateRole"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -97,7 +97,7 @@ class RoleManagementController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/CreateOrUpdateRole"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/CreateOrUpdateRole"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -115,7 +115,7 @@ class RoleManagementController extends Controller
 
     public function delete($Id=null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/DeleteRole?RoleId=".$Id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/DeleteRole?RoleId=".$Id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -133,7 +133,7 @@ class RoleManagementController extends Controller
     public function SyncRole(Request $request)
     {
         // API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/RoleManagementAPI/SyncRole"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RoleManagementAPI/SyncRole"; 
         $ch = curl_init($url);                                                     
          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            

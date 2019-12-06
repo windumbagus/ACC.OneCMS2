@@ -18,7 +18,7 @@ class PushNotificationController extends Controller
             'SubMenuId'=>"6"
         ]);
         //API
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PushNotificationAPI/GetAllPushNotification?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];   
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PushNotificationAPI/GetAllPushNotification?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"];   
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -43,7 +43,7 @@ class PushNotificationController extends Controller
     public function show(Request $request)
     {
         //API GET
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PushNotificationAPI/GetPushNotificationById?MplNotifikasiUser_Id=".$request->Id; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PushNotificationAPI/GetPushNotificationById?MplNotifikasiUser_Id=".$request->Id; 
         $ch = curl_init($url);                                                     
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                            
@@ -71,7 +71,7 @@ class PushNotificationController extends Controller
         ));
         // dd($data);
 
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PushNotificationAPI/UpdatePushNotification"; 
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PushNotificationAPI/UpdatePushNotification"; 
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -95,7 +95,7 @@ class PushNotificationController extends Controller
     
     public function delete($id=null,Request $request)
     {
-        $url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/PushNotificationAPI/DeletePushNotificationById?MplNotifikasiUser_Id=".$id;
+        $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/PushNotificationAPI/DeletePushNotificationById?MplNotifikasiUser_Id=".$id;
         // dd($url);        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
