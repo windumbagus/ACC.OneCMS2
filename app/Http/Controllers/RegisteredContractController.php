@@ -276,7 +276,7 @@ class RegisteredContractController extends Controller
             ]);
         }
         // dd($X);
-        return Excel::download(new TransactionHistoryExport($X), 'accone Transaction History '.$Hasil->MstTransactionHistory->CONTRACT_NO. ' Per '. date("Y-m-d") .'.xlsx');
+        return Excel::download(new TransactionHistoryExport($X), 'accone Transaction History Per '. date("Y-m-d") .'.xlsx');
     }
     
 }
