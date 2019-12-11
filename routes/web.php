@@ -255,6 +255,24 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/acccash-apply/changestatus','AccCashApplyController@changestatus');
     Route::get('/acccash-apply/download','AccCashApplyController@download');
 
+    Route::get('/seamless-unit','SeamlessUnitController@index');
+    Route::get('/seamless-unit/show','SeamlessUnitController@show');
+
+    Route::get('/seamless-unit/upload-page','SeamlessUnitUploadController@index');
+    Route::get('/seamless-unit/cancel','SeamlessUnitUploadController@cancel');
+    Route::post('/seamless-unit/upload','SeamlessUnitUploadController@upload');
+
+    Route::get('/seamless-unit-detail/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitDetailController@index');
+    
+    Route::get('/seamless-unit-detail/upload-page/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadDetailController@index');
+    Route::get('/seamless-unit-detail/cancel/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadDetailController@cancel');
+    Route::post('/seamless-unit-detail/upload/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadDetailController@upload');
+
+    Route::get('/seamless-product','SeamlessProductController@index');
+    Route::get('/seamless-product/show','SeamlessProductController@show');
+
+    Route::get('/seamless-product-detail/{Id}','SeamlessProductDetailController@index');
+
  //   Route::post('/acccash-apply/changestatus/{Guid}','AccCashApplyController@changestatus');
 
     Route::get('/invalid-permission','InvalidPermissionController@index');

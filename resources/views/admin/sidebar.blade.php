@@ -159,6 +159,18 @@
                 <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply') }}"><i class="fa fa-circle-o"></i> Apply</a></li>
                 </ul>
             </li>
+            <li class="@yield('seamless') treeview">
+                <a href="#">
+                <i class="fa fa-university"></i> <span>Seamless</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                <li class="@yield('seamless-unit')"><a href="{{ asset('seamless-unit') }}"><i class="fa fa-circle-o"></i> Unit</a></li>
+                <li class="@yield('seamless-product')"><a href="{{ asset('seamless-product') }}"><i class="fa fa-circle-o"></i> Product</a></li>
+                </ul>
+            </li>
 
         {{-- <li class="header">LABELS</li> --}}
         </ul>

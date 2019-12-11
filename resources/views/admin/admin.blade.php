@@ -90,6 +90,9 @@
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="/assets/adminLTE/dist/js/demo.js"></script> --}}
 
+{{-- XLSX to JSON --}}
+<script src="/assets/xlsx.full.min.js"></script>
+
 {{-- CKEDITOR --}}
 <script src="/assets/AdminLTE/bower_components/ckeditor/ckeditor.js"></script>
 <!-- PACE -->
