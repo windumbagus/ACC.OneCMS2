@@ -78,11 +78,11 @@
                 <td><span>{{$ACCCashApply->ID_USER}}</span></td>
                 <td><span>{{$ACCCashApply->PHONE_MOBILE1}}</span></td>
                 <td><span>{{$ACCCashApply->NO_AGGR}}</span></td>          
-                <td><span>{{$ACCCashApply->DISBURSEMENT}}</span></td>
-                <td><span>{{$ACCCashApply->AMT_INSTALLMENT}}</span></td>
+                <td><span>{{number_format($ACCCashApply->DISBURSEMENT, 0, ',', '.')}}</span></td>
+                <td><span>{{number_format($ACCCashApply->AMT_INSTALLMENT, 0, ',', '.')}}</span></td>
                 <td><span>{{$ACCCashApply->PENYEDIA}}</span></td>
                 <td><span>{{$ACCCashApply->STATUS}}</span></td>
-              
+                
 
                 <!-- <td>
                 <span>

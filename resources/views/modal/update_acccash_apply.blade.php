@@ -25,6 +25,10 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                         <input type="text" class="form-control" name="NO_AGGR" disabled>
                     </div>
                     <div class="form-group">
+                        <label>Id User</label>
+                        <input type="text" class="form-control" name="ID_USER" disabled>
+                    </div>
+                    <div class="form-group">
                         <label>Disbursement</label>
                         <input type="text" class="form-control" name="DISBURSEMENT" disabled>
                     </div>

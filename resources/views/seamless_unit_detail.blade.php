@@ -58,7 +58,11 @@
                             </span></td>
                         </tr>
                         </table>
-                    
+                        <br/>
+                        <br/>
+                        <div class="col-sm-2">
+                            <a href="{{asset('/seamless-unit-otr/upload-page/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" class="btn btn-block btn-primary">Upload OTR</a>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -133,15 +137,18 @@
                     <div class="box-body">
                         <div class="row">
                         
-                            <div class="col-sm-8">
+                            <div class="col-sm-6">
                                 <input type="text" placeholder="Search by Brand, Type, Model, Year, etc" class="InputSearch form-control">
                             </div>
-                            <div class="col-sm-3">
-                                <div class="col-sm-6">
+                            <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <a href="#" class="ButtonSearch1 btn btn-block btn-info">Search</a>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <a href="#" class="ResetSearch1 btn btn-block btn-info">Reset</a>    
+                                </div>
+                                <div class="col-sm-4">
+                                  <a href="{{asset('/seamless-unit-detail/upload-page/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" class="btn btn-block btn-primary">Upload</a>
                                 </div>
                             </div>
                         </div><br>

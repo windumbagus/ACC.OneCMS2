@@ -268,6 +268,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit-detail/cancel/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadDetailController@cancel');
     Route::post('/seamless-unit-detail/upload/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadDetailController@upload');
 
+    Route::get('/seamless-unit-otr/upload-page/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadOtrController@index');
+    Route::get('/seamless-unit-otr/cancel/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadOtrController@cancel');
+    Route::post('/seamless-unit-otr/upload/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadOtrController@upload');
+
+
     Route::get('/seamless-product','SeamlessProductController@index');
     Route::get('/seamless-product/show','SeamlessProductController@show');
 
