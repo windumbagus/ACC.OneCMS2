@@ -156,7 +156,9 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply') }}"><i class="fa fa-circle-o"></i> Apply</a></li>
+                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/PENDING') }}"><i class="fa fa-circle-o"></i> Pending List</a></li>
+                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/APPROVED') }}"><i class="fa fa-circle-o"></i> Approved List</a></li>
+                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/REJECT') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
                 </ul>
             </li>
             <li class="@yield('seamless') treeview">

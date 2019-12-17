@@ -13,105 +13,136 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     <!-- <h4 class="box-title">View ACCCash Apply</h4>                  -->
                
             </div>
-            <form id="form-view-accash-apply" action="#" method="post"> 
+            <form id="form-view-accash-apply" action="#" method="post" class="form-horizontal"> 
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <label>GUID</label>
-                        <input type="text" class="form-control" name="GUID" readonly>
+                        <label class="col-sm-4 control-label">GUID</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="GUID" readonly>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>No Aggr</label>
-                        <input type="text" class="form-control" name="NO_AGGR" disabled>
+                        <label class="col-sm-4 control-label">No Aggr</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="NO_AGGR" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Id User</label>
-                        <input type="text" class="form-control" name="ID_USER" disabled>
+                        <label class="col-sm-4 control-label">Id User</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="ID_USER" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Disbursement</label>
-                        <input type="text" class="form-control" name="DISBURSEMENT" disabled>
+                        <label class="col-sm-4 control-label">Disbursement</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="DISBURSEMENT" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Amt Installment</label>
-                        <input type="text" class="form-control" name="AMT_INSTALLMENT" disabled>
+                        <label class="col-sm-4 control-label">Amt Installment</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="AMT_INSTALLMENT" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Tujuan Penggunaan </label>
-                        <input type="text" class="form-control" name="TUJUAN_PENGGUNAAN" disabled>
+                        <label class="col-sm-4 control-label">Tenor</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="TENOR" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Penyedia </label>
-                        <input type="text" class="form-control" name="PENYEDIA" disabled>
+                        <label class="col-sm-4 control-label">Tujuan Penggunaan</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="TUJUAN_PENGGUNAAN" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>BTMY </label>
-                        <input type="text" class="form-control" name="BTMY" readonly>
+                        <label class="col-sm-4 control-label">Penyedia</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="PENYEDIA" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Phone Mobile 1 </label>
-                        <input type="text" class="form-control" name="PHONE_MOBILE1" disabled>
+                        <label class="col-sm-4 control-label">BTMY</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="BTMY" readonly>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Phone Mobile 2 </label>
-                        <input type="text" class="form-control" name="PHONE_MOBILE2" disabled>
+                        <label class="col-sm-4 control-label">Phone Mobile 1</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="PHONE_MOBILE1" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Area </label>
-                        <input type="text" class="form-control" name="AREA" disabled>
+                        <label class="col-sm-4 control-label">Phone Mobile 2</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="PHONE_MOBILE2" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Cabang </label>
-                        <input type="text" class="form-control" name="CABANG" disabled>
+                        <label class="col-sm-4 control-label">Area</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="AREA" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>No Polisi </label>
-                        <input type="text" class="form-control" name="NO_CAR_POLICE" disabled>
+                        <label class="col-sm-4 control-label">Cabang</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="CABANG" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Pefindo Score </label>
-                        <input type="text" class="form-control" name="PEFINDO_SCORE" disabled>
+                        <label class="col-sm-4 control-label">No Polisi</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="NO_CAR_POLICE" disabled>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Pefindo Detail </label>
-                        <input type="text" class="form-control" name="PEFINDO_DETAIL" disabled>
+                        <label class="col-sm-4 control-label">Pefindo Score</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="PEFINDO_SCORE" disabled>
+                        </div>
                     </div>
-                    <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Pefindo Detail</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="PEFINDO_DETAIL" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-6">
-                            <div class="form-group">
-                            
-                            <img style="width: 250px; height: 200px;" alt=""
-                            id="PATH_FILE0" />
-                            </div>
+                            <img style="width: 200px; height: 150px;" alt=""
+                            id="PATH_FILE0" class="center"/>
                         </div>
                         
                         <div class="col-sm-6">
-                            <div class="form-group">
-                            
-                            <img style="width: 250px; height: 200px;" alt=""
-                                    id="PATH_FILE1" />
-                            </div>
+                            <img style="width: 200px; height: 150px;" alt=""
+                            id="PATH_FILE1" class="center"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Status </label>
-                        <input type="text" class="form-control" name="STATUS" disabled>
-                      
+                        <label class="col-sm-4 control-label">Status</label>
+                        
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="STATUS" readonly>
+                        </div>
                     </div>   
                     <div class="form-group">
-                        <label>Reason </label>
-                        <input type="text" class="form-control" name="REASON" disabled>
+                        <label class="col-sm-4 control-label">Reason</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="REASON" readonly>
+                        </div>
                     </div>
-                    
-                    <div class="modal-footer">
-                    <button type="button" class="close-modal-view btn btn-default" >Close</button>			
-                   
-                </div>	
-                    
 
                 </div>
-               	
+                <div class="modal-footer">
+                    <button type="button" class="close-modal-view btn btn-default" >Close</button>	
+                   		
+                </div>
             </form>
         </div>
     </div>

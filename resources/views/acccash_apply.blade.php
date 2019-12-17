@@ -11,15 +11,15 @@
         
         <div class="row">
             <div class="col-sm-8">
-                <h3 class="box-title">ACCCash Apply</h3>
+                <h3 class="box-title">ACCCash {{$Statusapply}} List</h3>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
 
-                        <a href="#" class="add-user-cms btn btn-block btn-primary">Create New</a>
+                       
                 </div>
                 <div class="col-sm-6">
-                        <a href="{{asset('/acccash-apply/download')}}" class="btn btn-block btn-primary">Download</a>
+                        <a href="{{asset('/acccash-apply/'.$Statusapply.'/download')}}" class="btn btn-block btn-primary">Download</a>
                 </div>
             </div>
         </div>
@@ -27,21 +27,9 @@
     <!-- /.box-header -->
     <div class="box-body">
         <div class="row">
-            <div class="col-sm-4">
-                <select class="form-control select2" id="Status" style="width:100%;">
-                <option value="PENDING" selected>PENDING</option>
-                    <option value="APPROVED" >APPROVED</option>
-                    <option value="REJECT-ALL" >REJECT ALL</option>
-                    <option value="REJECT-PICT" >REJECT PICTURE</option>
-                    <option value="REJECT-DATA" >REJECT DATA</option>
-                    <option value="REJECT-UNCONTACTED" >REJECT UNCONTACTED</option>
-                    <option value="REJECT-NOTAPPLY" >REJECT NOT APPLY</option>
-                    <option value="REJECT-WRONGUNIT" >REJECT WRONG UNIT</option>
-                    <option value="REJECT-UNIT" >REJECT UNIT</option>
-                </select>
-            </div>
+           
 
-            <div class="col-sm-5">
+            <div class="col-sm-8">
                 <input type="text" placeholder="Search by No Aggr, Id User, Tujuan Penggunaan, etc" class="InputSearch form-control">
             </div>
             <div class="col-sm-3">
@@ -94,9 +82,11 @@
 
                 <td>
                 <span>
-                <a href="#" data-id="{{$ACCCashApply->GUID}}" class="update-acccash-apply btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
-                
-                <!-- <a href="#" data-id="{{$ACCCashApply->GUID}}" class="view-acccash-apply btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> &nbsp; -->
+                @if ($Statusapply == "PENDING")
+                    <a href="#" data-id="{{$ACCCashApply->GUID}}" class="update-acccash-apply btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
+                @else
+                    <a href="#" data-id="{{$ACCCashApply->GUID}}" class="view-acccash-apply btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> &nbsp;
+                @endif
                 </span>
                 </td>
                 
@@ -150,58 +140,6 @@
             $('.InputSearch').val('')
         })
 
-        //DROPDOWN STATUS
-        $('#Status').on('change',function(){
-            var Status = $(this).val();
-            
-            // console.log(Condition);
-
-           
-
-            $.ajax({
-                url:'/acccash-apply/getbystatus',
-                data: {'Status':Status,'_token':'{{csrf_token()}}'},
-                dataType:'json',
-                success: function(Hasils){
-                    console.log(Hasils);
-                    var table = $('#example1').DataTable()
-                    var ACCCashApply = Hasils;
-                    table.clear().draw()
-
-                   
-                    ACCCashApply.map(e=>{
-
-                        var Elemenstatus= '';
-                        if(e.STATUS == "PENDING"){
-                            Elemenstatus= '<span>'+
-                                '<a href="#" data-id="'+e.GUID+'" class="update-acccash-apply btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;'+
-                            '</span>';
-                        }
-                        else{
-                            Elemenstatus= '<span>'+
-                                '<a href="#" data-id="'+e.GUID+'" class="view-acccash-apply btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> &nbsp;'+
-                            '</span>';
-                        }
-                        table.row.add([
-                            e.DT_ADDED,
-                            e.ID_USER,
-                            e.PHONE_MOBILE1,
-                            e.NO_AGGR,
-                            e.DISBURSEMENT,
-                            e.AMT_INSTALLMENT,
-                            e.PENYEDIA,
-                            e.STATUS,
-
-            
-                            Elemenstatus,
-                        ]).draw(false)
-                    }) 
-
-
-                   
-                }
-            })
-        });
 
 
         // // ADD
@@ -210,12 +148,12 @@
         //     $('#update-acccash-apply1').modal();
         // });
 
-        // //UPDATE
+        // //UPDATE FOR PENDING
         $(document).on('click','.update-acccash-apply',function(){
             var id = $(this).attr('data-id');
             console.log(id);
             $.ajax({
-                url:"{{asset('/acccash-apply/show')}}",
+                url:"{{asset('/acccash-apply/'.$Statusapply.'/show')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}' },
                 dataType:'JSON', 
                 type:'GET',
@@ -240,10 +178,11 @@
                     $('[name="NO_CAR_POLICE"]').val(val.OUT_DATA[0].dataApply[0].NO_CAR_POLICE);
                     $('[name="PEFINDO_SCORE"]').val(val.OUT_DATA[0].dataApply[0].PEFINDO_SCORE);
                     $('[name="PEFINDO_DETAIL"]').val(val.OUT_DATA[0].dataApply[0].PEFINDO_DETAIL);
-                    $('#PATH_FILE0').attr('src', val.OUT_DATA[0].dataPicture[0].PATH_FILE);
-                    $('#PATH_FILE1').attr('src', val.OUT_DATA[0].dataPicture[1].PATH_FILE);
                     $('[name="STATUS"]').val(val.OUT_DATA[0].dataApply[0].STATUS);
                     $('[name="REASON"]').val(val.OUT_DATA[0].dataApply[0].REASON);
+                    $('#PATH_FILE0').attr('src', val.OUT_DATA[0].dataPicture[0].PATH_FILE);
+                    $('#PATH_FILE1').attr('src', val.OUT_DATA[0].dataPicture[1].PATH_FILE);
+                   
                    
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
@@ -255,12 +194,13 @@
             $('#update-acccash-apply-popup').modal();
         });
 
-  // //VIEW
+  // //VIEW APPROVED AND REJECTED
      $(document).on('click','.view-acccash-apply',function(){
             var id = $(this).attr('data-id');
             console.log(id);
             $.ajax({
-                url:"{{asset('/acccash-apply/showview')}}",
+               
+                url:"{{asset('/acccash-apply/'.$Statusapply.'/show')}}",
                 data: {'Id':id ,'_token':'{{csrf_token()}}' },
                 dataType:'JSON', 
                 type:'GET',
@@ -285,10 +225,11 @@
                     $('[name="NO_CAR_POLICE"]').val(val.OUT_DATA[0].dataApply[0].NO_CAR_POLICE);
                     $('[name="PEFINDO_SCORE"]').val(val.OUT_DATA[0].dataApply[0].PEFINDO_SCORE);
                     $('[name="PEFINDO_DETAIL"]').val(val.OUT_DATA[0].dataApply[0].PEFINDO_DETAIL);
-                    $('#PATH_FILE0').attr('src', val.OUT_DATA[0].dataPicture[0].PATH_FILE);
-                    $('#PATH_FILE1').attr('src', val.OUT_DATA[0].dataPicture[1].PATH_FILE);
                     $('[name="STATUS"]').val(val.OUT_DATA[0].dataApply[0].STATUS);
                     $('[name="REASON"]').val(val.OUT_DATA[0].dataApply[0].REASON);
+                    $('#PATH_FILE0').attr('src', val.OUT_DATA[0].dataPicture[0].PATH_FILE);
+                    $('#PATH_FILE1').attr('src', val.OUT_DATA[0].dataPicture[1].PATH_FILE);
+                    
                    
                 },
                 error: function( jqXhr, textStatus, errorThrown ){

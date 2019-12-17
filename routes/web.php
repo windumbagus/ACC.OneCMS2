@@ -248,12 +248,11 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/master-gcm/edit-gcm-access','EditGcmAccessController@index');
     Route::get('/master-gcm/edit-gcm-access/OnChangeAccWorld/{Id}&{Condition}&{AccWorld}','EditGcmAccessController@OnChangeAccWorld');
 
-    Route::get('/acccash-apply','AccCashApplyController@index');
-    Route::get('/acccash-apply/show','AccCashApplyController@show');
-    Route::get('/acccash-apply/showview','AccCashApplyController@showview');
-    Route::get('/acccash-apply/getbystatus','AccCashApplyController@getbystatus');
-    Route::post('/acccash-apply/changestatus','AccCashApplyController@changestatus');
-    Route::get('/acccash-apply/download','AccCashApplyController@download');
+    Route::get('/acccash-apply/{Statusapply}','AccCashApplyController@index');
+    Route::get('/acccash-apply/{Statusapply}/show','AccCashApplyController@show');
+    Route::get('/acccash-apply/{Statusapply}/getbystatus','AccCashApplyController@getbystatus');
+    Route::post('/acccash-apply/{Statusapply}/changestatus','AccCashApplyController@changestatus');
+    Route::get('/acccash-apply/{Statusapply}/download','AccCashApplyController@download');
 
     Route::get('/seamless-unit','SeamlessUnitController@index');
     Route::get('/seamless-unit/show','SeamlessUnitController@show');
