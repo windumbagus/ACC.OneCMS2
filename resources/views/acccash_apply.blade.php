@@ -85,8 +85,9 @@
                 @if ($Statusapply == "PENDING")
                     <a href="#" data-id="{{$ACCCashApply->GUID}}" class="update-acccash-apply btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp;
                 @else
-                    <a href="#" data-id="{{$ACCCashApply->GUID}}" class="view-acccash-apply btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> &nbsp;
+                    <a href="#" data-id="{{$ACCCashApply->GUID}}" class="view-acccash-apply btn btn-warning btn-sm"><i class="fa fa-eye"></i></a> &nbsp;
                 @endif
+                <a href="{{ asset('acccash-apply-detail/'.$ACCCashApply->GUID) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                 </span>
                 </td>
                 

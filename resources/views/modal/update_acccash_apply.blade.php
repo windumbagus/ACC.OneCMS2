@@ -132,22 +132,30 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                             <select class="form-control select2" id="STATUS" name="STATUS" style="width:100%;">
                                 <option value="PENDING" selected>PENDING</option>
                                 <option value="APPROVED" >APPROVED</option>
-                                <option value="REJECT" >REJECT</option>
+                                <option value="REJECT ALL" >REJECT ALL</option>
+                                <option value="REJECT PARTIAL" >REJECT PARTIAL</option>
                             </select>
                         </div>
                     </div>   
                    
-                    <div class="form-group" id="REASONREJECTCHOICE">
+                    <div class="form-group" id="REASONREJECTALLCHOICE">
                         <label class="col-sm-4 control-label">Reason Reject</label>
                         <div class="col-sm-7">
-                            <select class="form-control select3" id="REASONREJECT" name="REASONREJECT" style="width:100%;">
+                            <select class="form-control select3" id="REASONREJECTALL" name="REASONREJECTALL" style="width:100%;">
                                 <option value="REJECT-NOTAPPLY" selected>Customer tidak merasa mengajukan</option>
                                 <option value="REJECT-UNCONTACTED" >Customer tidak dapat dihubungi dalam waktu 3x24 jam</option>
-                                <option value="REJECT-DATA" >Customer berubah pikiran terhadap nominal dan tenor yang diajukan dan ingin mengajukan ulang sendiri</option>
-                                <option value="REJECT-DATA2">Customer berubah pikiran terhadap nominal dan tenor yang diajukan dan ingin diproses secara manual oleh cabang</option>
-                                <option value="REJECT-PICT" >Foto mobil tidak sesuai dengan petunjuk</option>
                                 <option value="REJECT-WRONGUNIT" >Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL</option>
                                 <option value="REJECT-UNIT">Kondisi mobil tidak layak untuk dibiayai</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="REASONREJECTPARTIALCHOICE">
+                        <label class="col-sm-4 control-label">Reason Reject</label>
+                        <div class="col-sm-7">
+                            <select class="form-control select3" id="REASONREJECTPARTIAL" name="REASONREJECTPARTIAL" style="width:100%;">
+                                <option value="REJECT-DATA" >Customer ingin mengubah data pengajuan</option>
+                                <option value="REJECT-PICT" >Foto mobil tidak sesuai dengan petunjuk</option>
                             </select>
                         </div>
                     </div>
@@ -179,7 +187,8 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
 
 <Script>
     $(document).ready(function () {
-        $('#REASONREJECTCHOICE').hide();
+        $('#REASONREJECTALLCHOICE').hide();
+        $('#REASONREJECTPARTIALCHOICE').hide();
         $('#REASONPENDINGCHOICE').show();
         $('#REASONAPPROVEDCHOICE').hide();
 
@@ -195,28 +204,41 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
         $('#STATUS').on('change',function(){
         
         switch($('#STATUS').val()) {
-                case "REJECT":
-                    $('#REASONREJECTCHOICE').show()
+                case "REJECT ALL":
+                    $('#REASONREJECTALLCHOICE').show()
+                    $('#REASONREJECTPARTIALCHOICE').hide()
                     $('#REASONPENDINGCHOICE').hide()
                     $('#REASONAPPROVEDCHOICE').hide()
 
                     break;
+
+                case "REJECT PARTIAL":
+                    $('#REASONREJECTALLCHOICE').hide()
+                    $('#REASONREJECTPARTIALCHOICE').show()
+                    $('#REASONPENDINGCHOICE').hide()
+                    $('#REASONAPPROVEDCHOICE').hide()
+
+                    break;
+
                 case "PENDING":
-                    $('#REASONREJECTCHOICE').hide()
+                    $('#REASONREJECTALLCHOICE').hide()
+                    $('#REASONREJECTPARTIALCHOICE').hide()
                     $('#REASONPENDINGCHOICE').show()
                     $('#REASONAPPROVEDCHOICE').hide()
 
                     break;
 
                 case "APPROVED":
-                    $('#REASONREJECTCHOICE').hide()
+                    $('#REASONREJECTALLCHOICE').hide()
+                    $('#REASONREJECTPARTIALCHOICE').hide()
                     $('#REASONPENDINGCHOICE').hide()
                     $('#REASONAPPROVEDCHOICE').show()
 
                     break;
 
                 default:
-                    $('#REASONREJECTCHOICE').hide()
+                    $('#REASONREJECTALLCHOICE').hide()
+                    $('#REASONREJECTPARTIALCHOICE').hide()
                     $('#REASONPENDINGCHOICE').show()
                     $('#REASONAPPROVEDCHOICE').hide()
 

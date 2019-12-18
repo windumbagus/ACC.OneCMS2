@@ -93,16 +93,24 @@ class ACCCashApplyController extends Controller
 
     public function changestatus(Request $request)
     {
-        if($request->STATUS == "REJECT")
+        if($request->STATUS == "REJECT ALL")
         {
-            $statuschange = $request->REASONREJECT;
+            $statuschange = $request->REASONREJECTALL;
+            $redirectstatus = "REJECT";
+        }
+        else if($request->STATUS == "REJECT PARTIAL")
+        {
+            $statuschange = $request->REASONREJECTPARTIAL;
+            $redirectstatus = "REJECT";
         }
         else if($request->STATUS == "PENDING")
         {
             $statuschange = $request->REASONPENDING;
+            $redirectstatus = "PENDING";
         }
         else{
             $statuschange = "APPROVED";
+            $redirectstatus = "APPROVED";
         }
 
         switch ($statuschange) {
@@ -115,15 +123,11 @@ class ACCCashApplyController extends Controller
                 break;
 
             case 'REJECT-DATA':
-                $reasonchange = "Customer berubah pikiran terhadap nominal dan tenor yang diajukan dan ingin mengajukan ulang sendiri";
-                break;
-
-            case 'REJECT-DATA2':
-                $reasonchange = "Customer berubah pikiran terhadap nominal dan tenor yang diajukan dan ingin diproses secara manual oleh cabang";
+                $reasonchange = "Customer ingin mengubah data pengajuan";
                 break;
 
             case 'REJECT-PICT':
-                $reasonchange = "Foto mobil tidak sesuai dengan petunjuk";
+                $reasonchange = "Foto mobil tidak jelas/tidak sesuai dengan petunjuk";
                 break;
 
             case 'REJECT-WRONGUNIT':
@@ -234,7 +238,8 @@ class ACCCashApplyController extends Controller
 
         //dd($Hasils);
         if ($Hasils->OUT_STAT == "T"){
-            return redirect("acccash-apply/".$request->STATUS)->with('success','Status berhasil diubah');
+            // return redirect("acccash-apply/".$request->STATUS)->with('success','Status berhasil diubah');
+            return redirect("acccash-apply/".$redirectstatus)->with('success','Status berhasil diubah');
         }else{
             return redirect("acccash-apply/PENDING")->with('error',$Hasils->OUT_MESS);
         }

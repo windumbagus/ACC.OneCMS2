@@ -64,76 +64,6 @@ class SeamlessUnitController extends Controller
     }
 
 
-    public function getbystatus(Request $request)
-    {
-        
-        $data = json_encode(array(
-            "doTransactionApply" => array(   
-                // "Id"=> $request->Id_add,
-                "P_GUID"=>"",
-                "TRANSACTION_CODE"=>"GET_APPLY",
-                "P_STATUS"=>$request->Status,
-            ),
-        ));
-        //dd($data);
-         //API GET
-        //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
-       $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
-        // $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
-        $ch = curl_init($url);                   
-        curl_setopt($ch, CURLOPT_POST, true);                                  
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-        $result = curl_exec($ch);
-        $err = curl_error($ch);
-        curl_close($ch);
-        $Hasils= json_decode($result); 
-        //   dd($Hasils);
-
-        return json_encode($Hasils->OUT_DATA[0]->dataApply);
-    }
-
-
-    public function changestatus(Request $request)
-    {
-
-        $data = json_encode(array(
-            "doTransactionApply" => array(   
-                // "Id"=> $request->Id_add,
-                "P_GUID"=>$request->GUID,
-                "TRANSACTION_CODE"=>"UPD_APPLY",
-                "P_STATUS"=>$request->STATUS,
-                "P_REASON"=>$request->REASON,
-            ),
-        ));
-        //dd($data);
-         //API GET
-        //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
-        $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
-        // $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
-        $ch = curl_init($url);                   
-        curl_setopt($ch, CURLOPT_POST, true);                                  
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-        $result = curl_exec($ch);
-        $err = curl_error($ch);
-        curl_close($ch);
-        $Hasils= json_decode($result); 
-        //   dd($Hasils);
-
-      
-        //dd($Hasils);
-        if ($Hasils->OUT_STAT == "T"){
-            return redirect("acccash-apply")->with('success','Apply berhasil');
-        }else{
-            return redirect("acccash-apply")->with('error',$Hasils->OUT_MESS);
-        }
-       
-    }
 
     public function show(Request $request)
     {
@@ -169,41 +99,7 @@ class SeamlessUnitController extends Controller
         return json_encode($val);
     }
 
-    public function showview(Request $request)
-    {
-
-        $data = json_encode(array(
-            "doTransactionApply" => array(   
-                // "Id"=> $request->Id_add,
-                "P_GUID"=>$request->Id,
-                // "P_NO_AGGR"=>$request->P_NO_AGGR,
-                "TRANSACTION_CODE"=>"GET_APPLY",
-                "P_NO_AGGR"=>"",
-            ),
-        ));
-        
-         //API GET
-         $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
-         //dd($data);
-        //  $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
-         // dd($url);
-       
-        $ch = curl_init($url);                   
-        curl_setopt($ch, CURLOPT_POST, true);                                  
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $val= json_decode($result);
-         // dd($val);
-         //dd($err);
-        return json_encode($val);
-    }
-
-
+ 
 
     public function download(Request $request)
     {
