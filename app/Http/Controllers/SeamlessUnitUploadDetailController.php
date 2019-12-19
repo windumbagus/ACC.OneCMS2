@@ -48,7 +48,6 @@ class SeamlessUnitUploadDetailController extends Controller
                 "DataUnitDetail"=>json_decode($x),
             ),
         ));
-       
 
         $url = config('global.base_url_sofia')."/restV2/seamless/accone/datacms"; 
         $ch = curl_init($url);                   
@@ -61,7 +60,7 @@ class SeamlessUnitUploadDetailController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $Hasils = json_decode($result);
-        //  dd($Hasils);
+        // dd($Hasils);
 
         if($Hasils->OUT_STAT="T"){
             return redirect('/seamless-unit-detail/'.$request->Id.'&'.$request->Brand.'&'.$request->Type.'&'.$request->Model.'&'.$request->Tahun)->with('success','Seamless Unit Detail Upload Successfull !!!');

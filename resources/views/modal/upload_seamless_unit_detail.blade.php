@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <label> JSON : </label><br>
-                        <textarea name="jsonObject" id="jsonObject" class="form-control" style="display:none;"></textarea>
+                        <textarea name="jsonObject" id="jsonObject" class="form-control" style=""></textarea>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -111,8 +111,11 @@
                 });
                 var XL_row_object;
                 var json_object;
+                var UNIT_ID = JSON.parse("{{$unitid}}");
                 workbook.SheetNames.forEach(function(sheetName) {
                     XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName],{raw:false,defval:""});
+                    for (var i = 0; i < XL_row_object.length; i++)
+                        XL_row_object[i].ID_UNIT = UNIT_ID.toString();;
                     json_object = JSON.stringify(XL_row_object);
                     document.getElementById("jsonObject").innerHTML = json_object;
                 })
