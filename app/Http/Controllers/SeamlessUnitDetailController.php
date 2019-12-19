@@ -12,7 +12,7 @@ class SeamlessUnitDetailController extends Controller
 
     public function index(Request $request)
     {
-   
+        
         $session=[];
         array_push($session,[
             'LoginSession'=>$request->session()->get('LoginSession'),
@@ -22,7 +22,8 @@ class SeamlessUnitDetailController extends Controller
            // 'RoleId'=>$request->session()->get('RoleId'),
            // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
-
+        
+        //dd($request->Id);
         $data_detail = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_UNIT_CMS_DETAIL",

@@ -11,7 +11,7 @@
         
         <div class="row">
             <div class="col-sm-8">
-                <h3 class="box-title">ACCCash Log</h3>
+                <h3 class="box-title">ACCCash Details</h3>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
@@ -19,7 +19,7 @@
                        
                 </div>
                 <div class="col-sm-6">
-                      
+                <a href="{{asset('/acccash-apply/'.$Statusapply)}}" class="btn btn-block btn-primary">Back</a>
                 </div>
             </div>
         </div>
@@ -41,14 +41,20 @@
                 </div>
             </div>
         </div><br>
+        <div class="row">
+            <div class="col-sm-6">
+            
 
-        <table id="example1" class="table table-bordered display nowrap" style="width:100%">
+            </div>
+            <div class="col-sm-6">
+            
+            </div>
+        </div> 
+        <table id="exampledetail" class="table table-bordered display nowrap" style="width:100%">
         <thead>
         <tr>
             <th>Status</th>
             <th>Date Added</th>       
-            
-            
         </tr>
         </thead>
         <tbody>
@@ -61,13 +67,16 @@
             @endforeach       
         </tbody>
         </table>
+
+
+
     </div>
  </div>
 
   <!-- page script -->
-<script>
+  <script>
     $(document).ready(function () {
-      $('#example1').DataTable({
+      $('#exampledetail').DataTable({
           'deferRender': true,
           'paging'      : true,
           'lengthChange': false,
@@ -81,23 +90,25 @@
                 null,
                 null,
                 
-                
             ]
       })
+
+
 
         //Button Search
         $('.ButtonSearch').on('click', function(){
             var searchData = $('.InputSearch').val()
-            var dtable = $('#example1').DataTable()
+            var dtable = $('#exampledetail').DataTable()
             dtable.search(searchData).draw()
         })
 
-        //Reset Button Search
+    
         $('.ResetSearch').on('click',function(){
-            var tab = $('#example1').DataTable()
+            var tab = $('#exampledetail').DataTable()
             tab.search('').draw()
             $('.InputSearch').val('')
         })
+
 
     })
   </script>

@@ -114,12 +114,12 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     </div>
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <img style="width: 200px; height: 150px;" alt=""
+                            <img style="width: 100%; height: 100%;" alt=""
                             id="PATH_FILE0" class="center"/>
                         </div>
                         
                         <div class="col-sm-6">
-                            <img style="width: 200px; height: 150px;" alt=""
+                            <img style="width: 100%; height: 100%;" alt=""
                             id="PATH_FILE1" class="center"/>
                         </div>
                     </div>
@@ -137,6 +137,8 @@ aria-hidden="true" data-keyboard="false" data-backdrop="static">
                             <input type="text" class="form-control" name="REASON" readonly>
                         </div>
                     </div>
+
+
 
                 </div>
                 <div class="modal-footer">

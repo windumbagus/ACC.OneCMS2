@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="col-sm-6">
-                            <a href="{{asset('seamless-unit') }}" class="add-seamless-Product btn btn-block btn-primary">Back</a>
+                            <a href="{{asset('seamless-unit') }}" class="btn btn-block btn-primary">Back</a>
                     </div>
                     <div class="col-sm-6">
                             <a href="{{asset('/seamless-unit-detail/upload-page/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" class="btn btn-block btn-primary">Upload</a>

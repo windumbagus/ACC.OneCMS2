@@ -21,7 +21,7 @@ class SeamlessUnitUploadController extends Controller
         // dd($Hasils);
         
         return view('modal/upload_seamless_unit',[
-            
+           
             'session' => $session
             ]);    
     }

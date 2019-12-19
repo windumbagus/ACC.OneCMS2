@@ -87,7 +87,7 @@
                 @else
                     <a href="#" data-id="{{$ACCCashApply->GUID}}" class="view-acccash-apply btn btn-warning btn-sm"><i class="fa fa-eye"></i></a> &nbsp;
                 @endif
-                <a href="{{ asset('acccash-apply-detail/'.$ACCCashApply->GUID) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                <a href="{{ asset('acccash-apply-detail/'.$ACCCashApply->GUID.'&'.$Statusapply) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                 </span>
                 </td>
                 

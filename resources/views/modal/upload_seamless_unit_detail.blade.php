@@ -7,7 +7,7 @@
 
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h4 class="box-title">Upload Unit Detail</h4> 
+        <h4 class="box-title">Upload Unit {{$unitid}} Detail</h4> 
     </div>
     <div class="box-body">
         <form id="form-upload-seamless-unit-detail" action="{{asset('/seamless-unit-detail/upload/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" method="post" enctype="multipart/form-data"> 
