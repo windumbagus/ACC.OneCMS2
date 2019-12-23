@@ -43,10 +43,15 @@ class SeamlessUnitDetailController extends Controller
         $data_otr = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_UNIT_OTR_CMS",
-                "P_CD_BRAND"=>$request->Brand,
-                "P_CD_TYPE"=>$request->Type,
-                "P_CD_MODEL"=>$request->Model,
-                "P_TAHUN"=>$request->Tahun,
+                "P_INPUT"=>$request->Id,
+                "P_LANGUAGE"=>"IN",
+            ),
+        ));
+
+        $data_sim = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"GET_SIMULATION_CMS",
+                "P_GUID"=>$request->Id,
                 "P_LANGUAGE"=>"IN",
             ),
         ));
@@ -98,17 +103,35 @@ class SeamlessUnitDetailController extends Controller
             //  dd($Hasils_otr);
             //  dd($data_otr);
 
+        $ch_sim = curl_init($url);                   
+        curl_setopt($ch_sim, CURLOPT_POST, true);                                  
+        curl_setopt($ch_sim, CURLOPT_POSTFIELDS, $data_sim);
+        curl_setopt($ch_sim, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch_sim, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch_sim, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result_sim = curl_exec($ch_sim);
+        $err_sim = curl_error($ch_sim);
+        curl_close($ch_sim);
+        $Hasils_sim= json_decode($result_sim); 
+            //  dd($Hasils_sim);
+            //  dd($data_otr);
+        // if($Hasils_otr->OUT_DATA == null)
+        // {
+        //     $Areaforsim = "";
+        // }
+        // else
+        // {
+        //     $Areaforsim = $Hasils_otr->OUT_DATA;
+        // }
+
             return view(
                 'seamless_unit_detail',[
                    // 'Role' => $Hasils->Role,
                     'SeamlessUnitDetails'=>$Hasils_detail->OUT_DATA,
                     'SeamlessUnitColors'=>$Hasils_color->OUT_DATA,
                     'SeamlessUnitOtrs'=>$Hasils_otr->OUT_DATA,
+                    'SeamlessUnitSims'=>$Hasils_sim->OUT_DATA,
                     'unitid'=>$request->Id,
-                    'brand'=>$request->Brand,
-                    'type'=>$request->Type,
-                    'model'=>$request->Model,
-                    'tahun'=>$request->Tahun,
 
                    // 'Roles'=>$Hasils2->Roles,
                   //  'UserCategories'=>$Hasils2->UserCategory, 
@@ -151,38 +174,37 @@ class SeamlessUnitDetailController extends Controller
         return json_encode($val);
     }
 
-    public function showview(Request $request)
+    public function hitungsimulasi(Request $request)
     {
 
-        $data = json_encode(array(
-            "doTransactionApply" => array(   
-                // "Id"=> $request->Id_add,
-                "P_GUID"=>$request->Id,
-                // "P_NO_AGGR"=>$request->P_NO_AGGR,
-                "TRANSACTION_CODE"=>"GET_APPLY",
-                "P_NO_AGGR"=>"",
+        $datasimulasi = json_encode(array(
+            "doSendDataCMS" => array(   
+                
+                "TRANSACTION_CODE"=>"GEN_SIMULATION_CMS",
+                "P_ID_UNIT"=>$request->Id,
+                "P_CD_AREA"=>$request->Area,
+                "P_LANGUAGE"=>"IN",
             ),
         ));
         
          //API GET
-         $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
+         $urlsimulasi = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
          //dd($data);
-        //  $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
          // dd($url);
        
-        $ch = curl_init($url);                   
-        curl_setopt($ch, CURLOPT_POST, true);                                  
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $val= json_decode($result);
+        $chsimulasi = curl_init($urlsimulasi);                   
+        curl_setopt($chsimulasi, CURLOPT_POST, true);                                  
+        curl_setopt($chsimulasi, CURLOPT_POSTFIELDS, $datasimulasi);
+        curl_setopt($chsimulasi, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($chsimulasi, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($chsimulasi, CURLOPT_RETURNTRANSFER, true);  
+         $resultsimulasi = curl_exec($chsimulasi);
+         $errsimulasi = curl_error($chsimulasi);
+         curl_close($chsimulasi);
+         $valsimulasi= json_decode($resultsimulasi);
          // dd($val);
          //dd($err);
-        return json_encode($val);
+         return redirect("seamless-unit-detail/".$request->Id)->with('success','Berhasil Menghitung Simulasi');
     }
 
 

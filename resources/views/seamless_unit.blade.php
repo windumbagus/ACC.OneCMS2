@@ -77,7 +77,7 @@
                 <td><span>{{$SeamlessUnit->FLAG_NEWUSED}}</span></td>
                 <td><span>{{$SeamlessUnit->FLAG_ACTIVE}}</span></td>
                 <td><span> 
-                <a href="{{ asset('seamless-unit-detail/'.$SeamlessUnit->GUID.'&'.$SeamlessUnit->KODE_BRAND.'&'.$SeamlessUnit->KODE_TYPE.'&'.$SeamlessUnit->KODE_MODEL.'&'.$SeamlessUnit->TAHUN) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                <a href="{{ asset('seamless-unit-detail/'.$SeamlessUnit->GUID) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                 
                 </span></td>
                 

@@ -27,7 +27,7 @@ class SeamlessUnitController extends Controller
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_UNIT_CMS",
                 "P_INPUT"=>"",
-                "P_FLAG_NEW_USED"=>"N",
+                "P_FLAG_NEW_USED"=>"",
                 "P_LANGUAGE"=>"IN",
             ),
         ));

@@ -14,10 +14,10 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="col-sm-6">
-                            <a href="{{asset('seamless-unit') }}" class="btn btn-block btn-primary">Back</a>
+                            
                     </div>
                     <div class="col-sm-6">
-                            <a href="{{asset('/seamless-unit-detail/upload-page/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" class="btn btn-block btn-primary">Upload</a>
+                            <a href="{{asset('seamless-unit') }}" class="btn btn-block btn-primary">Back</a>
                     </div>
                 </div>
             </div>
@@ -25,48 +25,56 @@
             <div class="box-body">
               <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                <div class="panel box box-primary">
+                <div class="panel box box-danger">
                   <div class="box-header with-border">
                     <h4 class="box-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        OTR
+                        Simulasi
                       </a>
                     </h4>
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
-                 
-                        <table style="width:100%">
-                        
-                        <tr>
-                            <th>Kode Area</th>
-                            <td> <span>@if( !empty($SeamlessUnitOtrs[0]->CD_AREA))
-                                {{$SeamlessUnitOtrs[0]->CD_AREA}} 
-                                @else
-                                tidak ditemukan
-                                @endif
-                            </span></td>
-                         
-                        </tr>
-                        <tr>
-                            <th>OTR</th>
-                            <td><span> @if( !empty($SeamlessUnitOtrs[0]->OTR))
-                                {{$SeamlessUnitOtrs[0]->OTR}} 
-                                @else
-                                tidak ditemukan
-                                @endif
-                            </span></td>
-                        </tr>
-                        </table>
-                        <br/>
-                        <br/>
-                        <div class="col-sm-2">
-                            <a href="{{asset('/seamless-unit-otr/upload-page/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" class="btn btn-block btn-primary">Upload OTR</a>
-                        </div>
+                      <table style="width:50%">        
+                            <tr>
+                                <th>Tenor</th>
+                                <td> <span>@if( !empty($SeamlessUnitSims[0]->tenor))
+                                    {{$SeamlessUnitSims[0]->tenor}} 
+                                    @else
+                                    tidak ditemukan
+                                    @endif
+                                </span></td>
+                            </tr>
+                            <tr>
+                                <th>Amount Installment</th>
+                                <td><span> @if( !empty($SeamlessUnitSims[0]->amt_installment))
+                                    {{$SeamlessUnitSims[0]->amt_installment}} 
+                                    @else
+                                    tidak ditemukan
+                                    @endif
+                                </span></td>
+                            </tr>
+                            <tr>
+                                <th>Total Pay First</th>
+                                <td><span> @if( !empty($SeamlessUnitSims[0]->tot_pay_first))
+                                    {{$SeamlessUnitSims[0]->tot_pay_first}} 
+                                    @else
+                                    tidak ditemukan
+                                    @endif
+                                </span></td>
+                            </tr>
+
+                          </table>
+                          <br/>
+                          <br/>
+                          <div class="col-sm-2">
+                          <a href="{{asset('/seamless-unit-detail/hitungsimulasi/'.$unitid.'&'.$SeamlessUnitOtrs[0]->CD_AREA)}}" class="btn btn-block btn-primary">Hitung Simulasi</a>
+                          </div>
+                          
                     </div>
                   </div>
                 </div>
-                <div class="panel box box-danger">
+                <div class="panel box box-warning">
                   <div class="box-header with-border">
                     <h4 class="box-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -78,16 +86,20 @@
                   <div class="box-body">
                         <div class="row">
                         
-                            <div class="col-sm-8">
-                                <input type="text" placeholder="Search by Brand, Type, Model, Year, etc" class="InputSearch form-control">
+                            <div class="col-sm-7">
+                                <input type="text" placeholder="Search by Color Code, Color Description, ID FIle, Category, etc" class="InputSearch2 form-control">
                             </div>
-                            <div class="col-sm-3">
-                                <div class="col-sm-6">
+                            <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <a href="#" class="ButtonSearch2 btn btn-block btn-info">Search</a>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <a href="#" class="ResetSearch2 btn btn-block btn-info">Reset</a>    
                                 </div>
+                                <div class="col-sm-4">
+                                <a href="{{asset('/seamless-unit-color/upload-page/'.$unitid)}}" class="btn btn-block btn-primary">Upload</a>    
+                                </div>
+                                
                             </div>
                         </div><br>
 
@@ -137,8 +149,8 @@
                     <div class="box-body">
                         <div class="row">
                         
-                            <div class="col-sm-6">
-                                <input type="text" placeholder="Search by Brand, Type, Model, Year, etc" class="InputSearch form-control">
+                            <div class="col-sm-7">
+                                <input type="text" placeholder="Search by Category, Char Value, Char Desc, etc" class="InputSearch1 form-control">
                             </div>
                             <div class="col-sm-5">
                                 <div class="col-sm-4">
@@ -148,7 +160,7 @@
                                     <a href="#" class="ResetSearch1 btn btn-block btn-info">Reset</a>    
                                 </div>
                                 <div class="col-sm-4">
-                                  <a href="{{asset('/seamless-unit-detail/upload-page/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" class="btn btn-block btn-primary">Upload</a>
+                                  <a href="{{asset('/seamless-unit-detail/upload-page/'.$unitid)}}" class="btn btn-block btn-primary">Upload</a>
                                 </div>
                             </div>
                         </div><br>
@@ -186,6 +198,47 @@
                     </div>
                   </div>
                 </div>
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        OTR
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="box-body">
+                      <table style="width:50%">
+                        
+                        <tr>
+                            <th>Kode Area</th>
+                            <td> <span>@if( !empty($SeamlessUnitOtrs[0]->CD_AREA))
+                                {{$SeamlessUnitOtrs[0]->CD_AREA}} 
+                                @else
+                                tidak ditemukan
+                                @endif
+                            </span></td>
+                          
+                        </tr>
+                        <tr>
+                            <th>OTR</th>
+                            <td><span> @if( !empty($SeamlessUnitOtrs[0]->OTR))
+                                {{$SeamlessUnitOtrs[0]->OTR}} 
+                                @else
+                                tidak ditemukan
+                                @endif
+                            </span></td>
+                        </tr>
+                      </table>
+                      <br/>
+                      <br/>
+                      <div class="col-sm-2">
+                            <a href="{{asset('/seamless-unit-otr/upload-page/'.$unitid)}}" class="btn btn-block btn-primary">Upload</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
             <!-- /.box-body -->
@@ -250,7 +303,7 @@
 
         //Button Search
         $('.ButtonSearch1').on('click', function(){
-            var searchData = $('.InputSearch').val()
+            var searchData = $('.InputSearch1').val()
             var dtable = $('#example1').DataTable()
             dtable.search(searchData).draw()
         })
@@ -259,12 +312,12 @@
         $('.ResetSearch1').on('click',function(){
             var tab = $('#example1').DataTable()
             tab.search('').draw()
-            $('.InputSearch').val('')
+            $('.InputSearch1').val('')
         })
 
 
         $('.ButtonSearch2').on('click', function(){
-            var searchData = $('.InputSearch').val()
+            var searchData = $('.InputSearch2').val()
             var dtable = $('#example2').DataTable()
             dtable.search(searchData).draw()
         })
@@ -272,7 +325,7 @@
         $('.ResetSearch2').on('click',function(){
             var tab = $('#example2').DataTable()
             tab.search('').draw()
-            $('.InputSearch').val('')
+            $('.InputSearch2').val('')
         })
 
 

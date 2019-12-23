@@ -255,6 +255,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/acccash-apply/{Statusapply}/download','AccCashApplyController@download');
 
     Route::get('/acccash-apply-detail/{GUID}&{Statusapply}','AccCashApplyDetailController@index');
+    Route::post('/acccash-apply-detail/changestatus','AccCashApplyDetailController@changestatus');
 
     Route::get('/seamless-unit','SeamlessUnitController@index');
     Route::get('/seamless-unit/show','SeamlessUnitController@show');
@@ -263,15 +264,21 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit/cancel','SeamlessUnitUploadController@cancel');
     Route::post('/seamless-unit/upload','SeamlessUnitUploadController@upload');
 
-    Route::get('/seamless-unit-detail/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitDetailController@index');
+    Route::get('/seamless-unit-detail/{Id}','SeamlessUnitDetailController@index');
+    Route::get('/seamless-unit-detail/hitungsimulasi/{Id}&{Area}','SeamlessUnitDetailController@hitungsimulasi');
     
-    Route::get('/seamless-unit-detail/upload-page/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadDetailController@index');
-    Route::get('/seamless-unit-detail/cancel/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadDetailController@cancel');
-    Route::post('/seamless-unit-detail/upload/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadDetailController@upload');
+    
+    Route::get('/seamless-unit-detail/upload-page/{Id}','SeamlessUnitUploadDetailController@index');
+    Route::get('/seamless-unit-detail/cancel/{Id}','SeamlessUnitUploadDetailController@cancel');
+    Route::post('/seamless-unit-detail/upload/{Id}','SeamlessUnitUploadDetailController@upload');
 
-    Route::get('/seamless-unit-otr/upload-page/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadOtrController@index');
-    Route::get('/seamless-unit-otr/cancel/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadOtrController@cancel');
-    Route::post('/seamless-unit-otr/upload/{Id}&{Brand}&{Type}&{Model}&{Tahun}','SeamlessUnitUploadOtrController@upload');
+    Route::get('/seamless-unit-otr/upload-page/{Id}','SeamlessUnitUploadOtrController@index');
+    Route::get('/seamless-unit-otr/cancel/{Id}','SeamlessUnitUploadOtrController@cancel');
+    Route::post('/seamless-unit-otr/upload/{Id}','SeamlessUnitUploadOtrController@upload');
+
+    Route::get('/seamless-unit-color/upload-page/{Id}','SeamlessUnitUploadColorController@index');
+    Route::get('/seamless-unit-color/cancel/{Id}','SeamlessUnitUploadColorController@cancel');
+    Route::post('/seamless-unit-color/upload/{Id}','SeamlessUnitUploadColorController@upload');
 
 
     Route::get('/seamless-product','SeamlessProductController@index');

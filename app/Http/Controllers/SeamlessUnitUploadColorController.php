@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SeamlessUnitUploadDetailController extends Controller
+class SeamlessUnitUploadColorController extends Controller
 {
     public function index(Request $request)
     {
@@ -20,7 +20,7 @@ class SeamlessUnitUploadDetailController extends Controller
         
         // dd($Hasils);
         
-        return view('modal/upload_seamless_unit_detail',[
+        return view('modal/upload_seamless_unit_color',[
             'unitid'=>$request->Id,
             'session' => $session
             ]);    
@@ -29,10 +29,10 @@ class SeamlessUnitUploadDetailController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'upload_seamless_unit_detail' => 'required',
+            'upload_seamless_unit_color' => 'required',
         ]);
        
-        // $file = $request->upload_seamless_unit_detail;
+        // $file = $request->upload_seamless_unit_color;
         $x=$request->jsonObject; 
         // $y= base64_encode($x);
 
@@ -40,10 +40,11 @@ class SeamlessUnitUploadDetailController extends Controller
         //dd($x);
         $data = json_encode(array(
             "doSendDataCMS" => array(   
-                "TRANSACTION_CODE"=>"INSERT_DATA_UNIT_DETAIL",
-                "DataUnitDetail"=>json_decode($x),
+                "TRANSACTION_CODE"=>"INSERT_DATA_UNIT_COLOR_PICT",
+                "DataUnitColorPict"=>json_decode($x),
             ),
         ));
+       
 
         $url = config('global.base_url_sofia')."/restV2/seamless/accone/datacms"; 
         $ch = curl_init($url);                   
@@ -56,12 +57,12 @@ class SeamlessUnitUploadDetailController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $Hasils = json_decode($result);
-        // dd($Hasils);
+        //  dd($Hasils);
 
         if($Hasils->OUT_STAT="T"){
-            return redirect('/seamless-unit-detail/'.$request->Id)->with('success','Seamless Unit Detail Upload Successfull !!!');
+            return redirect('/seamless-unit-detail/'.$request->Id)->with('success','Seamless Unit Color and Picture Upload Successfull !!!');
         }else{
-            return redirect('/seamless-unit-detail/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
+            return redirect('/seamless-unit-color/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
         }
     }
 

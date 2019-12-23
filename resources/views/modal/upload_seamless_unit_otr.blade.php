@@ -7,13 +7,13 @@
 
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h4 class="box-title">Upload Unit OTR</h4> 
+        <h4 class="box-title">Upload Unit {{$unitid}} OTR</h4> 
     </div>
     <div class="box-body">
-        <form id="form-upload-seamless-unit-otr" action="{{asset('/seamless-unit-otr/upload/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" method="post" enctype="multipart/form-data"> 
+        <form id="form-upload-seamless-unit-otr" action="{{asset('/seamless-unit-otr/upload/'.$unitid)}}" method="post" enctype="multipart/form-data"> 
             @csrf
                
-            Structure : CD_AREA, CD_BRAND, CD_TYPE, CD_MODEL, OTR, ID_USER_ADDED, ID_USER_UPDATED, FLAG_NEWUSED, TAHUN<br>
+            Structure : CD_AREA, OTR, ID_USER_ADDED, ID_USER_UPDATED<br>
             <br/><br/>
             Format &nbsp;&nbsp;&nbsp;: .xlsx file, no double-quotes for text
             <div class="row">
@@ -22,7 +22,6 @@
                         <input type="file" class="form-control" name="upload_seamless_unit_otr" id="upload_seamless_unit_otr" required >
                     </div>
                     <div class="form-group">
-                        <label> JSON : </label><br>
                         <textarea name="jsonObject" id="jsonObject" class="form-control" style="display:none;"></textarea>
                     </div>
                 </div>
@@ -41,26 +40,22 @@
         <table id="table_upload_seamless_unit_otr" class="table table-bordered display nowrap" style="width:100%">
             <thead>
                 <tr>
+                    <th>ID_UNIT</th>
                     <th>CD_AREA</th>
-                    <th>CD_BRAND</th>
-                    <th>CD_TYPE</th>
-                    <th>CD_MODEL</th>
                     <th>OTR</th>
                     <th>ID_USER_ADDED</th>
                     <th>ID_USER_UPDATED</th>
-                    <th>FLAG_NEWUSED</th>
-                    <th>TAHUN</th>
-
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
 
+
         <div class="row">
             <div class="col-sm-4">
                 <div class="col-sm-6">
-                    <a href="{{asset('/seamless-unit-otr/cancel/'.$unitid.'&'.$brand.'&'.$type.'&'.$model.'&'.$tahun)}}" class="btn btn-block btn-primary">Back</a>
+                    <a href="{{asset('/seamless-unit-otr/cancel/'.$unitid)}}" class="btn btn-block btn-primary">Back</a>
                 </div>
                 <div class="col-sm-6">
                     
@@ -90,10 +85,6 @@
                 null,
                 null,
                 null,
-                null,                
-                null,
-                null,
-                null,
                 
             ]
         })
@@ -103,6 +94,7 @@
             var table = $('#table_upload_seamless_unit_otr').DataTable()
             table.clear().draw()
         })
+
 
         $("#upload_seamless_unit_otr").change(function(evt){
             var selectedFile = evt.target.files[0];
@@ -114,8 +106,11 @@
                 });
                 var XL_row_object;
                 var json_object;
+                var UNIT_ID = JSON.parse("{{$unitid}}");
                 workbook.SheetNames.forEach(function(sheetName) {
                     XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName],{raw:false,defval:""});
+                    for (var i = 0; i < XL_row_object.length; i++)
+                        XL_row_object[i].ID_UNIT = UNIT_ID.toString();;
                     json_object = JSON.stringify(XL_row_object);
                     document.getElementById("jsonObject").innerHTML = json_object;
                 })
@@ -126,16 +121,11 @@
 
                 X.map(e=>{
                     table.row.add([
+                        e.ID_UNIT,
                         e.CD_AREA,
-                        e.CD_BRAND,
-                        e.CD_TYPE,
-                        e.CD_MODEL,
                         e.OTR,
                         e.ID_USER_ADDED,
                         e.ID_USER_UPDATED,
-                        e.FLAG_NEWUSED,
-                        e.TAHUN,
-
                     ]).draw(false)
                 }) 
             };
@@ -145,8 +135,5 @@
             reader.readAsBinaryString(selectedFile);
         });
     });
-
-          
-
 </Script>
 @endsection

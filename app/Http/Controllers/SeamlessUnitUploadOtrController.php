@@ -45,7 +45,7 @@ class SeamlessUnitUploadOtrController extends Controller
         $data = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"INSERT_DATA_UNIT_OTR",
-                "DataUnitDetail"=>json_decode($x),
+                "DataUnitOTR"=>json_decode($x),
             ),
         ));
        
