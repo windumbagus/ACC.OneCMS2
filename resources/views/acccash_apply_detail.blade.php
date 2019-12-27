@@ -152,7 +152,7 @@
 													
 													<div class="col-sm-6">
 														@if(!empty($AccCashApplyPictures[1]->PATH_FILE))
-														<a href="{{$AccCashApplyPictures[0]->PATH_FILE}}">
+														<a href="{{$AccCashApplyPictures[1]->PATH_FILE}}">
 															<img style="width: 50%; height: 50%;" alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
 														</a>
 														@endif

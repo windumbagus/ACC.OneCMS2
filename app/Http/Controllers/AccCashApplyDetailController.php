@@ -93,6 +93,7 @@ class ACCCashApplyDetailController extends Controller
     public function changestatus(Request $request)
     {
         // @dd($request->STATUS);
+        $statusnotif = "";
         if($request->STATUS == "REJECT ALL")
         {
             $statuschange = $request->REASONREJECTALL;
@@ -125,18 +126,22 @@ class ACCCashApplyDetailController extends Controller
 
             case 'REJECT-DATA':
                 $reasonchange = "Customer ingin mengubah data pengajuan";
+                $statusnotif = "Pengajuan anda ditolak, silahkan memperbaiki data anda";
                 break;
 
             case 'REJECT-PICT':
                 $reasonchange = "Foto mobil tidak jelas/tidak sesuai dengan petunjuk";
+                $statusnotif = "Pengajuan anda ditolak, silahkan mengunggah ulang foto mobil";
                 break;
 
             case 'REJECT-WRONGUNIT':
                 $reasonchange = "Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL";
+                $statusnotif = "Pengajuan anda ditolak, mobil tidak sesuai dengan data kontrak anda";
                 break;
 
             case 'REJECT-UNIT':
                 $reasonchange = "Kondisi mobil tidak layak untuk dibiayai";
+                $statusnotif = "Pengajuan anda ditolak, kondisi mobil tidak layak untuk dibiayai";
                 break;
 
             case 'PENDING-UNCONTACTED':
@@ -149,6 +154,7 @@ class ACCCashApplyDetailController extends Controller
 
             case 'APPROVED':
                 $reasonchange = "";
+                $statusnotif = "Pengajuan anda diterima";
                 break;
         
         }
@@ -343,7 +349,39 @@ class ACCCashApplyDetailController extends Controller
             $directstatus = "PENDING";
         }
         
+        
+
          //@dd($directstatus);
+
+        if($statusnotif != "")
+        {
+            $datanotif = json_encode(array(
+                "doTransactionApply" => array(   
+                    // "Id"=> $request->Id_add,
+                    "P_EMAIL"=>$request->ID_USER,
+                    "TRANSACTION_CODE"=>"SEND_NOTIF",
+                    // "P_STATUS"=>$request->STATUS,
+                   // "P_REASON"=>$request->REASON,
+                    "P_MESSAGE"=>$statusnotif,
+                ),
+            ));
+    
+            //SEND NOTIF
+            $urlnotif = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
+            $chnotif = curl_init($urlnotif);                   
+            curl_setopt($chnotif, CURLOPT_POST, true);                                  
+            curl_setopt($chnotif, CURLOPT_POSTFIELDS, $datanotif);
+            curl_setopt($chnotif, CURLOPT_SSL_VERIFYPEER, FALSE);   
+            curl_setopt($chnotif, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+            curl_setopt($chnotif, CURLOPT_RETURNTRANSFER, true);                                                                  
+            $resultnotif = curl_exec($chnotif);
+            $errnotif = curl_error($chnotif);
+            curl_close($chnotif);
+            $Hasilsnotif= json_decode($resultnotif); 
+            //   dd($Hasilsnotif);
+        }
+        
+        
 
 
         //dd($Hasils);
