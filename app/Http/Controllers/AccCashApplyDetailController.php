@@ -183,36 +183,102 @@ class ACCCashApplyDetailController extends Controller
         //   dd($Hasils);
 
 
+        $datacashtoLeads = json_encode(array(
+            "doTransactionApply" => array(   
+                "TRANSACTION_CODE"=>"GET_DATA_LMS",
+                "P_ID_APPLY"=>$request->GUID,
+            ),
+        ));
+        //dd($datacashtoleads);
+        //PREPARATION TO LEADS
+        $urlcashtoLeads = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
+        $chcashtoLeads = curl_init($urlcashtoLeads);                   
+        curl_setopt($chcashtoLeads, CURLOPT_POST, true);                                  
+        curl_setopt($chcashtoLeads, CURLOPT_POSTFIELDS, $datacashtoLeads);
+        curl_setopt($chcashtoLeads, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($chcashtoLeads, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($chcashtoLeads, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $resultcashtoLeads = curl_exec($chcashtoLeads);
+        $errcashtoLeads = curl_error($chcashtoLeads);
+        curl_close($chcashtoLeads);
+        $HasilscashtoLeads= json_decode($resultcashtoLeads); 
+        //   dd($HasilscashtoLeads);
+
 
 
         //ACC LEADS
         if($redirectstatus == 'REJECT'){
 
-            $directstatus = "REJECT";
+            if ($statuschange == 'REJECT-UNCONTACTED')
+            {
+                $dataLeads = json_encode(array(
+                    "doSendDataLeads" => array(   
+                        "P_ACCOUNT_ID"=>"",
+                        "P_NAME"=>$HasilscashtoLeads->OUT_DATA[0]->NAME, 
+                        "P_PRODUCT"=>"0003",
+                        "P_NO_AGGR"=>$HasilscashtoLeads->OUT_DATA[0]->NO_AGGR,
+                        "P_PHONE_NUMBER"=>$HasilscashtoLeads->OUT_DATA[0]->PHONE_MOBILE,
+                        "P_CD_VEHICLE_BRAND"=>$HasilscashtoLeads->OUT_DATA[0]->CD_VEHICLE_BRAND,	
+                        "P_CD_VEHICLE_MODEL"=>$HasilscashtoLeads->OUT_DATA[0]->CD_VEHICLE_MODEL,		
+                        "P_CD_VEHICLE_TYPE"=>$HasilscashtoLeads->OUT_DATA[0]->CD_VEHICLE_TYPE,     		
+                        "P_YEAR_OF_MFG"=>$HasilscashtoLeads->OUT_DATA[0]->YEAR_OF_MFG,
+                        "P_OTR"=>$HasilscashtoLeads->OUT_DATA[0]->OTR,
+                        "P_DP"=>$HasilscashtoLeads->OUT_DATA[0]->DP,
+                        "P_TENOR"=>$HasilscashtoLeads->OUT_DATA[0]->TENOR,
+                        "P_CD_AREA"=>$HasilscashtoLeads->OUT_DATA[0]->CD_AREA,
+                        "P_CD_SP"=>$HasilscashtoLeads->OUT_DATA[0]->CD_SP,
+                        "P_FLAT_RATE"=>$HasilscashtoLeads->OUT_DATA[0]->FLAT_RATE,
+                        "P_ASURANSI_CASH_KREDIT"=>$HasilscashtoLeads->OUT_DATA[0]->ASURANSI_CASH_KREDIT,
+                        "P_FLAG_ACP"=>$HasilscashtoLeads->OUT_DATA[0]->FLAG_ACP,
+                        "P_AMT_ACP"=>$HasilscashtoLeads->OUT_DATA[0]->AMT_ACP,
+                        "P_TDP"=>$HasilscashtoLeads->OUT_DATA[0]->TDP,
+                        "P_SOURCE_LEADS"=>$HasilscashtoLeads->OUT_DATA[0]->SOURCE_LEADS,
+                        "P_AGEN_SOURCE_LEADS"=>$HasilscashtoLeads->OUT_DATA[0]->AGEN_SOURCE_LEADS,
+                        "P_AMT_INSTALLMENT"=>$HasilscashtoLeads->OUT_DATA[0]->AMT_INSTALLMENT,
+                        "P_ADD_AMOUNT"=>$HasilscashtoLeads->OUT_DATA[0]->ADD_AMOUNT,
+                        "P_EFF_RATE"=>$HasilscashtoLeads->OUT_DATA[0]->EFF_RATE,
+                        "P_NO_ADV_INST"=>$HasilscashtoLeads->OUT_DATA[0]->NO_ADV_INST,
+                        "P_PAYMENT_METHOD"=>$HasilscashtoLeads->OUT_DATA[0]->PAYMENT_METHOD,
+                        "P_MODE_PROVISI"=>$HasilscashtoLeads->OUT_DATA[0]->MODE_PROVISI,
+                        "P_BIAYA_PROVISI"=>$HasilscashtoLeads->OUT_DATA[0]->BIAYA_PROVISI,
+                        "P_AF"=>$HasilscashtoLeads->OUT_DATA[0]->AF,
+                        "P_INTEREST"=>$HasilscashtoLeads->OUT_DATA[0]->INTEREST,
+                        "P_AR"=>$HasilscashtoLeads->OUT_DATA[0]->AR,
+                        "ID_USER"=>$HasilscashtoLeads->OUT_DATA[0]->ID_USER,
+                        "P_CD_SALESMAN"=>$HasilscashtoLeads->OUT_DATA[0]->CD_SALESMAN,
+                        "P_CD_BANK_BR"=>$HasilscashtoLeads->OUT_DATA[0]->CD_BANK_BR,
+                        "P_NO_REKENING"=>$HasilscashtoLeads->OUT_DATA[0]->NO_REKENING,
+                        "P_NAMA_REKENING"=>$HasilscashtoLeads->OUT_DATA[0]->NAMA_REKENING,
+                        "P_CD_CHANNEL"=>"",
+                        "P_CD_SPK"=>"",
+                    ),
+                ));
+                //  dd($dataLeads);
+                //ACC LEADS
+                $urlLeads = config('global.base_url_sofia').'/rest/com/acc/lms/in/httprest/dataentry/dataleads';
+                $chLeads = curl_init($urlLeads);                   
+                curl_setopt($chLeads, CURLOPT_POST, true);                                  
+                curl_setopt($chLeads, CURLOPT_POSTFIELDS, $dataLeads);
+                curl_setopt($chLeads, CURLOPT_SSL_VERIFYPEER, FALSE);   
+                curl_setopt($chLeads, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+                curl_setopt($chLeads, CURLOPT_RETURNTRANSFER, true);                                                                  
+                $resultLeads = curl_exec($chLeads);
+                $errLeads = curl_error($chLeads);
+                curl_close($chLeads);
+                $HasilsLeads= json_decode($resultLeads); 
+                  dd($HasilsLeads);
+                
+                $directstatus = "REJECT";
+            }
+            else
+            {
+                $directstatus = "REJECT";
+                // dd($statuschange);
+            }
         }
         else if ($redirectstatus == 'APPROVED')
         {
-            $datacashtoLeads = json_encode(array(
-                "doTransactionApply" => array(   
-                    "TRANSACTION_CODE"=>"GET_DATA_LMS",
-		            "P_ID_APPLY"=>$request->GUID,
-                ),
-            ));
-            //dd($datacashtoleads);
-            //PREPARATION TO LEADS
-            $urlcashtoLeads = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
-            $chcashtoLeads = curl_init($urlcashtoLeads);                   
-            curl_setopt($chcashtoLeads, CURLOPT_POST, true);                                  
-            curl_setopt($chcashtoLeads, CURLOPT_POSTFIELDS, $datacashtoLeads);
-            curl_setopt($chcashtoLeads, CURLOPT_SSL_VERIFYPEER, FALSE);   
-            curl_setopt($chcashtoLeads, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-            curl_setopt($chcashtoLeads, CURLOPT_RETURNTRANSFER, true);                                                                  
-            $resultcashtoLeads = curl_exec($chcashtoLeads);
-            $errcashtoLeads = curl_error($chcashtoLeads);
-            curl_close($chcashtoLeads);
-            $HasilscashtoLeads= json_decode($resultcashtoLeads); 
-            //   dd($HasilscashtoLeads);
-
+            
             $dataLeads = json_encode(array(
                 "doSendDataLeads" => array(   
                     "P_ACCOUNT_ID"=>"",
@@ -255,7 +321,7 @@ class ACCCashApplyDetailController extends Controller
                     "P_CD_SPK"=>"",
                 ),
             ));
-            // dd($dataLeads);
+            //  dd($dataLeads);
             //ACC LEADS
             $urlLeads = config('global.base_url_sofia').'/rest/com/acc/lms/in/httprest/dataentry/dataleads';
             $chLeads = curl_init($urlLeads);                   
