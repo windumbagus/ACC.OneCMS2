@@ -70,7 +70,7 @@
                 <td><span>{{$SeamlessUnit->DESC_TYPE}}</span></td>
                 <td><span>{{$SeamlessUnit->DESC_MODEL}}</span></td>
                 <td><span>{{$SeamlessUnit->TAHUN}}</span></td>
-                <td><span>{{$SeamlessUnit->DT_ADDED}}</span></td>          
+                <td><span>{{date('d/m/Y H:i:s', strtotime($SeamlessUnit->DT_ADDED))}}</span></td>          
                 <td><span>{{$SeamlessUnit->TYPE_MACHINE}}</span></td>
                 <td><span>{{$SeamlessUnit->MACHINE_CAPACITY}}</span></td>
                 <td><span>{{$SeamlessUnit->TRANSMISSION}}</span></td>

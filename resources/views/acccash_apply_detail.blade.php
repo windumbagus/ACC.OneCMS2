@@ -298,7 +298,7 @@
                                     @foreach ($AccCashApplyDetails as $AccCashApplyDetails)
                                     <tr>  
                                         <td><span>{{$AccCashApplyDetails->STATUS}}</span></td>
-                                        <td><span>{{$AccCashApplyDetails->DT_ADDED}}</span></td>              
+										<td><span>{{date('d/m/Y H:i:s', strtotime($AccCashApplyDetails->DT_ADDED))}}</span></td>              
                                     </tr>                              
                                     @endforeach       
                                 </tbody>
