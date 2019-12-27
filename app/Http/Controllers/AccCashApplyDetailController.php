@@ -266,7 +266,7 @@ class ACCCashApplyDetailController extends Controller
                 $errLeads = curl_error($chLeads);
                 curl_close($chLeads);
                 $HasilsLeads= json_decode($resultLeads); 
-                  dd($HasilsLeads);
+            //      dd($HasilsLeads);
                 
                 $directstatus = "REJECT";
             }
