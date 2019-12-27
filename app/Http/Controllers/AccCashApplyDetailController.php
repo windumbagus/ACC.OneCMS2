@@ -92,7 +92,7 @@ class ACCCashApplyDetailController extends Controller
 
     public function changestatus(Request $request)
     {
-        // @dd($request->STATUS);
+        //  @dd($request->EMAIL);
         $statusnotif = "";
         if($request->STATUS == "REJECT ALL")
         {
@@ -358,13 +358,14 @@ class ACCCashApplyDetailController extends Controller
             $datanotif = json_encode(array(
                 "doTransactionApply" => array(   
                     // "Id"=> $request->Id_add,
-                    "P_EMAIL"=>$request->ID_USER,
+                    "P_EMAIL"=>$request->EMAIL,
                     "TRANSACTION_CODE"=>"SEND_NOTIF",
                     // "P_STATUS"=>$request->STATUS,
                    // "P_REASON"=>$request->REASON,
                     "P_MESSAGE"=>$statusnotif,
                 ),
             ));
+            //dd($datanotif);
     
             //SEND NOTIF
             $urlnotif = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';

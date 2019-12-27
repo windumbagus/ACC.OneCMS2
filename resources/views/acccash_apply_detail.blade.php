@@ -56,9 +56,9 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Id User</label>
+													<label class="col-sm-3 control-label">Email</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="ID_USER" value="{{$AccCashApplys[0]->ID_USER}}"disabled>
+														<input type="text" class="form-control" name="EMAIL" value="{{$AccCashApplys[0]->ID_USER}}"readonly>
 													</div>
 												</div>
 												<div class="form-group">
