@@ -118,30 +118,32 @@ class ACCCashApplyDetailController extends Controller
         switch ($statuschange) {
             case 'REJECT-NOTAPPLY':
                 $reasonchange = "Customer tidak merasa mengajukan";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
             case 'REJECT-UNCONTACTED':
                 $reasonchange = "Customer tidak dapat dihubungi dalam waktu 3x24 jam";
+                $statusnotif = "Pengajuan Kamu dialihkan ke cabang ACC karena kami tidak dapat menghubungi Kamu selama 3x24 jam.";
                 break;
 
             case 'REJECT-DATA':
                 $reasonchange = "Customer ingin mengubah data pengajuan";
-                $statusnotif = "Pengajuan anda ditolak, silahkan memperbaiki data anda";
+                $statusnotif = "Kamu masih dapat mengubah informasi pengajuan kamu. Ubah sekarang yuk!";
                 break;
 
             case 'REJECT-PICT':
                 $reasonchange = "Foto mobil tidak jelas/tidak sesuai dengan petunjuk";
-                $statusnotif = "Pengajuan anda ditolak, silahkan mengunggah ulang foto mobil";
+                $statusnotif = "Pengajuan Kamu belum dapat diproses, Mohon unggah kembali foto mobil Kamu.";
                 break;
 
             case 'REJECT-WRONGUNIT':
                 $reasonchange = "Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL";
-                $statusnotif = "Pengajuan anda ditolak, mobil tidak sesuai dengan data kontrak anda";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
             case 'REJECT-UNIT':
                 $reasonchange = "Kondisi mobil tidak layak untuk dibiayai";
-                $statusnotif = "Pengajuan anda ditolak, kondisi mobil tidak layak untuk dibiayai";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
             case 'PENDING-UNCONTACTED':
@@ -154,10 +156,11 @@ class ACCCashApplyDetailController extends Controller
 
             case 'APPROVED':
                 $reasonchange = "";
-                $statusnotif = "Pengajuan anda diterima";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No Kontrak '.$request->NO_AGGR.' telah disetujui. Kamu akan segera kami hubungi untuk tanda tangan kontrak.';
                 break;
         
         }
+        // dd($statusnotif);
 
         $data = json_encode(array(
             "doTransactionApply" => array(   
@@ -365,7 +368,7 @@ class ACCCashApplyDetailController extends Controller
                     "P_MESSAGE"=>$statusnotif,
                 ),
             ));
-            //dd($datanotif);
+            //`dd($datanotif);
     
             //SEND NOTIF
             $urlnotif = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';

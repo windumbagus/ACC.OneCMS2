@@ -26,17 +26,15 @@
     </div>
     <!-- /.box-header -->
         <div class="box-body">
-              <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                <div class="panel box box-primary">
-                  <div class="box-header with-border">
+                <div class="panel box">
+                  <div class="box-header">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                     
                         Detail and Approval
-                      </a>
+                      
                     </h4>
                   </div>
-                  <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
 						<div class="row">
 							<form id="form-update-accash-apply" action="{{asset('acccash-apply-detail/changestatus') }}" method="post" class="form-horizontal"> 
@@ -52,7 +50,7 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">No Aggr</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="NO_AGGR" value="{{$AccCashApplys[0]->NO_AGGR}}" disabled>
+														<input type="text" class="form-control" name="NO_AGGR" value="{{$AccCashApplys[0]->NO_AGGR}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
@@ -64,7 +62,7 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Disbursement</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="DISBURSEMENT" value="{{$AccCashApplys[0]->DISBURSEMENT}}" disabled>
+														<input type="text" class="form-control" name="DISBURSEMENT" value="{{$AccCashApplys[0]->DISBURSEMENT}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
@@ -217,7 +215,8 @@
 
 													</div>
 													<div class="col-sm-7">
-														<button type="submit" class="btn btn-primary" style="width:50%">Verify</button>	
+														<button type="submit" class="btn btn-primary" onclick="return confirm('Apakah yakin ingin mengubah status pengajuan?')" style="width:50%">Verify</button>	
+			
 													</div>
 												
 												</div>
@@ -251,17 +250,17 @@
 
                           
                     </div>
-                  </div>
+                  <!-- </div> -->
                 </div>
-                <div class="panel box box-success">
-                  <div class="box-header with-border">
+                <div class="panel box">
+                  <div class="box-header">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                      
                         Activity Log
-                      </a>
+                     
                     </h4>
                   </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
+                  <!-- <div id="collapseTwo" class="panel-collapse collapse"> -->
 					<div class="box-body">
                         <div class="row">
 							<div class="col-sm-8">
@@ -308,7 +307,7 @@
                 </div>
                 
                 
-              </div>
+
         </div>
  </div>
 
