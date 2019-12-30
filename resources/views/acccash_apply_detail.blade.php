@@ -29,11 +29,15 @@
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                 <div class="panel box">
                   <div class="box-header">
-                    <h4 class="box-title">
-                     
-                        Detail and Approval
-                      
-                    </h4>
+					<div class="col-sm-10">
+						<h4 class="box-title">
+                        	Detail and Approval
+						</h4>
+					</div>
+					<div class="col-sm-2">
+						<a href="{{asset('/acccash-apply-detail/cetakPDF/'.$AccCashApplys[0]->GUID.'&'.$Statusapply) }}" class="btn btn-block btn-primary">Download PDF</a>    
+					</div>
+
                   </div>
                     <div class="box-body">
 						<div class="row">

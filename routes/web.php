@@ -256,6 +256,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/acccash-apply-detail/{GUID}&{Statusapply}','AccCashApplyDetailController@index');
     Route::post('/acccash-apply-detail/changestatus','AccCashApplyDetailController@changestatus');
+    Route::get('/acccash-apply-detail/cetakPDF/{GUID}&{Statusapply}','AccCashApplyDetailController@cetakPDF');
 
     Route::get('/seamless-unit','SeamlessUnitController@index');
     Route::get('/seamless-unit/show','SeamlessUnitController@show');
