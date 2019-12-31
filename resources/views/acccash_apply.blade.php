@@ -62,7 +62,7 @@
         
             @foreach ($ACCCashApplys[0]->dataApply as $ACCCashApply)
             <tr>  
-                <td><span>{{date('d/m/Y H:i:s', strtotime($ACCCashApply->DT_ADDED))}}</span></td>
+                <td><span>{{date('d M Y H:i:s', strtotime($ACCCashApply->DT_ADDED))}}</span></td>
                 <td><span>{{$ACCCashApply->ID_USER}}</span></td>
                 <td><span>{{$ACCCashApply->PHONE_MOBILE1}}</span></td>
                 <td><span>{{$ACCCashApply->NO_AGGR}}</span></td>          

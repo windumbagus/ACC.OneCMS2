@@ -185,9 +185,9 @@
                                 <td><span>{{$SeamlessUnitDetail->CATEGORY}}</span></td>
                                 <td><span>{{$SeamlessUnitDetail->CHAR_VALUE}}</span></td>
                                 <td><span>{{$SeamlessUnitDetail->CHAR_DESC}}</span></td>
-                                <td><span>{{date('d/m/Y H:i:s', strtotime($SeamlessUnitDetail->DT_ADDED))}}</span></td>
+                                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessUnitDetail->DT_ADDED))}}</span></td>
                                 <td><span>{{$SeamlessUnitDetail->ID_USER_ADDED}}</span></td>
-                                <td><span>{{date('d/m/Y H:i:s', strtotime($SeamlessUnitDetail->DT_UPDATED))}}</span></td>
+                                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessUnitDetail->DT_UPDATED))}}</span></td>
                                 <td><span>{{$SeamlessUnitDetail->ID_USER_UPDATED}}</span></td>
                                             
                                 

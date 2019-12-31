@@ -59,8 +59,8 @@
             <tr>  
                 <td><span>{{$SeamlessProduct->CD_PRODUCT}}</span></td>
                 <td><span>{{$SeamlessProduct->DESC_PRODUCT}}</span></td>
-                <td><span>{{date('d/m/Y H:i:s', strtotime($SeamlessProduct->DT_START))}}</span></td>
-                <td><span>{{date('d/m/Y H:i:s', strtotime($SeamlessProduct->DT_END))}}</span></td>
+                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessProduct->DT_START))}}</span></td>
+                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessProduct->DT_END))}}</span></td>
                 <td><span><a href="{{ asset('seamless-product-detail/'.$SeamlessProduct->CD_PRODUCT) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> </span></td>
                 
             
