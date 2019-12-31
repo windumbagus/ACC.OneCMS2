@@ -52,7 +52,7 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">No Aggr</label>
+													<label class="col-sm-3 control-label">No Kontrak Induk</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="NO_AGGR" value="{{$AccCashApplys[0]->NO_AGGR}}" readonly>
 													</div>
@@ -64,13 +64,13 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Disbursement</label>
+													<label class="col-sm-3 control-label">Nominal</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="DISBURSEMENT" value="{{$AccCashApplys[0]->DISBURSEMENT}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Amt Installment</label>
+													<label class="col-sm-3 control-label">Angsuran</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="AMT_INSTALLMENT" value="{{$AccCashApplys[0]->AMT_INSTALLMENT}}" disabled>
 													</div>
@@ -100,13 +100,13 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Phone Mobile 1</label>
+													<label class="col-sm-3 control-label">No Handphone 1</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="PHONE_MOBILE1" value="{{$AccCashApplys[0]->PHONE_MOBILE1}}" disabled>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Phone Mobile 2</label>
+													<label class="col-sm-3 control-label">No Handphone 2</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="PHONE_MOBILE2" value="{{$AccCashApplys[0]->PHONE_MOBILE2}}" disabled>
 													</div>
@@ -132,13 +132,13 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Pefindo Score</label>
+													<label class="col-sm-3 control-label">Skor Pefindo</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="PEFINDO_SCORE" value="{{$AccCashApplys[0]->PEFINDO_SCORE}}" disabled>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Pefindo Detail</label>
+													<label class="col-sm-3 control-label">Detail Pefindo</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="PEFINDO_DETAIL" value="{{$AccCashApplys[0]->PEFINDO_DETAIL}}" disabled>
 													</div>

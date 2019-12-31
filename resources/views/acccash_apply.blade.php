@@ -46,11 +46,11 @@
         <thead>
         <tr>
             <th>Waktu Pengajuan</th>
-            <th>Id User</th>
+            <th>Email</th>
             <th>No HP</th>
             <th>No Kontrak Induk</th>
-            <th>Disbursement</th>
-            <th>Amt Installment</th>
+            <th>Nominal</th>
+            <th>Angsuran</th>
             <th>Penyedia</th>
             <th>Status</th>
             <th>Action</th>            
