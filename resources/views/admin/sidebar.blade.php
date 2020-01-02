@@ -13,9 +13,9 @@
             </span>
             </a>
             <ul class="treeview-menu">
-            <li class="@yield('user-mobile')"><a href="{{asset("user-mobile")}}"><i class="fa fa-circle-o"></i> User Mobile</a></li>
-            <li class="@yield('user-cms')"><a href="{{asset("user-cms")}}"><i class="fa fa-circle-o"></i> User CMS</a></li>
-            <li class="@yield('role-management')"><a href="{{asset("role-management ")}}"><i class="fa fa-circle-o"></i> Role Management</a></li>
+            <li class="@yield('user-mobile')"><a href="{{asset('user-mobile')}}"><i class="fa fa-circle-o"></i> User Mobile</a></li>
+            <li class="@yield('user-cms')"><a href="{{asset('user-cms')}}"><i class="fa fa-circle-o"></i> User CMS</a></li>
+            <li class="@yield('role-management')"><a href="{{asset('role-management')}}"><i class="fa fa-circle-o"></i> Role Management</a></li>
             <li class="@yield('acc-yes-migration')"><a href="{{asset('acc-yes-migration')}}"><i class="fa fa-circle-o"></i> ACCYes Migration</a></li>
             </ul>
         </li>
@@ -157,6 +157,7 @@
                 </a>
                 <ul class="treeview-menu">
                 <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/PENDING') }}"><i class="fa fa-circle-o"></i> Pending List</a></li>
+                <!-- ditaruh di dalam a setelah text Pending List <span class="badge">t</span> -->
                 <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/APPROVED') }}"><i class="fa fa-circle-o"></i> Approved List</a></li>
                 <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/REJECT') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
                 </ul>

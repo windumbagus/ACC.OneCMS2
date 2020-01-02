@@ -134,7 +134,7 @@
                     <div class="box-body">
 						<div class="row">
 							<form id="form-update-accash-apply" action="{{asset('acccash-apply-detail/changestatus') }}" method="post" class="form-horizontal"> 
-									<div class="modal-body">
+									
 										@csrf
 										<div class="col-sm-6">
 												<div class="form-group">
@@ -367,11 +367,6 @@
 
 										</div>
 
-									</div>
-									<div class="modal-footer">
-									   
-						
-									</div>	
 							</form>
 
 						</div>
