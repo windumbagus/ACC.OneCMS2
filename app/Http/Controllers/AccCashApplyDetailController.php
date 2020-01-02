@@ -392,7 +392,8 @@ class ACCCashApplyDetailController extends Controller
         //dd($Hasils);
         if ($Hasils->OUT_STAT == "T"){
             // return redirect("acccash-apply/".$request->STATUS)->with('success','Status berhasil diubah');
-            return redirect("acccash-apply/".$directstatus)->with('success','Status berhasil diubah');
+            // return redirect("acccash-apply/".$directstatus)->with('success','Status berhasil diubah');
+            return redirect("acccash-apply/PENDING")->with('success','Status berhasil diubah');
         }else{
             return redirect("acccash-apply/PENDING")->with('error',$Hasils->OUT_MESS);
         }
