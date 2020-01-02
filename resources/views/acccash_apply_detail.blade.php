@@ -411,16 +411,30 @@
                             <table id="exampledetail" class="table table-bordered display nowrap" style="width:100%">
                                 <thead>
                                     <tr>
+										<th>Date Time</th>
+            							<th style="display:none">Time for sort</th>
                                         <th>Status</th>
-                                        <th>Date Added</th>       
+										<th>Reason</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 
                                     @foreach ($AccCashApplyDetails as $AccCashApplyDetails)
-                                    <tr>  
-                                        <td><span>{{$AccCashApplyDetails->STATUS}}</span></td>
-										<td><span>{{date('d/m/Y H:i:s', strtotime($AccCashApplyDetails->DT_ADDED))}}</span></td>              
+                                    <tr>
+										<td style="display:none"><span>{{$AccCashApplyDetails->DT_ADDED}}</span></td>  
+										<td><span>{{date('d M Y H:i:s', strtotime($AccCashApplyDetails->DT_ADDED))}}</span></td>  
+                                        <td>
+										@if($AccCashApplyDetails->STATUS == "REJECT-NOTAPPLY" || $AccCashApplyDetails->STATUS == "REJECT-UNCONTACTED" || $AccCashApplyDetails->STATUS == "REJECT-WRONGUNIT" || $AccCashApplyDetails->STATUS == "REJECT-UNIT")
+											<span>REJECT ALL</span>
+										@elseif($AccCashApplyDetails->STATUS == "REJECT-DATA" || $AccCashApplyDetails->STATUS == "REJECT-PICT")
+											<span>REJECT PARTIAL</span>
+										@elseif($AccCashApplyDetails->STATUS == "PENDING-UNCONTACTED" || $AccCashApplyDetails->STATUS == "PENDING-NEXTTIME")
+											<span>PENDING</span>
+										@else
+											<span>{{$AccCashApplyDetails->STATUS}}</span>
+										@endif
+										</td>      
+										<td><span>{{$AccCashApplyDetails->REASON}}</span></td>
                                     </tr>                              
                                     @endforeach       
                                 </tbody>
@@ -447,14 +461,17 @@
           'paging'      : true,
           'lengthChange': false,
           'searching'   : true,
+		  'order': [[ 0, "desc" ]]
           'ordering'    : true,
           'info'        : true,
           'autoWidth'   : true,
           'scrollX': true,
           sDom: 'lrtip', 
           "columns": [
+			  	null,
                 null,
                 null,
+				null,
                 
             ]
         })

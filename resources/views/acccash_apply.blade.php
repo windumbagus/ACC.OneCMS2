@@ -46,6 +46,7 @@
         <thead>
         <tr>
             <th>Waktu Pengajuan</th>
+            <th style="display:none">Waktu for sort</th>
             <th>Email</th>
             <th>No HP</th>
             <th>No Kontrak Induk</th>
@@ -61,7 +62,8 @@
         <tbody>
         
             @foreach ($ACCCashApplys[0]->dataApply as $ACCCashApply)
-            <tr>  
+            <tr>
+                <td style="display:none"><span>{{$ACCCashApply->DT_ADDED}}</span></td>  
                 <td><span>{{date('d M Y H:i:s', strtotime($ACCCashApply->DT_ADDED))}}</span></td>
                 <td><span>{{$ACCCashApply->ID_USER}}</span></td>
                 <td><span>{{$ACCCashApply->PHONE_MOBILE1}}</span></td>
@@ -69,7 +71,17 @@
                 <td><span>{{number_format($ACCCashApply->DISBURSEMENT, 0, ',', '.')}}</span></td>
                 <td><span>{{number_format($ACCCashApply->AMT_INSTALLMENT, 0, ',', '.')}}</span></td>
                 <td><span>{{$ACCCashApply->PENYEDIA}}</span></td>
-                <td><span>{{$ACCCashApply->STATUS}}</span></td>
+                <td>
+                @if($ACCCashApply->STATUS == "REJECT-NOTAPPLY" || $ACCCashApply->STATUS == "REJECT-UNCONTACTED" || $ACCCashApply->STATUS == "REJECT-WRONGUNIT" || $ACCCashApply->STATUS == "REJECT-UNIT")
+                    <span>REJECT ALL</span>
+                @elseif($ACCCashApply->STATUS == "REJECT-DATA" || $ACCCashApply->STATUS == "REJECT-PICT")
+                    <span>REJECT PARTIAL</span>
+                @elseif($ACCCashApply->STATUS == "PENDING-UNCONTACTED" || $ACCCashApply->STATUS == "PENDING-NEXTTIME")
+                    <span>PENDING</span>                
+                @else
+                    <span>{{$ACCCashApply->STATUS}}</span>
+                @endif
+                </td>
                 
 
                 <!-- <td>
@@ -109,12 +121,14 @@
           'paging'      : true,
           'lengthChange': false,
           'searching'   : true,
+          'order': [[ 0, "desc" ]],
           'ordering'    : true,
           'info'        : true,
           'autoWidth'   : true,
           'scrollX': true,
           sDom: 'lrtip', 
           "columns": [
+                null,
                 null,
                 null,
                 null,
