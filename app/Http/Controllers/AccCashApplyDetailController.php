@@ -453,7 +453,7 @@ class ACCCashApplyDetailController extends Controller
                                 'Statusapply'=>$request->Statusapply,
                                 // 'session' => $session
                             ]);
-    	return $pdf->download('AccCash-Apply-Detail-pdf');
+    	return $pdf->download('AccCash-Apply-Detail-GUID-'.$request->GUID);
     }
 
 }

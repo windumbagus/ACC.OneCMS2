@@ -23,10 +23,10 @@
 	  display: none; /* Hidden by default */
 	  position: fixed; /* Stay in place */
 	  z-index: 1; /* Sit on top */
-	  padding-top: 100px; /* Location of the box */
-	  left: 22%;
+	  padding-top: 120px; /* Location of the box */
+	  left: 0%;
 	  top: 0;
-	  width: 80%; /* Full width */
+	  width: 100%; /* Full width */
 	  height: 100%; /* Full height */
 	  overflow: auto; /* Enable scroll if needed */
 	  background-color: rgb(0,0,0); /* Fallback color */
@@ -37,7 +37,7 @@
 	.modal-content {
 	  margin: auto;
 	  display: block;
-	  width: 80%;
+	  width: 100%;
 	  max-width: 700px;
 	}
 	
@@ -73,8 +73,8 @@
 	
 	/* The Close Button */
 	.close {
-	  position: absolute;
-	  top: 15px;
+	  position: fixed;
+	  top: 55px;
 	  right: 35px;
 	  color: #f1f1f1;
 	  font-size: 40px;
@@ -156,33 +156,73 @@
 													</div>
 												</div>
 												<div class="form-group">
+													<label class="col-sm-3 control-label">No HP 1</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="PHONE_MOBILE1" value="{{$AccCashApplys[0]->PHONE_MOBILE1}}" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label">No HP 2</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="PHONE_MOBILE2" value="{{$AccCashApplys[0]->PHONE_MOBILE2}}" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label">Akun Bank</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="BANK_NAME" value="{{$AccCashApplys[0]->BANK_NAME}}" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label">Nama Rekening</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="NAMA_REKENING" value="{{$AccCashApplys[0]->NAMA_REKENING}}" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label">No Rekening</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="ACCOUNT_NUMBER" value="{{$AccCashApplys[0]->ACCOUNT_NUMBER}}" readonly>
+													</div>
+												</div>
+												<div class="form-group">
 													<label class="col-sm-3 control-label">Nominal</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="DISBURSEMENT" value="{{$AccCashApplys[0]->DISBURSEMENT}}" readonly>
+														<input type="text" class="form-control" name="DISBURSEMENT" value="{{number_format($AccCashApplys[0]->DISBURSEMENT, 0, ',', '.')}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Angsuran</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="AMT_INSTALLMENT" value="{{$AccCashApplys[0]->AMT_INSTALLMENT}}" disabled>
+														<input type="text" class="form-control" name="AMT_INSTALLMENT" value="{{number_format($AccCashApplys[0]->AMT_INSTALLMENT, 0, ',', '.')}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Tenor</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="TENOR" value="{{$AccCashApplys[0]->TENOR}}" disabled>
+														<input type="text" class="form-control" name="TENOR" value="{{$AccCashApplys[0]->TENOR}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Tujuan Penggunaan</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="TUJUAN_PENGGUNAAN" value="{{$AccCashApplys[0]->TUJUAN_PENGGUNAAN}}" disabled>
+														<input type="text" class="form-control" name="TUJUAN_PENGGUNAAN" value="{{$AccCashApplys[0]->TUJUAN_PENGGUNAAN}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Penyedia</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="PENYEDIA" value="{{$AccCashApplys[0]->PENYEDIA}}" disabled>
+														<input type="text" class="form-control" name="PENYEDIA" value="{{$AccCashApplys[0]->PENYEDIA}}" readonly>
+													</div>
+												</div>
+												
+												
+										</div>
+										<div class="col-sm-6">
+												<div class="form-group">
+													<label class="col-sm-3 control-label">No Polisi</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="NO_CAR_POLICE" value="{{$AccCashApplys[0]->NO_CAR_POLICE}}" disabled>
 													</div>
 												</div>
 												<div class="form-group">
@@ -192,47 +232,34 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">No Handphone 1</label>
+													<label class="col-sm-3 control-label">Warna</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="PHONE_MOBILE1" value="{{$AccCashApplys[0]->PHONE_MOBILE1}}" disabled>
+														<input type="text" class="form-control" name="COLOR" value="{{$AccCashApplys[0]->COLOR}}" readonly>
 													</div>
 												</div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label">No Handphone 2</label>
-													<div class="col-sm-7">
-														<input type="text" class="form-control" name="PHONE_MOBILE2" value="{{$AccCashApplys[0]->PHONE_MOBILE2}}" disabled>
-													</div>
-												</div>
-										</div>
-										<div class="col-sm-6">
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Area</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="AREA" value="{{$AccCashApplys[0]->AREA}}" disabled>
+														<input type="text" class="form-control" name="AREA" value="{{$AccCashApplys[0]->AREA}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Cabang</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="CABANG" value="{{$AccCashApplys[0]->CABANG}}" disabled>
+														<input type="text" class="form-control" name="CABANG" value="{{$AccCashApplys[0]->CABANG}}" readonly>
 													</div>
 												</div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label">No Polisi</label>
-													<div class="col-sm-7">
-														<input type="text" class="form-control" name="NO_CAR_POLICE" value="{{$AccCashApplys[0]->NO_CAR_POLICE}}" disabled>
-													</div>
-												</div>
+												
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Skor Pefindo</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="PEFINDO_SCORE" value="{{$AccCashApplys[0]->PEFINDO_SCORE}}" disabled>
+														<input type="text" class="form-control" name="PEFINDO_SCORE" value="{{$AccCashApplys[0]->PEFINDO_SCORE}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Detail Pefindo</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="PEFINDO_DETAIL" value="{{$AccCashApplys[0]->PEFINDO_DETAIL}}" disabled>
+														<input type="text" class="form-control" name="PEFINDO_DETAIL" value="{{$AccCashApplys[0]->PEFINDO_DETAIL}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
