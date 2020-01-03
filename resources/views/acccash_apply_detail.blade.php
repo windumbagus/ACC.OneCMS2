@@ -5,7 +5,7 @@
 
 @section('content')
 
-{{-- css image --}}
+
 <style>
 	
 	body {font-family: Arial, Helvetica, sans-serif;}
@@ -95,7 +95,7 @@
 		width: 100%;
 	  }
 	}
-	</style>
+</style>
 
 <!-- TableACCCashLog -->
 <div class="box box-primary">
@@ -419,22 +419,22 @@
                                 </thead>
                                 <tbody>
                                 
-                                    @foreach ($AccCashApplyDetails as $AccCashApplyDetails)
+                                    @foreach ($AccCashApplyDetails as $AccCashApplyDetail)
                                     <tr>
-										<td style="display:none"><span>{{$AccCashApplyDetails->DT_ADDED}}</span></td>  
-										<td><span>{{date('d M Y H:i:s', strtotime($AccCashApplyDetails->DT_ADDED))}}</span></td>  
+										<td style="display:none"><span>{{$AccCashApplyDetail->DT_ADDED}}</span></td>  
+										<td><span>{{date('d M Y H:i:s', strtotime($AccCashApplyDetail->DT_ADDED))}}</span></td>  
                                         <td>
-										@if($AccCashApplyDetails->STATUS == "REJECT-NOTAPPLY" || $AccCashApplyDetails->STATUS == "REJECT-UNCONTACTED" || $AccCashApplyDetails->STATUS == "REJECT-WRONGUNIT" || $AccCashApplyDetails->STATUS == "REJECT-UNIT")
+										@if($AccCashApplyDetail->STATUS == "REJECT-NOTAPPLY" || $AccCashApplyDetail->STATUS == "REJECT-UNCONTACTED" || $AccCashApplyDetail->STATUS == "REJECT-WRONGUNIT" || $AccCashApplyDetail->STATUS == "REJECT-UNIT")
 											<span>REJECT ALL</span>
-										@elseif($AccCashApplyDetails->STATUS == "REJECT-DATA" || $AccCashApplyDetails->STATUS == "REJECT-PICT")
+										@elseif($AccCashApplyDetail->STATUS == "REJECT-DATA" || $AccCashApplyDetail->STATUS == "REJECT-PICT")
 											<span>REJECT PARTIAL</span>
-										@elseif($AccCashApplyDetails->STATUS == "PENDING-UNCONTACTED" || $AccCashApplyDetails->STATUS == "PENDING-NEXTTIME")
+										@elseif($AccCashApplyDetail->STATUS == "PENDING-UNCONTACTED" || $AccCashApplyDetail->STATUS == "PENDING-NEXTTIME")
 											<span>PENDING</span>
 										@else
-											<span>{{$AccCashApplyDetails->STATUS}}</span>
+											<span>{{$AccCashApplyDetail->STATUS}}</span>
 										@endif
 										</td>      
-										<td><span>{{$AccCashApplyDetails->REASON}}</span></td>
+										<td><span>{{$AccCashApplyDetail->REASON}}</span></td>
                                     </tr>                              
                                     @endforeach       
                                 </tbody>
@@ -450,7 +450,40 @@
 
   <!-- page script -->
   <script>
-    $(document).ready(function () {
+    
+	// Get the modal image
+	var modal = document.getElementById("myModal");
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img = document.getElementById("myImg");
+	var modalImg = document.getElementById("img01");
+	var captionText = document.getElementById("caption");
+	img.onclick = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+		captionText.innerHTML = this.alt;
+	};
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img2 = document.getElementById("myImg2");
+	var modalImg2 = document.getElementById("img01");
+	var captionText2 = document.getElementById("caption");
+	img2.onclick = function(){
+		modal.style.display = "block";
+		modalImg2.src = this.src;
+		captionText2.innerHTML = this.alt;
+	};
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() { 
+		modal.style.display = "none";
+	};
+
+	
+	$(document).ready(function () {
         $('#REASONREJECTALLCHOICE').hide();
         $('#REASONREJECTPARTIALCHOICE').hide();
         $('#REASONPENDINGCHOICE').show();
@@ -461,7 +494,7 @@
           'paging'      : true,
           'lengthChange': false,
           'searching'   : true,
-		  'order': [[ 0, "desc" ]]
+		  'order': [[ 0, "desc" ]],
           'ordering'    : true,
           'info'        : true,
           'autoWidth'   : true,
@@ -543,36 +576,6 @@
 
     })
 
-	// Get the modal image
-	var modal = document.getElementById("myModal");
-
-	// Get the image and insert it inside the modal - use its "alt" text as a caption
-	var img = document.getElementById("myImg");
-	var modalImg = document.getElementById("img01");
-	var captionText = document.getElementById("caption");
-	img.onclick = function(){
-	modal.style.display = "block";
-	modalImg.src = this.src;
-	captionText.innerHTML = this.alt;
-	}
-
-	// Get the image and insert it inside the modal - use its "alt" text as a caption
-	var img2 = document.getElementById("myImg2");
-	var modalImg2 = document.getElementById("img01");
-	var captionText2 = document.getElementById("caption");
-	img2.onclick = function(){
-	modal.style.display = "block";
-	modalImg2.src = this.src;
-	captionText2.innerHTML = this.alt;
-	}
-
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() { 
-	modal.style.display = "none";
-	}
-
+	
   </script>
 @endsection

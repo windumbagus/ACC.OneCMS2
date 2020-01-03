@@ -34,8 +34,8 @@ class SeamlessUnitDetailController extends Controller
 
         $data_color = json_encode(array(
             "doSendDataCMS" => array(   
-                "TRANSACTION_CODE"=>"GET_COLOR_CMS",
-                "P_GUID"=>$request->Id,
+                "TRANSACTION_CODE"=>"GET_COLOR_PICT_CMS",
+                "P_ID_UNIT"=>$request->Id,
                 "P_LANGUAGE"=>"IN",
             ),
         ));
