@@ -40,17 +40,7 @@
 	  max-width: 700px;
 	}
 	
-	/* Caption of Modal Image */
-	#caption {
-	  margin: auto;
-	  display: block;
-	  width: 80%;
-	  max-width: 700px;
-	  text-align: center;
-	  color: #ccc;
-	  padding: 10px 0;
-	  height: 150px;
-	}
+
 	
 	/* Add Animation */
 	.modal-content, #caption {  
@@ -178,7 +168,7 @@
                         <div class="row">
                         
                             <div class="col-sm-7">
-                                <input type="text" placeholder="Search by Color Code, Color Description, ID FIle, Category, etc" class="InputSearch2 form-control">
+                                <input type="text" placeholder="Search by Color Code and Color Description" class="InputSearch2 form-control">
                             </div>
                             <div class="col-sm-5">
                                 <div class="col-sm-4">
@@ -210,7 +200,7 @@
                                 <td><span>{{$SeamlessUnitColor->CD_COLOR}}</span></td>
                                 <td><span>{{$SeamlessUnitColor->DESC_COLOR}}</span></td>
                                 <td><span>{{$SeamlessUnitColor->FLAG_PRIMARY}}</span></td>
-                                <td><span><img id="myImg" style="width: 70px; height: 70px;" alt=""
+                                <td><span><img class="myImg" style="width: 70px; height: 70px;" alt=""
                                                     src="{{$SeamlessUnitColor->URL}}" /></span></td>
                             </tr>                              
                             @endforeach       
@@ -358,6 +348,7 @@
         modal.style.display = "block";
         modalImg.src = this.src;
       //  captionText.innerHTML = this.alt;
+      }
     }
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName('close')[0];
@@ -407,7 +398,6 @@
                 null,
                 {"searchable":false},
                
-                
             ]
       })
 
