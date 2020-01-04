@@ -268,6 +268,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit-detail/{Id}','SeamlessUnitDetailController@index');
     Route::get('/seamless-unit-detail/hitungsimulasi/{Id}&{Area}','SeamlessUnitDetailController@hitungsimulasi');
     
+    Route::get('/seamless-unit-picture/{GUID}&{ID_UNIT}','SeamlessUnitUploadPictureController@index');
+    Route::post('/seamless-unit-picture/uploadpicture','SeamlessUnitUploadPictureController@uploadpicture');
+   
     
     Route::get('/seamless-unit-detail/upload-page/{Id}','SeamlessUnitUploadDetailController@index');
     Route::get('/seamless-unit-detail/cancel/{Id}','SeamlessUnitUploadDetailController@cancel');
@@ -280,7 +283,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit-color/upload-page/{Id}','SeamlessUnitUploadColorController@index');
     Route::get('/seamless-unit-color/cancel/{Id}','SeamlessUnitUploadColorController@cancel');
     Route::post('/seamless-unit-color/upload/{Id}','SeamlessUnitUploadColorController@upload');
-
+    
 
     Route::get('/seamless-product','SeamlessProductController@index');
     Route::get('/seamless-product/show','SeamlessProductController@show');

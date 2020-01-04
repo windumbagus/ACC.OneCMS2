@@ -220,12 +220,6 @@
 										</div>
 										<div class="col-sm-6">
 												<div class="form-group">
-													<label class="col-sm-3 control-label">No Polisi</label>
-													<div class="col-sm-7">
-														<input type="text" class="form-control" name="NO_CAR_POLICE" value="{{$AccCashApplys[0]->NO_CAR_POLICE}}" disabled>
-													</div>
-												</div>
-												<div class="form-group">
 													<label class="col-sm-3 control-label">BTMY</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="BTMY" value="{{$AccCashApplys[0]->BTMY}}" readonly>
@@ -237,6 +231,19 @@
 														<input type="text" class="form-control" name="COLOR" value="{{$AccCashApplys[0]->COLOR}}" readonly>
 													</div>
 												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label">No Polisi</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="NO_CAR_POLICE" value="{{$AccCashApplys[0]->NO_CAR_POLICE}}" disabled>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label">Jatuh Tempo STNK</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="EXP_STNK" value="{{$AccCashApplys[0]->EXP_STNK}}" disabled>
+													</div>
+												</div>
+												
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Area</label>
 													<div class="col-sm-7">
@@ -451,38 +458,6 @@
   <!-- page script -->
   <script>
     
-	// Get the modal image
-	var modal = document.getElementById("myModal");
-
-	// Get the image and insert it inside the modal - use its "alt" text as a caption
-	var img = document.getElementById("myImg");
-	var modalImg = document.getElementById("img01");
-	var captionText = document.getElementById("caption");
-	img.onclick = function(){
-		modal.style.display = "block";
-		modalImg.src = this.src;
-		captionText.innerHTML = this.alt;
-	};
-
-	// Get the image and insert it inside the modal - use its "alt" text as a caption
-	var img2 = document.getElementById("myImg2");
-	var modalImg2 = document.getElementById("img01");
-	var captionText2 = document.getElementById("caption");
-	img2.onclick = function(){
-		modal.style.display = "block";
-		modalImg2.src = this.src;
-		captionText2.innerHTML = this.alt;
-	};
-
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() { 
-		modal.style.display = "none";
-	};
-
-	
 	$(document).ready(function () {
         $('#REASONREJECTALLCHOICE').hide();
         $('#REASONREJECTPARTIALCHOICE').hide();
@@ -576,6 +551,38 @@
 
     })
 
+	// Get the modal image
+	var modal = document.getElementById("myModal");
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img = document.getElementById("myImg");
+	var modalImg = document.getElementById("img01");
+	var captionText = document.getElementById("caption");
+	img.onclick = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+		captionText.innerHTML = this.alt;
+	};
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img2 = document.getElementById("myImg2");
+	var modalImg2 = document.getElementById("img01");
+	var captionText2 = document.getElementById("caption");
+	img2.onclick = function(){
+		modal.style.display = "block";
+		modalImg2.src = this.src;
+		captionText2.innerHTML = this.alt;
+	};
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() { 
+		modal.style.display = "none";
+	};
+
+	
 	
   </script>
 @endsection

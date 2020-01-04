@@ -190,7 +190,8 @@
                             <th>Color Code</th>
                             <th>Color Description</th>
                             <th>Is Primary</th>
-                            <th>Picture</th>     
+                            <th>Picture</th>
+                            <th>Action</th>     
                             
                         </tr>
                         </thead>
@@ -200,8 +201,12 @@
                                 <td><span>{{$SeamlessUnitColor->CD_COLOR}}</span></td>
                                 <td><span>{{$SeamlessUnitColor->DESC_COLOR}}</span></td>
                                 <td><span>{{$SeamlessUnitColor->FLAG_PRIMARY}}</span></td>
-                                <td><span><img class="myImg" style="width: 70px; height: 70px;" alt=""
-                                                    src="{{$SeamlessUnitColor->URL}}" /></span></td>
+                                <td><span><img class="myImg" style="width: 70px; height: 70px;" alt="" src="{{$SeamlessUnitColor->URL}}" /></span></td>
+                                <td><span>
+                                <!-- <a href="#" data-id="{{$SeamlessUnitColor->GUID}}" class="upload-seamless-picture btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
+                                <a href="{{asset('/seamless-unit-picture/'.$SeamlessUnitColor->GUID.'&'.$SeamlessUnitColor->ID_UNIT)}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                </span>
+                                </td>
                             </tr>                              
                             @endforeach       
                         </tbody>
@@ -397,6 +402,7 @@
                 null,
                 null,
                 {"searchable":false},
+                {"searchable":false},
                
             ]
       })
@@ -430,8 +436,36 @@
         })
 
 
+        $(document).on('click','.upload-seamless-picture',function(){
+            var id = $(this).attr('data-id');
+            console.log(id);
+            $.ajax({
+                url:"{{asset('/seamless-unit-detail/uploadpictureshow')}}",
+                data: {'Id':id ,'_token':'{{csrf_token()}}' },
+                dataType:'JSON', 
+                type:'GET',
+                success: function (val){
+                    console.log(val);
+                    $('[name="GUID"]').val(val.OUT_DATA[0].GUID);
+                    $('[name="ID_UNIT"]').val(val.OUT_DATA[0].dataApply[0].ID_UNIT);
+                    $('[name="CD_COLOR"]').val(val.OUT_DATA[0].dataApply[0].CD_COLOR);
+                    $('[name="DESC_COLOR"]').val(val.OUT_DATA[0].dataApply[0].DESC_COLOR);
+                    $('[name="FLAG_PRIMARY"]').val(val.OUT_DATA[0].dataApply[0].FLAG_PRIMARY);
+                    $('#URL').attr('src', val.OUT_DATA[0].URL);
+                   
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                console.log(jqXhr);
+                console.log( errorThrown );
+                console.log(textStatus);
+                },
+            });
+            $('#upload-seamless-unit-picture').modal();
+        });
+
         
     })
   </script>
 
+@include('modal.upload_seamless_unit_picture')
 @endsection

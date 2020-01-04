@@ -207,6 +207,103 @@ class SeamlessUnitDetailController extends Controller
          return redirect("seamless-unit-detail/".$request->Id)->with('success','Berhasil Menghitung Simulasi');
     }
 
+    public function uploadpictureshow(Request $request) {
+
+        // $session=[];
+        // array_push($session,[
+        //     'LoginSession'=>$request->session()->get('LoginSession'),
+        //     'Email'=>$request->session()->get('Email'),
+        //     'Name'=>$request->session()->get('Name'),
+        //     'Id'=>$request->session()->get('Id'),
+        //    // 'RoleId'=>$request->session()->get('RoleId'),
+        //    // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
+        // ]);
+
+        $data_color = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"GET_COLOR_PICT_CMS",
+                "P_ID_UNIT"=>$request->ID_UNIT,
+                "P_GUID"=>$request->GUID,
+                "P_LANGUAGE"=>"IN",
+            ),
+        ));
+
+         //API GET
+         $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+        //  dd($data);
+     
+         // dd($url);
+       
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_color);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+         $result = curl_exec($ch);
+         $err = curl_error($ch);
+         curl_close($ch);
+         $Hasils= json_decode($result);
+         // dd($Hasils);
+         //dd($err);
+            return view(
+                'seamless_unit_picture',[
+                   // 'Role' => $Hasils->Role,
+                    'SeamlessUnitPictures'=>$Hasils->OUT_DATA[0],
+                   // 'Roles'=>$Hasils2->Roles,
+                  //  'UserCategories'=>$Hasils2->UserCategory, 
+                    // 'session' => $session
+            ]);
+
+
+    }
+
+    public function uploadpicture(Request $request) {
+
+            $file = $request->input_update_picture_seamlessunit;
+            $getContent = file_get_contents($file);
+            $content= base64_encode($getContent);
+            $name = $file->getClientOriginalName();
+            $type = $file->extension();
+
+        $data = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"UPLOAD_COLOR_PICT_CMS",
+                "P_ID_UNIT"=>$request->ID_UNIT,
+                "P_GUID"=>$request->GUID,
+                "P_CD_COLOR"=>$request->CD_COLOR,
+			    "P_DESC_COLOR"=>$request->DESC_COLOR,
+			    "P_FLAG_PRIMARY"=>$request->FLAG_PRIMARY,
+                "P_FILE_NAME"=>$name,
+                "P_USER_NAME"=>"ADMIN",
+                "P_PATH_FILE"=>'/mnt/ACCONE/unit/'.$name,
+                "P_LANGUAGE"=>"IN",
+                "P_RAW_FILE"=>$content,
+            ),
+        ));
+
+         //API GET
+         $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+        //  dd($data);
+     
+         // dd($url);
+       
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+         $result = curl_exec($ch);
+         $err = curl_error($ch);
+         curl_close($ch);
+         $val= json_decode($result);
+         // dd($val);
+         //dd($err);
+        return json_encode($val);
+
+    }
+
 
 
 
