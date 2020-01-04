@@ -70,7 +70,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Picture</label><br>
 										<div class="col-sm-7">
-											<img style="width: 300px; height: 200px;" src="{{$SeamlessProductPictures->URL}}" alt=""
+											<img style="width: 50%; height: 50%;" src="{{$SeamlessProductPictures->URL}}" alt=""
 												id="placeholder_updatepicture"/><br>
 											File type : JPEG/PNG<br>
 											File name max : 50 char<br>

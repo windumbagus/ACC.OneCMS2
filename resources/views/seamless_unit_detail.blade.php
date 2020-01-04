@@ -201,7 +201,7 @@
                                 <td><span>{{$SeamlessUnitColor->CD_COLOR}}</span></td>
                                 <td><span>{{$SeamlessUnitColor->DESC_COLOR}}</span></td>
                                 <td><span>{{$SeamlessUnitColor->FLAG_PRIMARY}}</span></td>
-                                <td><span><img class="myImg" style="width: 70px; height: 70px;" alt="" src="{{$SeamlessUnitColor->URL}}" /></span></td>
+                                <td><span><img class="myImg" style="width: 30%; height: 30%;" alt="" src="{{$SeamlessUnitColor->URL}}" /></span></td>
                                 <td><span>
                                 <!-- <a href="#" data-id="{{$SeamlessUnitColor->GUID}}" class="upload-seamless-picture btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
                                 <a href="{{asset('/seamless-unit-picture/'.$SeamlessUnitColor->GUID.'&'.$SeamlessUnitColor->ID_UNIT)}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
