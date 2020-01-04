@@ -33,7 +33,7 @@
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
-                 
+                        
                         <table style="width:100%">
                         
                         <tr>
@@ -66,16 +66,19 @@
                         </tr>
                         <tr>
                             <th>Picture</th>
-                            <td><span> @if( !empty($SeamlessProductPicts[0]->PATH_FILE))
+                            <td><span> @if( !empty($SeamlessProductPicts[0]->URL))
                             <img style="width: 100px; height: 100px;" alt=""
-                                                    src="{{$SeamlessProductPicts[0]->PATH_FILE}}" />
+                                                    src="{{$SeamlessProductPicts[0]->URL}}" />
                                 @else
                                 tidak ditemukan
                                 @endif
                             </span></td>
                         </tr>
                         </table>
-                    
+                        <br/><br/>
+                        <div class="col-sm-2">
+                                <a href="{{asset('/seamless-product-picture/'.$SeamlessProductPicts[0]->CD_PRODUCT)}}" class="btn btn-block btn-primary">Update</a>         
+                        </div>
                     </div>
                   </div>
                 </div>

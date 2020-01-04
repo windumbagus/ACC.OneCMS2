@@ -290,6 +290,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/seamless-product-detail/{Id}','SeamlessProductDetailController@index');
 
+    Route::get('/seamless-product-picture/{CD_PRODUCT}','SeamlessProductUploadPictureController@index');
+    Route::post('/seamless-product-picture/update','SeamlessProductUploadPictureController@update');
+
  //   Route::post('/acccash-apply/changestatus/{Guid}','AccCashApplyController@changestatus');
 
     Route::get('/invalid-permission','InvalidPermissionController@index');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AccCashApplyExport;
 
-class SeamlessUnitUploadPictureController extends Controller
+class SeamlessProductUploadPictureController extends Controller
 {
   
 
@@ -26,9 +26,8 @@ class SeamlessUnitUploadPictureController extends Controller
 
         $data = json_encode(array(
             "doSendDataCMS" => array(   
-                "TRANSACTION_CODE"=>"GET_COLOR_PICT_CMS",
-                "P_ID_UNIT"=>$request->ID_UNIT,
-                "P_GUID"=>$request->GUID,
+                "TRANSACTION_CODE"=>"GET_PRODUCT_PICT",
+                "P_CD_PRODUCT"=>$request->CD_PRODUCT,
                 "P_LANGUAGE"=>"IN",
             ),
         ));
@@ -52,9 +51,9 @@ class SeamlessUnitUploadPictureController extends Controller
          // dd($Hasils);
          //dd($err);
             return view(
-                'seamless_unit_picture',[
+                'seamless_product_picture',[
                    // 'Role' => $Hasils->Role,
-                    'SeamlessUnitPictures'=>$Hasils->OUT_DATA[0],
+                    'SeamlessProductPictures'=>$Hasils->OUT_DATA[0],
                    // 'Roles'=>$Hasils2->Roles,
                   //  'UserCategories'=>$Hasils2->UserCategory, 
                     'session' => $session
@@ -66,24 +65,31 @@ class SeamlessUnitUploadPictureController extends Controller
 
    
 
-    public function uploadpicture(Request $request) {
+    public function update(Request $request) {
 
-            $file = $request->addPicture_seamlessunit;
-            // dd($file);
-            $getContent = file_get_contents($file);
+        $file = $request->addPicture_seamlessproduct;
+        //dd($file);
+        If(!file_exists($file))
+        {
+            $content = null;
+        }
+        else{
            
+            $getContent = file_get_contents($file);
+       
             $content= base64_encode($getContent);
             $name = $file->getClientOriginalName();
             $type = $file->extension();
 
+        }
+        //  dd($content);
+
         $data = json_encode(array(
             "doSendDataCMS" => array(   
-                "TRANSACTION_CODE"=>"UPLOAD_COLOR_PICT_CMS",
-                "P_ID_UNIT"=>$request->ID_UNIT,
-                "P_GUID"=>$request->GUID,
-                "P_CD_COLOR"=>$request->CD_COLOR,
-			    "P_DESC_COLOR"=>$request->DESC_COLOR,
-			    "P_FLAG_PRIMARY"=>$request->FLAG_PRIMARY,
+                "TRANSACTION_CODE"=>"UPLOAD_PRODUCT_PICT_CMS",
+                "P_CD_PRODUCT"=>$request->CD_PRODUCT,
+                "P_DESC_DETAIL"=>$request->DESC_DETAIL,
+                "P_TNC"=>$request->TNC,
                 "P_FILE_NAME"=>$request->FILE_NAME,
                 "P_USER_NAME"=>"ADMIN",
                 "P_PATH_FILE"=>$request->PATH_FILE,
@@ -113,12 +119,12 @@ class SeamlessUnitUploadPictureController extends Controller
          //dd($err);
          
          
-         if ($Hasils->OUT_STAT == "T"){
+        //  if ($Hasils->OUT_STAT == "T"){
             
-            return redirect('seamless-unit-detail/'.$request->ID_UNIT)->with('success','Gambar berhasil diubah');
-        }else{
-            return redirect('seamless-unit-picture/'.$request->GUID.'&'.$request->ID_UNIT)->with('error',$Hasils->OUT_MESS);
-        }
+            return redirect('seamless-product-detail/'.$request->CD_PRODUCT)->with('success','Data berhasil diubah');
+        // }else{
+            // return redirect('seamless-product-picture/'.$$request->CD_PRODUCT)->with('error',$Hasils->OUT_MESS);
+        // }
 
     }
 
