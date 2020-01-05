@@ -1,7 +1,7 @@
 @extends('admin.admin') 
 
-@section('acccash', 'active')
-@section('acccash-apply', 'active')
+@section('seamless', 'active')
+@section('seamless-unit-detail', 'active')
 
 @section('content')
 

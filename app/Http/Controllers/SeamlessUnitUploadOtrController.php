@@ -64,9 +64,9 @@ class SeamlessUnitUploadOtrController extends Controller
         //  dd($Hasils);
 
         if($Hasils->OUT_STAT="T"){
-            return redirect('/seamless-unit-detail/'.$request->Id.'&'.$request->Brand.'&'.$request->Type.'&'.$request->Model.'&'.$request->Tahun)->with('success','Seamless Unit OTR Upload Successfull !!!');
+            return redirect('/seamless-unit-detail/'.$request->Id)->with('success','Seamless Unit OTR Upload Successfull !!!');
         }else{
-            return redirect('/seamless-unit-otr/upload-page/'.$request->Id.'&'.$request->Brand.'&'.$request->Type.'&'.$request->Model.'&'.$request->Tahun)->with('warning', $Hasils->OUT_MESS);
+            return redirect('/seamless-unit-otr/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
         }
     }
 

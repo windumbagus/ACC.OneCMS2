@@ -28,7 +28,8 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">Upload</button>	
-                        <button type="reset" class="btn btn-danger" id="reset-table">Cancel</button>	
+                        <button type="reset" class="btn btn-danger" id="reset-table">Cancel</button>
+                        <button type="button" class="btn btn-primary"onclick="location.href='{{asset('/seamless-unit-color/download')}}';">Download Template</button>
                     </div>
                    
 

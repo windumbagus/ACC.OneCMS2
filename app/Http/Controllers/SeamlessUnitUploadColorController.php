@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SeamlessUnitColorExport;
 
 class SeamlessUnitUploadColorController extends Controller
 {
@@ -64,6 +66,26 @@ class SeamlessUnitUploadColorController extends Controller
         }else{
             return redirect('/seamless-unit-color/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
         }
+    }
+
+    public function download(Request $request)
+    {
+         //API GET
+
+    
+         $data=[];
+             array_push($data,[
+                 "CD_COLOR"=>"",
+                 "DESC_COLOR"=>"",
+                 "ID_FILE"=>"",
+                 "ID_USER_ADDED"=>"ADMIN",
+                 "ID_USER_UPDATED"=>"ADMIN",
+                 "FLAG_PRIMARY"=>"Y",
+
+            ]);
+         
+        //  dd($data);
+         return Excel::download(new SeamlessUnitColorExport($data), 'SeamlessUnitColorTemplate.xlsx');
     }
 
     public function cancel(Request $request)

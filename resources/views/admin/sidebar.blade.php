@@ -172,6 +172,8 @@
                 <ul class="treeview-menu">
                 <li class="@yield('seamless-unit')"><a href="{{ asset('seamless-unit') }}"><i class="fa fa-circle-o"></i> Unit</a></li>
                 <li class="@yield('seamless-product')"><a href="{{ asset('seamless-product') }}"><i class="fa fa-circle-o"></i> Product</a></li>
+                <li class="@yield('seamless-banner')"><a href="{{ asset('seamless-banner') }}"><i class="fa fa-circle-o"></i> Banner</a></li>
+
                 </ul>
             </li>
 

@@ -261,6 +261,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit','SeamlessUnitController@index');
     Route::get('/seamless-unit/show','SeamlessUnitController@show');
 
+    Route::get('/seamless-unit-update/{GUID}','SeamlessUnitUpdateController@index');
+    Route::post('/seamless-unit-update/update','SeamlessUnitUpdateController@update');
+
     Route::get('/seamless-unit/upload-page','SeamlessUnitUploadController@index');
     Route::get('/seamless-unit/cancel','SeamlessUnitUploadController@cancel');
     Route::post('/seamless-unit/upload','SeamlessUnitUploadController@upload');
@@ -279,20 +282,31 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit-otr/upload-page/{Id}','SeamlessUnitUploadOtrController@index');
     Route::get('/seamless-unit-otr/cancel/{Id}','SeamlessUnitUploadOtrController@cancel');
     Route::post('/seamless-unit-otr/upload/{Id}','SeamlessUnitUploadOtrController@upload');
-
+    
     Route::get('/seamless-unit-color/upload-page/{Id}','SeamlessUnitUploadColorController@index');
     Route::get('/seamless-unit-color/cancel/{Id}','SeamlessUnitUploadColorController@cancel');
     Route::post('/seamless-unit-color/upload/{Id}','SeamlessUnitUploadColorController@upload');
-    
+    Route::get('/seamless-unit-color/download/','SeamlessUnitUploadColorController@download');
 
     Route::get('/seamless-product','SeamlessProductController@index');
     Route::get('/seamless-product/show','SeamlessProductController@show');
+    Route::post('/seamless-product/delete/{CD_PRODUCT}','SeamlessProductController@delete');
+    
 
     Route::get('/seamless-product-detail/{Id}','SeamlessProductDetailController@index');
+
+    Route::get('/seamless-product-detail-update/{Id}','SeamlessProductDetailUpdateController@index');
+    Route::post('/seamless-product-detail-update/update','SeamlessProductDetailUpdateController@update');
 
     Route::get('/seamless-product-picture/{CD_PRODUCT}','SeamlessProductUploadPictureController@index');
     Route::post('/seamless-product-picture/update','SeamlessProductUploadPictureController@update');
 
+    Route::get('/seamless-banner','SeamlessBannerController@index');
+    // Route::post('/seamless-banner/delete/{ID}','SeamlessBannerController@delete');
+    Route::get('/seamless-banner/{ID}/delete', array('before' => 'auth', 'as' => 'seamless-banner.delete', 'uses' => 'SeamlessBannerController@delete'));
+
+    Route::get('/seamless-banner-update/{Id}','SeamlessBannerUpdateController@index');
+    Route::post('/seamless-banner-update/update','SeamlessBannerUpdateController@update');
  //   Route::post('/acccash-apply/changestatus/{Guid}','AccCashApplyController@changestatus');
 
     Route::get('/invalid-permission','InvalidPermissionController@index');

@@ -291,28 +291,44 @@
                   </div>
                   <div id="collapseFour" class="panel-collapse collapse">
                     <div class="box-body">
-                      <table style="width:50%">
+                    <div class="row">
                         
-                        <tr>
-                            <th>Kode Area</th>
-                            <td> <span>@if( !empty($SeamlessUnitOtrs[0]->CD_AREA))
-                                {{$SeamlessUnitOtrs[0]->CD_AREA}} 
-                                @else
-                                tidak ditemukan
-                                @endif
-                            </span></td>
-                          
-                        </tr>
-                        <tr>
-                            <th>OTR</th>
-                            <td><span> @if( !empty($SeamlessUnitOtrs[0]->OTR))
-                                {{$SeamlessUnitOtrs[0]->OTR}} 
-                                @else
-                                tidak ditemukan
-                                @endif
-                            </span></td>
-                        </tr>
-                      </table>
+                        <div class="col-sm-7">
+                            <input type="text" placeholder="Search by Kode Area, OTR" class="InputSearch1 form-control">
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="col-sm-4">
+                                <a href="#" class="ButtonSearch1 btn btn-block btn-info">Search</a>    
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="#" class="ResetSearch1 btn btn-block btn-info">Reset</a>    
+                            </div>
+                            <div class="col-sm-4">
+                              <a href="{{asset('/seamless-unit-detail/upload-page/'.$unitid)}}" class="btn btn-block btn-primary">Upload</a>
+                            </div>
+                        </div>
+                    </div><br>
+
+                    <table id="example3" class="table table-bordered display nowrap" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Kode Area</th>
+                        <th>OTR</th>   
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                        @foreach ($SeamlessUnitOtrs as $SeamlessUnitOtr)
+                        <tr>  
+                            <td><span>{{$SeamlessUnitOtr->CD_AREA}}</span></td>
+                            <td><span>{{$SeamlessUnitOtr->OTR}}</span></td>
+                                        
+                            
+                        </tr>                              
+                        @endforeach       
+                    </tbody>
+                    </table>
                       <br/>
                       <br/>
                       <div class="col-sm-2">

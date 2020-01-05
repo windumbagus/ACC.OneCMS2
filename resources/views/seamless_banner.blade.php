@@ -1,17 +1,17 @@
 @extends('admin.admin') 
 
 @section('seamless', 'active')
-@section('seamless-product', 'active')
+@section('seamless-banner', 'active')
 
 @section('content')
 
-<!-- TableSeamlessProduct -->
+<!-- TableSeamlessBanner -->
 <div class="box box-primary">
     <div class="box-header with-border">
         
         <div class="row">
             <div class="col-sm-8">
-                <h3 class="box-title">Product</h3>
+                <h3 class="box-title">Banner</h3>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
@@ -19,7 +19,7 @@
                         <a href="#" class="add-seamless-Product btn btn-block btn-primary">Create New</a> -->
                 </div>
                 <!-- <div class="col-sm-6">
-                        <a href="{{asset('/acccash-apply/download')}}" class="btn btn-block btn-primary">Download</a>
+                        
                 </div> -->
             </div>
         </div>
@@ -44,27 +44,44 @@
         <table id="example2" class="table table-bordered display nowrap" style="width:100%">
         <thead>
         <tr>
-            <th>Kode Produk</th>
-            <th>Deskripsi</th>
+            <th>Nama</th>
+            <th>Kode Promo</th>
+            <th>Is Active Promo</th>
             <th>Start Date</th>
             <th>End Date</th>
-            <th>Action</th>      
-            
+            <th>Promo Type</th>
+            <th>Promo Ammount</th>
+            <th>Product Owner</th>
+            <th>Jenis Promo</th>
+            <th>Periode Promo</th>
+            <th>Is Active Banner</th>
+            <th>Picture</th>
+            <th>Action</th>
+
             
         </tr>
         </thead>
         <tbody>
         
-            @foreach ($SeamlessProducts as $SeamlessProduct)
+            @foreach ($SeamlessBanners as $SeamlessBanner)
             <tr>  
-                <td><span>{{$SeamlessProduct->CD_PRODUCT}}</span></td>
-                <td><span>{{$SeamlessProduct->DESC_PRODUCT}}</span></td>
-                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessProduct->DT_START))}}</span></td>
-                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessProduct->DT_END))}}</span></td>
+                <td><span>{{$SeamlessBanner->NAME}}</span></td>
+                <td><span>{{$SeamlessBanner->PROMO_CODE}}</span></td>
+                <td><span>{{$SeamlessBanner->IS_ACTIVE_PROMO}}</span></td>
+                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessBanner->START_DATE))}}</span></td>
+                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessBanner->END_DATE))}}</span></td>
+                <td><span>{{$SeamlessBanner->PROMO_TYPE}}</span></td>
+                <td><span>{{$SeamlessBanner->PROMO_AMOUNT}}</span></td>
+                <td><span>{{$SeamlessBanner->PRODUCT_OWNER}}</span></td>
+                <td><span>{{$SeamlessBanner->JENIS_PROMO}}</span></td>
+                <td><span>{{$SeamlessBanner->PERIODE_PROMO}}</span></td>
+                <td><span>{{$SeamlessBanner->IS_ACTIVE_BANNER}}</span></td>
+                <td><span><img class="myImg" style="width: 30%; height: 30%;" alt="" src="{{$SeamlessBanner->URL_FILE}}" /></span></td>
+
                 <td><span>
-                <a href="{{ asset('seamless-product-detail/'.$SeamlessProduct->CD_PRODUCT) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> 
-                
-                <a href="{{asset('/seamless-product/delete/'.$SeamlessProduct->CD_PRODUCT)}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')"><i class="fa fa-trash"></i></a>
+                <a href="{{asset('/seamless-banner-update/'.$SeamlessBanner->ID)}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> 
+                <!-- <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this ?')"><i class="fa fa-trash"></i></button> -->
+                <a href="{{ route('seamless-banner.delete',array($SeamlessBanner->ID))}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure want to delete this ?')"><i class="fa fa-trash-o"></i></a>
                 </span></td>
                 
             
@@ -93,11 +110,21 @@
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                {"searchable":false},
                 {"searchable":false},
                 
             ]
       })
 
+
+   
         //Button Search
         $('.ButtonSearch').on('click', function(){
             var searchData = $('.InputSearch').val()
@@ -113,39 +140,9 @@
         })
 
       
-  // //VIEW
-     $(document).on('click','.view-seamless-product',function(){
-            var id = $(this).attr('data-id');
-            console.log(id);
-            $.ajax({
-                url:"{{asset('/seamless-product/show')}}",
-                data: {'Id':id ,'_token':'{{csrf_token()}}' },
-                dataType:'JSON', 
-                type:'GET',
-                success: function (val){
-                    console.log(val);
-                    
-                    $('[name="ID_UNIT"]').val(val.OUT_DATA[0].ID_UNIT);
-                    $('[name="CATEGORY"]').val(val.OUT_DATA[0].CATEGORY);
-                    $('[name="CHAR_VALUE"]').val(val.OUT_DATA[0].CHAR_VALUE);
-                    $('[name="CHAR_DESC"]').val(val.OUT_DATA[0].CHAR_DESC);
-                    $('[name="DT_ADDED"]').val(val.OUT_DATA[0].DT_ADDED);
-                    $('[name="ID_USER_ADDED"]').val(val.OUT_DATA[0].ID_USER_ADDED);
-                    $('[name="DT_UPDATED"]').val(val.OUT_DATA[0].DT_UPDATED);
-                    $('[name="ID_USER_UPDATED"]').val(val.OUT_DATA[0].ID_USER_UPDATED);
-                  
-                },
-                error: function( jqXhr, textStatus, errorThrown ){
-                console.log(jqXhr);
-                console.log( errorThrown );
-                console.log(textStatus);
-                },
-            });
-            $('#view-seamless-product-detail-popup').modal();
-        });
+
         
     })
   </script>
 
-@include('modal.view_seamless_product_detail')
 @endsection

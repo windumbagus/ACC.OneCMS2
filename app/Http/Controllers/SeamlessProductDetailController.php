@@ -23,6 +23,14 @@ class SeamlessProductDetailController extends Controller
            // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
 
+        $data = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"GET_PRODUCT",
+                "P_SEARCH"=>$request->Id,
+                "P_LANGUAGE"=>"IN"
+            ),
+        ));
+
         $data_detail = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_PRODUCT_DETAIL",
@@ -50,6 +58,17 @@ class SeamlessProductDetailController extends Controller
         
         //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionaggr";
         //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result); 
+
         $ch_detail = curl_init($url);                   
         curl_setopt($ch_detail, CURLOPT_POST, true);                                  
         curl_setopt($ch_detail, CURLOPT_POSTFIELDS, $data_detail);
@@ -78,6 +97,7 @@ class SeamlessProductDetailController extends Controller
             return view(
                 'seamless_product_detail',[
                    // 'Role' => $Hasils->Role,
+                    'SeamlessProducts'=>$Hasils->OUT_DATA,
                     'SeamlessProductDetails'=>$Hasils_detail->OUT_DATA,
                     'SeamlessProductPicts'=>$Hasils_pict->OUT_DATA,
 

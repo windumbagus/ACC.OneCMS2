@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AccCashApplyExport;
 
-class SeamlessProductController extends Controller
+class SeamlessBannerController extends Controller
 {
   
 
@@ -25,8 +25,7 @@ class SeamlessProductController extends Controller
 
         $data = json_encode(array(
             "doSendDataCMS" => array(   
-                "TRANSACTION_CODE"=>"GET_PRODUCT",
-                "P_SEARCH"=>"",
+                "TRANSACTION_CODE"=>"GET_BANNER_CMS",
                 "P_LANGUAGE"=>"IN",
             ),
         ));
@@ -52,9 +51,9 @@ class SeamlessProductController extends Controller
           
             // dd($Hasils);
             return view(
-                'seamless_product',[
+                'seamless_banner',[
                    // 'Role' => $Hasils->Role,
-                    'SeamlessProducts'=>$Hasils->OUT_DATA,
+                    'SeamlessBanners'=>$Hasils->OUT_DATA,
                    // 'Roles'=>$Hasils2->Roles,
                   //  'UserCategories'=>$Hasils2->UserCategory, 
                     'session' => $session
@@ -63,24 +62,24 @@ class SeamlessProductController extends Controller
     }
 
 
-    
-    public function delete(Request $request)
+   
+
+    public function delete($id)
     {
 
        
         $data = json_encode(array(
             "doSendDataCMS" => array(   
-                "TRANSACTION_CODE"=>"DELETE_PRODUCT_CMS",
+                "TRANSACTION_CODE"=>"DELETE_BANNER_CMS",
                 "P_LANGUAGE"=>"IN",
-                "P_CD_PRODUCT"=>$request->CD_PRODUCT,
-                "P_FLAG_PROMOTED"=>"N",
-                "P_USERNAME"=>"ADMIN",
+                "P_ID"=>$id,
+                "P_IS_ACTIVE_BANNER"=>"N",
             ),
         ));
-        //dd($data);
+        // dd($data);
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
-        $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
         // $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
@@ -97,9 +96,9 @@ class SeamlessProductController extends Controller
       
         //dd($Hasils);
         if ($Hasils->OUT_STAT == "T"){
-            return redirect("seamless-product")->with('success','Banner berhasil terhapus');
+            return redirect("seamless-banner")->with('success','Banner berhasil terhapus');
         }else{
-            return redirect("seamless-product")->with('error',$Hasils->OUT_MESS);
+            return redirect("seamless-banner")->with('error',$Hasils->OUT_MESS);
         }
        
     }

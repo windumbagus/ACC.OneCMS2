@@ -1,7 +1,7 @@
 @extends('admin.admin') 
 
 @section('seamless', 'active')
-@section('seamless-unit-detail', 'active')
+@section('seamless-product', 'active')
 
 @section('content')
 
@@ -104,15 +104,96 @@
             <div class="box-body">
               <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                <div class="panel box box-primary">
+                <div class="panel box box-warning">
                   <div class="box-header with-border">
                     <h4 class="box-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        Picture
+                        Detail
                       </a>
                     </h4>
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                        
+                        <table style="width:100%">
+                        
+                        <tr>
+                            <th>Product Code</th>
+                            <td> <span>@if( !empty($SeamlessProducts[0]->CD_PRODUCT))
+                                {{$SeamlessProducts[0]->CD_PRODUCT}} 
+                                @else
+                                -
+                                @endif
+                            </span></td>
+                         
+                        </tr>
+                        <tr>
+                            <th>Product Name</th>
+                            <td> <span>@if( !empty($SeamlessProducts[0]->DESC_PRODUCT))
+                                {{$SeamlessProducts[0]->DESC_PRODUCT}} 
+                                @else
+                                -
+                                @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Start Date</th>
+                            <td><span> @if( !empty($SeamlessProducts[0]->DT_START))
+                                {{$SeamlessProducts[0]->DT_START}} 
+                                @else
+                                -
+                                @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>End Date</th>
+                            <td><span> @if( !empty($SeamlessProducts[0]->DT_END))
+                                {{$SeamlessProducts[0]->DT_END}} 
+                                @else
+                                -
+                                @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Is Active</th>
+                            <td><span> @if( !empty($SeamlessProducts[0]->FLAG_ACTIVE))
+                                {{$SeamlessProducts[0]->FLAG_ACTIVE}} 
+                                @else
+                                -
+                                @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Is Promoted</th>
+                            <td><span> @if( !empty($SeamlessProducts[0]->FLAG_PROMOTED))
+                                {{$SeamlessProducts[0]->FLAG_PROMOTED}} 
+                                @else
+                                -
+                                @endif
+                            </span></td>
+                        </tr>
+                        </table>
+                        <div id="myModal" class="modal">
+														<span class="close">&times;</span>
+														<img class="modal-content" id="img01">
+														<div id="caption"></div>
+													</div>
+                        <br/><br/>
+                        <div class="col-sm-2">
+                                <a href="{{asset('/seamless-product-detail-update/'.$SeamlessProducts[0]->CD_PRODUCT)}}" class="btn btn-block btn-primary">Update</a>         
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        Picture
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="box-body">
                         
                         <table style="width:100%">
@@ -171,12 +252,12 @@
                 <div class="panel box box-danger">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        Detail
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        Unit List
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
+                  <div id="collapseThree" class="panel-collapse collapse">
                   <div class="box-body">
                         <div class="row">
                         
