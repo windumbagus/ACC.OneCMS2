@@ -93,7 +93,17 @@ class ACCCashApplyDetailController extends Controller
 
     public function changestatus(Request $request)
     {
-        //  @dd($request->EMAIL);
+
+        // $data_mail = [
+        //     'EMAIL' => $request->EMAIL,
+        //     'DISBURSEMENT' => $request->DISBURSEMENT,
+        //     'NO_AGGR'=>$request->NO_AGGR
+        // ];
+        // // dd($data_mail);
+        // \Mail::to('atosna70@gmail.com')->send(new \App\Mail\MailAccCashApproved($data_mail));
+
+
+        //   @dd($request->EMAIL);
         $statusnotif = "";
         if($request->STATUS == "REJECT ALL")
         {
@@ -259,6 +269,11 @@ class ACCCashApplyDetailController extends Controller
                         "P_CD_BANK_BR"=>$HasilscashtoLeads->OUT_DATA[0]->CD_BANK_BR,
                         "P_NO_REKENING"=>$HasilscashtoLeads->OUT_DATA[0]->NO_REKENING,
                         "P_NAMA_REKENING"=>$HasilscashtoLeads->OUT_DATA[0]->NAMA_REKENING,
+                        "P_RESERVE1"=> $HasilscashtoLeads->OUT_DATA[0]->AMT_CASH_PENCAIRAN,
+                        "P_RESERVE2"=> $HasilscashtoLeads->OUT_DATA[0]->AMT_CASH_INT,
+                        "P_RESERVE3"=> $HasilscashtoLeads->OUT_DATA[0]->TENOR_CASH,
+                        "P_RESERVE4"=> $HasilscashtoLeads->OUT_DATA[0]->TUJUAN_DANA,
+                        "P_RESERVE5"=> $HasilscashtoLeads->OUT_DATA[0]->BARANG_JASA,
                         "P_CD_CHANNEL"=>"",
                         "P_CD_SPK"=>"",
                     ),
@@ -327,6 +342,11 @@ class ACCCashApplyDetailController extends Controller
                     "P_CD_BANK_BR"=>$HasilscashtoLeads->OUT_DATA[0]->CD_BANK_BR,
                     "P_NO_REKENING"=>$HasilscashtoLeads->OUT_DATA[0]->NO_REKENING,
                     "P_NAMA_REKENING"=>$HasilscashtoLeads->OUT_DATA[0]->NAMA_REKENING,
+                    "P_RESERVE1"=> $HasilscashtoLeads->OUT_DATA[0]->AMT_CASH_PENCAIRAN,
+                    "P_RESERVE2"=> $HasilscashtoLeads->OUT_DATA[0]->AMT_CASH_INT,
+                    "P_RESERVE3"=> $HasilscashtoLeads->OUT_DATA[0]->TENOR_CASH,
+                    "P_RESERVE4"=> $HasilscashtoLeads->OUT_DATA[0]->TUJUAN_DANA,
+                    "P_RESERVE5"=> $HasilscashtoLeads->OUT_DATA[0]->BARANG_JASA,
                     "P_CD_CHANNEL"=>"",
                     "P_CD_SPK"=>"",
                 ),
@@ -355,7 +375,7 @@ class ACCCashApplyDetailController extends Controller
                     'NO_AGGR'=>$request->NO_AGGR
                 ];
                 // dd($data_mail);
-                \Mail::to('windumbagus@gmail.com')->send(new \App\Mail\MailAccCashApproved($data_mail));
+                \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashApproved($data_mail));
             }
             
             $directstatus = "APPROVED";

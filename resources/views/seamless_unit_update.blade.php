@@ -1,7 +1,7 @@
 @extends('admin.admin') 
 
 @section('seamless', 'active')
-@section('seamless-banner', 'active')
+@section('seamless-unit', 'active')
 
 @section('content')
 

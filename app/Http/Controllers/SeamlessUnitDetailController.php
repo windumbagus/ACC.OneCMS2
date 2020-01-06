@@ -27,7 +27,7 @@ class SeamlessUnitDetailController extends Controller
         $data_detail = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_UNIT_CMS_DETAIL",
-                "P_GUID"=>$request->Id,
+                "P_ID"=>$request->Id,
                 "P_LANGUAGE"=>"IN",
             ),
         ));

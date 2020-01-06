@@ -257,7 +257,8 @@
                             <th>Date Added</th>
                             <th>Id User Added</th>
                             <th>Date Updated</th>
-                            <th>Id User Updated</th>     
+                            <th>Id User Updated</th>
+                            <th>Action</th>
                             
                         </tr>
                         </thead>
@@ -272,8 +273,9 @@
                                 <td><span>{{$SeamlessUnitDetail->ID_USER_ADDED}}</span></td>
                                 <td><span>{{date('d M Y H:i:s', strtotime($SeamlessUnitDetail->DT_UPDATED))}}</span></td>
                                 <td><span>{{$SeamlessUnitDetail->ID_USER_UPDATED}}</span></td>
-                                            
-                                
+                                <td><span>
+                                <a href="{{ asset('/seamless-unit-detail-update/'.$SeamlessUnitDetail->ID_UNIT.'&'.$SeamlessUnitDetail->GUID) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>            
+                                </span></td>
                             </tr>                              
                             @endforeach       
                         </tbody>
@@ -398,6 +400,7 @@
                 null,
                 null,                
                 null,
+                {"searchable":false},
                
                 
             ]
