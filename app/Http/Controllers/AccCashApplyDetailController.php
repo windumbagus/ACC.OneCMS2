@@ -345,6 +345,18 @@ class ACCCashApplyDetailController extends Controller
             curl_close($chLeads);
             $HasilsLeads= json_decode($resultLeads); 
             //   dd($HasilsLeads);
+
+            // Mail Send
+            if($HasilsLeads->OUT_STAT == "T"){
+
+                $data_mail = [
+                    'EMAIL' => $request->EMAIL,
+                    'DISBURSEMENT' => $request->DISBURSEMENT,
+                    'NO_AGGR'=>$request->NO_AGGR
+                ];
+                // dd($data_mail);
+                \Mail::to('windumbagus@gmail.com')->send(new \App\Mail\MailAccCashApproved($data_mail));
+            }
             
             $directstatus = "APPROVED";
         }
