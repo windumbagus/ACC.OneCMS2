@@ -26,10 +26,11 @@ class SeamlessUnitUpdateController extends Controller
         $data = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_UNIT_CMS",
-                "P_ID"=>$request->Id,
+                "P_INPUT"=>$request->GUID,
                 "P_LANGUAGE"=>"IN",
             ),
         ));
+        // dd($request->GUID);
 
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
@@ -50,7 +51,7 @@ class SeamlessUnitUpdateController extends Controller
         curl_close($ch);
         $Hasils= json_decode($result); 
           
-            //   dd($Hasils->OUT_DATA[0]);
+            //    dd($Hasils->OUT_DATA[0]);
             return view(
                 'seamless_unit_update',[
                    // 'Role' => $Hasils->Role,
