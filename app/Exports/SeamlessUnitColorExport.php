@@ -25,7 +25,6 @@ class SeamlessUnitColorExport implements FromArray, WithHeadings
         return [
             "CD_COLOR",
             "DESC_COLOR",
-            "ID_FILE",
             "ID_USER_ADDED",
             "ID_USER_UPDATED",
             "FLAG_PRIMARY",

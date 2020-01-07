@@ -13,7 +13,7 @@
         <form id="form-upload-seamless-unit-color" action="{{asset('/seamless-unit-color/upload/'.$unitid)}}" method="post" enctype="multipart/form-data"> 
             @csrf
                
-            Structure : CD_COLOR, DESC_COLOR, ID_FILE, ID_USER_ADDED, ID_USER_UPDATED, FLAG PRIMARY<br>
+            Structure : CD_COLOR, DESC_COLOR, ID_USER_ADDED, ID_USER_UPDATED, FLAG PRIMARY<br>
             <br/><br/>
             Format &nbsp;&nbsp;&nbsp;: .xlsx file, no double-quotes for text
             <div class="row">
@@ -44,7 +44,6 @@
                     <th>ID_UNIT</th>
                     <th>CD_COLOR</th>
                     <th>DESC_COLOR</th>
-                    <th>ID_FILE</th>
                     <th>ID_USER_ADDED</th>
                     <th>ID_USER_UPDATED</th>
                     <th>FLAG_PRIMARY</th>
@@ -129,7 +128,6 @@
                         e.ID_UNIT,
                         e.CD_COLOR,
                         e.DESC_COLOR,
-                        e.ID_FILE,
                         e.ID_USER_ADDED,
                         e.ID_USER_UPDATED,
                         e.FLAG_PRIMARY,

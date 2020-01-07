@@ -42,11 +42,11 @@ class SeamlessUnitUploadColorController extends Controller
         //dd($x);
         $data = json_encode(array(
             "doSendDataCMS" => array(   
-                "TRANSACTION_CODE"=>"INSERT_DATA_UNIT_COLOR_PICT",
-                "DataUnitColorPict"=>json_decode($x),
+                "TRANSACTION_CODE"=>"INSERT_DATA_COLOR_PICT",
+                "DataColorPict"=>json_decode($x),
             ),
         ));
-       
+    //    dd($data);
 
         $url = config('global.base_url_sofia')."/restV2/seamless/accone/datacms"; 
         $ch = curl_init($url);                   
@@ -77,7 +77,6 @@ class SeamlessUnitUploadColorController extends Controller
              array_push($data,[
                  "CD_COLOR"=>"",
                  "DESC_COLOR"=>"",
-                 "ID_FILE"=>"",
                  "ID_USER_ADDED"=>"ADMIN",
                  "ID_USER_UPDATED"=>"ADMIN",
                  "FLAG_PRIMARY"=>"Y",

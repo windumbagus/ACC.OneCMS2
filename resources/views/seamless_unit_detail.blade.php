@@ -306,7 +306,7 @@
                                 <a href="#" class="ResetSearch1 btn btn-block btn-info">Reset</a>    
                             </div>
                             <div class="col-sm-4">
-                              <a href="{{asset('/seamless-unit-detail/upload-page/'.$unitid)}}" class="btn btn-block btn-primary">Upload</a>
+                            <a href="{{asset('/seamless-unit-otr/upload-page/'.$unitid)}}" class="btn btn-block btn-primary">Upload</a>
                             </div>
                         </div>
                     </div><br>
@@ -334,7 +334,7 @@
                       <br/>
                       <br/>
                       <div class="col-sm-2">
-                            <a href="{{asset('/seamless-unit-otr/upload-page/'.$unitid)}}" class="btn btn-block btn-primary">Upload</a>
+                            
                       </div>
                     </div>
                   </div>

@@ -18,16 +18,11 @@ class SeamlessUnitUploadOtrController extends Controller
         ]);
         //API GET
         
-        // dd($Hasils);
-        
         return view('modal/upload_seamless_unit_otr',[
             'unitid'=>$request->Id,
-            'brand'=>$request->Brand,
-            'type'=>$request->Type,
-            'model'=>$request->Model,
-            'tahun'=>$request->Tahun,
             'session' => $session
             ]);    
+   
     }
 
     public function upload(Request $request)
@@ -73,7 +68,7 @@ class SeamlessUnitUploadOtrController extends Controller
     public function cancel(Request $request)
     {
          
-        return redirect('/seamless-unit-detail/'.$request->Id.'&'.$request->Brand.'&'.$request->Type.'&'.$request->Model.'&'.$request->Tahun);
+        return redirect('/seamless-unit-detail/'.$request->Id);
 
     }
 
