@@ -21,7 +21,7 @@
 	<tr style="height: 14px;">
 	<td style="width: 190px; height: 14px;">Nama Pelanggan</td>
 	<td style="width: 9px; height: 14px;">:</td>
-	<td style="width: 250px; height: 14px;">{{$AccCashApplys[0]->ID_USER}}</td>
+	<td style="width: 250px; height: 14px;">{{$AccCashApplys[0]->NAME}}</td>
 	</tr>
 	<tr style="height: 14px;">
 	<td style="width: 190px; height: 14px;">Tanggal</td>

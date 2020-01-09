@@ -260,6 +260,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/seamless-unit','SeamlessUnitController@index');
     Route::get('/seamless-unit/show','SeamlessUnitController@show');
+    Route::get('/seamless-unit/{ID}/delete', array('before' => 'auth', 'as' => 'seamless-unit.delete', 'uses' => 'SeamlessUnitController@delete'));
 
     Route::get('/seamless-unit-update/{GUID}','SeamlessUnitUpdateController@index');
     Route::post('/seamless-unit-update/update','SeamlessUnitUpdateController@update');
@@ -307,6 +308,9 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-banner','SeamlessBannerController@index');
     // Route::post('/seamless-banner/delete/{ID}','SeamlessBannerController@delete');
     Route::get('/seamless-banner/{ID}/delete', array('before' => 'auth', 'as' => 'seamless-banner.delete', 'uses' => 'SeamlessBannerController@delete'));
+
+    Route::get('/seamless-banner-create','SeamlessBannerCreateController@index');
+    Route::post('/seamless-banner-create/create','SeamlessBannerCreateController@create');
 
     Route::get('/seamless-banner-update/{Id}','SeamlessBannerUpdateController@index');
     Route::post('/seamless-banner-update/update','SeamlessBannerUpdateController@update');

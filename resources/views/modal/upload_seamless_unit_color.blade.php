@@ -88,7 +88,6 @@
                 null,
                 null,
                 null,
-                null,
                 
             ]
         })
@@ -140,5 +139,9 @@
             reader.readAsBinaryString(selectedFile);
         });
     });
+
+/*
+8 Jan 2020 : Fixing preview excel 
+*/
 </Script>
 @endsection

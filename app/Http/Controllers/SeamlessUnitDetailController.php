@@ -74,8 +74,10 @@ class SeamlessUnitDetailController extends Controller
         $err_detail = curl_error($ch_detail);
         curl_close($ch_detail);
         $Hasils_detail= json_decode($result_detail); 
-            //   dd($Hasils_detail);
+            //    dd($Hasils_detail->OUT_DATA);
             //   dd($data_detail);
+
+
 
         $ch_color = curl_init($url);                   
         curl_setopt($ch_color, CURLOPT_POST, true);                                  
@@ -124,13 +126,15 @@ class SeamlessUnitDetailController extends Controller
         //     $Areaforsim = $Hasils_otr->OUT_DATA;
         // }
 
+        // dd($Hasils_sim->OUT_STAT);
+
             return view(
                 'seamless_unit_detail',[
                    // 'Role' => $Hasils->Role,
                     'SeamlessUnitDetails'=>$Hasils_detail->OUT_DATA,
                     'SeamlessUnitColors'=>$Hasils_color->OUT_DATA,
-                    'SeamlessUnitOtrs'=>$Hasils_otr->OUT_DATA,
-                    'SeamlessUnitSims'=>$Hasils_sim->OUT_DATA,
+                    'SeamlessUnitOtrs'=>$Hasils_otr,
+                    'SeamlessUnitSims'=>$Hasils_sim,
                     'unitid'=>$request->Id,
 
                    // 'Roles'=>$Hasils2->Roles,
@@ -183,13 +187,14 @@ class SeamlessUnitDetailController extends Controller
                 "TRANSACTION_CODE"=>"GEN_SIMULATION_CMS",
                 "P_ID_UNIT"=>$request->Id,
                 "P_CD_AREA"=>$request->Area,
+                // "P_CD_AREA"=>"001",
                 "P_LANGUAGE"=>"IN",
             ),
         ));
-        
+        //dd($datasimulasi);
          //API GET
          $urlsimulasi = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
-         //dd($data);
+        //  dd($datasimulasi);
          // dd($url);
        
         $chsimulasi = curl_init($urlsimulasi);                   
@@ -202,7 +207,7 @@ class SeamlessUnitDetailController extends Controller
          $errsimulasi = curl_error($chsimulasi);
          curl_close($chsimulasi);
          $valsimulasi= json_decode($resultsimulasi);
-         // dd($val);
+        //   dd($valsimulasi);
          //dd($err);
          return redirect("seamless-unit-detail/".$request->Id)->with('success','Berhasil Menghitung Simulasi');
     }
@@ -308,3 +313,6 @@ class SeamlessUnitDetailController extends Controller
 
 
 }
+/* 8 Jan 2020 : Fixing Hitung Simulasi
+
+*/

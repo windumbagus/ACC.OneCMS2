@@ -150,6 +150,12 @@
 													</div>
 												</div>
 												<div class="form-group">
+													<label class="col-sm-3 control-label">Nama</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="NAME" value="{{$AccCashApplys[0]->NAME}}"readonly>
+													</div>
+												</div>
+												<div class="form-group">
 													<label class="col-sm-3 control-label">Email</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="EMAIL" value="{{$AccCashApplys[0]->ID_USER}}"readonly>

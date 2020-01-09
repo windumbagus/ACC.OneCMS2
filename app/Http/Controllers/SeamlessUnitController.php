@@ -35,11 +35,13 @@ class SeamlessUnitController extends Controller
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         //  $url = $this->base_url_sofia.'/restV2/acccash/getdata/transactionapply';
+        // $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
         $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
         // $url = $this->base_url+"restV2/acccash/getdata/transactionapply"; 
         
         //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionaggr";
         //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
+        // dd($url);
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -63,6 +65,44 @@ class SeamlessUnitController extends Controller
 
     }
 
+    public function delete($id)
+    {
+
+       
+        $data = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"DELETE_UNIT_CMS",
+                "P_LANGUAGE"=>"IN",
+                "P_GUID"=>$id,
+                "P_FLAG_ACTIVE"=>"N",
+            ),
+        ));
+        // dd($data);
+         //API GET
+        //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+        // $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result); 
+          dd($Hasils);
+
+      
+        //dd($Hasils);
+        // if ($Hasils->OUT_STAT == "T"){
+            return redirect("seamless-unit")->with('success','Unit berhasil terhapus');
+        // }else{
+            // return redirect("seamless-unit")->with('error',$Hasils->OUT_MESS);
+        // }
+       
+    }
 
 
     public function show(Request $request)

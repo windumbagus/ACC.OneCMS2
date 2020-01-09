@@ -79,6 +79,7 @@
                 <td><span> 
                 <a href="{{ asset('/seamless-unit-detail/'.$SeamlessUnit->GUID) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                 <a href="{{ asset('/seamless-unit-update/'.$SeamlessUnit->GUID) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> 
+                <a href="{{ route('seamless-unit.delete',array($SeamlessUnit->GUID))}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure want to delete this ?')"><i class="fa fa-trash-o"></i></a>
                 </span></td>
                 
                 

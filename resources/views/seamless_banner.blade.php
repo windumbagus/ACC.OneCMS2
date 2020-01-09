@@ -15,6 +15,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
+                <a href="{{asset('/seamless-banner-create')}}" class="btn btn-block btn-primary">Create New</a>
 <!-- 
                         <a href="#" class="add-seamless-Product btn btn-block btn-primary">Create New</a> -->
                 </div>

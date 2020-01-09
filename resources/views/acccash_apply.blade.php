@@ -48,6 +48,7 @@
             <th>Waktu Pengajuan</th>
             <th style="display:none">Waktu for sort</th>
             <th>Email</th>
+            <th>Nama</th>
             <th>No HP</th>
             <th>No Kontrak Induk</th>
             <th>Nominal</th>
@@ -66,6 +67,7 @@
                 <td style="display:none"><span>{{$ACCCashApply->DT_ADDED}}</span></td>  
                 <td><span>{{date('d M Y H:i:s', strtotime($ACCCashApply->DT_ADDED))}}</span></td>
                 <td><span>{{$ACCCashApply->ID_USER}}</span></td>
+                <td><span>{{$ACCCashApply->NAME}}</span></td>
                 <td><span>{{$ACCCashApply->PHONE_MOBILE1}}</span></td>
                 <td><span>{{$ACCCashApply->NO_AGGR}}</span></td>          
                 <td><span>{{number_format($ACCCashApply->DISBURSEMENT, 0, ',', '.')}}</span></td>
@@ -128,6 +130,7 @@
           'scrollX': true,
           sDom: 'lrtip', 
           "columns": [
+                null,
                 null,
                 null,
                 null,

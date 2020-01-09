@@ -139,7 +139,7 @@
 									<div class="form-group" style="display:none;">
 										<label class="col-sm-3 control-label">Flag Active</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" name="FLAG_ACTIVE" id="FLAG_ACTIVE" value="{{$SeamlessUnitUpdates->FLAG_ACTIVE}}">
+											<input type="text" class="form-control" name="FLAG_ACTIVE" id="FLAG_ACTIVE" value="{{$SeamlessUnitUpdates->FLAG_ACTIVE}}" readonly>
 										</div>
 									</div>
 									

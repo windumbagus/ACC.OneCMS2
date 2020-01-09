@@ -33,7 +33,7 @@ class ACCCashApplyDetailController extends Controller
                
             ),
         ));
-        
+        //dd($request->session()->get('Name'));        
          //API GET
          $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
         //  dd($data);
@@ -180,11 +180,12 @@ class ACCCashApplyDetailController extends Controller
                 "TRANSACTION_CODE"=>"UPD_APPLY",
                 // "P_STATUS"=>$request->STATUS,
                // "P_REASON"=>$request->REASON,
+               "P_ID_USER"=>$request->session()->get('Name'),
                 "P_STATUS"=>$statuschange,
                 "P_REASON"=>$reasonchange,
             ),
         ));
-        //dd($data);
+        // dd($data);
 
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
@@ -486,7 +487,7 @@ class ACCCashApplyDetailController extends Controller
                                 'Statusapply'=>$request->Statusapply,
                                 // 'session' => $session
                             ]);
-    	return $pdf->download('AccCash-Apply-Detail-GUID-'.$request->GUID);
+    	return $pdf->download('AccCash-Apply-Detail-GUID-'.$request->GUID.'.pdf');
     }
 
 }

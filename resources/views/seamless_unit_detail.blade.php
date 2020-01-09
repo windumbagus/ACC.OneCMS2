@@ -119,37 +119,49 @@
                       <table style="width:50%">        
                             <tr>
                                 <th>Tenor</th>
-                                <td> <span>@if( !empty($SeamlessUnitSims[0]->tenor))
-                                    {{$SeamlessUnitSims[0]->tenor}} 
-                                    @else
+                                <td> <span>
+                                    @if($SeamlessUnitSims->OUT_STAT == "F")
                                     tidak ditemukan
+                                    @else
+                                    {{$SeamlessUnitSims->OUT_DATA[0]->tenor}} 
                                     @endif
                                 </span></td>
                             </tr>
                             <tr>
                                 <th>Amount Installment</th>
-                                <td><span> @if( !empty($SeamlessUnitSims[0]->amt_installment))
-                                    {{$SeamlessUnitSims[0]->amt_installment}} 
-                                    @else
+                                <td><span> 
+                                    @if($SeamlessUnitSims->OUT_STAT == "F")
                                     tidak ditemukan
+                                    @else
+                                    {{$SeamlessUnitSims->OUT_DATA[0]->amt_installment}} 
                                     @endif
                                 </span></td>
                             </tr>
                             <tr>
                                 <th>Total Pay First</th>
-                                <td><span> @if( !empty($SeamlessUnitSims[0]->tot_pay_first))
-                                    {{$SeamlessUnitSims[0]->tot_pay_first}} 
-                                    @else
+                                <td><span>
+                                    @if($SeamlessUnitSims->OUT_STAT == "F")
                                     tidak ditemukan
+                                    @else
+                                    {{$SeamlessUnitSims->OUT_DATA[0]->tot_pay_first}} 
                                     @endif
                                 </span></td>
                             </tr>
+
+
+                          
 
                           </table>
                           <br/>
                           <br/>
                           <div class="col-sm-2">
-                          <a href="{{asset('/seamless-unit-detail/hitungsimulasi/'.$unitid.'&'.$SeamlessUnitOtrs[0]->CD_AREA)}}" class="btn btn-block btn-primary">Hitung Simulasi</a>
+                          
+                          @if($SeamlessUnitOtrs->OUT_STAT == "F")
+                          <a href="#" class="btn btn-block btn-grey" onClick="alert('Isi OTR terlebih dahulu')">Hitung Simulasi</a>
+                          @else
+                          <a href="{{asset('/seamless-unit-detail/hitungsimulasi/'.$unitid.'&001')}}" class="btn btn-block btn-primary">Hitung Simulasi</a>
+                          
+                          @endif
                           </div>
                           
                     </div>
@@ -196,6 +208,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                       
                             @foreach ($SeamlessUnitColors as $SeamlessUnitColor)
                             <tr>  
                                 <td><span>{{$SeamlessUnitColor->CD_COLOR}}</span></td>
@@ -208,7 +221,7 @@
                                 </span>
                                 </td>
                             </tr>                              
-                            @endforeach       
+                            @endforeach
                         </tbody>
                         </table>
                         <!-- The Modal image-->
@@ -277,7 +290,8 @@
                                 <a href="{{ asset('/seamless-unit-detail-update/'.$SeamlessUnitDetail->ID_UNIT.'&'.$SeamlessUnitDetail->GUID) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>            
                                 </span></td>
                             </tr>                              
-                            @endforeach       
+                            @endforeach
+                        
                         </tbody>
                         </table>
                     </div>
@@ -321,14 +335,13 @@
                     </thead>
                     <tbody>
                     
-                        @foreach ($SeamlessUnitOtrs as $SeamlessUnitOtr)
+                        @foreach ($SeamlessUnitOtrs->OUT_DATA as $SeamlessUnitOtr)
                         <tr>  
                             <td><span>{{$SeamlessUnitOtr->CD_AREA}}</span></td>
                             <td><span>{{$SeamlessUnitOtr->OTR}}</span></td>
-                                        
-                            
                         </tr>                              
-                        @endforeach       
+                        @endforeach    
+                    
                     </tbody>
                     </table>
                       <br/>
@@ -484,6 +497,10 @@
 
         
     })
+
+/* 8 Jan 2020 : Fixing Hitung Simulasi
+
+*/
   </script>
 
 @include('modal.upload_seamless_unit_picture')
