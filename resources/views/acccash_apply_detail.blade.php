@@ -305,8 +305,8 @@
 														<select class="form-control select2" id="STATUS" name="STATUS" style="width:100%;">
 															<option value="PENDING" selected>PENDING</option>
 															<option value="APPROVED" >APPROVED</option>
-															<option value="REJECT ALL" >REJECT ALL</option>
-															<option value="REJECT PARTIAL" >REJECT PARTIAL</option>
+															<option value="REJECT ALL" >REJECT SEMUA</option>
+															<option value="REJECT PARTIAL" >REJECT SEBAGIAN</option>
 														</select>
 													</div>
 												</div>   
@@ -365,10 +365,23 @@
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Status</label>
-											
+													@if ($AccCashApplys[0]->STATUS == "REJECT-NOTAPPLY" || $AccCashApplys[0]->STATUS == "REJECT-UNCONTACTED" || $AccCashApplys[0]->STATUS == "REJECT-WRONGUNIT" || $AccCashApplys[0]->STATUS == "REJECT-UNIT")
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="STATUS" value="{{$AccCashApplys[0]->STATUS}}"readonly>
+														<input type="text" class="form-control" name="STATUS" value="REJECT SEMUA" readonly>
 													</div>
+													@elseif ($AccCashApplys[0]->STATUS == "PENDING-UNCONTACTED" || $AccCashApplys[0]->STATUS == "PENDING-NEXTTIME")
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="STATUS" value="REJECT SEBAGIAN" readonly>
+													</div>
+													@elseif ($AccCashApplys[0]->STATUS == "PENDING-UNCONTACTED" || $AccCashApplys[0]->STATUS == "PENDING-NEXTTIME")
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="STATUS" value="PENDING" readonly>
+													</div>
+													@else
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="STATUS" value="{{$AccCashApplys[0]->STATUS}}" readonly>
+													</div>
+													@endif
 												</div>   
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Reason</label>
@@ -438,9 +451,9 @@
 										<td><span>{{date('d M Y H:i:s', strtotime($AccCashApplyDetail->DT_ADDED))}}</span></td>  
                                         <td>
 										@if($AccCashApplyDetail->STATUS == "REJECT-NOTAPPLY" || $AccCashApplyDetail->STATUS == "REJECT-UNCONTACTED" || $AccCashApplyDetail->STATUS == "REJECT-WRONGUNIT" || $AccCashApplyDetail->STATUS == "REJECT-UNIT")
-											<span>REJECT ALL</span>
+											<span>REJECT SEMUA</span>
 										@elseif($AccCashApplyDetail->STATUS == "REJECT-DATA" || $AccCashApplyDetail->STATUS == "REJECT-PICT")
-											<span>REJECT PARTIAL</span>
+											<span>REJECT SEBAGIAN</span>
 										@elseif($AccCashApplyDetail->STATUS == "PENDING-UNCONTACTED" || $AccCashApplyDetail->STATUS == "PENDING-NEXTTIME")
 											<span>PENDING</span>
 										@else
