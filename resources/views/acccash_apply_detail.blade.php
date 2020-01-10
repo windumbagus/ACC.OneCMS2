@@ -451,9 +451,9 @@
 										<td><span>{{date('d M Y H:i:s', strtotime($AccCashApplyDetail->DT_ADDED))}}</span></td>  
                                         <td>
 										@if($AccCashApplyDetail->STATUS == "REJECT-NOTAPPLY" || $AccCashApplyDetail->STATUS == "REJECT-UNCONTACTED" || $AccCashApplyDetail->STATUS == "REJECT-WRONGUNIT" || $AccCashApplyDetail->STATUS == "REJECT-UNIT")
-											<span>REJECT ALL</span>
+											<span>REJECT SEMUA</span>
 										@elseif($AccCashApplyDetail->STATUS == "REJECT-DATA" || $AccCashApplyDetail->STATUS == "REJECT-PICT")
-											<span>REJECT PARTIAL</span>
+											<span>REJECT SEBAGIAN</span>
 										@elseif($AccCashApplyDetail->STATUS == "PENDING-UNCONTACTED" || $AccCashApplyDetail->STATUS == "PENDING-NEXTTIME")
 											<span>PENDING</span>
 										@else
