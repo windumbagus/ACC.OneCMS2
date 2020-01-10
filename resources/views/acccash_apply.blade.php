@@ -75,9 +75,9 @@
                 <td><span>{{$ACCCashApply->PENYEDIA}}</span></td>
                 <td>
                 @if($ACCCashApply->STATUS == "REJECT-NOTAPPLY" || $ACCCashApply->STATUS == "REJECT-UNCONTACTED" || $ACCCashApply->STATUS == "REJECT-WRONGUNIT" || $ACCCashApply->STATUS == "REJECT-UNIT")
-                    <span>REJECT ALL</span>
+                    <span>REJECT SEMUA</span>
                 @elseif($ACCCashApply->STATUS == "REJECT-DATA" || $ACCCashApply->STATUS == "REJECT-PICT")
-                    <span>REJECT PARTIAL</span>
+                    <span>REJECT SEBAGIAN</span>
                 @elseif($ACCCashApply->STATUS == "PENDING-UNCONTACTED" || $ACCCashApply->STATUS == "PENDING-NEXTTIME")
                     <span>PENDING</span>                
                 @else
