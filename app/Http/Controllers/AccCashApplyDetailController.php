@@ -371,6 +371,7 @@ class ACCCashApplyDetailController extends Controller
             if($HasilsLeads->OUT_STAT == "T"){
 
                 $data_mail = [
+                    'NAME' => $request->NAME,
                     'EMAIL' => $request->EMAIL,
                     'DISBURSEMENT' => $request->DISBURSEMENT,
                     'NO_AGGR'=>$request->NO_AGGR

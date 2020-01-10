@@ -12,7 +12,7 @@
         <div class="panel-body">
             {{-- <img src="{{ asset('assets/Pictures/Picture1.png') }}" alt=""><br><br> --}}
 
-            <h3>Hai, {{ $data_mail["EMAIL"] }}</h3>
+            <h3>Hai, {{ $data_mail["NAME"] }}</h3>
             <img src="{{ asset('assets/Pictures/Picture1.png') }}" alt="" class="center"><br><br>
             <p>Selamat!</p>
             <p>Kamu mendapatkan plafon sebesar Rp {{$data_mail["DISBURSEMENT"]}} yang dapat kamu cairkan melalui aplikasi acc.one.</p>
