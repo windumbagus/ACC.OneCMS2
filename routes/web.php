@@ -322,5 +322,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/seamless-banner-update/update','SeamlessBannerUpdateController@update');
  //   Route::post('/acccash-apply/changestatus/{Guid}','AccCashApplyController@changestatus');
 
+    Route::get('/seamless-otrupload','SeamlessOtrUploadController@index');
+    Route::get('/seamless-otrupload/cancel','SeamlessOtrUploadController@cancel');
+    Route::post('/seamless-otrupload/upload','SeamlessOtrUploadController@upload');
+    Route::get('/seamless-otrupload/download/','SeamlessOtrUploadController@download');
+
     Route::get('/invalid-permission','InvalidPermissionController@index');
 });//end group route
