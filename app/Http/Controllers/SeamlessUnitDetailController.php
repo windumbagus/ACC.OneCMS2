@@ -335,6 +335,43 @@ class SeamlessUnitDetailController extends Controller
         return json_encode($Hasils);
     }
 
+    public function deleteotrall(Request $request)
+    {
+
+        $dataall = json_encode(array(
+                
+                "doSendDataCMS" => array(   
+                
+                    "TRANSACTION_CODE"=>"DELETE_OTR",
+                    "FLAG_SELECT"=>"ALL",
+                    "DATA_UNIT"=>[array(
+                        "GUID"=>null,
+                        "ID_UNIT"=>$request->Id,	
+                    )],
+                ),
+        ));
+
+         //API GET
+         $urlall = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+        //   dd($dataall);
+         // dd($url);
+       
+        $chall = curl_init($urlall);                   
+        curl_setopt($chall, CURLOPT_POST, true);                                  
+        curl_setopt($chall, CURLOPT_POSTFIELDS, $dataall);
+        curl_setopt($chall, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($chall, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($chall, CURLOPT_RETURNTRANSFER, true);  
+         $resultall = curl_exec($chall);
+         $errall = curl_error($chall);
+         curl_close($chall);
+         $valall= json_decode($resultall);
+        //   dd($valall);
+         //dd($err);
+         return redirect("seamless-unit-detail/".$request->Id)->with('success','Semua OTR berhasil terhapus');
+    }
+
+
 }
 /* 8 Jan 2020 : Fixing Hitung Simulasi
 

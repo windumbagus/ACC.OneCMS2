@@ -357,7 +357,7 @@
                           <a href="#" class="btn btn-block btn-warning" onclick="deleteSelected()">Delete Selected</a>
                         </div>
                         <div class="col-md-2">
-                          <a href="#" class="btn btn-block btn-danger">Delete All</a>
+                          <a href="{{asset('/seamless-unit-detail/deleteotrall/'.$unitid)}}" onclick="return confirm('Are you sure want to delete all data?')" class="btn btn-block btn-danger">Delete All</a>
                         </div>
                       </div>
                       <div class="col-sm-2">

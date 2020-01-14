@@ -273,6 +273,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit-detail/{Id}','SeamlessUnitDetailController@index');
     Route::get('/seamless-unit-detail/hitungsimulasi/{Id}&{Area}','SeamlessUnitDetailController@hitungsimulasi');
     Route::post('/seamless-unit-detail/delete-selected','SeamlessUnitDetailController@deleteselected');
+    Route::get('/seamless-unit-detail/deleteotrall/{Id}','SeamlessUnitDetailController@deleteotrall');
 
     Route::get('/seamless-unit-detail-update/{ID_UNIT}&{GUID}','SeamlessUnitDetailUpdateController@index');
     Route::post('/seamless-unit-detail-update/update','SeamlessUnitDetailUpdateController@update');
