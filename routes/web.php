@@ -271,13 +271,13 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/seamless-unit-detail/{Id}','SeamlessUnitDetailController@index');
     Route::get('/seamless-unit-detail/hitungsimulasi/{Id}&{Area}','SeamlessUnitDetailController@hitungsimulasi');
+    Route::post('/seamless-unit-detail/delete-selected','SeamlessUnitDetailController@deleteselected');
 
     Route::get('/seamless-unit-detail-update/{ID_UNIT}&{GUID}','SeamlessUnitDetailUpdateController@index');
     Route::post('/seamless-unit-detail-update/update','SeamlessUnitDetailUpdateController@update');
     
     Route::get('/seamless-unit-picture/{GUID}&{ID_UNIT}','SeamlessUnitUploadPictureController@index');
     Route::post('/seamless-unit-picture/uploadpicture','SeamlessUnitUploadPictureController@uploadpicture');
-   
     
     Route::get('/seamless-unit-detail/upload-page/{Id}','SeamlessUnitUploadDetailController@index');
     Route::get('/seamless-unit-detail/cancel/{Id}','SeamlessUnitUploadDetailController@cancel');

@@ -330,15 +330,21 @@
                     <tr>
                         <th>Kode Area</th>
                         <th>OTR</th>   
+                        <th></th>
+                        <th></th>
+                        <th>Selected to Delete </th>
                         
                     </tr>
                     </thead>
                     <tbody>
-                    
+
                         @foreach ($SeamlessUnitOtrs->OUT_DATA as $SeamlessUnitOtr)
                         <tr>  
-                            <td><span>{{$SeamlessUnitOtr->CD_AREA}}</span></td>
-                            <td><span>{{$SeamlessUnitOtr->OTR}}</span></td>
+                            <td>{{$SeamlessUnitOtr->CD_AREA}}</td>
+                            <td>{{$SeamlessUnitOtr->OTR}}</td>
+                            <td>{{$SeamlessUnitOtr->GUID}}</td>
+                            <td>{{$SeamlessUnitOtr->ID_UNIT}}</td>
+                            <td><input type="checkbox" class="deleteSelected" GUID="{{$SeamlessUnitOtr->GUID}}" ID_UNIT="{{$SeamlessUnitOtr->ID_UNIT}}" ></td>
                         </tr>                              
                         @endforeach    
                     
@@ -346,6 +352,14 @@
                     </table>
                       <br/>
                       <br/>
+                      <div class="row">
+                        <div class="col-md-2">
+                          <a href="#" class="btn btn-block btn-warning" onclick="deleteSelected()">Delete Selected</a>
+                        </div>
+                        <div class="col-md-2">
+                          <a href="#" class="btn btn-block btn-danger">Delete All</a>
+                        </div>
+                      </div>
                       <div class="col-sm-2">
                             
                       </div>
@@ -439,7 +453,54 @@
             ]
       })
 
-
+      $('#example3').DataTable( {
+          "columnDefs": [
+              {
+                  "targets": [ 2 ],
+                  "visible": false
+              },
+              {
+                  "targets": [ 3 ],
+                  "visible": false
+              },
+          ]
+      } );
+    
+    //Fungsi Delete Selected
+    deleteSelected=()=>{
+    	const data = [];
+      let x = document.getElementsByClassName("deleteSelected");
+      for(i = 0; i < x.length; i++){
+          if(x[i].checked){
+            data.push(
+              {
+                "GUID": x[i].getAttribute("GUID"),
+                "ID_UNIT": x[i].getAttribute("ID_UNIT")
+              }
+            )
+          }
+      }
+      console.log(data);
+      $.ajax({
+        url:"{{asset('/seamless-unit-detail/delete-selected')}}",
+        data: {
+          'data': data,
+          '_token':'{{csrf_token()}}'
+        },
+        dataType:'JSON', 
+        type:'POST',
+        success: function (val){
+          console.log(val);
+          window.location.reload();
+          alert("Delete OTR Successfully!");
+        },
+        error: function( jqXhr, textStatus, errorThrown ){
+          console.log(jqXhr);
+          console.log(errorThrown);
+          console.log(textStatus);
+        },
+      });
+    }
         //Button Search
         $('.ButtonSearch1').on('click', function(){
             var searchData = $('.InputSearch1').val()

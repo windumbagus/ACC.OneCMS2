@@ -8,8 +8,6 @@ use App\Exports\AccCashApplyExport;
 
 class SeamlessUnitDetailController extends Controller
 {
-  
-
     public function index(Request $request)
     {
         
@@ -19,8 +17,8 @@ class SeamlessUnitDetailController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-           // 'RoleId'=>$request->session()->get('RoleId'),
-           // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
+            // 'RoleId'=>$request->session()->get('RoleId'),
+            // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
         
         //dd($request->Id);
@@ -56,7 +54,7 @@ class SeamlessUnitDetailController extends Controller
             ),
         ));
 
-         //API GET
+        //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         //  $url = $this->base_url_sofia.'/restV2/acccash/getdata/transactionapply';
         $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
@@ -74,8 +72,8 @@ class SeamlessUnitDetailController extends Controller
         $err_detail = curl_error($ch_detail);
         curl_close($ch_detail);
         $Hasils_detail= json_decode($result_detail); 
-            //    dd($Hasils_detail->OUT_DATA);
-            //   dd($data_detail);
+        // dd($Hasils_detail->OUT_DATA);
+        // dd($data_detail);
 
 
 
@@ -89,7 +87,7 @@ class SeamlessUnitDetailController extends Controller
         $err_color = curl_error($ch_color);
         curl_close($ch_color);
         $Hasils_color= json_decode($result_color); 
-            //  dd($Hasils_color);
+        // dd($Hasils_color);
 
 
         $ch_otr = curl_init($url);                   
@@ -102,8 +100,8 @@ class SeamlessUnitDetailController extends Controller
         $err_otr = curl_error($ch_otr);
         curl_close($ch_otr);
         $Hasils_otr= json_decode($result_otr); 
-            //  dd($Hasils_otr);
-            //  dd($data_otr);
+        //  dd($Hasils_otr);
+        //  dd($data_otr);
 
         $ch_sim = curl_init($url);                   
         curl_setopt($ch_sim, CURLOPT_POST, true);                                  
@@ -115,8 +113,8 @@ class SeamlessUnitDetailController extends Controller
         $err_sim = curl_error($ch_sim);
         curl_close($ch_sim);
         $Hasils_sim= json_decode($result_sim); 
-            //  dd($Hasils_sim);
-            //  dd($data_otr);
+        //  dd($Hasils_sim);
+        //  dd($data_otr);
         // if($Hasils_otr->OUT_DATA == null)
         // {
         //     $Areaforsim = "";
@@ -130,16 +128,16 @@ class SeamlessUnitDetailController extends Controller
 
             return view(
                 'seamless_unit_detail',[
-                   // 'Role' => $Hasils->Role,
-                    'SeamlessUnitDetails'=>$Hasils_detail->OUT_DATA,
-                    'SeamlessUnitColors'=>$Hasils_color->OUT_DATA,
-                    'SeamlessUnitOtrs'=>$Hasils_otr,
-                    'SeamlessUnitSims'=>$Hasils_sim,
-                    'unitid'=>$request->Id,
+                // 'Role' => $Hasils->Role,
+                'SeamlessUnitDetails'=>$Hasils_detail->OUT_DATA,
+                'SeamlessUnitColors'=>$Hasils_color->OUT_DATA,
+                'SeamlessUnitOtrs'=>$Hasils_otr,
+                'SeamlessUnitSims'=>$Hasils_sim,
+                'unitid'=>$request->Id,
 
-                   // 'Roles'=>$Hasils2->Roles,
-                  //  'UserCategories'=>$Hasils2->UserCategory, 
-                    'session' => $session
+                // 'Roles'=>$Hasils2->Roles,
+                //  'UserCategories'=>$Hasils2->UserCategory, 
+                'session' => $session
             ]);
 
     }
@@ -299,18 +297,43 @@ class SeamlessUnitDetailController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-         $result = curl_exec($ch);
-         $err = curl_error($ch);
-         curl_close($ch);
-         $val= json_decode($result);
-         // dd($val);
-         //dd($err);
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $val= json_decode($result);
+        // dd($val);
+        //dd($err);
         return json_encode($val);
 
     }
 
-
-
+    public function deleteselected(Request $request)
+    {
+        // dd($request->data);
+        $data = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"DELETE_OTR",
+                "FLAG_SELECT"=>"SELECTED",
+                "DATA_UNIT"=>$request->data,
+            ),
+        ));
+        // dd($data);
+       
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms'; 
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                 
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result); 
+        // dd($Hasils);
+        
+        return json_encode($Hasils);
+    }
 
 }
 /* 8 Jan 2020 : Fixing Hitung Simulasi

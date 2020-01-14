@@ -92,7 +92,7 @@ class SeamlessUnitController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $Hasils= json_decode($result); 
-          dd($Hasils);
+        //   dd($Hasils);
 
       
         //dd($Hasils);
