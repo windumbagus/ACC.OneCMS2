@@ -244,7 +244,7 @@
 													</div>
                         <br/><br/>
                         <div class="col-sm-2">
-                                <a href="{{asset('/seamless-product-picture/'.$SeamlessProductPicts[0]->CD_PRODUCT)}}" class="btn btn-block btn-primary">Update</a>         
+                                <a href="{{asset('/seamless-product-picture/'.$SeamlessProducts[0]->CD_PRODUCT)}}" class="btn btn-block btn-primary">Update</a>         
                         </div>
                     </div>
                   </div>

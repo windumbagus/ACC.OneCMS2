@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SeamlessUnitDetailExport;
 
 class SeamlessUnitUploadDetailController extends Controller
 {
@@ -63,6 +65,26 @@ class SeamlessUnitUploadDetailController extends Controller
         }else{
             return redirect('/seamless-unit-detail/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
         }
+    }
+
+    public function download(Request $request)
+    {
+         //API GET
+
+        $data=[];
+             array_push($data,[
+
+                 "CATEGORY"=>"EXAMPLE",
+                 "CD_VALUE"=>"999",
+                 "CHAR_VALUE"=>"999",
+                 "CHAR_DESC"=>"EXAMPLE 123",
+                 "ID_USER_ADDED"=>"ADMIN",
+                 "ID_USER_UPDATED"=>"ADMIN",
+
+            ]);
+         
+        //   dd($data);
+         return Excel::download(new SeamlessUnitDetailExport($data), 'SeamlessUnitDetailTemplate.xlsx');
     }
 
     public function cancel(Request $request)

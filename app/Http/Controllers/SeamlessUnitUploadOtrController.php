@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SeamlessUnitOtrExport;
 
 class SeamlessUnitUploadOtrController extends Controller
 {
@@ -63,6 +65,24 @@ class SeamlessUnitUploadOtrController extends Controller
         }else{
             return redirect('/seamless-unit-otr/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
         }
+    }
+
+    public function download(Request $request)
+    {
+         //API GET
+
+        $data=[];
+             array_push($data,[
+
+                 "CD_AREA"=>"001",
+                 "OTR"=>"250000000",
+                 "ID_USER_ADDED"=>"ADMIN",
+                 "ID_USER_UPDATED"=>"ADMIN",
+
+            ]);
+         
+        //   dd($data);
+         return Excel::download(new SeamlessUnitOtrExport($data), 'SeamlessUnitOtrTemplate.xlsx');
     }
 
     public function cancel(Request $request)

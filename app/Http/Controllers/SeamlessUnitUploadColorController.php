@@ -75,8 +75,8 @@ class SeamlessUnitUploadColorController extends Controller
     
          $data=[];
              array_push($data,[
-                 "CD_COLOR"=>"",
-                 "DESC_COLOR"=>"",
+                 "CD_COLOR"=>"123",
+                 "DESC_COLOR"=>"COLOR",
                  "ID_USER_ADDED"=>"ADMIN",
                  "ID_USER_UPDATED"=>"ADMIN",
                  "FLAG_PRIMARY"=>"Y",

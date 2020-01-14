@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SeamlessUnitExport;
 
 class SeamlessUnitUploadController extends Controller
 {
@@ -64,6 +66,34 @@ class SeamlessUnitUploadController extends Controller
         }else{
             return redirect('/seamless-unit/upload-page')->with('warning', 'Error');
         }
+    }
+
+    public function download(Request $request)
+    {
+         //API GET
+
+        $data=[];
+             array_push($data,[
+                 "CD_BRAND"=>"001",
+                 "DESC_BRAND"=>"BRAND",
+                 "CD_TYPE"=>"T01",
+                 "DESC_TYPE"=>"TYPE",
+                 "CD_MODEL"=>"099",
+                 "DESC_MODEL"=>"MODEL",
+                 "TAHUN"=>"2020",
+                 "TYPE_MACHINE"=>"BENSIN",
+                 "MACHINE_CAPACITY"=>"2500",
+                 "TRANSMISSION"=>"M/T",
+                 "FLAG_NEWUSED"=>"N",
+                 "ID_USER_ADDED"=>"ADMIN",
+                 "ID_USER_UPDATED"=>"ADMIN",
+                 "FLAG_ACTIVE"=>"Y",
+                 "DESC_PRODUCT"=>"",
+
+            ]);
+         
+        //  dd($data);
+         return Excel::download(new SeamlessUnitExport($data), 'SeamlessUnitTemplate.xlsx');
     }
 
     public function cancel(Request $request)

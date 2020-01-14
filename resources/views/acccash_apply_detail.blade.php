@@ -39,6 +39,7 @@
 	  display: block;
 	  width: 100%;
 	  max-width: 700px;
+	  transform: rotate(270deg);
 	}
 	
 	/* Caption of Modal Image */
@@ -186,13 +187,13 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">No Rekening</label>
+													<label class="col-sm-3 control-label">Nomor Rekening</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="ACCOUNT_NUMBER" value="{{$AccCashApplys[0]->ACCOUNT_NUMBER}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Nominal</label>
+													<label class="col-sm-3 control-label">Nominal Pencairan</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="DISBURSEMENT" value="{{number_format($AccCashApplys[0]->DISBURSEMENT, 0, ',', '.')}}" readonly>
 													</div>
@@ -216,7 +217,7 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Penyedia</label>
+													<label class="col-sm-3 control-label">Penyedia Barang/Jasa</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="PENYEDIA" value="{{$AccCashApplys[0]->PENYEDIA}}" readonly>
 													</div>
@@ -226,7 +227,7 @@
 										</div>
 										<div class="col-sm-6">
 												<div class="form-group">
-													<label class="col-sm-3 control-label">BTMY</label>
+													<label class="col-sm-3 control-label">BTMK</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="BTMY" value="{{$AccCashApplys[0]->BTMY}}" readonly>
 													</div>
@@ -251,7 +252,7 @@
 												</div>
 												
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Area</label>
+													<label class="col-sm-3 control-label">Area Pengajuan</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="AREA" value="{{$AccCashApplys[0]->AREA}}" readonly>
 													</div>
@@ -278,13 +279,13 @@
 												<div class="form-group">
 													<div class="col-sm-6">
 														@if(!empty($AccCashApplyPictures[0]->PATH_FILE))
-															<img id="myImg" style="width: 50%; height: 50%;" alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
+															<img id="myImg" style="width: 50%; height: 50%; transform: rotate(270deg);" alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
 														@endif
 													</div>
 													
 													<div class="col-sm-6">
 														@if(!empty($AccCashApplyPictures[1]->PATH_FILE))
-															<img id="myImg2" style="width: 50%; height: 50%;" alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
+															<img id="myImg2" style="width: 50%; height: 50%; transform: rotate(270deg);" alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
 														@endif
 													</div>
 

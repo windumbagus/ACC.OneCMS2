@@ -268,6 +268,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit/upload-page','SeamlessUnitUploadController@index');
     Route::get('/seamless-unit/cancel','SeamlessUnitUploadController@cancel');
     Route::post('/seamless-unit/upload','SeamlessUnitUploadController@upload');
+    Route::get('/seamless-unit/upload-pages/download/','SeamlessUnitUploadController@download');
 
     Route::get('/seamless-unit-detail/{Id}','SeamlessUnitDetailController@index');
     Route::get('/seamless-unit-detail/hitungsimulasi/{Id}&{Area}','SeamlessUnitDetailController@hitungsimulasi');
@@ -282,15 +283,19 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit-detail/upload-page/{Id}','SeamlessUnitUploadDetailController@index');
     Route::get('/seamless-unit-detail/cancel/{Id}','SeamlessUnitUploadDetailController@cancel');
     Route::post('/seamless-unit-detail/upload/{Id}','SeamlessUnitUploadDetailController@upload');
+    Route::get('/seamless-unit-detail/upload-pages/download/','SeamlessUnitUploadDetailController@download');
 
     Route::get('/seamless-unit-otr/upload-page/{Id}','SeamlessUnitUploadOtrController@index');
     Route::get('/seamless-unit-otr/cancel/{Id}','SeamlessUnitUploadOtrController@cancel');
     Route::post('/seamless-unit-otr/upload/{Id}','SeamlessUnitUploadOtrController@upload');
+    Route::get('/seamless-unit-otr/upload-pages/download/','SeamlessUnitUploadOtrController@download');
     
     Route::get('/seamless-unit-color/upload-page/{Id}','SeamlessUnitUploadColorController@index');
     Route::get('/seamless-unit-color/cancel/{Id}','SeamlessUnitUploadColorController@cancel');
     Route::post('/seamless-unit-color/upload/{Id}','SeamlessUnitUploadColorController@upload');
     Route::get('/seamless-unit-color/download/','SeamlessUnitUploadColorController@download');
+    Route::get('/seamless-unit-color/upload-pages/download/','SeamlessUnitUploadColorController@download');
+
 
     Route::get('/seamless-product','SeamlessProductController@index');
     Route::get('/seamless-product/show','SeamlessProductController@show');

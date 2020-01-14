@@ -5,7 +5,7 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class SeamlessUnitColorExport implements FromArray, WithHeadings
+class SeamlessUnitDetailExport implements FromArray, WithHeadings
 {
 
     private $X;
@@ -23,12 +23,13 @@ class SeamlessUnitColorExport implements FromArray, WithHeadings
     public function headings(): array
     {
         return [
-            
-            "CD_COLOR",
-            "DESC_COLOR",
+
+            "CATEGORY",
+            "CD_VALUE",
+            "CHAR_VALUE",
+            "CHAR_DESC",
             "ID_USER_ADDED",
             "ID_USER_UPDATED",
-            "FLAG_PRIMARY",
             
         ];
     }

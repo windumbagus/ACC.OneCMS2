@@ -134,7 +134,19 @@
             $('.InputSearch').val('')
         })
 
-  
+        $(document).on('click','.view-seamless-unit-detail',function(){
+            var id = $(this).attr('UnitId');
+            // console.log(id);
+            $.ajax({
+                url:"{{asset('/seamless-unit-detail/')}}",
+                data: {'Id':id },
+                method:'get',
+                success:function(data) {
+                    window.location.href = url;
+                    },
+            });
+        });
+
 
   // //VIEW
     
