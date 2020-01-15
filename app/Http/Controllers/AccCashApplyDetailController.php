@@ -311,6 +311,10 @@ class ACCCashApplyDetailController extends Controller
                 
                 $directstatus = "REJECT";
             }
+            else if($request->STATUS == "REJECT PARTIAL")
+            {
+                $directstatus = "REJECT";
+            }
             else
             {
                 $data_mail = [
@@ -321,7 +325,7 @@ class ACCCashApplyDetailController extends Controller
                     'CABANG'=>$request->CABANG
                 ];
                 // dd($data_mail);
-                \Mail::to("windumbagus@gmail.com")->send(new \App\Mail\MailAccCashRejectAll($data_mail));
+                \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashRejectAll($data_mail));
 
                 $directstatus = "REJECT";
                 // dd($statuschange);

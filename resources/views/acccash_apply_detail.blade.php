@@ -247,7 +247,7 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Jatuh Tempo STNK</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="EXP_STNK" value="{{$AccCashApplys[0]->EXP_STNK}}" disabled>
+														<input type="text" class="form-control" name="EXP_STNK" value="{{date('d M Y H:i:s', strtotime($AccCashApplys[0]->EXP_STNK))}}" disabled>
 													</div>
 												</div>
 												
