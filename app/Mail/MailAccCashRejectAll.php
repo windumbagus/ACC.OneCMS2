@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class MailAccCashApproved extends Mailable
+class MailAccCashRejectAll extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,7 +21,7 @@ class MailAccCashApproved extends Mailable
     public function __construct($data_mail)
     {
         $this->data_mail = $data_mail;
-        $this->aggr= $data_mail["NO_AGGR"];
+        $this->aggr = $data_mail["NO_AGGR"];
     }
 
     /**
@@ -31,7 +31,7 @@ class MailAccCashApproved extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.mail_acc_cash_approved')
-                    ->subject("Aplikasi acccash ".$this->aggr." Approved");
+        return $this->view('mail.mail_acc_cash_reject_all')
+                    ->subject("Aplikasi acccash ".$this->aggr." Reject");
     }
 }

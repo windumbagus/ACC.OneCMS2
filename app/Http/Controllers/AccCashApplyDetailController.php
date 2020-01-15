@@ -294,11 +294,35 @@ class ACCCashApplyDetailController extends Controller
                 curl_close($chLeads);
                 $HasilsLeads= json_decode($resultLeads); 
             //      dd($HasilsLeads);
+
+                // Mail Send
+                if($HasilsLeads->OUT_STAT == "T"){
+
+                    $data_mail = [
+                        'NAME' => $request->NAME,
+                        'EMAIL' => $request->EMAIL,
+                        'DISBURSEMENT' => $request->DISBURSEMENT,
+                        'NO_AGGR'=>$request->NO_AGGR,
+                        'CABANG'=>$request->CABANG
+                    ];
+                    // dd($data_mail);
+                    \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashReject($data_mail));
+                }
                 
                 $directstatus = "REJECT";
             }
             else
             {
+                $data_mail = [
+                    'NAME' => $request->NAME,
+                    'EMAIL' => $request->EMAIL,
+                    'DISBURSEMENT' => $request->DISBURSEMENT,
+                    'NO_AGGR'=>$request->NO_AGGR,
+                    'CABANG'=>$request->CABANG
+                ];
+                // dd($data_mail);
+                \Mail::to("windumbagus@gmail.com")->send(new \App\Mail\MailAccCashRejectAll($data_mail));
+
                 $directstatus = "REJECT";
                 // dd($statuschange);
             }
@@ -376,7 +400,8 @@ class ACCCashApplyDetailController extends Controller
                     'NAME' => $request->NAME,
                     'EMAIL' => $request->EMAIL,
                     'DISBURSEMENT' => $request->DISBURSEMENT,
-                    'NO_AGGR'=>$request->NO_AGGR
+                    'NO_AGGR'=>$request->NO_AGGR,
+                    'CABANG'=>$request->CABANG
                 ];
                 // dd($data_mail);
                 \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashApproved($data_mail));
