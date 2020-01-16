@@ -442,6 +442,7 @@
             							<th style="display:none">Time for sort</th>
                                         <th>Status</th>
 										<th>Reason</th>
+										<th>PIC</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -462,6 +463,7 @@
 										@endif
 										</td>      
 										<td><span>{{$AccCashApplyDetail->REASON}}</span></td>
+										<td><span>{{$AccCashApplyDetail->ID_USER_ADDED}}</span></td>
                                     </tr>                              
                                     @endforeach       
                                 </tbody>
@@ -499,6 +501,7 @@
 			  	null,
                 null,
                 null,
+				null,
 				null,
                 
             ]

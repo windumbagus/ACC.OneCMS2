@@ -150,7 +150,7 @@
 
             <li class="@yield('acccash') treeview">
                 <a href="#">
-                <i class="fa fa-university"></i> <span>acccash</span>
+                <i class="fa fa-money"></i> <span>acccash</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -164,7 +164,7 @@
             </li>
             <li class="@yield('seamless') treeview">
                 <a href="#">
-                <i class="fa fa-university"></i> <span>Seamless</span>
+                <i class="fa fa-rocket"></i> <span>Seamless</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>

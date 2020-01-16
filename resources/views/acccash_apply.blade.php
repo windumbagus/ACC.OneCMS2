@@ -65,7 +65,15 @@
             @foreach ($ACCCashApplys[0]->dataApply as $ACCCashApply)
             <tr>
                 <td style="display:none"><span>{{$ACCCashApply->DT_ADDED}}</span></td>  
-                <td><span>{{date('d M Y H:i:s', strtotime($ACCCashApply->DT_ADDED))}}</span></td>
+                <td>
+                @if (($Statusapply == "PENDING") && (strtotime($ACCCashApply->DT_UPDATED)<(strtotime(now())-(60*60))))
+                <i class="fa fa-exclamation-triangle" style="color:red"></i>
+                <span class="text-danger">{{date('d M Y H:i:s', strtotime($ACCCashApply->DT_ADDED))}}</span>
+                
+                @else
+                <span>{{date('d M Y H:i:s', strtotime($ACCCashApply->DT_ADDED))}}</span>
+                @endif
+                </td>
                 <td><span>{{$ACCCashApply->ID_USER}}</span></td>
                 <td><span>{{$ACCCashApply->NAME}}</span></td>
                 <td><span>{{$ACCCashApply->PHONE_MOBILE1}}</span></td>
@@ -100,7 +108,7 @@
                     <a href="{{ asset('acccash-apply-detail/'.$ACCCashApply->GUID.'&'.$Statusapply) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
                     <!-- <a href="#" data-id="{{$ACCCashApply->GUID}}" class="update-acccash-apply btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> &nbsp; -->
                 @else
-                <a href="{{ asset('acccash-apply-detail/'.$ACCCashApply->GUID.'&'.$Statusapply) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                    <a href="{{ asset('acccash-apply-detail/'.$ACCCashApply->GUID.'&'.$Statusapply) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                 @endif
                 
                 </span>
