@@ -274,12 +274,12 @@
 														<input type="text" class="form-control" name="PEFINDO_SCORE" value="{{$AccCashApplys[0]->PEFINDO_SCORE}}" readonly>
 													</div>
 												</div>
-												<div class="form-group">
+												<!-- <div class="form-group">
 													<label class="col-sm-3 control-label">Detail Pefindo</label>
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="PEFINDO_DETAIL" value="{{$AccCashApplys[0]->PEFINDO_DETAIL}}" readonly>
 													</div>
-												</div>
+												</div> -->
 												<div class="form-group">
 													<div class="col-sm-6">
 														@if(!empty($AccCashApplyPictures[0]->PATH_FILE))
@@ -447,6 +447,7 @@
                                         <th>Status</th>
 										<th>Reason</th>
 										<th>PIC</th>
+										<th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -468,6 +469,7 @@
 										</td>      
 										<td><span>{{$AccCashApplyDetail->REASON}}</span></td>
 										<td><span>{{$AccCashApplyDetail->ID_USER_ADDED}}</span></td>
+										<td><span>{{$AccCashApplyDetail->ACTION}}</span></td>
                                     </tr>                              
                                     @endforeach       
                                 </tbody>
@@ -505,6 +507,7 @@
 			  	null,
                 null,
                 null,
+				null,
 				null,
 				null,
                 
