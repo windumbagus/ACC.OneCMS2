@@ -66,7 +66,7 @@
             <tr>
                 <td style="display:none"><span>{{$ACCCashApply->DT_ADDED}}</span></td>  
                 <td>
-                @if (($Statusapply == "PENDING") && (strtotime($ACCCashApply->DT_UPDATED)<(strtotime(now())-(60*60))))
+                @if (($Statusapply == "PENDING") && (strtotime($ACCCashApply->DT_UPDATED)<(strtotime(now())-(2*60*60))))
                 <i class="fa fa-exclamation-triangle" style="color:red"></i>
                 <span class="text-danger">{{date('d M Y H:i:s', strtotime($ACCCashApply->DT_ADDED))}}</span>
                 
