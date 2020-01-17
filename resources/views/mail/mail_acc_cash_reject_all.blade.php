@@ -29,7 +29,7 @@
 <body>
     <div class="center panel panel-default" style=" width:800px;">
         <div class="panel-header" style="height:115px; background:#081e33;">
-            <br><img src="{{ asset('assets/Pictures/logo acccash text.png') }}" style="width:250px; height:75px !important; ;" alt="" class="center"><br><br>
+            <br><img src="{{ asset('assets/Pictures/logo_acccash_text.png') }}" style="width:250px; height:75px !important; ;" alt="" class="center"><br><br>
         </div>
         <div class="panel-body">
             <h3>Hai, {{ $data_mail["NAME"] }}</h3>
@@ -49,7 +49,7 @@
                     <p class="bold">Whatsapp Yuna</p>
                     <div class="row">
                         <div class="col-sm-1">
-                        <p><img src="{{ asset('assets/Pictures/Picture6') }}" style="width:20px; height:20px !important;" alt=""></p>
+                        <p><img src="{{ asset('assets/Pictures/Picture6.jpg') }}" style="width:20px; height:20px !important;" alt=""></p>
                         </div>
                         <div class="col-sm-10">
                             <p>0811-1-500-599</p>
@@ -60,7 +60,7 @@
                     <p  class="bold">Kontak Center ACC</p>
                     <div class="row">
                         <div class="col-sm-1">
-                            <p><img src="{{ asset('assets/Pictures/Picture6') }}" style="width:20px; height:20px !important;" alt=""></p>
+                            <p><img src="{{ asset('assets/Pictures/Picture7.jpg') }}" style="width:20px; height:20px !important;" alt=""></p>
                         </div>
                         <div class="col-sm-10">
                             <p>1500599</p>
