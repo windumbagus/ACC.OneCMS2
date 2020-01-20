@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -69,8 +69,36 @@
                 </div>
             </div><br>
             <p>This email is intended solely for the recipient specified in the message. This system-generate email,<strong> Please do not reply</strong>.</p>
-            {{-- <a class="center" href="#"><img src="{{ asset('assets/Pictures/Picture5.png') }}" alt="" ></a><br> --}}
+            <a class="center" href="#"><img src="{{ asset('assets/Pictures/Picture5.png') }}" alt="" ></a><br>
         </div>
+    </div>
+</body>
+</html> --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+   
+    <title>Aplikasi acccash {{$data_mail["NO_AGGR"]}} Reject</title>
+</head>
+    
+<body>
+    <div  style=" width:800px; border-radius: 25px; border:1px solid;  border-spacing: 0px; color: #081e33; margin: 0 auto;">
+        <div style="height:115px; border-top-left-radius :25px;border-top-right-radius :25px; background:#081e33;">
+        <br><img src="{{ asset('assets/Pictures/logo_acccash_text.png') }}" style="width:250px; height:75px !important; display: block; margin-left: auto; margin-right: auto;" alt="" ><br><br>
+        </div>
+        <div style="margin:20px">
+            <h3>Hai, {{ $data_mail["NAME"] }}</h3>
+            <p>Maaf saat ini pengajuan Kamu Reject dan belum dapat dilanjutkan ke proses selanjutnya.<br>
+                Ayo ajukan kembali pengajuan Kamu dan pastikan sudah sesuai dengan <a href="https://www.acc.co.id/acccash">syarat & ketentuan </a>yang berlaku.</p>
+
+            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:250px; height:50px !important; display: block; margin:0 auto;"></a>    
+          <div style="display:block; margin: 10px 0; text-align:center; position:relative;">
+            <a style="margin :5px;" href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px;"></a>
+            <a style="margin :5px;" href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png') }}" style="width:120px; height:50px;"></a>  
+          </div>
+        </div>
+            <a href="#"><img src="{{asset('assets/Pictures/Picture5.png')}}" alt="" style="width:800px; display:block; border-bottom-left-radius :25px;border-bottom-right-radius :25px; position:relative; " ></a>
     </div>
 </body>
 </html>
