@@ -254,6 +254,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/acccash-apply/{Statusapply}/changestatus','AccCashApplyController@changestatus');
     Route::get('/acccash-apply/{Statusapply}/download','AccCashApplyController@download');
 
+    Route::get('/acccash-apply-plafon','AccCashApplyPlafonController@index');
+    Route::get('/acccash-apply-plafon/broadcast','AccCashApplyPlafonController@broadcast');
+    
+
     Route::get('/acccash-apply-detail/{GUID}&{Statusapply}','AccCashApplyDetailController@index');
     Route::post('/acccash-apply-detail/changestatus','AccCashApplyDetailController@changestatus');
     Route::get('/acccash-apply-detail/cetakPDF/{GUID}&{Statusapply}','AccCashApplyDetailController@cetakPDF');

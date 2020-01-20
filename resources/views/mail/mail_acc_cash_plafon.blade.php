@@ -16,11 +16,11 @@
             <h3>Hai, {{ $data_mail["NAME"] }}</h3>
             <img src="{{ asset('assets/Pictures/Ilustrasi_acccash-02.jpg') }}" class="center" style="height:300px;"alt=""><br><br>
             <p>Selamat!</p>
-            <p>Kamu mendapatkan plafon sebesar {{$data_mail["DISBURSEMENT"]}} yang dapat kamu cairkan melalui
+            <p>Kamu mendapatkan plafon sebesar {{$data_mail["PLAFOND"]}} yang dapat kamu cairkan melalui
                 aplikasi acc.one.<br>
                 Yuk download aplikasinya sekarang dan lihat plafon Kamu.</p>
          
-                <a class="center" href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png') }}" style="width:250px; height:50px" alt="" class="center"></a>    
+                <a class="center" href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png') }}" style="width:200px; height:30px" alt="" class="center"></a>    
                 <div class="tengah">
                 <a href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px" alt=""></a>
                 <a href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png  ') }}" style="width:120px; height:50px " alt="" ></a>  
@@ -77,11 +77,11 @@
                 <img src="{{ asset('assets/Pictures/Ilustrasi_acccash-02.jpg') }}" style="height:300px; "alt=""><br><br>
             </div>
             <p>Selamat!</p>
-            <p>Kamu mendapatkan plafon sebesar {{$data_mail["DISBURSEMENT"]}} yang dapat kamu cairkan melalui
+            <p>Kamu mendapatkan plafon sebesar {{$data_mail["PLAFOND"]}} yang dapat kamu cairkan melalui
                 aplikasi acc.one.<br>
                 Yuk download aplikasinya sekarang dan lihat plafon Kamu.</p>
          
-            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:250px; height:50px !important; display: block; margin:0 auto;"></a>    
+            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:200px; height:25px !important; display: block; margin:0 auto;"></a>    
           <div style="display:block; margin: 10px 0; text-align:center; position:relative;">
             <a style="margin :5px;" href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px;"></a>
             <a style="margin :5px;" href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png') }}" style="width:120px; height:50px;"></a>  

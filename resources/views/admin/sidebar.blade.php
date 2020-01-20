@@ -160,6 +160,7 @@
                 <!-- ditaruh di dalam a setelah text Pending List <span class="badge">t</span> -->
                 <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/APPROVED') }}"><i class="fa fa-circle-o"></i> Approved List</a></li>
                 <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/REJECT') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
+                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply-plafon/') }}"><i class="fa fa-circle-o"></i> Broadcast Plafond</a></li>
                 </ul>
             </li>
             <li class="@yield('seamless') treeview">

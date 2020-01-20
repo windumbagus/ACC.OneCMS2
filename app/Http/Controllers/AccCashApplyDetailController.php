@@ -105,12 +105,12 @@ class ACCCashApplyDetailController extends Controller
 
         //   @dd($request->EMAIL);
         $statusnotif = "";
-        if($request->STATUS == "REJECT ALL")
+        if($request->STATUS == "REJECT SEMUA")
         {
             $statuschange = $request->REASONREJECTALL;
             $redirectstatus = "REJECT";
         }
-        else if($request->STATUS == "REJECT PARTIAL")
+        else if($request->STATUS == "REJECT SEBAGIAN")
         {
             $statuschange = $request->REASONREJECTPARTIAL;
             $redirectstatus = "REJECT";

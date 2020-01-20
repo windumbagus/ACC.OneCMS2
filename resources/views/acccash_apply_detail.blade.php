@@ -134,7 +134,7 @@
                   </div>
                     <div class="box-body">
 						<div class="row">
-							<form id="form-update-accash-apply" action="{{asset('acccash-apply-detail/changestatus') }}" method="post" class="form-horizontal"> 
+							<form id="form-update-accash-apply" action="{{asset('acccash-apply-detail/changestatus') }}" method="post" class="changestatus form-horizontal"> 
 									
 										@csrf
 										<div class="col-sm-6">
@@ -310,8 +310,8 @@
 														<select class="form-control select2" id="STATUS" name="STATUS" style="width:100%;">
 															<option value="PENDING" selected>PENDING</option>
 															<option value="APPROVED" >APPROVED</option>
-															<option value="REJECT ALL" >REJECT SEMUA</option>
-															<option value="REJECT PARTIAL" >REJECT SEBAGIAN</option>
+															<option value="REJECT SEMUA" >REJECT SEMUA</option>
+															<option value="REJECT SEBAGIAN" >REJECT SEBAGIAN</option>
 														</select>
 													</div>
 												</div>   
@@ -361,7 +361,8 @@
 
 													</div>
 													<div class="col-sm-7">
-														<button type="submit" class="btn btn-primary" onclick="return confirm('Apakah yakin ingin mengubah status pengajuan?')" style="width:50%">Verify</button>	
+														
+														<button type="submit" class="btn btn-primary" style="width:50%">Verify</button>		
 			
 													</div>
 												
@@ -374,7 +375,7 @@
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="STATUS" value="REJECT SEMUA" readonly>
 													</div>
-													@elseif ($AccCashApplys[0]->STATUS == "PENDING-UNCONTACTED" || $AccCashApplys[0]->STATUS == "PENDING-NEXTTIME")
+													@elseif ($AccCashApplys[0]->STATUS == "REJECT-DATA" || $AccCashApplys[0]->STATUS == "REJECT-PICT")
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="STATUS" value="REJECT SEBAGIAN" readonly>
 													</div>
@@ -485,7 +486,8 @@
 
   <!-- page script -->
   <script>
-    
+
+
 	$(document).ready(function () {
         $('#REASONREJECTALLCHOICE').hide();
         $('#REASONREJECTPARTIALCHOICE').hide();
@@ -530,24 +532,25 @@
             $('.InputSearch').val('')
         })
 
+		
         //DROPDOWN STATUS
         $('#STATUS').on('change',function(){
         
             switch($('#STATUS').val()) {
-                case "REJECT ALL":
+                case "REJECT SEMUA":
                     $('#REASONREJECTALLCHOICE').show()
                     $('#REASONREJECTPARTIALCHOICE').hide()
                     $('#REASONPENDINGCHOICE').hide()
                     $('#REASONAPPROVEDCHOICE').hide()
-
+					// $Statusapply = "REJECT SEMUA";
                     break;
 
-                case "REJECT PARTIAL":
+                case "REJECT SEBAGIAN":
                     $('#REASONREJECTALLCHOICE').hide()
                     $('#REASONREJECTPARTIALCHOICE').show()
                     $('#REASONPENDINGCHOICE').hide()
                     $('#REASONAPPROVEDCHOICE').hide()
-
+					// $Statusapply = "REJECT SEBAGIAN";
                     break;
 
                 case "PENDING":
@@ -555,7 +558,7 @@
                     $('#REASONREJECTPARTIALCHOICE').hide()
                     $('#REASONPENDINGCHOICE').show()
                     $('#REASONAPPROVEDCHOICE').hide()
-
+					// $Statusapply = "PENDING";
                     break;
 
                 case "APPROVED":
@@ -563,7 +566,7 @@
                     $('#REASONREJECTPARTIALCHOICE').hide()
                     $('#REASONPENDINGCHOICE').hide()
                     $('#REASONAPPROVEDCHOICE').show()
-
+					// $Statusapply = "APPROVED";
                     break;
 
                 default:
@@ -579,7 +582,13 @@
 
         });
 
+		$(".changestatus").on("submit", function(){
+        return confirm('Apakah Anda yakin akan ' + $('#STATUS').val() +' aplikasi ini?');
+    	});
+
     })
+
+
 
 	// Get the modal image
 	var modal = document.getElementById("myModal");
