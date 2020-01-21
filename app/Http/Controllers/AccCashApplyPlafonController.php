@@ -105,6 +105,30 @@ class ACCCashApplyPlafonController extends Controller
        
     }
 
+    public function broadcastapi(Request $request)
+    {
+
+        
+
+        
+
+        // Code Here
+                $data_mail = [
+                        'NAME' => $request->NAME,
+                        'EMAIL' => $request->EMAIL,
+                        'PLAFOND' => $request->PLAFOND
+                    ];
+                \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashPlafon($data_mail));
+         
+
+
+                $message = \Response::json(array(
+                    'OUT_MESS' => 'SUKSES',
+                    'OUT_STAT' => 'T',
+                    ));
+                    return $message;
+    }
+
 
 
     
