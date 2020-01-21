@@ -29,7 +29,7 @@
 <body>
     <div class="center panel panel-default" style=" width:800px; border-radius: 25px; border: 2px solid">
         <div class="panel-header" style="height:115px; background:#081e33;">
-        <br><img src="{{ asset('assets/Pictures/logo_acccash_text.png') }}" style="width:250px; height:75px !important; display: block; margin-left: auto; margin-right: auto;" alt="" ><br><br>
+        <br><img src="{{ asset('assets/Pictures/logo_acccash_text.png') }}" style="width:300px; height:75px !important; display: block; margin-left: auto; margin-right: auto;" alt="" ><br><br>
         </div>
         <div class="panel-body">
 
@@ -41,7 +41,7 @@
                 Terima kasih telah melakukan pengajuan melalui acc.one!<br>
                 Kami tunggu pengajuan Kamu selanjutnya.</p>
 
-          <a class="center" href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png') }}" style="width:200px; height:30px !important; display: block; margin-left: auto; margin-right: auto;" alt="" class="center"></a>    
+          <a class="center" href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png') }}" style="width:210px; height:30px !important; display: block; margin-left: auto; margin-right: auto;" alt="" class="center"></a>    
           <div class="tengah">
           <a href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px; display: block; margin-left: auto; margin-right: auto;" alt=""></a>
           <a href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png  ') }}" style="width:120px; height:50px; display: block; margin-left: auto; margin-right: auto; " alt="" ></a>  
@@ -92,6 +92,7 @@
     
     p,h3{
       font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16px;
     }
   </style>  
     <title>Aplikasi acccash {{$data_mail["NO_AGGR"]}} Approved</title>
@@ -100,7 +101,7 @@
 <body>
     <div  style=" width:800px; border-radius: 25px; border:1px solid;  border-spacing: 0px; color: #081e33; margin: 0 auto;">
         <div style="height:115px; border-top-left-radius :25px;border-top-right-radius :25px; background:#081e33;">
-        <br><img src="{{ asset('assets/Pictures/logo_acccash_text.png') }}" style="width:250px; height:75px !important; display: block; margin-left: auto; margin-right: auto;" alt="" ><br><br>
+        <br><img src="{{ asset('assets/Pictures/logo_acccash_text.png') }}" style="width:300px; height:75px !important; display: block; margin-left: auto; margin-right: auto;" alt="" ><br><br>
         </div>
         <div style="margin:20px">
             <h3>Hai, {{ $data_mail["NAME"] }}</h3>
@@ -111,14 +112,14 @@
                 Terima kasih telah melakukan pengajuan melalui acc.one!<br>
                 Kami tunggu pengajuan Kamu selanjutnya.</p>
 
-            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:200px; height:25px !important; display: block; margin:0 auto;"></a>    
+            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:210px; height:30px !important; display: block; margin:0 auto;"></a>    
           <div style="display:block; margin: 10px 0; text-align:center; position:relative;">
             <a style="margin :5px;" href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px;"></a>
             <a style="margin :5px;" href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png') }}" style="width:120px; height:50px;"></a>  
           </div>
         </div>
             {{-- <a href="#"><img src="{{asset('assets/Pictures/Picture5.png')}}" alt="" style="width:800px; display:block; border-bottom-left-radius :25px;border-bottom-right-radius :25px; position:relative; " ></a> --}}
-        <div style="height:250px; border-bottom-left-radius :25px;border-bottom-right-radius :25px; background:lightgrey; ">
+        <div style="height:250px; border-bottom-left-radius :25px;border-bottom-right-radius :25px; background:#e9e9f2; ">
         
           <h3 style=" padding:10px;"><strong>Punya Pertanyaan? Kamu Dapat Hubungi</strong></h3>
           <table style="padding:10px">
