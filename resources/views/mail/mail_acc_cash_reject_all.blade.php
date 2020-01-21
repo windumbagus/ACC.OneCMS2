@@ -104,7 +104,21 @@
             <a style="margin :5px;" href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png') }}" style="width:120px; height:50px;"></a>  
           </div>
         </div>
-            <a href="#"><img src="{{asset('assets/Pictures/Picture5.png')}}" alt="" style="width:800px; display:block; border-bottom-left-radius :25px;border-bottom-right-radius :25px; position:relative; " ></a>
+            {{-- <a href="#"><img src="{{asset('assets/Pictures/Picture5.png')}}" alt="" style="width:800px; display:block; border-bottom-left-radius :25px;border-bottom-right-radius :25px; position:relative; " ></a> --}}
+            <div style="height:250px; border-bottom-left-radius :25px;border-bottom-right-radius :25px; background:lightgrey; ">
+                <h3 style=" padding:10px;"><strong>Punya Pertanyaan? Kamu Dapat Hubungi</strong></h3>
+                <table style="padding:10px">
+                  <tr>
+                    <th  style=" padding:5px"> Whatsapp Yuna</th>
+                    <th  style=" padding:5px"> Kontak Center ACC</th>
+                  </tr>
+                  <tr>
+                    <td><img src="{{ asset('assets/Pictures/Picture6.png')}}" style="width:20px; height:20px !important;margin-right:5px" alt=""> 0811-1-500-599</td>
+                    <td><img src="{{ asset('assets/Pictures/Picture7.png')}}" style="width:20px; height:20px !important;margin-right:5px" alt=""> 1500599</td>
+                  </tr>
+                </table>
+                <p  style="padding:10px">This email is intended solely for the recipient specified in the message. This system-generate email,<strong> Please do not reply</strong>.<br></p>
+            </div>
     </div>
 </body>
 </html>
