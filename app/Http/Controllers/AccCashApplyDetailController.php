@@ -408,7 +408,7 @@ class ACCCashApplyDetailController extends Controller
                     'CABANG'=>$request->CABANG
                 ];
                 // dd($data_mail);
-                \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashApproved($data_mail));
+                \Mail::to("windumbagus@gmail.com")->send(new \App\Mail\MailAccCashApproved($data_mail));
             }
             
             $directstatus = "APPROVED";

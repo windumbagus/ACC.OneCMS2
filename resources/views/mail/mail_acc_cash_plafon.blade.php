@@ -62,7 +62,13 @@
     <!DOCTYPE html>
 <html>
 <head>
-   
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+        
+        p,h3{
+          font-family: 'Source Sans Pro', sans-serif;
+        }
+      </style>  
     <title>Kamu Mendapatkan Plafon Kredit dari ACC!</title>
 </head>
     
