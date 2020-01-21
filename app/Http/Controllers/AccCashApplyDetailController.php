@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AccCashApplyExport;
 use PDF;
 
-class ACCCashApplyDetailController extends Controller
+class AccCashApplyDetailController extends Controller
 {
   
 

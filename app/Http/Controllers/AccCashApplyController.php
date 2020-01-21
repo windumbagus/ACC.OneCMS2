@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AccCashApplyExport;
 
-class ACCCashApplyController extends Controller
+class AccCashApplyController extends Controller
 {
   
     public function index(Request $request)

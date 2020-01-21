@@ -87,7 +87,7 @@
                 aplikasi acc.one.<br>
                 Yuk download aplikasinya sekarang dan lihat plafon Kamu.</p>
          
-            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:200px; height:25px !important; display: block; margin:0 auto;"></a>    
+            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:200px; height:30px !important; display: block; margin:0 auto;"></a>    
           <div style="display:block; margin: 10px 0; text-align:center; position:relative;">
             <a style="margin :5px;" href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px;"></a>
             <a style="margin :5px;" href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png') }}" style="width:120px; height:50px;"></a>  

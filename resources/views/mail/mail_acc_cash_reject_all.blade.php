@@ -98,7 +98,7 @@
             <p>Maaf saat ini pengajuan Kamu Reject dan belum dapat dilanjutkan ke proses selanjutnya.<br>
                 Ayo ajukan kembali pengajuan Kamu dan pastikan sudah sesuai dengan <a href="https://www.acc.co.id/acccash">syarat & ketentuan </a>yang berlaku.</p>
 
-            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:200px; height:25px !important; display: block; margin:0 auto;"></a>    
+            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:200px; height:30px !important; display: block; margin:0 auto;"></a>    
           <div style="display:block; margin: 10px 0; text-align:center; position:relative;">
             <a style="margin :5px;" href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px;"></a>
             <a style="margin :5px;" href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png') }}" style="width:120px; height:50px;"></a>  
