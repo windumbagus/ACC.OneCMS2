@@ -23,6 +23,20 @@ class SeamlessProductUploadPictureController extends Controller
            // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
         
+        $urlrole = config('global.base_url_outsystems').'/ACCWorldCMS/rest/CheckRoleAPI/CheckRole';
+
+        $chrole = curl_init($urlrole);                   
+        curl_setopt($chrole, CURLOPT_POST, true);                                  
+        curl_setopt($chrole, CURLOPT_POSTFIELDS, $role);
+        curl_setopt($chrole, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($chrole, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($chrole, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $resultrole = curl_exec($chrole);
+        $errrole = curl_error($chrole);
+        curl_close($chrole);
+        $Hasilsrole= json_decode($resultrole);
+        //dd($Hasilsrole);
+
 
         $data = json_encode(array(
             "doSendDataCMS" => array(   
@@ -50,6 +64,9 @@ class SeamlessProductUploadPictureController extends Controller
          $Hasils= json_decode($result);
          // dd($Hasils);
          //dd($err);
+
+         if ($Hasilsrole->OUT_DATA == 'Super Admin' || $Hasilsrole->OUT_DATA == 'Super_Admin' || $Hasilsrole->OUT_DATA == 'seamless')
+         {
             return view(
                 'seamless_product_picture',[
                    // 'Role' => $Hasils->Role,
@@ -58,6 +75,13 @@ class SeamlessProductUploadPictureController extends Controller
                   //  'UserCategories'=>$Hasils2->UserCategory, 
                     'session' => $session
             ]);
+         }
+         else
+         {
+             return redirect('/invalid-permission');
+         }
+ 
+
 
     }
    

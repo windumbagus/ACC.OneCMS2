@@ -67,6 +67,7 @@
         
         p,h3{
           font-family: 'Source Sans Pro', sans-serif;
+          font-size: 15px;
         }
       </style>  
     <title>Kamu Mendapatkan Plafon Kredit dari ACC!</title>

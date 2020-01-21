@@ -17,9 +17,30 @@ class AccCashApplyPlafonController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-           // 'RoleId'=>$request->session()->get('RoleId'),
+            'RoleId'=>$request->session()->get('RoleId'),
            // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
+
+        $role = json_encode(array(  
+            // "Id"=> $request->Id_add,
+            "ROLEID"=>$request->session()->get('RoleId'),
+        
+        ));
+
+        $urlrole = config('global.base_url_outsystems').'/ACCWorldCMS/rest/CheckRoleAPI/CheckRole';
+
+        $chrole = curl_init($urlrole);                   
+        curl_setopt($chrole, CURLOPT_POST, true);                                  
+        curl_setopt($chrole, CURLOPT_POSTFIELDS, $role);
+        curl_setopt($chrole, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($chrole, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($chrole, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $resultrole = curl_exec($chrole);
+        $errrole = curl_error($chrole);
+        curl_close($chrole);
+        $Hasilsrole= json_decode($resultrole);
+        //dd($Hasilsrole);
+
 
         $data = json_encode(array(
             "doTransactionPlafond" => array(   
@@ -42,6 +63,10 @@ class AccCashApplyPlafonController extends Controller
         $Hasils= json_decode($result); 
            //dd($data);
         //    dd($Hasils);
+            
+
+        if ($Hasilsrole->OUT_DATA == 'Super Admin' || $Hasilsrole->OUT_DATA == 'Super_Admin' || $Hasilsrole->OUT_DATA == 'acccash')
+        {
             return view(
                 'acccash_apply_plafon',[
                    // 'Role' => $Hasils->Role,
@@ -51,6 +76,12 @@ class AccCashApplyPlafonController extends Controller
                     'session' => $session
 
             ]);
+
+        }
+        else
+        {
+            return redirect('/invalid-permission');
+        }
 
     }
 
@@ -108,10 +139,6 @@ class AccCashApplyPlafonController extends Controller
     public function broadcastapi(Request $request)
     {
 
-        
-
-        
-
         // Code Here
                 $data_mail = [
                         'NAME' => $request->NAME,
@@ -119,8 +146,6 @@ class AccCashApplyPlafonController extends Controller
                         'PLAFOND' => $request->PLAFOND
                     ];
                 \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashPlafon($data_mail));
-         
-
 
                 $message = \Response::json(array(
                     'OUT_MESS' => 'SUKSES',
@@ -129,6 +154,23 @@ class AccCashApplyPlafonController extends Controller
                     return $message;
     }
 
+    public function broadcastapi2(Request $request)
+    {
+
+        // Code Here
+                $data_mail = [
+                        'NAME' => $request->json()->get("NAME"),
+                        'EMAIL' => $request->json()->get("EMAIL"),
+                        'PLAFOND' => $request->json()->get("PLAFOND")
+                    ];
+                \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashPlafon($data_mail));
+
+                $message = \Response::json(array(
+                    'OUT_MESS' => 'SUKSES',
+                    'OUT_STAT' => 'T',
+                    ));
+                    return $message;
+    }
 
 
     
