@@ -1,7 +1,15 @@
 @extends('admin.admin') 
 
 @section('acccash', 'active')
-@section('acccash-apply', 'active')
+@if ($Statusapply == "PENDING")
+    @section('acccash-apply-pending', 'active')
+@elseif ($Statusapply == "APPROVED")
+    @section('acccash-apply-approved', 'active')
+@elseif ($Statusapply == "REJECT")
+    @section('acccash-apply-reject', 'active')
+@elseif ($Statusapply == "PLAFON")
+    @section('acccash-apply-plafon', 'active')
+@endif
 
 @section('content')
 
