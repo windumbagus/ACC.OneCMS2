@@ -17,6 +17,27 @@ class RejectedController extends Controller
             'RoleId'=>$request->session()->get('RoleId'),
             'SubMenuId'=>"26"
         ]);
+
+        $role = json_encode(array(  
+            // "Id"=> $request->Id_add,
+            "ROLEID"=>$request->session()->get('RoleId'),
+        
+        ));
+
+        $urlrole = config('global.base_url_outsystems').'/ACCWorldCMS/rest/CheckRoleAPI/CheckRole';
+
+        $chrole = curl_init($urlrole);                   
+        curl_setopt($chrole, CURLOPT_POST, true);                                  
+        curl_setopt($chrole, CURLOPT_POSTFIELDS, $role);
+        curl_setopt($chrole, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($chrole, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($chrole, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $resultrole = curl_exec($chrole);
+        $errrole = curl_error($chrole);
+        curl_close($chrole);
+        $Hasilsrole= json_decode($resultrole);
+        //dd($Hasilsrole);
+
         //API GET
         $url = config("global.base_url_outsystems")."/ACCWorldCMS/rest/RejectedListAPI/GetAllRejectedList?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         $ch = curl_init($url);                                                     
@@ -33,6 +54,7 @@ class RejectedController extends Controller
             return view('rejected',[
                 'Role' => $Hasils->Role,
                 'Rejected' =>$Hasils->Data,
+                'role'=> $Hasilsrole->OUT_DATA, 
                 'session' => $session            
             ]);          
         }else{

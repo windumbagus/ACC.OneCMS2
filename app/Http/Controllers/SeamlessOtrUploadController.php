@@ -44,6 +44,7 @@ class SeamlessOtrUploadController extends Controller
         {
            //   dd($Hasils->OUT_DATA[0]);
            return view('modal/upload_seamless_otr',[
+            'role'=> $Hasilsrole->OUT_DATA,
             'session' => $session
             ]);    
         }

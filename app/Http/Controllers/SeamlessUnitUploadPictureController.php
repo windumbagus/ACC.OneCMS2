@@ -79,6 +79,7 @@ class SeamlessUnitUploadPictureController extends Controller
                     'SeamlessUnitPictures'=>$Hasils->OUT_DATA[0],
                    // 'Roles'=>$Hasils2->Roles,
                   //  'UserCategories'=>$Hasils2->UserCategory, 
+                  'role'=> $Hasilsrole->OUT_DATA,
                     'session' => $session
             ]);
          }

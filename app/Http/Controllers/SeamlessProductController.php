@@ -80,6 +80,7 @@ class SeamlessProductController extends Controller
                     'SeamlessProducts'=>$Hasils->OUT_DATA,
                    // 'Roles'=>$Hasils2->Roles,
                   //  'UserCategories'=>$Hasils2->UserCategory, 
+                  'role'=> $Hasilsrole->OUT_DATA,
                     'session' => $session
             ]);
         }

@@ -83,6 +83,7 @@ class SeamlessProductDetailUpdateController extends Controller
                     'IsActive'=>$IsActive,
                     // 'Roles'=>$Hasils2->Roles,
                     //  'UserCategories'=>$Hasils2->UserCategory, 
+                    'role'=> $Hasilsrole->OUT_DATA,
                     'session' => $session
             ]);
         }

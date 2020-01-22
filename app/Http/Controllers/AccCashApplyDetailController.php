@@ -108,6 +108,7 @@ class AccCashApplyDetailController extends Controller
                         'Statusapply'=>$request->Statusapply,
                        // 'Roles'=>$Hasils2->Roles,
                       //  'UserCategories'=>$Hasils2->UserCategory, 
+                      'role'=> $Hasilsrole->OUT_DATA,
                         'session' => $session
                 ]);
             }

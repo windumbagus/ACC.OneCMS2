@@ -45,7 +45,7 @@ class SeamlessUnitUploadController extends Controller
         if ($Hasilsrole->OUT_DATA == 'Super Admin' || $Hasilsrole->OUT_DATA == 'Super_Admin' || $Hasilsrole->OUT_DATA == 'seamless')
         {
             return view('modal/upload_seamless_unit',[
-           
+                'role'=> $Hasilsrole->OUT_DATA,
                 'session' => $session
                 ]);    
 

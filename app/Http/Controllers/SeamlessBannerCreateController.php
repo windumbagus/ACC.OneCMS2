@@ -51,6 +51,7 @@ class SeamlessBannerCreateController extends Controller
                    // 'Role' => $Hasils->Role,
                    // 'Roles'=>$Hasils2->Roles,
                   //  'UserCategories'=>$Hasils2->UserCategory, 
+                  'role'=> $Hasilsrole->OUT_DATA,
                     'session' => $session
             ]);
 
