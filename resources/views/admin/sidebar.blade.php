@@ -4,7 +4,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-
+        @if($role == 'Super Admin' || $role == 'Super_Admin')
         <li class="@yield('user-management') treeview">
             <a href="#">
             <i class="fa fa-users"></i> <span>User Management</span>
@@ -147,7 +147,8 @@
                 <li class="@yield('customer')"><a href="{{ asset('customer') }}"><i class="fa fa-circle-o"></i> Customer</a></li>
                 </ul>
             </li>
-
+            @endif
+            @if($role == 'Super Admin' || $role == 'Super_Admin' || $role == 'acccash')
             <li class="@yield('acccash') treeview">
                 <a href="#">
                 <i class="fa fa-money"></i> <span>acccash</span>
@@ -163,6 +164,8 @@
                 <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply-plafon/') }}"><i class="fa fa-circle-o"></i> Broadcast Plafond</a></li>
                 </ul>
             </li>
+            @endif
+            @if($role == 'Super Admin' || $role == 'Super_Admin' || $role == 'seamless')
             <li class="@yield('seamless') treeview">
                 <a href="#">
                 <i class="fa fa-rocket"></i> <span>Seamless</span>
@@ -178,6 +181,7 @@
 
                 </ul>
             </li>
+            @endif
 
         {{-- <li class="header">LABELS</li> --}}
         </ul>
