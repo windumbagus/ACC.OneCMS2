@@ -157,11 +157,11 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/PENDING') }}"><i class="fa fa-circle-o"></i> Pending List</a></li>
+                <li class="@yield('acccash-apply-pending')"><a href="{{ asset('acccash-apply/PENDING') }}"><i class="fa fa-circle-o"></i> Pending List</a></li>
                 <!-- ditaruh di dalam a setelah text Pending List <span class="badge">t</span> -->
-                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/APPROVED') }}"><i class="fa fa-circle-o"></i> Approved List</a></li>
-                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply/REJECT') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
-                <li class="@yield('acccash-apply')"><a href="{{ asset('acccash-apply-plafon/') }}"><i class="fa fa-circle-o"></i> Broadcast Plafond</a></li>
+                <li class="@yield('acccash-apply-approved')"><a href="{{ asset('acccash-apply/APPROVED') }}"><i class="fa fa-circle-o"></i> Approved List</a></li>
+                <li class="@yield('acccash-apply-reject')"><a href="{{ asset('acccash-apply/REJECT') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
+                <li class="@yield('acccash-apply-plafon')"><a href="{{ asset('acccash-apply-plafon/') }}"><i class="fa fa-circle-o"></i> Broadcast Plafond</a></li>
                 </ul>
             </li>
             @endif
