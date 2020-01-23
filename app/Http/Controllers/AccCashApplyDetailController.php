@@ -201,37 +201,7 @@ class AccCashApplyDetailController extends Controller
         }
         // dd($statusnotif);
 
-        $data = json_encode(array(
-            "doTransactionApply" => array(   
-                // "Id"=> $request->Id_add,
-                "P_GUID"=>$request->GUID,
-                "TRANSACTION_CODE"=>"UPD_APPLY",
-                // "P_STATUS"=>$request->STATUS,
-               // "P_REASON"=>$request->REASON,
-               "P_ID_USER"=>$request->session()->get('Name'),
-                "P_STATUS"=>$statuschange,
-                "P_REASON"=>$reasonchange,
-            ),
-        ));
-        // dd($data);
-
-         //API GET
-        //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
-        $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
-        // $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
-        $ch = curl_init($url);                   
-        curl_setopt($ch, CURLOPT_POST, true);                                  
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-        $result = curl_exec($ch);
-        $err = curl_error($ch);
-        curl_close($ch);
-        $Hasils= json_decode($result); 
-        //   dd($Hasils);
-
-
+       //getdatalms
         $datacashtoLeads = json_encode(array(
             "doTransactionApply" => array(   
                 "TRANSACTION_CODE"=>"GET_DATA_LMS",
@@ -264,7 +234,7 @@ class AccCashApplyDetailController extends Controller
                     "doSendDataLeads" => array(   
                         "P_ACCOUNT_ID"=>"",
                         "P_NAME"=>$HasilscashtoLeads->OUT_DATA[0]->NAME, 
-                        "P_PRODUCT"=>"0003",
+                        "P_PRODUCT"=>$HasilscashtoLeads->OUT_DATA[0]->PRODUCT,
                         "P_NO_AGGR"=>$HasilscashtoLeads->OUT_DATA[0]->NO_AGGR,
                         "P_PHONE_NUMBER"=>$HasilscashtoLeads->OUT_DATA[0]->PHONE_MOBILE,
                         "P_CD_VEHICLE_BRAND"=>$HasilscashtoLeads->OUT_DATA[0]->CD_VEHICLE_BRAND,	
@@ -324,7 +294,7 @@ class AccCashApplyDetailController extends Controller
             //      dd($HasilsLeads);
 
                 // Mail Send
-                if($HasilsLeads->OUT_STAT == "T"){
+                //if($HasilsLeads->OUT_STAT == "T"){
 
                     $data_mail = [
                         'NAME' => $request->NAME,
@@ -335,13 +305,15 @@ class AccCashApplyDetailController extends Controller
                     ];
                     // dd($data_mail);
                     \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashReject($data_mail));
-                }
+                //}
                 
                 $directstatus = "REJECT";
+                $leadsid=null;
             }
             else if($request->STATUS == "REJECT PARTIAL")
             {
                 $directstatus = "REJECT";
+                $leadsid=null;
             }
             else
             {
@@ -356,6 +328,8 @@ class AccCashApplyDetailController extends Controller
                 \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashRejectAll($data_mail));
 
                 $directstatus = "REJECT";
+                $leadsid=null;
+
                 // dd($statuschange);
             }
         }
@@ -410,7 +384,7 @@ class AccCashApplyDetailController extends Controller
                     "P_CD_SPK"=>"",
                 ),
             ));
-            //  dd($dataLeads);
+            // dd($dataLeads);
             //ACC LEADS
             $urlLeads = config('global.base_url_sofia').'/rest/com/acc/lms/in/httprest/dataentry/dataleads';
             $chLeads = curl_init($urlLeads);                   
@@ -424,9 +398,14 @@ class AccCashApplyDetailController extends Controller
             curl_close($chLeads);
             $HasilsLeads= json_decode($resultLeads); 
             //   dd($HasilsLeads);
+            
+
+            
+    
+    
 
             // Mail Send
-            if($HasilsLeads->OUT_STAT == "T"){
+           // if($HasilsLeads->OUT_STAT == "T"){
 
                 $data_mail = [
                     'NAME' => $request->NAME,
@@ -437,16 +416,49 @@ class AccCashApplyDetailController extends Controller
                 ];
                 // dd($data_mail);
                 \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashApproved($data_mail));
-            }
+            //}
             
             $directstatus = "APPROVED";
+            $leadsid=$HasilsLeads->OUT_DATA;
         }
         else
         {
             $directstatus = "PENDING";
+            $leadsid=null;
         }
         
-        
+
+
+        $data = json_encode(array(
+            "doTransactionApply" => array(   
+                // "Id"=> $request->Id_add,
+                "P_GUID"=>$request->GUID,
+                "TRANSACTION_CODE"=>"UPD_APPLY",
+                // "P_STATUS"=>$request->STATUS,
+               // "P_REASON"=>$request->REASON,
+               "P_ID_USER"=>$request->session()->get('Name'),
+               "P_LEADS_ID"=>$leadsid,
+                "P_STATUS"=>$statuschange,
+                "P_REASON"=>$reasonchange,
+            ),
+        ));
+        // dd($data);
+
+         //API GET
+        //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
+        $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
+        // $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result); 
+        //   dd($Hasils);
 
          //@dd($directstatus);
 
