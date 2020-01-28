@@ -276,8 +276,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/seamless-unit-detail/{Id}','SeamlessUnitDetailController@index');
     Route::get('/seamless-unit-detail/hitungsimulasi/{Id}&{Area}','SeamlessUnitDetailController@hitungsimulasi');
-    Route::post('/seamless-unit-detail/delete-selected','SeamlessUnitDetailController@deleteselected');
+    Route::post('/seamless-unit-detail/delete-otr-selected','SeamlessUnitDetailController@deleteotrselected');
     Route::get('/seamless-unit-detail/deleteotrall/{Id}','SeamlessUnitDetailController@deleteotrall');
+    Route::post('/seamless-unit-detail/delete-detail-selected','SeamlessUnitDetailController@deletedetailselected');
+    Route::get('/seamless-unit-detail/deletedetailall/{Id}','SeamlessUnitDetailController@deletedetailall');
 
     Route::get('/seamless-unit-detail-update/{ID_UNIT}&{GUID}','SeamlessUnitDetailUpdateController@index');
     Route::post('/seamless-unit-detail-update/update','SeamlessUnitDetailUpdateController@update');
@@ -331,5 +333,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/seamless-otrupload/upload','SeamlessOtrUploadController@upload');
     Route::get('/seamless-otrupload/download/','SeamlessOtrUploadController@download');
 
+    Route::get('/seamless-dataleads','SeamlessDataLeadsController@index');
+    Route::get('/seamless-dataleads/get-by-bulantahun','SeamlessDataLeadsController@getByBulanTahun');
+    
     Route::get('/invalid-permission','InvalidPermissionController@index');
 });//end group route

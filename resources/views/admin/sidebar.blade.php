@@ -161,7 +161,7 @@
                 <!-- ditaruh di dalam a setelah text Pending List <span class="badge">t</span> -->
                 <li class="@yield('acccash-apply-approved')"><a href="{{ asset('acccash-apply/APPROVED') }}"><i class="fa fa-circle-o"></i> Approved List</a></li>
                 <li class="@yield('acccash-apply-reject')"><a href="{{ asset('acccash-apply/REJECT') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
-                <li class="@yield('acccash-apply-plafon')"><a href="{{ asset('acccash-apply-plafon/') }}"><i class="fa fa-circle-o"></i> Broadcast Plafond</a></li>
+                <!-- <li class="@yield('acccash-apply-plafon')"><a href="{{ asset('acccash-apply-plafon/') }}"><i class="fa fa-circle-o"></i> Broadcast Plafond</a></li> -->
                 </ul>
             </li>
             @endif
@@ -178,7 +178,7 @@
                 <li class="@yield('seamless-product')"><a href="{{ asset('seamless-product') }}"><i class="fa fa-circle-o"></i> Product</a></li>
                 <li class="@yield('seamless-banner')"><a href="{{ asset('seamless-banner') }}"><i class="fa fa-circle-o"></i> Banner</a></li>
                 <li class="@yield('seamless-otrupload')"><a href="{{ asset('seamless-otrupload') }}"><i class="fa fa-circle-o"></i> OTR Upload</a></li>
-
+                <li class="@yield('seamless-dataleads')"><a href="{{ asset('seamless-dataleads') }}"><i class="fa fa-circle-o"></i> Data Leads</a></li>                
                 </ul>
             </li>
             @endif
