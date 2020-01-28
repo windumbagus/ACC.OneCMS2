@@ -80,7 +80,7 @@
             @foreach ($SeamlessDataLeads as $SeamlessDataLead)
             <tr>  
                 <td><span>{{$SeamlessDataLead->LEADS_ID}}</span></td>
-                <td><span>{{date('d M Y H:i:s', strtotime($SeamlessDataLead->DT_ADDED))}}</span></td>    
+                <td><span>{{$SeamlessDataLead->DT_ADDED}}</span></td>    
                 <td><span>{{$SeamlessDataLead->NAME}}</span></td>
                 <td><span>{{$SeamlessDataLead->PHONE_NUMBER}}</span></td>
                 <td><span>{{$SeamlessDataLead->DESC_BRAND}}</span></td>
@@ -106,6 +106,7 @@
 
   <!-- page script -->
 <script>
+    $(document).ajaxStart(function() { Pace.restart(); });
     $(document).ready(function () {
       $('#example2').DataTable({
           'deferRender': true,
