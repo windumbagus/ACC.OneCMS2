@@ -72,7 +72,7 @@
             <th>TDP</th>
             <th>Angsuran</th>
             <th>OTR</th>           
-            <th>Action</th>      
+            {{-- <th>Action</th>       --}}
         </tr>
         </thead>
         <tbody>
@@ -92,7 +92,7 @@
                 <td><span>{{$SeamlessDataLead->AMT_TDP}}</span></td>
                 <td><span>{{$SeamlessDataLead->AMT_INSTALLMENT}}</span></td>
                 <td><span>{{$SeamlessDataLead->AMT_OTR}}</span></td>
-                <td><span> 
+                {{-- <td><span>  --}}
                 
                 </span></td>
                 
@@ -131,7 +131,7 @@
                 null,
                 null,
                 null,
-                {"searchable":false},
+                // {"searchable":false},
                 
             ]
       })
@@ -161,12 +161,50 @@
                 success: function(data){
                     console.log(data);
                     var table = $('#example2').DataTable()
-                    var DataLeads = data.Object;
+                    var DataLeads = data;
                     table.clear().draw()
 
 
-                    DataLeads.map(e=>{
-                        
+                    DataLeads.map(e=>{ 
+                        if (typeof e.LEADS_ID === 'undefined') {
+                        e.LEADS_ID = "";
+                        }
+                        if (typeof e.DT_ADDED === 'undefined') {
+                        e.DT_ADDED = "";
+                        }
+                        if (typeof e.NAME === 'undefined') {
+                        e.NAME = "";
+                        }
+                        if (typeof e.PHONE_NUMBER === 'undefined') {
+                        e.PHONE_NUMBER = "";
+                        }
+                        if (typeof DESC_BRAND === 'undefined') {
+                        DESC_BRAND = "";
+                        }
+                        if (typeof e.DESC_TYPE === 'undefined') {
+                        e.DESC_TYPE = "";
+                        }
+                        if (typeof e.DESC_MODEL === 'undefined') {
+                        e.DESC_MODEL = "";
+                        }
+                        if (typeof e.CD_SP === 'undefined') {
+                        e.CD_SP = "";
+                        }
+                        if (typeof e.DESC_SP === 'undefined') {
+                        e.DESC_SP = "";
+                        }
+                        if (typeof e.TAHUN === 'undefined') {
+                        e.TAHUN = "";
+                        }
+                        if (typeof e.AMT_TDP === 'undefined') {
+                        e.AMT_TDP = "";
+                        }
+                        if (typeof e.AMT_INSTALLMENT === 'undefined') {
+                        e.AMT_INSTALLMENT = "";
+                        }
+                        if (typeof e.AMT_OTR === 'undefined') {
+                        e.AMT_OTR = "";
+                        }
 
                         table.row.add([
                             e.LEADS_ID,
@@ -176,11 +214,13 @@
                             e.DESC_BRAND,
                             e.DESC_TYPE,
                             e.DESC_MODEL,
+                            e.CD_SP,
                             e.DESC_SP,
                             e.TAHUN,
                             e.AMT_TDP,
                             e.AMT_INSTALLMENT,
                             e.AMT_OTR,
+
                         ]).draw(false)
                     }) 
                 }
