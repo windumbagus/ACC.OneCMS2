@@ -43,16 +43,9 @@ class SeamlessDataLeadsController extends Controller
         $Hasilsrole= json_decode($resultrole);
         //dd($Hasilsrole);
 
-
-        if(now()->month < 10)
-        {
-            $bulantahun = '0'.now()->month.'/'.now()->year;
-        }
-        else{
-            $bulantahun = now()->month.'/'.now()->year;
-        }
+        $bulantahun = date('m/Y', strtotime(now()));
+        
         //dd($bulantahun);
-       
         $data = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_DATA_LEADS",

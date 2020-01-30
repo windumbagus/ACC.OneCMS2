@@ -36,13 +36,11 @@
                 <div class="col-sm-4">
                     <select class="form-control select2" id="Bulantahunselect" style="width:100%;">
                         <option value="0" selected>-- Pilih Bulan, Tahun --</option>
-                        <option value="11/2019">November 2019</option>
-                        <option value="12/2019">Desember 2019</option>
-                        <option value="01/2020">Januari 2020</option>
-                        <option value="02/2020">Februari 2020</option>
-                        <option value="03/2020">Maret 2020</option>
-                        <option value="04/2020">April 2020</option>
-                        <option value="05/2020">Mei 2020</option>
+                        @for ($i = 0; $i > -3; $i--)
+                            <option value="{{date('m/Y', strtotime(now()->addMonths($i)))}}">
+                            {{date('M Y', strtotime(now()->addMonths($i)))}}
+                            </option>
+                        @endfor
                     </select>
                 </div>
             </div>
@@ -156,7 +154,8 @@
             var Bulantahunselect = $(this).val();
            
             $.ajax({
-                url:'/seamless-dataleads/get-by-bulantahun',
+                
+                url:"{{asset('/seamless-dataleads/get-by-bulantahun')}}",
                 data: {'Bulantahun':Bulantahunselect,'_token':'{{csrf_token()}}'},
                 dataType:'json',
                 success: function(data){
