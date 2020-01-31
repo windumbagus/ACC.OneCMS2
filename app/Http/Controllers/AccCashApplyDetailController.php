@@ -280,7 +280,7 @@ class AccCashApplyDetailController extends Controller
                 ));
                 //  dd($dataLeads);
                 //ACC LEADS
-                $urlLeads = config('global.base_url_sofia').'/rest/com/acc/lms/in/httprest/dataentry/dataleads';
+                $urlLeads = config('global.base_url_sofia2').'/rest/com/acc/lms/in/httprest/dataentry/dataleads';
                 $chLeads = curl_init($urlLeads);                   
                 curl_setopt($chLeads, CURLOPT_POST, true);                                  
                 curl_setopt($chLeads, CURLOPT_POSTFIELDS, $dataLeads);
@@ -291,7 +291,7 @@ class AccCashApplyDetailController extends Controller
                 $errLeads = curl_error($chLeads);
                 curl_close($chLeads);
                 $HasilsLeads= json_decode($resultLeads); 
-            //      dd($HasilsLeads);
+                  //dd($HasilsLeads);
 
                 // Mail Send
                 //if($HasilsLeads->OUT_STAT == "T"){
@@ -386,7 +386,7 @@ class AccCashApplyDetailController extends Controller
             ));
             // dd($dataLeads);
             //ACC LEADS
-            $urlLeads = config('global.base_url_sofia').'/rest/com/acc/lms/in/httprest/dataentry/dataleads';
+            $urlLeads = config('global.base_url_sofia2').'/rest/com/acc/lms/in/httprest/dataentry/dataleads';
             $chLeads = curl_init($urlLeads);                   
             curl_setopt($chLeads, CURLOPT_POST, true);                                  
             curl_setopt($chLeads, CURLOPT_POSTFIELDS, $dataLeads);
@@ -495,13 +495,13 @@ class AccCashApplyDetailController extends Controller
 
 
         //dd($Hasils);
-        if ($Hasils->OUT_STAT == "T"){
+       // if ($Hasils->OUT_STAT == "T"){
             // return redirect("acccash-apply/".$request->STATUS)->with('success','Status berhasil diubah');
             // return redirect("acccash-apply/".$directstatus)->with('success','Status berhasil diubah');
             return redirect("acccash-apply/PENDING")->with('success','Status berhasil diubah');
-        }else{
-            return redirect("acccash-apply/PENDING")->with('error',$Hasils->OUT_MESS);
-        }
+        //}else{
+        //    return redirect("acccash-apply/PENDING")->with('error',$Hasils->OUT_MESS);
+       // }
        
     }
 

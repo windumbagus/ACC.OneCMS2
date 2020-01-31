@@ -111,7 +111,7 @@ class SeamlessProductController extends Controller
         //dd($data);
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
-        $url = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
         // $url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
         $ch = curl_init($url);                   
         curl_setopt($ch, CURLOPT_POST, true);                                  

@@ -306,7 +306,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/seamless-product','SeamlessProductController@index');
     Route::get('/seamless-product/show','SeamlessProductController@show');
-    Route::post('/seamless-product/delete/{CD_PRODUCT}','SeamlessProductController@delete');
+    Route::get('/seamless-product/delete/{CD_PRODUCT}','SeamlessProductController@delete');
     
 
     Route::get('/seamless-product-detail/{Id}','SeamlessProductDetailController@index');
