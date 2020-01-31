@@ -58,10 +58,16 @@
 											<input type="text" class="form-control" name="DT_END" id="DT_END" value="{{$SeamlessProducts->DT_END}}">
 										</div>
 									</div>
-									<div class="form-group" style="display:none;">
+									<div class="form-group">
 										<label class="col-sm-3 control-label">Is Active</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" name="FLAG_ACTIVE" id="FLAG_ACTIVE" value="{{$SeamlessProducts->FLAG_ACTIVE}}" readonly>
+											<input type="text" class="form-control" name="FLAG_ACTIVE" id="FLAG_ACTIVE" value="{{$SeamlessProducts->FLAG_ACTIVE}}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Is Promoted</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" name="FLAG_PROMOTED" id="FLAG_PROMOTED" value="{{$SeamlessProducts->FLAG_PROMOTED}}">
 										</div>
 									</div>
 									<div class="form-group">

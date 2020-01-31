@@ -22,6 +22,12 @@ class SeamlessProductUploadPictureController extends Controller
            // 'RoleId'=>$request->session()->get('RoleId'),
            // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
+
+        $role = json_encode(array(  
+            // "Id"=> $request->Id_add,
+            "ROLEID"=>$request->session()->get('RoleId'),
+        
+        ));
         
         $urlrole = config('global.base_url_outsystems').'/ACCWorldCMS/rest/CheckRoleAPI/CheckRole';
 

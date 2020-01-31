@@ -107,6 +107,7 @@ class SeamlessProductDetailUpdateController extends Controller
                 "P_DT_START"=>$request->DT_START,
                 "P_DT_END"=>$request->DT_END,
                 "P_FLAG_ACTIVE"=>$request->FLAG_ACTIVE,
+                "P_FLAG_PROMOTED"=>$request->FLAG_PROMOTED,
                 "P_LANGUAGE"=>"IN",
             ),
         ));
