@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AccCashApplyExport;
+use Image;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 
 class SeamlessBannerCreateController extends Controller
 {
@@ -71,16 +74,17 @@ class SeamlessBannerCreateController extends Controller
         
 
         $file = $request->addPicture_seamlessbanner;
-        //dd($file);
+        // dd($file);
         If(!file_exists($file))
         {
             $content = null;
         }
         else{
            
-            $getContent = file_get_contents($file);
-       
-            $content= base64_encode($getContent);
+            // $getContent = file_get_contents($file);
+            $content = (string) Image::make($file)->resize(300, 200)->encode('data-url');
+            // dd($content);
+            // $content= base64_encode($getContent);
             $name = $file->getClientOriginalName();
             $type = $file->extension();
 
@@ -125,7 +129,6 @@ class SeamlessBannerCreateController extends Controller
             ),
         ));
         // dd($data);
-         // dd($content);
         //API GET
         $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
         //  dd($data);
