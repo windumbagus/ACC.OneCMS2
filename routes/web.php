@@ -340,8 +340,15 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-diskon/delete/{GUID}','SeamlessDiskonController@delete');
     Route::get('/seamless-diskon-create','SeamlessDiskonCreateController@index');
     Route::post('/seamless-diskon-create/create','SeamlessDiskonCreateController@create');
-    Route::get('/seamless-diskon-update/{Id}','SeamlessDiskonUpdateController@index');
+    Route::get('/seamless-diskon-update/{GUID}','SeamlessDiskonUpdateController@index');
     Route::post('/seamless-diskon-update/update','SeamlessDiskonUpdateController@update');
+
+    Route::get('/seamless-param','SeamlessParamController@index');
+    Route::get('/seamless-param/delete/{CD_PRODUCT}','SeamlessParamController@delete');
+    Route::get('/seamless-param-create','SeamlessParamCreateController@index');
+    Route::post('/seamless-param-create/create','SeamlessParamCreateController@create');
+    Route::get('/seamless-param-update/{CD_PRODUCT}','SeamlessParamUpdateController@index');
+    Route::post('/seamless-param-update/update','SeamlessParamUpdateController@update');
 
 
 

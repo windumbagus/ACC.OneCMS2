@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AccCashApplyExport;
 
-
-class SeamlessDiskonUpdateController extends Controller
+class SeamlessParamUpdateController extends Controller
 {
   
 
@@ -45,9 +44,9 @@ class SeamlessDiskonUpdateController extends Controller
         //dd($Hasilsrole);
 
         $data = json_encode(array(
-            "doSendDataDiscount" => array(   
-                "TRANSACTION_CODE"=>"GET_DISCOUNT",
-                "P_INPUT"=>$request->GUID,
+            "doSendDataCustomerApply" => array(   
+                "TRANSACTION_CODE"=>"GET_PARAM_SIMULATION",
+                "P_CD_PRODUCT"=>$request->CD_PRODUCT,
                 "P_LANGUAGE"=>"IN",
             ),
         ));
@@ -55,7 +54,7 @@ class SeamlessDiskonUpdateController extends Controller
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         //  $url = $this->base_url_sofia.'/restV2/acccash/getdata/transactionapply';
-        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datadiscount';
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/customerapply';
         // $url = $this->base_url+"restV2/acccash/getdata/transactionapply"; 
         
         //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionaggr";
@@ -75,9 +74,9 @@ class SeamlessDiskonUpdateController extends Controller
         {
            //   dd($Hasils->OUT_DATA[0]);
            return view(
-            'seamless_diskon_update',[
+            'seamless_param_update',[
                // 'Role' => $Hasils->Role,
-                'SeamlessDiskonUpdates'=>$Hasils->OUT_DATA[0],
+                'SeamlessParamUpdates'=>$Hasils->OUT_DATA[0],
                // 'Roles'=>$Hasils2->Roles,
               //  'UserCategories'=>$Hasils2->UserCategory, 
               'role'=> $Hasilsrole->OUT_DATA,
@@ -98,20 +97,23 @@ class SeamlessDiskonUpdateController extends Controller
     {
         // dd($end_date);
         $data = json_encode(array(
-            "doSendDataDiscount" => array(   
-                "TRANSACTION_CODE"=>"UPDATE_DISCOUNT",
-                "P_GUID"=>$request->GUID,
-                "P_DISCOUNT"=>$request->DISCOUNT,
+            "doSendParamSimulation" => array(   
+                "TRANSACTION_CODE"=>"UPDATE_PARAM_SIMULATION",
+                "P_CD_PRODUCT"=>$request->CD_PRODUCT,
+                "P_PERC_DP"=>$request->PERC_DP,
+                "P_TENOR"=>$request->TENOR,
+                "P_TYPE_INSU"=>$request->TYPE_INSU,
+                "P_MODE_INSU"=>$request->MODE_INSU,
+                "P_FLAG_ACP"=>$request->FLAG_ACP,
+                "P_FLAG_ADDM"=>$request->FLAG_ADDM,
                 "P_USER"=>"ADMIN",
-                "P_YEAR"=>$request->YEAR,
                 "P_LANGUAGE"=>"IN",
-
             ),
         ));
 
          // dd($content);
         //API GET
-        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datadiscount';
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/paramsimulation';
         //   dd($data);
 
         // dd($url);
@@ -132,9 +134,9 @@ class SeamlessDiskonUpdateController extends Controller
         
         //  if ($Hasils->OUT_STAT == "T"){
             
-            return redirect('seamless-diskon/')->with('success','Data berhasil diubah');
+            return redirect('seamless-param/')->with('success','Data berhasil diubah');
         // }else{
-            // return redirect('seamless-diskon-picture/'.$$request->CD_PRODUCT)->with('error',$Hasils->OUT_MESS);
+            // return redirect('seamless-param-picture/'.$$request->CD_PRODUCT)->with('error',$Hasils->OUT_MESS);
         // }
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AccCashApplyExport;
 
-class SeamlessDiskonCreateController extends Controller
+class SeamlessParamCreateController extends Controller
 {
   
 
@@ -47,7 +47,7 @@ class SeamlessDiskonCreateController extends Controller
         if ($Hasilsrole->OUT_DATA == 'Super Admin' || $Hasilsrole->OUT_DATA == 'Super_Admin' || $Hasilsrole->OUT_DATA == 'seamless')
         {
             return view(
-                'seamless_diskon_create',[
+                'seamless_param_create',[
                    // 'Role' => $Hasils->Role,
                    // 'Roles'=>$Hasils2->Roles,
                   //  'UserCategories'=>$Hasils2->UserCategory, 
@@ -69,21 +69,22 @@ class SeamlessDiskonCreateController extends Controller
     {
 
         $data = json_encode(array(
-            "doSendDataDiscount" => array(   
-                "TRANSACTION_CODE"=>"INSERT_DISCOUNT",
-                "P_DISCOUNT"=>$request->DISCOUNT,
+            "doSendParamSimulation" => array(   
+                "TRANSACTION_CODE"=>"INSERT_PARAM_SIMULATION",
+                "P_CD_PRODUCT"=>$request->CD_PRODUCT,
+                "P_PERC_DP"=>$request->PERC_DP,
+                "P_TENOR"=>$request->TENOR,
+                "P_TYPE_INSU"=>$request->TYPE_INSU,
+                "P_MODE_INSU"=>$request->MODE_INSU,
+                "P_FLAG_ACP"=>$request->FLAG_ACP,
+                "P_FLAG_ADDM"=>$request->FLAG_ADDM,
                 "P_USER"=>"ADMIN",
-                "P_YEAR"=>$request->YEAR,
-                "P_CD_BRAND"=>$request->CD_BRAND,
-                "P_CD_TYPE"=>$request->CD_TYPE,
-                "P_CD_MODEL"=>$request->CD_MODEL,
                 "P_LANGUAGE"=>"IN",
-
             ),
         ));
         // dd($data);
         //API GET
-        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datadiscount';
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/paramsimulation';
         //  dd($data);
 
         // dd($url);
@@ -98,15 +99,15 @@ class SeamlessDiskonCreateController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $Hasils= json_decode($result);
-        // dd($Hasils);
+       //  dd($Hasils);
         //dd($err);
         
         
         //  if ($Hasils->OUT_STAT == "T"){
             
-            return redirect('seamless-diskon/')->with('success','Data berhasil dibuat');
+            return redirect('seamless-param/')->with('success','Data berhasil dibuat');
         // }else{
-            // return redirect('seamless-diskon-create')->with('error',$Hasils->OUT_MESS);
+            // return redirect('seamless-param-create')->with('error',$Hasils->OUT_MESS);
         // }
     }
 
