@@ -336,5 +336,14 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-dataleads','SeamlessDataLeadsController@index');
     Route::get('/seamless-dataleads/get-by-bulantahun','SeamlessDataLeadsController@getByBulanTahun');
     
+    Route::get('/seamless-diskon','SeamlessDiskonController@index');
+    Route::get('/seamless-diskon/delete/{GUID}','SeamlessDiskonController@delete');
+    Route::get('/seamless-diskon-create','SeamlessDiskonCreateController@index');
+    Route::post('/seamless-diskon-create/create','SeamlessDiskonCreateController@create');
+    Route::get('/seamless-diskon-update/{Id}','SeamlessDiskonUpdateController@index');
+    Route::post('/seamless-diskon-update/update','SeamlessDiskonUpdateController@update');
+
+
+
     Route::get('/invalid-permission','InvalidPermissionController@index');
 });//end group route

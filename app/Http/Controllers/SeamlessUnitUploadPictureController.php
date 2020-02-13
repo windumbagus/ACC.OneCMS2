@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AccCashApplyExport;
+use Image;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 
 class SeamlessUnitUploadPictureController extends Controller
 {
@@ -98,12 +101,31 @@ class SeamlessUnitUploadPictureController extends Controller
     public function uploadpicture(Request $request) {
 
             $file = $request->addPicture_seamlessunit;
-            // dd($file);
-            $getContent = file_get_contents($file);
-           
-            $content= base64_encode($getContent);
-            $name = $file->getClientOriginalName();
-            $type = $file->extension();
+             // dd($file);
+            If(!file_exists($file))
+            {
+                $content = null;
+            }
+            else{
+            
+                //  $getcontent = file_get_contents($file);
+                $getcontentresizing = (string) Image::make($file)->resize(null, 200, 
+                function ($constraint) {
+                    $constraint->aspectRatio();
+                })->encode('data-url');
+                
+                
+            // $content = str_replace('data:image/jpeg;base64,','',$getcontent);
+                $getcontent = file_get_contents($getcontentresizing);
+                $content = base64_encode($getcontent);
+                //dd($content);
+                $name = $file->getClientOriginalName();
+                $type = $file->extension();
+
+            }
+
+
+
 
         $data = json_encode(array(
             "doSendDataCMS" => array(   

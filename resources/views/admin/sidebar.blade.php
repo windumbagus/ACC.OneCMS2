@@ -178,7 +178,8 @@
                 <li class="@yield('seamless-product')"><a href="{{ asset('seamless-product') }}"><i class="fa fa-circle-o"></i> Product</a></li>
                 <li class="@yield('seamless-banner')"><a href="{{ asset('seamless-banner') }}"><i class="fa fa-circle-o"></i> Banner</a></li>
                 <li class="@yield('seamless-otrupload')"><a href="{{ asset('seamless-otrupload') }}"><i class="fa fa-circle-o"></i> OTR Upload</a></li>
-                <li class="@yield('seamless-dataleads')"><a href="{{ asset('seamless-dataleads') }}"><i class="fa fa-circle-o"></i> Data Leads</a></li>                
+                <li class="@yield('seamless-dataleads')"><a href="{{ asset('seamless-dataleads') }}"><i class="fa fa-circle-o"></i> Data Leads</a></li>
+                <li class="@yield('seamless-diskon')"><a href="{{ asset('seamless-diskon') }}"><i class="fa fa-circle-o"></i> Master Discount</a></li>                
                 </ul>
             </li>
             @endif
