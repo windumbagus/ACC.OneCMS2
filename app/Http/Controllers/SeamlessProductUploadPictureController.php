@@ -110,11 +110,13 @@ class SeamlessProductUploadPictureController extends Controller
         }
         else{
         
+
+            $getcontentresizing = (string) Image::make($file)->resize(1435, 576)->encode('data-url');
             //  $getcontent = file_get_contents($file);
-            $getcontentresizing = (string) Image::make($file)->resize(null, 200, 
-            function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('data-url');
+            // $getcontentresizing = (string) Image::make($file)->resize(null, 200, 
+            // function ($constraint) {
+            //     $constraint->aspectRatio();
+            // })->encode('data-url');
             
             
         // $content = str_replace('data:image/jpeg;base64,','',$getcontent);

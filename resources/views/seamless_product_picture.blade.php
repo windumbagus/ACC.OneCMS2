@@ -49,7 +49,11 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">TNC</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" name="TNC" id="TNC" value="{{$SeamlessProductPictures->TNC}}">
+											<input type="checkbox" value="True" id="checkboxtnc_useTextEditor" checked> 
+											Use text editor?<br>
+											<textarea rows="12" cols="60" type="text" class="form-control" name="TNC" 
+												id="TNC">{{$SeamlessProductPictures->TNC}}
+											</textarea>
 										</div>
 									</div>
 									<div class="form-group" style="display:none;">
@@ -99,10 +103,26 @@
  </div>
 
   <!-- page script -->
+  <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
   <script>
+    $(function() {
+      
+        CKEDITOR.replace('TNC')
+    });
+
     $("#input_update_picture_seamlessproduct").change(function() {
         readUrlAdd(this);
     });
+
+	 // UseTextEditor Checkbox
+	$(document).on('change','#checkboxtnc_useTextEditor',function(){
+        if ($('#checkboxtnc_useTextEditor').is(':checked')) {
+            CKEDITOR.replace('TNC');
+        } else {
+            CKEDITOR.instances['TNC'].destroy();
+        }
+    });
+
     function readUrlAdd(input) {
         if (input.files && input.files[0]) {
             var readerPictureAdd = new FileReader();

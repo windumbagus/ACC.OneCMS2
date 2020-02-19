@@ -107,12 +107,18 @@ class SeamlessUnitUploadPictureController extends Controller
                 $content = null;
             }
             else{
-            
                 //  $getcontent = file_get_contents($file);
-                $getcontentresizing = (string) Image::make($file)->resize(null, 200, 
-                function ($constraint) {
-                    $constraint->aspectRatio();
-                })->encode('data-url');
+                if($request->FLAG_PRIMARY == 'Y')
+                {
+                    $getcontentresizing = (string) Image::make($file)->resize(150, 150)->encode('data-url');
+                }
+                else
+                {
+                    $getcontentresizing = (string) Image::make($file)->resize(450, 300)->encode('data-url');
+                }
+                
+
+
                 
                 
             // $content = str_replace('data:image/jpeg;base64,','',$getcontent);
