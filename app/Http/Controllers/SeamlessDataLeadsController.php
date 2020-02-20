@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AccCashApplyExport;
+use App\Exports\SeamlessDataLeadsExport;
 
 class SeamlessDataLeadsController extends Controller
 {
@@ -104,7 +104,7 @@ class SeamlessDataLeadsController extends Controller
     public function getByBulanTahun(Request $request)
     {
         $bulantahun = $request->Bulantahun;
-        
+            // dd($bulantahun);
         $data = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_DATA_LEADS",
@@ -136,6 +136,130 @@ class SeamlessDataLeadsController extends Controller
         //dd($Hasils);
 
         return json_encode($Hasils->OUT_DATA); 
+    }
+
+    public function download($bulan=null,$tahun=null, Request $request)
+    {
+        $bulantahun= $bulan."/".$tahun;
+        $data = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"GET_DATA_LEADS",
+                "P_INPUT"=>"$bulantahun",
+            ),
+        ));
+    // dd($bulantahun);
+    // dd($data);
+
+    //API GET
+    $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+
+    $ch = curl_init($url);                   
+    curl_setopt($ch, CURLOPT_POST, true);                                  
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+    $result = curl_exec($ch);
+    $err = curl_error($ch);
+    curl_close($ch);
+    $Hasils= json_decode($result); 
+    // dd($Hasils);
+        
+        $data_export=[];
+        if(property_exists($Hasils,'OUT_DATA')){
+            foreach ($Hasils->OUT_DATA as $Hasil) {
+
+                if (property_exists($Hasil, 'LEADS_ID')){
+                    $LEADS_ID = $Hasil->LEADS_ID;
+                }else{
+                    $LEADS_ID = "";
+                }
+                if (property_exists($Hasil, 'DT_ADDED')){
+                    $DT_ADDED = $Hasil->DT_ADDED;
+                }else{
+                    $DT_ADDED = "";
+                }
+                if (property_exists($Hasil, 'NAME')){
+                    $NAME = $Hasil->NAME;
+                }else{
+                    $NAME = "";
+                }
+                if (property_exists($Hasil, 'PHONE_NUMBER')){
+                    $PHONE_NUMBER = $Hasil->PHONE_NUMBER;
+                }else{
+                    $PHONE_NUMBER = "";
+                }
+                if (property_exists($Hasil, 'DESC_BRAND')){
+                    $DESC_BRAND = $Hasil->DESC_BRAND;
+                }else{
+                    $DESC_BRAND = "";
+                }
+                if (property_exists($Hasil, 'DESC_TYPE')){
+                    $DESC_TYPE = $Hasil->DESC_TYPE;
+                }else{
+                    $DESC_TYPE = "";
+                }
+                if (property_exists($Hasil, 'DESC_MODEL')){
+                    $DESC_MODEL = $Hasil->DESC_MODEL;
+                }else{
+                    $DESC_MODEL = "";
+                }
+                if (property_exists($Hasil, 'CD_SP')){
+                    $CD_SP = $Hasil->CD_SP;
+                }else{
+                    $CD_SP = "";
+                }
+                if (property_exists($Hasil, 'DESC_SP')){
+                    $DESC_SP = $Hasil->DESC_SP;
+                }else{
+                    $DESC_SP = "";
+                }
+                if (property_exists($Hasil, 'TAHUN')){
+                    $TAHUN = $Hasil->TAHUN;
+                }else{
+                    $TAHUN = "";
+                }
+                if (property_exists($Hasil, 'TENOR')){
+                    $TENOR = $Hasil->TENOR;
+                }else{
+                    $TENOR = "";
+                }
+                if (property_exists($Hasil, 'AMT_TDP')){
+                    $AMT_TDP = $Hasil->AMT_TDP;
+                }else{
+                    $AMT_TDP = "";
+                }
+                if (property_exists($Hasil, 'AMT_INSTALLMENT')){
+                    $AMT_INSTALLMENT = $Hasil->AMT_INSTALLMENT;
+                }else{
+                    $AMT_INSTALLMENT = "";
+                }
+                if (property_exists($Hasil, 'AMT_OTR')){
+                    $AMT_OTR = $Hasil->AMT_OTR;
+                }else{
+                    $AMT_OTR = "";
+                }
+                
+                array_push($data_export,[
+                    "LEADS_ID"=>$LEADS_ID,
+                    "DT_ADDED"=>$DT_ADDED,
+                    "NAME"=>$NAME,
+                    "PHONE_NUMBER"=>$PHONE_NUMBER,
+                    "DESC_BRAND"=>$DESC_BRAND,
+                    "DESC_TYPE"=>$DESC_TYPE,
+                    "DESC_MODEL"=>$DESC_MODEL,
+                    "CD_SP"=>$CD_SP,
+                    "DESC_SP"=>$DESC_SP,
+                    "TAHUN"=>$TAHUN,
+                    "TENOR"=>$TENOR,
+                    "AMT_TDP"=>$AMT_TDP,
+                    "AMT_INSTALLMENT"=>$AMT_INSTALLMENT,
+                    "AMT_OTR"=>$AMT_OTR,
+            ]);
+            }
+        }
+        // dd($data_export);
+        return Excel::download(new SeamlessDataLeadsExport($data_export), 'Seamless Data Leads '.  date("Y-m-d") .'.xlsx');
     }
 
 

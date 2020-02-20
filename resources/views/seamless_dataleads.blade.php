@@ -19,9 +19,9 @@
                         
                        
                 </div>
-                <!-- <div class="col-sm-6">
-                        
-                </div> -->
+                <div class="col-sm-6">
+                    <a href="{{asset('/Seamless-dataleads/download/'.date('m/Y', strtotime(now())) )}}" class="btn btn-block btn-primary" id="button-download">Download</a>    
+                </div> 
             </div>
         </div>
     </div>
@@ -152,6 +152,11 @@
         // Condition Dropdown
         $('#Bulantahunselect').on('change',function(){
             var Bulantahunselect = $(this).val();
+
+                var tempBulantahunselect = Bulantahunselect;
+            
+                document.getElementById('button-download').setAttribute("href", "");
+                document.getElementById('button-download').setAttribute("href", `{{asset('/seamless-dataleads/download/${tempBulantahunselect}')}}`);
            
             $.ajax({
                 
