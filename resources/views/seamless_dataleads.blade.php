@@ -11,7 +11,7 @@
         
         <div class="row">
             <div class="col-sm-8">
-                <h3 class="box-title">Data Leads</h3>
+                <h3 class="box-title">Data Leads </h3>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
@@ -20,8 +20,14 @@
                        
                 </div>
                 <div class="col-sm-6">
+<<<<<<< HEAD
                     <a href="{{asset('/Seamless-dataleads/download/'.date('m/Y', strtotime(now())) )}}" class="btn btn-block btn-primary" id="button-download">Download</a>    
                 </div> 
+=======
+                         
+                         <a href="#" class="ButtonDownload btn btn-block btn-primary">Download</a>  
+                </div>
+>>>>>>> 74e9f9054ba56c306c82aae1dfa47eb7a1f73612
             </div>
         </div>
     </div>
@@ -64,13 +70,13 @@
             <th>Brand</th>
             <th>Type</th>
             <th>Model</th>
+            <th>Kode Cabang</th>
             <th>Cabang</th>
             <th>Tahun</th>
             <th>Tenor</th>
             <th>TDP</th>
             <th>Angsuran</th>
             <th>OTR</th>           
-            {{-- <th>Action</th>       --}}
         </tr>
         </thead>
         <tbody>
@@ -84,15 +90,14 @@
                 <td><span>{{$SeamlessDataLead->DESC_BRAND}}</span></td>
                 <td><span>{{$SeamlessDataLead->DESC_TYPE}}</span></td>
                 <td><span>{{$SeamlessDataLead->DESC_MODEL}}</span></td>
+                <td><span>{{$SeamlessDataLead->CD_SP}}</span></td>
                 <td><span>{{$SeamlessDataLead->DESC_SP}}</span></td>
                 <td><span>{{$SeamlessDataLead->TAHUN}}</span></td>
                 <td><span>{{$SeamlessDataLead->TENOR}}</span></td>
                 <td><span>{{$SeamlessDataLead->AMT_TDP}}</span></td>
                 <td><span>{{$SeamlessDataLead->AMT_INSTALLMENT}}</span></td>
                 <td><span>{{$SeamlessDataLead->AMT_OTR}}</span></td>
-                {{-- <td><span>  --}}
-                
-                </span></td>
+         
                 
                 
             </tr>                              
@@ -104,6 +109,7 @@
 
   <!-- page script -->
 <script>
+    var Bulantahunselect;
     $(document).ajaxStart(function() { Pace.restart(); });
     $(document).ready(function () {
       $('#example2').DataTable({
@@ -130,17 +136,21 @@
                 null,
                 null,
                 null,
-                // {"searchable":false},
+                null,
                 
             ]
       })
 
+
+      
         //Button Search
         $('.ButtonSearch').on('click', function(){
             var searchData = $('.InputSearch').val()
             var dtable = $('#example2').DataTable()
             dtable.search(searchData).draw()
         })
+
+
 
         //Reset Button Search
         $('.ResetSearch').on('click',function(){
@@ -151,12 +161,16 @@
 
         // Condition Dropdown
         $('#Bulantahunselect').on('change',function(){
+<<<<<<< HEAD
             var Bulantahunselect = $(this).val();
 
                 var tempBulantahunselect = Bulantahunselect;
             
                 document.getElementById('button-download').setAttribute("href", "");
                 document.getElementById('button-download').setAttribute("href", `{{asset('/seamless-dataleads/download/${tempBulantahunselect}')}}`);
+=======
+            Bulantahunselect = $(this).val();
+>>>>>>> 74e9f9054ba56c306c82aae1dfa47eb7a1f73612
            
             $.ajax({
                 
@@ -230,6 +244,35 @@
                     }) 
                 }
             })
+        });
+
+        $('.ButtonDownload').on('click', function(){
+           
+           $.ajax({
+               xhrFields: {responseType: 'blob',},
+               url:"{{asset('/seamless-dataleads/download')}}",
+               data: {'Bulantahun':Bulantahunselect,'_token':'{{csrf_token()}}'},
+               dataType:'json',
+               success: function(result, status, xhr) {
+
+                    var disposition = xhr.getResponseHeader('content-disposition');
+                    var matches = /"([^"]*)"/.exec(disposition);
+                    var filename = (matches != null && matches[1] ? matches[1] : 'example.xlsx');
+
+                    // The actual download
+                    var blob = new Blob([result], {
+                        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                    });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = filename;
+
+                    document.body.appendChild(link);
+
+                    link.click();
+                    document.body.removeChild(link);
+                 }
+               })
         });
 
   // //VIEW

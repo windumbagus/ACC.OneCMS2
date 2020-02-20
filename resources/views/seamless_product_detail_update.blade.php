@@ -43,7 +43,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Product Name</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" name="DESC_PRODUCT" id="DESC_PRODUCT" value="{{$SeamlessProducts->DESC_PRODUCT}}" readonly>
+											<input type="text" class="form-control" name="DESC_PRODUCT" id="DESC_PRODUCT" value="{{$SeamlessProducts->DESC_PRODUCT}}">
 										</div>
 									</div>
 									<div class="form-group">

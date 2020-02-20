@@ -232,7 +232,7 @@ class AccCashApplyDetailController extends Controller
             {
                 $dataLeads = json_encode(array(
                     "doSendDataLeads" => array(   
-                        "P_ACCOUNT_ID"=>"",
+                        "P_ACCOUNT_ID"=>$HasilscashtoLeads->OUT_DATA[0]->ACCOUNT_ID,
                         "P_NAME"=>$HasilscashtoLeads->OUT_DATA[0]->NAME, 
                         "P_PRODUCT"=>$HasilscashtoLeads->OUT_DATA[0]->PRODUCT,
                         "P_NO_AGGR"=>$HasilscashtoLeads->OUT_DATA[0]->NO_AGGR,
@@ -308,7 +308,8 @@ class AccCashApplyDetailController extends Controller
                 //}
                 
                 $directstatus = "REJECT";
-                $leadsid=null;
+                //$leadsid=null;
+                $leadsid=$HasilsLeads->OUT_DATA;
             }
             else if($request->STATUS == "REJECT PARTIAL")
             {

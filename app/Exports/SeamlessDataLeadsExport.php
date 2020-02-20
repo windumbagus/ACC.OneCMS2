@@ -23,6 +23,7 @@ class SeamlessDataLeadsExport implements FromArray, WithHeadings
     public function headings(): array
     {
         return [
+<<<<<<< HEAD
             "LEADS_ID",
             "DT_ADDED",
             "NAME",
@@ -38,6 +39,20 @@ class SeamlessDataLeadsExport implements FromArray, WithHeadings
             "AMT_INSTALLMENT",
             "AMT_OTR",
             
+=======
+            "LeadsID",
+            "DateAdded",
+            "Name",
+            "PhoneNumber",
+            "DescBrand",
+            "DescType",
+            "DescModel",
+            "DescSP",
+            "Tahun",
+            "AmtTDP",
+            "AmtInstallment",
+            "AmtOTR",
+>>>>>>> 74e9f9054ba56c306c82aae1dfa47eb7a1f73612
         ];
     }
 }
