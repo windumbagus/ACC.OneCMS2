@@ -161,16 +161,12 @@
 
         // Condition Dropdown
         $('#Bulantahunselect').on('change',function(){
-<<<<<<< HEAD
             var Bulantahunselect = $(this).val();
 
                 var tempBulantahunselect = Bulantahunselect;
             
                 document.getElementById('button-download').setAttribute("href", "");
                 document.getElementById('button-download').setAttribute("href", `{{asset('/seamless-dataleads/download/${tempBulantahunselect}')}}`);
-=======
-            Bulantahunselect = $(this).val();
->>>>>>> 74e9f9054ba56c306c82aae1dfa47eb7a1f73612
            
             $.ajax({
                 

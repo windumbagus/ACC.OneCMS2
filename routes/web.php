@@ -335,13 +335,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/seamless-dataleads','SeamlessDataLeadsController@index');
     Route::get('/seamless-dataleads/get-by-bulantahun','SeamlessDataLeadsController@getByBulanTahun');
-<<<<<<< HEAD
     Route::get('/seamless-dataleads/download/{bulan}/{tahun}','SeamlessDataLeadsController@download');
     
-=======
-    Route::get('/seamless-dataleads/download','SeamlessDataLeadsController@download');
-
->>>>>>> 74e9f9054ba56c306c82aae1dfa47eb7a1f73612
     Route::get('/seamless-diskon','SeamlessDiskonController@index');
     Route::get('/seamless-diskon/delete/{GUID}','SeamlessDiskonController@delete');
     Route::get('/seamless-diskon-create','SeamlessDiskonCreateController@index');
