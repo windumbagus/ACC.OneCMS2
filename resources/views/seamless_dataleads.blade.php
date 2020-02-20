@@ -205,6 +205,9 @@
                         if (typeof e.TAHUN === 'undefined') {
                         e.TAHUN = "";
                         }
+                        if (typeof e.TENOR === 'undefined') {
+                        e.TENOR = "";
+                        }
                         if (typeof e.AMT_TDP === 'undefined') {
                         e.AMT_TDP = "";
                         }
