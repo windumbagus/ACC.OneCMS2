@@ -259,7 +259,7 @@ class SeamlessDataLeadsController extends Controller
             }
         }
         // dd($data_export);
-        return Excel::download(new SeamlessDataLeadsExport($data_export), 'Seamless Data Leads '.  date("Y-m-d") .'.xlsx');
+        return Excel::download(new SeamlessDataLeadsExport($data_export), 'Seamless Data Leads '. $bulan.'-'.$tahun .'.xlsx');
     }
 
 }
