@@ -20,14 +20,8 @@
                        
                 </div>
                 <div class="col-sm-6">
-<<<<<<< HEAD
                     <a href="{{asset('/Seamless-dataleads/download/'.date('m/Y', strtotime(now())) )}}" class="btn btn-block btn-primary" id="button-download">Download</a>    
                 </div> 
-=======
-                         
-                         <a href="#" class="ButtonDownload btn btn-block btn-primary">Download</a>  
-                </div>
->>>>>>> 74e9f9054ba56c306c82aae1dfa47eb7a1f73612
             </div>
         </div>
     </div>
@@ -232,6 +226,7 @@
                             e.CD_SP,
                             e.DESC_SP,
                             e.TAHUN,
+                            e.TENOR,
                             e.AMT_TDP,
                             e.AMT_INSTALLMENT,
                             e.AMT_OTR,
