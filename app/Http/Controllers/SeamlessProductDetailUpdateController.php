@@ -104,6 +104,7 @@ class SeamlessProductDetailUpdateController extends Controller
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"UPDATE_PRODUCT_CMS",
                 "P_CD_PRODUCT"=>$request->CD_PRODUCT,
+                "P_PRODUCT_NAME"=>$request->DESC_PRODUCT,
                 "P_DT_START"=>$request->DT_START,
                 "P_DT_END"=>$request->DT_END,
                 "P_FLAG_ACTIVE"=>$request->FLAG_ACTIVE,
