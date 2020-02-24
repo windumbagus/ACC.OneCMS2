@@ -104,15 +104,72 @@
             <div class="box-body">
               <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                <div class="panel box box-warning">
+                <div class="panel box box-danger">
                   <div class="box-header with-border">
                     <h4 class="box-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        Detail
+                        Simulasi
                       </a>
                     </h4>
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="box-body">
+                        <div class="row">
+                        
+                            <div class="col-sm-8">
+                                <input type="text" placeholder="Search by BTMK, etc" class="InputSearch2 form-control">
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="col-sm-6">
+                                    <a href="#" class="ButtonSearch2 btn btn-block btn-info">Search</a>    
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="#" class="ResetSearch2 btn btn-block btn-info">Reset</a>    
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <table id="example2" class="table table-bordered display nowrap" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>BTMK</th>
+                            <th>Tenor</th>
+                            <th>TDP</th>
+                            <th>Angsuran</th>
+                            <th>ID Unit</th>
+                            <th>Generate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                            @foreach ($SeamlessProductSims as $SeamlessProductSim)
+                            <tr>  
+                                <td><span>{{$SeamlessProductSim->BTMK}}</span></td>
+                                <td><span>{{$SeamlessProductSim->TENOR}}</span></td>
+                                <td><span>{{$SeamlessProductSim->TDP}}</span></td>
+                                <td><span>{{$SeamlessProductSim->AMT_INSTALLMENT}}</span></td>
+                                <td><span>{{$SeamlessProductSim->ID_UNIT}}</span></td>
+                                <td><span>
+                                  <a href="{{asset('/seamless-product-detail/hitungsimulasi/'.$SeamlessProductSim->CD_PRODUCT.'&'.$SeamlessProductSim->ID_UNIT)}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                </span>
+                                </td>
+                            
+                            </tr>                              
+                            @endforeach       
+                        </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-warning">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        Detail
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="box-body">
                         
                         <table style="width:100%">
@@ -185,15 +242,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="panel box box-primary">
+                <div class="panel box box-success">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                         Picture
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
+                  <div id="collapseThree" class="panel-collapse collapse">
                     <div class="box-body">
                         
                         <table style="width:100%">
@@ -249,20 +306,20 @@
                     </div>
                   </div>
                 </div>
-                <div class="panel box box-danger">
+                <div class="panel box box-primary">
                   <div class="box-header with-border">
                     <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                         Unit List
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseThree" class="panel-collapse collapse">
+                  <div id="collapseFour" class="panel-collapse collapse">
                   <div class="box-body">
                         <div class="row">
                         
                             <div class="col-sm-8">
-                                <input type="text" placeholder="Search by Brand, Type, Model, Year, etc" class="InputSearch form-control">
+                                <input type="text" placeholder="Search by Brand, Type, Model, Year, etc" class="InputSearch1 form-control">
                             </div>
                             <div class="col-sm-3">
                                 <div class="col-sm-6">
@@ -315,6 +372,7 @@
   <!-- page script -->
 <script>
     $(document).ready(function () {
+      //UNIT lIST
       $('#example1').DataTable({
           'deferRender': true,
           'paging'      : true,
@@ -334,10 +392,31 @@
       })
 
 
+      // SIMULASI
+      $('#example2').DataTable({
+          'deferRender': true,
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : true,
+          'scrollX': true,
+          sDom: 'lrtip', 
+          "columns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                {"searchable":false},
+            ]
+      })
 
-        //Button Search
+
+        //Button Search UNIT LIST
         $('.ButtonSearch1').on('click', function(){
-            var searchData = $('.InputSearch').val()
+            var searchData = $('.InputSearch1').val()
             var dtable = $('#example1').DataTable()
             dtable.search(searchData).draw()
         })
@@ -346,7 +425,21 @@
         $('.ResetSearch1').on('click',function(){
             var tab = $('#example1').DataTable()
             tab.search('').draw()
-            $('.InputSearch').val('')
+            $('.InputSearch1').val('')
+        })
+
+        //Button Search SIMULASI
+        $('.ButtonSearch2').on('click', function(){
+            var searchData = $('.InputSearch2').val()
+            var dtable = $('#example2').DataTable()
+            dtable.search(searchData).draw()
+        })
+
+    
+        $('.ResetSearch2').on('click',function(){
+            var tab = $('#example2').DataTable()
+            tab.search('').draw()
+            $('.InputSearch2').val('')
         })
 
 

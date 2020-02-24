@@ -310,6 +310,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     
 
     Route::get('/seamless-product-detail/{Id}','SeamlessProductDetailController@index');
+    Route::get('/seamless-product-detail/hitungsimulasi/{Id}&{Unitid}','SeamlessProductDetailController@hitungsimulasi');
+
 
     Route::get('/seamless-product-detail-update/{Id}','SeamlessProductDetailUpdateController@index');
     Route::post('/seamless-product-detail-update/update','SeamlessProductDetailUpdateController@update');

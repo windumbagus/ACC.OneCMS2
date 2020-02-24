@@ -68,6 +68,14 @@ class SeamlessProductDetailController extends Controller
             ),
         ));
 
+        $data_sim = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"SIMULASI_PAKET",
+                "P_CD_PRODUCT"=>$request->Id,
+                "P_LANGUAGE"=>"IN",
+            ),
+        ));
+
        
 
          //API GET
@@ -114,6 +122,18 @@ class SeamlessProductDetailController extends Controller
         $Hasils_pict= json_decode($result_pict); 
             //  dd($Hasils_pict);
 
+        $ch_sim = curl_init($url);                   
+        curl_setopt($ch_sim, CURLOPT_POST, true);                                  
+        curl_setopt($ch_sim, CURLOPT_POSTFIELDS, $data_sim);
+        curl_setopt($ch_sim, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch_sim, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch_sim, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result_sim = curl_exec($ch_sim);
+        $err_sim = curl_error($ch_sim);
+        curl_close($ch_sim);
+        $Hasils_sim= json_decode($result_sim); 
+
+
         if ($Hasilsrole->OUT_DATA == 'Super Admin' || $Hasilsrole->OUT_DATA == 'Super_Admin' || $Hasilsrole->OUT_DATA == 'seamless')
         {
             return view(
@@ -122,6 +142,8 @@ class SeamlessProductDetailController extends Controller
                     'SeamlessProducts'=>$Hasils->OUT_DATA,
                     'SeamlessProductDetails'=>$Hasils_detail->OUT_DATA,
                     'SeamlessProductPicts'=>$Hasils_pict->OUT_DATA,
+                    'SeamlessProductSims'=>$Hasils_sim->OUT_DATA,
+                    'CdProduct'=>$request->Id,
 
                    // 'Roles'=>$Hasils2->Roles,
                   //  'UserCategories'=>$Hasils2->UserCategory,
@@ -169,6 +191,40 @@ class SeamlessProductDetailController extends Controller
          //dd($err);
         return json_encode($val);
     }
+
+    public function hitungsimulasi(Request $request)
+    {
+
+        $datasimulasi = json_encode(array(
+            "doSendDataCMS" => array(   
+                
+                "TRANSACTION_CODE"=>"GEN_SIMULASI_PAKET",
+                "P_CD_PRODUCT"=>$request->Id,
+                "P_ID_UNIT"=>$request->Unitid,
+                "P_LANGUAGE"=>"IN",
+            ),
+        ));
+        //dd($datasimulasi);
+         //API GET
+         $urlsimulasi = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+        //  dd($datasimulasi);
+         // dd($url);
+       
+        $chsimulasi = curl_init($urlsimulasi);                   
+        curl_setopt($chsimulasi, CURLOPT_POST, true);                                  
+        curl_setopt($chsimulasi, CURLOPT_POSTFIELDS, $datasimulasi);
+        curl_setopt($chsimulasi, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($chsimulasi, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($chsimulasi, CURLOPT_RETURNTRANSFER, true);  
+         $resultsimulasi = curl_exec($chsimulasi);
+         $errsimulasi = curl_error($chsimulasi);
+         curl_close($chsimulasi);
+         $valsimulasi= json_decode($resultsimulasi);
+        //   dd($valsimulasi);
+         //dd($err);
+         return redirect("seamless-product-detail/".$request->Id)->with('success','Berhasil Menghitung Simulasi');
+    }
+
 
     public function showview(Request $request)
     {

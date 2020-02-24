@@ -43,13 +43,14 @@ class SeamlessDataLeadsController extends Controller
         $Hasilsrole= json_decode($resultrole);
         //dd($Hasilsrole);
 
-        $bulantahun = date('m/Y', strtotime(now()));
+       // $bulantahun = date('m/Y', strtotime(now()));
         
         //dd($bulantahun);
         $data = json_encode(array(
             "doSendDataCMS" => array(   
                 "TRANSACTION_CODE"=>"GET_DATA_LEADS",
-                "P_INPUT"=>"$bulantahun",
+                //"P_INPUT"=>"$bulantahun",
+                "P_INPUT"=>"",
             ),
         ));
         //dd($data);

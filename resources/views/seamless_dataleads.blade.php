@@ -11,12 +11,13 @@
         
         <div class="row">
             <div class="col-sm-8">
-                <h3 class="box-title">Data Leads </h3>
+                <h3 class="box-title">Data Leads </h3> <br/>
+                <h6>Silahkan Memilih Bulan Tahun terlebih dahulu </h6>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
 
-                        
+                
                        
                 </div>
                 <div class="col-sm-6">
@@ -24,6 +25,7 @@
                 </div> 
             </div>
         </div>
+        
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -31,6 +33,8 @@
           
             <div class="col-sm-8">
                 <div class="col-sm-8">
+                
+              
                     <input type="text" placeholder="Search by Leads ID, Nama, Brand, Type, etc" class="InputSearch form-control">
                 </div>
                 <div class="col-sm-4">
