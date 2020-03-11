@@ -43,9 +43,8 @@ class AccCashApplyHistorySMSController extends Controller
         $Hasilsrole= json_decode($resultrole);
         //dd($Hasilsrole);
 
-       // $bulantahun = date('m/Y', strtotime(now()));
-        
-        //dd($bulantahun);
+        // $now = date('d/m/Y', strtotime(now()));
+        // dd($now);
         $data = json_encode(array(
             "doGetHistorySMS" => array(   
                 "P_START_DATE"=>"",
@@ -104,9 +103,9 @@ class AccCashApplyHistorySMSController extends Controller
 
     public function getByDate(Request $request)
     {
-        $startdate = $request->startdate;
-        $enddate = $request->enddate;
-            // dd($bulantahun);
+        $startdate =  date('d/m/Y', strtotime($request->startdate));
+        $enddate =  date('d/m/Y', strtotime($request->enddate));
+            // dd($startdate);
         $data = json_encode(array(
             "doGetHistorySMS" => array(   
                 "P_START_DATE"=>$startdate,
@@ -114,7 +113,7 @@ class AccCashApplyHistorySMSController extends Controller
                 "P_LANGUAGE"=>"IN",
             ),
         ));
-        //dd($data);
+        // dd($data);
 
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
@@ -136,7 +135,7 @@ class AccCashApplyHistorySMSController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $Hasils= json_decode($result); 
-        //dd($Hasils);
+        // dd($Hasils);
 
         return json_encode($Hasils->OUT_DATA); 
     }

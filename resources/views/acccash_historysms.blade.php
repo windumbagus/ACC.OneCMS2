@@ -135,18 +135,25 @@
         $('.ResetSearch').on('click',function(){
             var tab = $('#example2').DataTable()
             tab.search('').draw()
+            tab.clear().draw()
             $('.InputSearch').val('')
+            $('#startdate').val('')
+            $('#enddate').val('')
         })
 
         // startdate
         $('#startdate').on('change',function(){
-                var StartDate = $(this).val();
-
-                // var tempStartDate = Startdate;
-            
-                // document.getElementById('button-download').setAttribute("href", "");
-                // document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${Startdate}/${Enddate}')}}`);
-           
+                var fullDate = new Date()
+                var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+                var now= fullDate.getFullYear() + "-" + twoDigitMonth + "-" + fullDate.getDate() ;
+                
+                    var StartDate = $(this).val();
+                if($("#enddate").val() == null || $("#enddate").val() == ""){
+                    var EndDate = now;
+                }else{
+                    var EndDate = $("#enddate").val();
+                } 
+ 
             $.ajax({
                 
                 url:"{{asset('/acccash-apply-historysms/get-by-date')}}",
@@ -202,13 +209,9 @@
         });
 
         $('#enddate').on('change',function(){
+                var StartDate = $("#startdate").val();
                 var EndDate = $(this).val();
-
-                // var tempStartDate = Startdate;
-            
-                // document.getElementById('button-download').setAttribute("href", "");
-                // document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${Startdate}/${Enddate}')}}`);
-           
+        
             $.ajax({
                 
                 url:"{{asset('/acccash-apply-historysms/get-by-date')}}",
