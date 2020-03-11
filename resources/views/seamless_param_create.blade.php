@@ -37,7 +37,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Kode Product</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" name="CD_PRODUCT" id="CD_PRODUCT" value="" readonly>
+											<input type="text" class="form-control" name="CD_PRODUCT" id="CD_PRODUCT" value="">
 										</div>
 									</div>
 									<div class="form-group">

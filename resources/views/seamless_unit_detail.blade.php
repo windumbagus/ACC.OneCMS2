@@ -218,6 +218,7 @@
                                 <td><span>
                                 <!-- <a href="#" data-id="{{$SeamlessUnitColor->GUID}}" class="upload-seamless-picture btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
                                 <a href="{{asset('/seamless-unit-picture/'.$SeamlessUnitColor->GUID.'&'.$SeamlessUnitColor->ID_UNIT)}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                <a href="{{asset('/seamless-unit-detail/deletecolorpict/'.$SeamlessUnitColor->GUID.'&'.$SeamlessUnitColor->ID_UNIT)}}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin akan menghapus data color/pict ini?')"><i class="fa fa-trash"></i></a>
                                 </span>
                                 </td>
                             </tr>                              

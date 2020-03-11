@@ -92,7 +92,7 @@
                 <td>
                 @if($ACCCashApply->STATUS == "REJECT-NOTAPPLY" || $ACCCashApply->STATUS == "REJECT-UNCONTACTED" || $ACCCashApply->STATUS == "REJECT-WRONGUNIT" || $ACCCashApply->STATUS == "REJECT-UNIT")
                     <span>REJECT SEMUA</span>
-                @elseif($ACCCashApply->STATUS == "REJECT-DATA" || $ACCCashApply->STATUS == "REJECT-PICT")
+                @elseif($ACCCashApply->STATUS == "REJECT-DATA" || $ACCCashApply->STATUS == "REJECT-PICT" || $ACCCashApply->STATUS == "REJECT-STNK" || $ACCCashApply->STATUS == "REJECT-STNKUNIT" )
                     <span>REJECT SEBAGIAN</span>
                 @elseif($ACCCashApply->STATUS == "PENDING-UNCONTACTED" || $ACCCashApply->STATUS == "PENDING-NEXTTIME")
                     <span>PENDING</span>                

@@ -175,6 +175,16 @@ class AccCashApplyDetailController extends Controller
                 $statusnotif = "Pengajuan Kamu belum dapat diproses, Mohon unggah kembali foto mobil Kamu.";
                 break;
 
+            case 'REJECT-STNK':
+                $reasonchange = "Foto STNK tidak jelas/tidak sesuai dengan data yang diberikan";
+                $statusnotif = "Pengajuan Kamu belum dapat diproses, Mohon unggah kembali foto STNK Kamu.";
+                break;
+
+            case 'REJECT-STNKUNIT':
+                $reasonchange = "Foto Unit & STNK tidak jelas/tidak sesuai dengan data yang diberikan";
+                $statusnotif = "Pengajuan Kamu belum dapat diproses, Mohon unggah kembali foto STNK dan mobil Kamu.";
+                break;  
+
             case 'REJECT-WRONGUNIT':
                 $reasonchange = "Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL";
                 $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
@@ -234,7 +244,7 @@ class AccCashApplyDetailController extends Controller
                     "doSendDataLeads" => array(   
                         "P_ACCOUNT_ID"=>$HasilscashtoLeads->OUT_DATA[0]->ACCOUNT_ID,
                         "P_NAME"=>$HasilscashtoLeads->OUT_DATA[0]->NAME, 
-                        "P_PRODUCT"=>$HasilscashtoLeads->OUT_DATA[0]->PRODUCT,
+                        "P_PRODUCT"=>"0003",
                         "P_NO_AGGR"=>$HasilscashtoLeads->OUT_DATA[0]->NO_AGGR,
                         "P_PHONE_NUMBER"=>$HasilscashtoLeads->OUT_DATA[0]->PHONE_MOBILE,
                         "P_CD_VEHICLE_BRAND"=>$HasilscashtoLeads->OUT_DATA[0]->CD_VEHICLE_BRAND,	

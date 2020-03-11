@@ -39,7 +39,6 @@
 	  display: block;
 	  width: 100%;
 	  max-width: 700px;
-	  transform: rotate(270deg);
 	}
 	
 	/* Caption of Modal Image */
@@ -222,8 +221,25 @@
 														<input type="text" class="form-control" name="PENYEDIA" value="{{$AccCashApplys[0]->PENYEDIA}}" readonly>
 													</div>
 												</div>
-												
-												
+												<div class="form-group">
+													<label class="col-sm-3 control-label">Alamat</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="ALAMAT" value="{{$AccCashApplys[0]->ALAMAT}}" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label">No Registration</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="NO_REGISTRATION" value="{{$AccCashApplys[0]->NO_REGISTRATION}}" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label">Nama Ibu Kandung</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control" name="MOTHER_MAIDEN" value="{{$AccCashApplys[0]->MOTHER_MAIDEN}}" readonly>
+													</div>
+												</div>
+									
 										</div>
 										<div class="col-sm-6">
 												<div class="form-group">
@@ -282,14 +298,29 @@
 												</div> -->
 												<div class="form-group">
 													<div class="col-sm-6">
+														
+														<h6> Rotate by Degrees </h6>
+														<input type="button" class="btn btn-warning" value="-90" onClick="rotateImage(this.value);" />
+														<input type="button" class="btn btn-warning" value="90" onClick="rotateImage(this.value);" />
+														<input type="button" class="btn btn-warning" value="0" onClick="rotateImage(this.value);" />
+														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage(this.value);" />
+														<br/><br/>
+														
 														@if(!empty($AccCashApplyPictures[0]->PATH_FILE))
-															<img id="myImg" style="width: 50%; height: 50%; transform: rotate(270deg);" alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
+															<img id="myImg" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
 														@endif
+													
 													</div>
 													
 													<div class="col-sm-6">
+													<h6> Rotate by Degrees </h6>
+														<input type="button" class="btn btn-warning" value="-90" onClick="rotateImage2(this.value);" />
+														<input type="button" class="btn btn-warning" value="90" onClick="rotateImage2(this.value);" />
+														<input type="button" class="btn btn-warning" value="0" onClick="rotateImage2(this.value);" />
+														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage2(this.value);" />
+														<br/><br/>
 														@if(!empty($AccCashApplyPictures[1]->PATH_FILE))
-															<img id="myImg2" style="width: 50%; height: 50%; transform: rotate(270deg);" alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
+															<img id="myImg2" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
 														@endif
 													</div>
 
@@ -334,6 +365,8 @@
 														<select class="form-control select3" id="REASONREJECTPARTIAL" name="REASONREJECTPARTIAL" style="width:100%;">
 															<option value="REJECT-DATA" >Customer ingin mengubah data pengajuan</option>
 															<option value="REJECT-PICT" >Foto mobil tidak sesuai dengan petunjuk</option>
+															<option value="REJECT-STNK" >Foto STNK tidak jelas/tidak sesuai dengan data yang diberikan</option>
+															<option value="REJECT-STNKUNIT" >Foto Unit & STNK tidak jelas/tidak sesuai dengan data yang diberikan</option>
 														</select>
 													</div>
 												</div>
@@ -621,7 +654,29 @@
 		modal.style.display = "none";
 	};
 
-	
+	function rotateImage(degree) {
+	$('#myImg').animate({  transform: degree }, {
+    step: function(now,fx) {
+        $(this).css({
+            '-webkit-transform':'rotate('+now+'deg)', 
+            '-moz-transform':'rotate('+now+'deg)',
+            'transform':'rotate('+now+'deg)'
+			});
+		}
+		});
+	}
+
+	function rotateImage2(degree) {
+	$('#myImg2').animate({  transform: degree }, {
+    step: function(now,fx) {
+        $(this).css({
+            '-webkit-transform':'rotate('+now+'deg)', 
+            '-moz-transform':'rotate('+now+'deg)',
+            'transform':'rotate('+now+'deg)'
+			});
+		}
+		});
+	}
 	
   </script>
 @endsection

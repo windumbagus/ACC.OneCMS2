@@ -88,13 +88,26 @@ class SeamlessUnitUploadDetailController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $Hasils = json_decode($result);
-        // dd($Hasils);
+        // dd($Hasils->OUT_STAT);
 
-        if($Hasils->OUT_STAT="T"){
-            return redirect('/seamless-unit-detail/'.$request->Id)->with('success','Seamless Unit Detail Upload Successfull !!!');
-        }else{
-            return redirect('/seamless-unit-detail/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
+        // if($Hasils->OUT_STAT="T"){
+        //     return redirect('/seamless-unit-detail/'.$request->Id)->with('success','Seamless Unit Detail Upload Successfull !!!');
+        // }else{
+        //     return redirect('/seamless-unit-detail/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
+        // }
+        
+        switch($Hasils->OUT_STAT){
+            case "T" : 
+                return redirect('/seamless-unit-detail/'.$request->Id)->with('success','Seamless Unit Detail Upload Successfull !!!');
+                break;
+            case "F" : 
+                return redirect('/seamless-unit-detail/upload-page/'.$request->Id)->with('warning', $Hasils->OUT_MESS);
+                break;
+            default :
+                return redirect('/seamless-unit-detail/upload-page/'.$request->Id)->with('warning', "Something went wrong");
+            
         }
+
     }
 
     public function download(Request $request)

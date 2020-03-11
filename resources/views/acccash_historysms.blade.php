@@ -1,0 +1,300 @@
+@extends('admin.admin') 
+
+@section('acccash-apply', 'active')
+@section('acccash-apply-historysms', 'active')
+
+@section('content')
+
+<!-- TableSeamlessDataLeads -->
+<div class="box box-primary">
+    <div class="box-header with-border">
+        
+        <div class="row">
+            <div class="col-sm-8">
+                <h3 class="box-title">History SMS Pengajuan </h3> <br/>
+                <h6>Silahkan Menentukan Start Date dan End Date terlebih dahulu </h6>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6">
+
+                
+                       
+                </div>
+                <div class="col-sm-6">
+                   
+                </div> 
+            </div>
+        </div>
+        
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+          
+            <div class="col-sm-8">
+                <div class="col-sm-4">
+                
+              
+                    <input type="text" placeholder="Search by SMS ID, etc" class="InputSearch form-control">
+                </div>
+
+                <div class="col-sm-8">
+                    <div class="col-sm-6">
+                        <input type="date" id="startdate" name="startdate"  class="form-control" value="">
+					</div>
+                    <div class="col-sm-6">
+                        <input type="date" id="enddate" name="enddate" class="form-control" value="">
+					</div>
+                </div>
+                
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-6">
+                    <a href="#" class="ButtonSearch btn btn-block btn-info">Search</a>    
+                </div>
+                <div class="col-sm-6">
+                    <a href="#" class="ResetSearch btn btn-block btn-info">Reset</a>    
+                </div>
+            </div>
+        </div><br>
+
+        <table id="example2" class="table table-bordered display nowrap" style="width:100%">
+        <thead>
+        <tr>
+            <th>SMS ID</th>
+            <th>Group ID</th>
+            <th>Pesan</th>
+            <th>Status</th>
+            <th>Tgl Terkirim</th>
+            <th>Tgl Diterima</th>
+            <th>Nomor Tujuan</th>
+            <th>Pengirim</th>  
+        </tr>
+        </thead>
+        <tbody>
+        
+            @foreach ($AcccashHistorySMSes as $AcccashHistorySMS)
+            <tr>  
+                <td><span>{{$AcccashHistorySMS->SMS_ID}}</span></td>
+                <td><span>{{$AcccashHistorySMS->SMS_GROUP_ID}}</span></td>    
+                <td><span>{{$AcccashHistorySMS->SMS_MSG}}</span></td>
+                <td><span>{{$AcccashHistorySMS->SMS_STATUS}}</span></td>
+                <td><span>{{$AcccashHistorySMS->SMS_SENT}}</span></td>
+                <td><span>{{$AcccashHistorySMS->SMS_DELIVERED}}</span></td>
+                <td><span>{{$AcccashHistorySMS->SMS_PHONENOTO}}</span></td>
+                <td><span>{{$AcccashHistorySMS->ID_USER_ADDED}}</span></td>
+                
+            </tr>                              
+            @endforeach       
+        </tbody>
+        </table>
+    </div>
+ </div>
+
+  <!-- page script -->
+<script>
+    var StartDate;
+    var EndDate;
+    $(document).ajaxStart(function() { Pace.restart(); });
+    $(document).ready(function () {
+      $('#example2').DataTable({
+          'deferRender': true,
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : true,
+          'scrollX': true,
+          sDom: 'lrtip', 
+          "columns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,                
+                null,
+                
+            ]
+      })
+
+
+      
+        //Button Search
+        $('.ButtonSearch').on('click', function(){
+            var searchData = $('.InputSearch').val()
+            var dtable = $('#example2').DataTable()
+            dtable.search(searchData).draw()
+        })
+
+
+
+        //Reset Button Search
+        $('.ResetSearch').on('click',function(){
+            var tab = $('#example2').DataTable()
+            tab.search('').draw()
+            $('.InputSearch').val('')
+        })
+
+        // startdate
+        $('#startdate').on('change',function(){
+                var StartDate = $(this).val();
+
+                // var tempStartDate = Startdate;
+            
+                // document.getElementById('button-download').setAttribute("href", "");
+                // document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${Startdate}/${Enddate}')}}`);
+           
+            $.ajax({
+                
+                url:"{{asset('/acccash-apply-historysms/get-by-date')}}",
+                data: {'startdate':StartDate,'enddate':EndDate,'_token':'{{csrf_token()}}'},
+                dataType:'json',
+                success: function(data){
+                    console.log(data);
+                    var table = $('#example2').DataTable()
+                    var DataLeads = data;
+                    table.clear().draw()
+
+
+                    DataLeads.map(e=>{ 
+                        if (typeof e.SMS_ID === 'undefined') {
+                        e.SMS_ID = "";
+                        }
+                        if (typeof e.SMS_MSG === 'undefined') {
+                        e.SMS_MSG = "";
+                        }
+                        if (typeof e.SMS_GROUP_ID === 'undefined') {
+                        e.SMS_GROUP_ID = "";
+                        }
+                        if (typeof e.SMS_STATUS === 'undefined') {
+                        e.SMS_STATUS = "";
+                        }
+                        if (typeof e.SMS_SENT === 'undefined') {
+                        e.SMS_SENT = "";
+                        }
+                        if (typeof e.SMS_DELIVERED === 'undefined') {
+                        e.SMS_DELIVERED = "";
+                        }
+                        if (typeof e.SMS_PHONENOTO === 'undefined') {
+                        e.SMS_PHONENOTO = "";
+                        }
+                        if (typeof e.ID_USER_ADDED === 'undefined') {
+                        e.ID_USER_ADDED = "";
+                        }
+                        
+                        table.row.add([
+                            e.SMS_ID,
+                            e.SMS_MSG,
+                            e.SMS_GROUP_ID,
+                            e.SMS_STATUS,
+                            e.SMS_SENT,
+                            e.SMS_DELIVERED,
+                            e.SMS_PHONENOTO,
+                            e.ID_USER_ADDED,
+
+                        ]).draw(false)
+                    }) 
+                }
+            })
+        });
+
+        $('#enddate').on('change',function(){
+                var EndDate = $(this).val();
+
+                // var tempStartDate = Startdate;
+            
+                // document.getElementById('button-download').setAttribute("href", "");
+                // document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${Startdate}/${Enddate}')}}`);
+           
+            $.ajax({
+                
+                url:"{{asset('/acccash-apply-historysms/get-by-date')}}",
+                data: {'startdate':StartDate,'enddate':EndDate,'_token':'{{csrf_token()}}'},
+                dataType:'json',
+                success: function(data){
+                    console.log(data);
+                    var table = $('#example2').DataTable()
+                    var DataLeads = data;
+                    table.clear().draw()
+
+
+                    DataLeads.map(e=>{ 
+                        if (typeof e.SMS_ID === 'undefined') {
+                        e.SMS_ID = "";
+                        }
+                        if (typeof e.SMS_MSG === 'undefined') {
+                        e.SMS_MSG = "";
+                        }
+                        if (typeof e.SMS_GROUP_ID === 'undefined') {
+                        e.SMS_GROUP_ID = "";
+                        }
+                        if (typeof e.SMS_STATUS === 'undefined') {
+                        e.SMS_STATUS = "";
+                        }
+                        if (typeof e.SMS_SENT === 'undefined') {
+                        e.SMS_SENT = "";
+                        }
+                        if (typeof e.SMS_DELIVERED === 'undefined') {
+                        e.SMS_DELIVERED = "";
+                        }
+                        if (typeof e.SMS_PHONENOTO === 'undefined') {
+                        e.SMS_PHONENOTO = "";
+                        }
+                        if (typeof e.ID_USER_ADDED === 'undefined') {
+                        e.ID_USER_ADDED = "";
+                        }
+                        
+                        table.row.add([
+                            e.SMS_ID,
+                            e.SMS_MSG,
+                            e.SMS_GROUP_ID,
+                            e.SMS_STATUS,
+                            e.SMS_SENT,
+                            e.SMS_DELIVERED,
+                            e.SMS_PHONENOTO,
+                            e.ID_USER_ADDED,
+
+                        ]).draw(false)
+                    }) 
+                }
+            })
+        });
+
+        $('.ButtonDownload').on('click', function(){
+           
+           $.ajax({
+               xhrFields: {responseType: 'blob',},
+               url:"{{asset('/acccash-apply-historysms/download')}}",
+                data: {'startdate':StartDate,'enddate':EndDate,'_token':'{{csrf_token()}}'},
+                dataType:'json',
+               success: function(result, status, xhr) {
+
+                    var disposition = xhr.getResponseHeader('content-disposition');
+                    var matches = /"([^"]*)"/.exec(disposition);
+                    var filename = (matches != null && matches[1] ? matches[1] : 'example.xlsx');
+
+                    // The actual download
+                    var blob = new Blob([result], {
+                        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                    });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = filename;
+
+                    document.body.appendChild(link);
+
+                    link.click();
+                    document.body.removeChild(link);
+                 }
+               })
+        });
+
+  // //VIEW
+    
+        
+    })
+  </script>
+@endsection

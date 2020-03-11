@@ -107,23 +107,22 @@ class SeamlessUnitUploadPictureController extends Controller
                 $content = null;
             }
             else{
-                //  $getcontent = file_get_contents($file);
-                if($request->FLAG_PRIMARY == 'Y')
-                {
-                    $getcontentresizing = (string) Image::make($file)->resize(150, 150)->encode('data-url');
-                }
-                else
-                {
-                    $getcontentresizing = (string) Image::make($file)->resize(450, 300)->encode('data-url');
-                }
+               
+               // use this if not compressing
+                $getContent = file_get_contents($file);
+               $content= base64_encode($getContent);
+            //     if($request->FLAG_PRIMARY == 'Y')
+            //     {
+            //         $getcontentresizing = (string) Image::make($file)->resize(150, 150)->encode('data-url');
+            //     }
+            //     else
+            //     {
+            //         $getcontentresizing = (string) Image::make($file)->resize(450, 300)->encode('data-url');
+            //     }  
                 
-
-
-                
-                
-            // $content = str_replace('data:image/jpeg;base64,','',$getcontent);
-                $getcontent = file_get_contents($getcontentresizing);
-                $content = base64_encode($getcontent);
+            // // $content = str_replace('data:image/jpeg;base64,','',$getcontent);
+            //     $getcontent = file_get_contents($getcontentresizing);
+            //     $content = base64_encode($getcontent);
                 //dd($content);
                 $name = $file->getClientOriginalName();
                 $type = $file->extension();

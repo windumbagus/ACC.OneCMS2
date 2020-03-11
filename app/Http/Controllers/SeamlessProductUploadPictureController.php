@@ -110,9 +110,20 @@ class SeamlessProductUploadPictureController extends Controller
         }
         else{
         
+            $getContent = file_get_contents($file);
+            $content= base64_encode($getContent);
 
-            $getcontentresizing = (string) Image::make($file)->resize(1435, 576)->encode('data-url');
-            //  $getcontent = file_get_contents($file);
+            //for resizing
+            // $getcontentresizing = (string) Image::make($file)->resize(1435, 576)->encode('data-url');
+
+            // $getcontent = file_get_contents($getcontentresizing);
+            // $content = base64_encode($getcontent);
+
+
+            //dd($content);
+
+            //coba coba
+                        //  $getcontent = file_get_contents($file);
             // $getcontentresizing = (string) Image::make($file)->resize(null, 200, 
             // function ($constraint) {
             //     $constraint->aspectRatio();
@@ -120,9 +131,6 @@ class SeamlessProductUploadPictureController extends Controller
             
             
         // $content = str_replace('data:image/jpeg;base64,','',$getcontent);
-            $getcontent = file_get_contents($getcontentresizing);
-            $content = base64_encode($getcontent);
-            //dd($content);
             $name = $file->getClientOriginalName();
             $type = $file->extension();
 

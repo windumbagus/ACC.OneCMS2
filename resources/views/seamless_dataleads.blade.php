@@ -191,8 +191,8 @@
                         if (typeof e.PHONE_NUMBER === 'undefined') {
                         e.PHONE_NUMBER = "";
                         }
-                        if (typeof DESC_BRAND === 'undefined') {
-                        DESC_BRAND = "";
+                        if (typeof e.DESC_BRAND === 'undefined') {
+                        e.DESC_BRAND = "";
                         }
                         if (typeof e.DESC_TYPE === 'undefined') {
                         e.DESC_TYPE = "";

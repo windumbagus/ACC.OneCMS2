@@ -254,6 +254,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/acccash-apply/{Statusapply}/changestatus','AccCashApplyController@changestatus');
     Route::get('/acccash-apply/{Statusapply}/download','AccCashApplyController@download');
 
+    Route::get('/acccash-apply-historysms','AccCashApplyHistorySMSController@index');
+    Route::get('/acccash-apply-historysms/get-by-date','AccCashApplyHistorySMSController@getByDate');
+    Route::get('/acccash-apply-historysms/download','AccCashApplyHistorySMSController@download');
+
     Route::get('/acccash-apply-plafon','AccCashApplyPlafonController@index');
     Route::get('/acccash-apply-plafon/broadcast','AccCashApplyPlafonController@broadcast');
     
@@ -280,6 +284,8 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-unit-detail/deleteotrall/{Id}','SeamlessUnitDetailController@deleteotrall');
     Route::post('/seamless-unit-detail/delete-detail-selected','SeamlessUnitDetailController@deletedetailselected');
     Route::get('/seamless-unit-detail/deletedetailall/{Id}','SeamlessUnitDetailController@deletedetailall');
+    Route::get('/seamless-unit-detail/deletecolorpict/{GUID}&{ID_UNIT}','SeamlessUnitDetailController@deletecolorpict');
+
 
     Route::get('/seamless-unit-detail-update/{ID_UNIT}&{GUID}','SeamlessUnitDetailUpdateController@index');
     Route::post('/seamless-unit-detail-update/update','SeamlessUnitDetailUpdateController@update');

@@ -161,6 +161,7 @@
                 <!-- ditaruh di dalam a setelah text Pending List <span class="badge">t</span> -->
                 <li class="@yield('acccash-apply-approved')"><a href="{{ asset('acccash-apply/APPROVED') }}"><i class="fa fa-circle-o"></i> Approved List</a></li>
                 <li class="@yield('acccash-apply-reject')"><a href="{{ asset('acccash-apply/REJECT') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>
+                <li class="@yield('acccash-apply-historysms')"><a href="{{ asset('acccash-apply-historysms') }}"><i class="fa fa-circle-o"></i> History SMS</a></li>
                 <!-- <li class="@yield('acccash-apply-plafon')"><a href="{{ asset('acccash-apply-plafon/') }}"><i class="fa fa-circle-o"></i> Broadcast Plafond</a></li> -->
                 </ul>
             </li>
@@ -175,12 +176,16 @@
                 </a>
                 <ul class="treeview-menu">
                 <li class="@yield('seamless-unit')"><a href="{{ asset('seamless-unit') }}"><i class="fa fa-circle-o"></i> Unit</a></li>
+                @if($role == 'Super Admin' || $role == 'Super_Admin')
                 <li class="@yield('seamless-product')"><a href="{{ asset('seamless-product') }}"><i class="fa fa-circle-o"></i> Product</a></li>
                 <li class="@yield('seamless-banner')"><a href="{{ asset('seamless-banner') }}"><i class="fa fa-circle-o"></i> Banner</a></li>
                 <li class="@yield('seamless-otrupload')"><a href="{{ asset('seamless-otrupload') }}"><i class="fa fa-circle-o"></i> OTR Upload</a></li>
+                @endif
                 <li class="@yield('seamless-dataleads')"><a href="{{ asset('seamless-dataleads') }}"><i class="fa fa-circle-o"></i> Data Leads</a></li>
+                @if($role == 'Super Admin' || $role == 'Super_Admin')
                 <li class="@yield('seamless-diskon')"><a href="{{ asset('seamless-diskon') }}"><i class="fa fa-circle-o"></i> Master Discount</a></li>
                 <li class="@yield('seamless-param')"><a href="{{ asset('seamless-param') }}"><i class="fa fa-circle-o"></i> Param Simulation</a></li>                
+                @endif
                 </ul>
             </li>
             @endif

@@ -337,6 +337,39 @@ class SeamlessUnitDetailController extends Controller
 
     }
 
+    public function deletecolorpict(Request $request)
+    {
+
+       
+        $data = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"DELETE_COLOR_PICT_CMS",
+                "P_GUID"=>$request->GUID,
+                "P_LANGUAGE"=>"IN",
+            ),
+        ));
+        //dd($data);
+         //API GET
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result); 
+        //   dd($Hasils);
+
+      
+        //dd($Hasils);
+        return redirect("seamless-unit-detail/".$request->ID_UNIT)->with('success','Color Unit berhasil terhapus');
+       
+    }
+
+
     public function deleteotrselected(Request $request)
     {
         // dd($request->data);
