@@ -165,11 +165,11 @@
                 success: function(data){
                     console.log(data);
                     var table = $('#example2').DataTable()
-                    var DataLeads = data;
+                    var DataSMS = data;
                     table.clear().draw()
 
 
-                    DataLeads.map(e=>{ 
+                    DataSMS.map(e=>{ 
                         if (typeof e.SMS_ID === 'undefined') {
                         e.SMS_ID = "";
                         }
@@ -228,11 +228,11 @@
                 success: function(data){
                     console.log(data);
                     var table = $('#example2').DataTable()
-                    var DataLeads = data;
+                    var DataSMS = data;
                     table.clear().draw()
 
 
-                    DataLeads.map(e=>{ 
+                    DataSMS.map(e=>{ 
                         if (typeof e.SMS_ID === 'undefined') {
                         e.SMS_ID = "";
                         }
