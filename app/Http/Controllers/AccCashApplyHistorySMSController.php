@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\SeamlessDataLeadsExport;
+use App\Exports\AccCashHistorySMSExport;
 
 class AccCashApplyHistorySMSController extends Controller
 {
@@ -142,8 +142,8 @@ class AccCashApplyHistorySMSController extends Controller
 
     public function download(Request $request)
     {
-        $startdate = $request->startdate;
-        $enddate = $request->enddate;
+        $startdate =  date('d/m/Y', strtotime($request->StartDate));
+        $enddate =  date('d/m/Y', strtotime($request->EndDate));
         $data = json_encode(array(
             "doGetHistorySMS" => array(   
                 "P_START_DATE"=>$startdate,

@@ -256,7 +256,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/acccash-apply-historysms','AccCashApplyHistorySMSController@index');
     Route::get('/acccash-apply-historysms/get-by-date','AccCashApplyHistorySMSController@getByDate');
-    Route::get('/acccash-apply-historysms/download','AccCashApplyHistorySMSController@download');
+    Route::get('/acccash-apply-historysms/download/{StartDate}/{EndDate}','AccCashApplyHistorySMSController@download');
 
     Route::get('/acccash-apply-plafon','AccCashApplyPlafonController@index');
     Route::get('/acccash-apply-plafon/broadcast','AccCashApplyPlafonController@broadcast');

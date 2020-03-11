@@ -16,12 +16,9 @@
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
-
-                
-                       
                 </div>
                 <div class="col-sm-6">
-                   
+                    <a href="#" class="btn btn-block btn-primary" id="button-download">Download</a>    
                 </div> 
             </div>
         </div>
@@ -152,7 +149,13 @@
                     var EndDate = now;
                 }else{
                     var EndDate = $("#enddate").val();
-                } 
+                }
+                
+                var tempStartDateSelect = StartDate;
+                var tempEndDateSelect = EndDate;
+            document.getElementById('button-download').setAttribute("href", "");
+            document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${tempStartDateSelect}/${tempEndDateSelect}')}}`);
+       
  
             $.ajax({
                 
@@ -211,6 +214,11 @@
         $('#enddate').on('change',function(){
                 var StartDate = $("#startdate").val();
                 var EndDate = $(this).val();
+
+                var tempStartDateSelect = StartDate;
+                var tempEndDateSelect = EndDate;
+            document.getElementById('button-download').setAttribute("href", "");
+            document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${tempStartDateSelect}/${tempEndDateSelect}')}}`);
         
             $.ajax({
                 
