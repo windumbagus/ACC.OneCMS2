@@ -144,9 +144,11 @@
                 var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
                 var now= fullDate.getFullYear() + "-" + twoDigitMonth + "-" + fullDate.getDate() ;
                 
-                    var StartDate = $(this).val();
-                if($("#enddate").val() == null || $("#enddate").val() == ""){
-                    var EndDate = now;
+                var StartDate = $(this).val();
+                if($("#startdate").val() == null && $("#enddate").val() == null  || $("#startdate").val() == "" && $("#enddate").val() == ""){
+                var EndDate = "";
+                }else if($("#enddate").val() == null || $("#enddate").val() == ""){
+                var EndDate = now;
                 }else{
                     var EndDate = $("#enddate").val();
                 }
@@ -173,11 +175,11 @@
                         if (typeof e.SMS_ID === 'undefined') {
                         e.SMS_ID = "";
                         }
-                        if (typeof e.SMS_GROUP_ID === 'undefined') {
-                        e.SMS_GROUP_ID = "";
-                        }
                         if (typeof e.SMS_MSG === 'undefined') {
                         e.SMS_MSG = "";
+                        }
+                        if (typeof e.SMS_GROUP_ID === 'undefined') {
+                        e.SMS_GROUP_ID = "";
                         }
                         if (typeof e.SMS_STATUS === 'undefined') {
                         e.SMS_STATUS = "";
@@ -197,8 +199,8 @@
                         
                         table.row.add([
                             e.SMS_ID,
-                            e.SMS_GROUP_ID,
                             e.SMS_MSG,
+                            e.SMS_GROUP_ID,
                             e.SMS_STATUS,
                             e.SMS_SENT,
                             e.SMS_DELIVERED,
@@ -236,11 +238,11 @@
                         if (typeof e.SMS_ID === 'undefined') {
                         e.SMS_ID = "";
                         }
-                        if (typeof e.SMS_GROUP_ID === 'undefined') {
-                        e.SMS_GROUP_ID = "";
-                        }
                         if (typeof e.SMS_MSG === 'undefined') {
                         e.SMS_MSG = "";
+                        }
+                        if (typeof e.SMS_GROUP_ID === 'undefined') {
+                        e.SMS_GROUP_ID = "";
                         }
                         if (typeof e.SMS_STATUS === 'undefined') {
                         e.SMS_STATUS = "";
@@ -260,8 +262,8 @@
                         
                         table.row.add([
                             e.SMS_ID,
-                            e.SMS_GROUP_ID,
                             e.SMS_MSG,
+                            e.SMS_GROUP_ID,
                             e.SMS_STATUS,
                             e.SMS_SENT,
                             e.SMS_DELIVERED,
