@@ -164,6 +164,7 @@ class AccCashApplyDetailController extends Controller
         {
             $statuschange = $request->REASONREJECTPARTIAL;
             $redirectstatus = "REJECT";
+            //$redirectstatus = "PENDING";
         }
         else if($request->STATUS == "PENDING")
         {
@@ -177,6 +178,8 @@ class AccCashApplyDetailController extends Controller
         // @dd($redirectstatus);
 
         switch ($statuschange) {
+
+        //REJECT ALL
             case 'REJECT-NOTAPPLY':
                 $reasonchange = "Customer tidak merasa mengajukan";
                 $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
@@ -187,6 +190,32 @@ class AccCashApplyDetailController extends Controller
                 $statusnotif = "Pengajuan Kamu dialihkan ke cabang ACC karena kami tidak dapat menghubungi Kamu selama 3x24 jam.";
                 break;
 
+            case 'REJECT-WRONGUNIT':
+                $reasonchange = "Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                break;
+
+            case 'REJECT-UNIT':
+                $reasonchange = "Kondisi mobil tidak layak untuk dibiayai";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                break;
+
+            case 'REJECT-STNK EXP':
+                $reasonchange = "Masa berlaku STNK habis dan customer tidak bersedia perpanjang";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                break;
+
+            case 'REJECT-STNK INVALID':
+                $reasonchange = "Data pada STNK yang dilampirkan tidak sesuai (No. Polisi berbeda dengan data yang tertera di CMS)";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                break;
+
+            case 'REJECT':
+                $reasonchange = "Customer berubah pikiran dan ingin mengajukan ulang";
+                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                break;
+
+        //REJECT PARTIAL
             case 'REJECT-DATA':
                 $reasonchange = "Customer ingin mengubah data pengajuan";
                 $statusnotif = "Kamu masih dapat mengubah informasi pengajuan kamu. Ubah sekarang yuk!";
@@ -198,24 +227,14 @@ class AccCashApplyDetailController extends Controller
                 break;
 
             case 'REJECT-STNK':
-                $reasonchange = "Foto STNK tidak jelas/tidak sesuai dengan data yang diberikan";
+                $reasonchange = "Perlu Foto Ulang STNK";
                 $statusnotif = "Pengajuan Kamu belum dapat diproses, Mohon unggah kembali foto STNK Kamu.";
                 break;
 
             case 'REJECT-STNKUNIT':
-                $reasonchange = "Foto Unit & STNK tidak jelas/tidak sesuai dengan data yang diberikan";
+                $reasonchange = "Perlu Foto Ulang Unit dan STNK";
                 $statusnotif = "Pengajuan Kamu belum dapat diproses, Mohon unggah kembali foto STNK dan mobil Kamu.";
                 break;  
-
-            case 'REJECT-WRONGUNIT':
-                $reasonchange = "Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
-                break;
-
-            case 'REJECT-UNIT':
-                $reasonchange = "Kondisi mobil tidak layak untuk dibiayai";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
-                break;
 
             case 'PENDING-UNCONTACTED':
                 $reasonchange = "Customer tidak dapat dihubungi";
@@ -306,6 +325,7 @@ class AccCashApplyDetailController extends Controller
                         "P_RESERVE3"=> $HasilscashtoLeads->OUT_DATA[0]->TENOR_CASH,
                         "P_RESERVE4"=> $HasilscashtoLeads->OUT_DATA[0]->TUJUAN_DANA,
                         "P_RESERVE5"=> $HasilscashtoLeads->OUT_DATA[0]->BARANG_JASA,
+                        "P_RESERVE6"=> $request->EXP_STNK,
                         "P_CD_CHANNEL"=>"",
                         "P_CD_SPK"=>"",
                     ),
@@ -413,6 +433,7 @@ class AccCashApplyDetailController extends Controller
                     "P_RESERVE3"=> $HasilscashtoLeads->OUT_DATA[0]->TENOR_CASH,
                     "P_RESERVE4"=> $HasilscashtoLeads->OUT_DATA[0]->TUJUAN_DANA,
                     "P_RESERVE5"=> $HasilscashtoLeads->OUT_DATA[0]->BARANG_JASA,
+                    "P_RESERVE6"=> $request->EXP_STNK,
                     "P_CD_CHANNEL"=>"",
                     "P_CD_SPK"=>"",
                 ),

@@ -264,7 +264,7 @@
 													<label class="col-sm-3 control-label">Jatuh Tempo STNK</label>
 													<div class="col-sm-7">
 														@if($AccCashApplys[0]->EXP_STNK != null)
-														<input type="text" class="form-control" name="EXP_STNK" value="{{date('d M Y H:i:s', strtotime($AccCashApplys[0]->EXP_STNK))}}" disabled>
+														<input type="text" class="form-control" name="EXP_STNK" value="{{date('d M Y', strtotime($AccCashApplys[0]->EXP_STNK))}}" disabled>
 														@else
 														<input type="text" class="form-control" name="EXP_STNK" value="" disabled>
 														@endif
@@ -355,6 +355,9 @@
 															<option value="REJECT-UNCONTACTED" >Customer tidak dapat dihubungi dalam waktu 3x24 jam</option>
 															<option value="REJECT-WRONGUNIT" >Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL</option>
 															<option value="REJECT-UNIT">Kondisi mobil tidak layak untuk dibiayai</option>
+															<option value="REJECT-STNK EXP">Masa berlaku STNK habis dan customer tidak bersedia perpanjang</option>
+															<option value="REJECT-STNK INVALID">Data pada STNK yang dilampirkan tidak sesuai (No. Polisi berbeda dengan data yang tertera di CMS)</option>
+															<option value="REJECT">Customer berubah pikiran dan ingin mengajukan ulang</option>
 														</select>
 													</div>
 												</div>
@@ -365,8 +368,8 @@
 														<select class="form-control select3" id="REASONREJECTPARTIAL" name="REASONREJECTPARTIAL" style="width:100%;">
 															<option value="REJECT-DATA" >Customer ingin mengubah data pengajuan</option>
 															<option value="REJECT-PICT" >Foto mobil tidak sesuai dengan petunjuk</option>
-															<option value="REJECT-STNK" >Foto STNK tidak jelas/tidak sesuai dengan data yang diberikan</option>
-															<option value="REJECT-STNKUNIT" >Foto Unit & STNK tidak jelas/tidak sesuai dengan data yang diberikan</option>
+															<option value="REJECT-STNK" >Perlu Foto Ulang STNK</option>
+															<option value="REJECT-STNKUNIT" >Perlu Foto Ulang Unit dan STNK</option>
 														</select>
 													</div>
 												</div>
@@ -616,6 +619,7 @@
         });
 
 		$(".changestatus").on("submit", function(){
+			$(this).find('button[type="submit"]').prop( 'disabled', true );
         return confirm('Apakah Anda yakin akan ' + $('#STATUS').val() +' aplikasi ini?');
     	});
 

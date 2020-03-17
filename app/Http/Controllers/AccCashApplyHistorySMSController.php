@@ -202,15 +202,15 @@ class AccCashApplyHistorySMSController extends Controller
                 }else{
                     $SMS_ID = "";
                 }
-                if (property_exists($Hasil, 'SMS_MSG')){
-                    $SMS_MSG = $Hasil->SMS_MSG;
-                }else{
-                    $SMS_MSG = "";
-                }
                 if (property_exists($Hasil, 'SMS_GROUP_ID')){
                     $SMS_GROUP_ID = $Hasil->SMS_GROUP_ID;
                 }else{
                     $SMS_GROUP_ID = "";
+                }
+                if (property_exists($Hasil, 'SMS_MSG')){
+                    $SMS_MSG = $Hasil->SMS_MSG;
+                }else{
+                    $SMS_MSG = "";
                 }
                 if (property_exists($Hasil, 'SMS_STATUS')){
                     $SMS_STATUS = $Hasil->SMS_STATUS;
@@ -241,8 +241,8 @@ class AccCashApplyHistorySMSController extends Controller
                 
                 array_push($data_export,[
                     "SMS_ID"=>$SMS_ID,
-                    "SMS_MSG"=>$SMS_MSG,
                     "SMS_GROUP_ID"=>$SMS_GROUP_ID,
+                    "SMS_MSG"=>$SMS_MSG,
                     "SMS_STATUS"=>$SMS_STATUS,
                     "SMS_SENT"=>$SMS_SENT,
                     "SMS_DELIVERED"=>$SMS_DELIVERED,

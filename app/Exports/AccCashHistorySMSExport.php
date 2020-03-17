@@ -24,8 +24,8 @@ class AccCashHistorySMSExport implements FromArray, WithHeadings
     {
         return [
             "SMS_ID",
-            "SMS_MSG",
             "SMS_GROUP_ID",
+            "SMS_MSG",
             "SMS_STATUS",
             "SMS_SENT",
             "SMS_DELIVERED",

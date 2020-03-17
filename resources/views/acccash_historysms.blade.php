@@ -173,11 +173,11 @@
                         if (typeof e.SMS_ID === 'undefined') {
                         e.SMS_ID = "";
                         }
-                        if (typeof e.SMS_MSG === 'undefined') {
-                        e.SMS_MSG = "";
-                        }
                         if (typeof e.SMS_GROUP_ID === 'undefined') {
                         e.SMS_GROUP_ID = "";
+                        }
+                        if (typeof e.SMS_MSG === 'undefined') {
+                        e.SMS_MSG = "";
                         }
                         if (typeof e.SMS_STATUS === 'undefined') {
                         e.SMS_STATUS = "";
@@ -197,8 +197,8 @@
                         
                         table.row.add([
                             e.SMS_ID,
-                            e.SMS_MSG,
                             e.SMS_GROUP_ID,
+                            e.SMS_MSG,
                             e.SMS_STATUS,
                             e.SMS_SENT,
                             e.SMS_DELIVERED,
@@ -236,11 +236,11 @@
                         if (typeof e.SMS_ID === 'undefined') {
                         e.SMS_ID = "";
                         }
-                        if (typeof e.SMS_MSG === 'undefined') {
-                        e.SMS_MSG = "";
-                        }
                         if (typeof e.SMS_GROUP_ID === 'undefined') {
                         e.SMS_GROUP_ID = "";
+                        }
+                        if (typeof e.SMS_MSG === 'undefined') {
+                        e.SMS_MSG = "";
                         }
                         if (typeof e.SMS_STATUS === 'undefined') {
                         e.SMS_STATUS = "";
@@ -260,8 +260,8 @@
                         
                         table.row.add([
                             e.SMS_ID,
-                            e.SMS_MSG,
                             e.SMS_GROUP_ID,
+                            e.SMS_MSG,
                             e.SMS_STATUS,
                             e.SMS_SENT,
                             e.SMS_DELIVERED,

@@ -166,7 +166,7 @@
                 </ul>
             </li>
             @endif
-            @if($role == 'Super Admin' || $role == 'Super_Admin' || $role == 'seamless')
+            @if($role == 'Super Admin' || $role == 'Super_Admin' || $role == 'seamless' || $role == 'dataleads')
             <li class="@yield('seamless') treeview">
                 <a href="#">
                 <i class="fa fa-rocket"></i> <span>Seamless</span>
@@ -175,7 +175,9 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
+                @if($role == 'Super Admin' || $role == 'Super_Admin' || $role == 'seamless')
                 <li class="@yield('seamless-unit')"><a href="{{ asset('seamless-unit') }}"><i class="fa fa-circle-o"></i> Unit</a></li>
+                @endif
                 @if($role == 'Super Admin' || $role == 'Super_Admin')
                 <li class="@yield('seamless-product')"><a href="{{ asset('seamless-product') }}"><i class="fa fa-circle-o"></i> Product</a></li>
                 <li class="@yield('seamless-banner')"><a href="{{ asset('seamless-banner') }}"><i class="fa fa-circle-o"></i> Banner</a></li>
