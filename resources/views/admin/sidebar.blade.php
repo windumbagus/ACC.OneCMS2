@@ -157,7 +157,7 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                <li class="@yield('acccash-apply-pending')"><a href="{{ asset('acccash-apply/PENDING') }}"><i class="fa fa-circle-o"></i> Pending List <span class="badge">{{$countpendingacccash}}</span></a></li>
+                <li class="@yield('acccash-apply-pending')"><a href="{{ asset('acccash-apply/PENDING') }}"><i class="fa fa-circle-o"></i> Pending List <span class="h3 badge bg-blue navbar-badge">{{$countpendingacccash}}</span></a></li>
                 <!-- ditaruh di dalam a setelah text Pending List <span class="badge">t</span> -->
                 <li class="@yield('acccash-apply-approved')"><a href="{{ asset('acccash-apply/APPROVED') }}"><i class="fa fa-circle-o"></i> Approved List</a></li>
                 <li class="@yield('acccash-apply-reject')"><a href="{{ asset('acccash-apply/REJECT') }}"><i class="fa fa-circle-o"></i> Rejected List</a></li>

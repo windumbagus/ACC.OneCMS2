@@ -200,12 +200,12 @@ class AccCashApplyDetailController extends Controller
                 $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
-            case 'REJECT-STNK EXP':
+            case 'REJECT-STNKEXP':
                 $reasonchange = "Masa berlaku STNK habis dan customer tidak bersedia perpanjang";
                 $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
-            case 'REJECT-STNK INVALID':
+            case 'REJECT-STNKINVALID':
                 $reasonchange = "Data pada STNK yang dilampirkan tidak sesuai (No. Polisi berbeda dengan data yang tertera di CMS)";
                 $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;

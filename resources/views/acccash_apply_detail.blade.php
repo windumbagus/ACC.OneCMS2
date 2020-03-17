@@ -355,8 +355,8 @@
 															<option value="REJECT-UNCONTACTED" >Customer tidak dapat dihubungi dalam waktu 3x24 jam</option>
 															<option value="REJECT-WRONGUNIT" >Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL</option>
 															<option value="REJECT-UNIT">Kondisi mobil tidak layak untuk dibiayai</option>
-															<option value="REJECT-STNK EXP">Masa berlaku STNK habis dan customer tidak bersedia perpanjang</option>
-															<option value="REJECT-STNK INVALID">Data pada STNK yang dilampirkan tidak sesuai (No. Polisi berbeda dengan data yang tertera di CMS)</option>
+															<option value="REJECT-STNKEXP">Masa berlaku STNK habis dan customer tidak bersedia perpanjang</option>
+															<option value="REJECT-STNKINVALID">Data pada STNK yang dilampirkan tidak sesuai (No. Polisi berbeda dengan data yang tertera di CMS)</option>
 															<option value="REJECT">Customer berubah pikiran dan ingin mengajukan ulang</option>
 														</select>
 													</div>

@@ -90,7 +90,7 @@
                 <td><span>{{number_format($ACCCashApply->AMT_INSTALLMENT, 0, ',', '.')}}</span></td>
                 <td><span>{{$ACCCashApply->PENYEDIA}}</span></td>
                 <td>
-                @if($ACCCashApply->STATUS == "REJECT-NOTAPPLY" || $ACCCashApply->STATUS == "REJECT-UNCONTACTED" || $ACCCashApply->STATUS == "REJECT-WRONGUNIT" || $ACCCashApply->STATUS == "REJECT-UNIT" || $ACCCashApply->STATUS == "REJECT-STNK EXP" || $ACCCashApply->STATUS == "REJECT-STNK INVALID")
+                @if($ACCCashApply->STATUS == "REJECT-NOTAPPLY" || $ACCCashApply->STATUS == "REJECT-UNCONTACTED" || $ACCCashApply->STATUS == "REJECT-WRONGUNIT" || $ACCCashApply->STATUS == "REJECT-UNIT" || $ACCCashApply->STATUS == "REJECT-STNKEXP" || $ACCCashApply->STATUS == "REJECT-STNKINVALID")
                     <span>REJECT SEMUA</span>
                 @elseif($ACCCashApply->STATUS == "REJECT-DATA" || $ACCCashApply->STATUS == "REJECT-PICT" || $ACCCashApply->STATUS == "REJECT-STNK" || $ACCCashApply->STATUS == "REJECT-STNKUNIT" )
                     <span>REJECT SEBAGIAN</span>
