@@ -83,12 +83,34 @@
 	}
 	
 	.close:hover,
-	.close:focus {
+	.close:focus,
+	.clockwise:hover,
+	.clockwise:focus,
+	.anticlockwise:hover,
+	.anticlockwise:focus {
 	  color: #bbb;
 	  text-decoration: none;
 	  cursor: pointer;
 	}
 	
+	.clockwise {
+	  position: fixed;
+	  top: 55px;
+	  right: 100px;
+	  color: #f1f1f1;
+	  font-size: 40px;
+	  font-weight: bold;
+	  transition: 0.3s;
+	}
+	.anticlockwise {
+	  position: fixed;
+	  top: 55px;
+	  right: 135px;
+	  color: #f1f1f1;
+	  font-size: 40px;
+	  font-weight: bold;
+	  transition: 0.3s;
+	}
 	/* 100% Image Width on Smaller Screens */
 	@media only screen and (max-width: 700px){
 	  .modal-content {
@@ -327,7 +349,9 @@
 													<!-- The Modal image-->
 													<div id="myModal" class="modal">
 														<span class="close">&times;</span>
-														<img class="modal-content" id="img01">
+														<span class="anticlockwise"> &#8630;</span>
+														<span class="clockwise"> &#8631;</span>
+														<img class="modal-content" angle="0" id="img01">
 														<div id="caption"></div>
 													</div>
 
@@ -654,9 +678,35 @@
 	var span = document.getElementsByClassName("close")[0];
 
 	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() { 
+	span.onclick = function() {
+		document.getElementById('img01').setAttribute('angle', '0');
+  		document.getElementById('img01').style.transform = 'rotate(0deg)'; 
 		modal.style.display = "none";
 	};
+
+	//function rotate image modal
+	var span_clockwise = document.getElementsByClassName("clockwise")[0]; 
+	span_clockwise.onclick = function(){
+		var angle = document.getElementById('img01').getAttribute('angle');
+    	var newAngle = parseInt(angle) + 90;
+    	var x = document.getElementById('img01');
+    	var c = document.getElementById('img01').setAttribute('angle', newAngle);
+    
+    x.style.transform = 'rotate('+newAngle+'deg)';
+
+	}
+
+	var span_anticlockwise = document.getElementsByClassName("anticlockwise")[0]; 
+	span_anticlockwise.onclick = function(){
+		var angle = document.getElementById('img01').getAttribute('angle');
+    	var newAngle = parseInt(angle) - 90;
+    	var x = document.getElementById('img01');
+    	var c = document.getElementById('img01').setAttribute('angle', newAngle);
+    
+    x.style.transform = 'rotate('+newAngle+'deg)';
+	}
+
+
 
 	function rotateImage(degree) {
 	$('#myImg').animate({  transform: degree }, {
