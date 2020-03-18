@@ -121,9 +121,16 @@
       
         //Button Search
         $('.ButtonSearch').on('click', function(){
-            var searchData = $('.InputSearch').val()
-            var dtable = $('#example2').DataTable()
-            dtable.search(searchData).draw()
+            if($('#startdate').val()== null || $('#startdate').val()== "" || $('#enddate').val()== null || $('#enddate').val()== "") 
+            {
+                alert("Silahkan isi Start Date dan End Date terlebih dahulu","");
+            }
+            else{
+                var searchData = $('.InputSearch').val()
+                var dtable = $('#example2').DataTable()
+                dtable.search(searchData).draw()
+            }
+
         })
 
 
