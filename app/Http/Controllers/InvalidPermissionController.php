@@ -37,9 +37,32 @@ class InvalidPermissionController extends Controller
         $Hasilsrole= json_decode($resultrole);
         //dd($Hasilsrole);
 
+        $datacount = json_encode(array(
+            "doTransactionApply" => array(   
+                // "Id"=> $request->Id_add,
+                "P_GUID"=>"",
+                "TRANSACTION_CODE"=>"GET_APPLY",
+                "P_STATUS"=>"PENDING",
+            ),
+        ));
+
+        $urlcount = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
+
+        $chcount = curl_init($urlcount);                   
+        curl_setopt($chcount, CURLOPT_POST, true);                                  
+        curl_setopt($chcount, CURLOPT_POSTFIELDS, $datacount);
+        curl_setopt($chcount, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($chcount, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($chcount, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $resultcount = curl_exec($chcount);
+        $errcount = curl_error($chcount);
+        curl_close($chcount);
+        $Hasilscount= json_decode($resultcount); 
+
             return view(
                 'invalid_permission',[
                     'role'=> $Hasilsrole->OUT_DATA, 
+                    'countpendingacccash'=>count($Hasilscount->OUT_DATA[0]->dataApply),
                     'session' => $session
             ]);  
     }

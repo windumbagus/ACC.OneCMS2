@@ -1,9 +1,9 @@
 <?php
 
 return [
-    //  'base_url_sofia' => 'https://apidev.acc.co.id',
+     'base_url_sofia' => 'https://apidev.acc.co.id',
     // 'base_url_sofia' => 'https://api2.acc.co.id',
-    'base_url_sofia' => 'http://172.16.4.32:8301',
+    // 'base_url_sofia' => 'http://172.16.4.32:8301',
     
     'base_url_sofia2' => 'https://apidev.acc.co.id',
     //'base_url_sofia2' => 'https://api1.acc.co.id',

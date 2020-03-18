@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-8">
                 <h3 class="box-title">History SMS Pengajuan </h3> <br/>
-                <h6>Silahkan Menentukan Start Date dan End Date terlebih dahulu, search by SMS ID dan lain-lain bisa dilakukan setelah filter by Start Date dan End Date </h6>
+                <!-- <h6>Silahkan Menentukan Start Date dan End Date terlebih dahulu, search by SMS ID dan lain-lain bisa dilakukan setelah filter by Start Date dan End Date </h6> -->
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
@@ -37,10 +37,17 @@
 
                 <div class="col-sm-8">
                     <div class="col-sm-6">
-                        <input type="text" onfocus="(this.type='date')" id="startdate" name="startdate"  placeholder="Start Date" class="form-control" value="">
-					</div>
+                        <h5 class="col-sm-3">Start</h5>
+                        <div class="col-sm-9">
+                            <input type="date" id="startdate" name="startdate" class="form-control" value="">
+                        </div>
+                    </div>
                     <div class="col-sm-6">
-                        <input type="text" onfocus="(this.type='date')" id="enddate" name="enddate" placeholder="End Date" class="form-control" value="">
+                        <h5 class="col-sm-3">End</h5>
+                        <div class="col-sm-9">
+                            <input type="date" id="enddate" name="enddate" class="form-control" value="">
+                        </div>
+
 					</div>
                 </div>
                 
@@ -121,15 +128,15 @@
       
         //Button Search
         $('.ButtonSearch').on('click', function(){
-            if($('#startdate').val()== null || $('#startdate').val()== "" || $('#enddate').val()== null || $('#enddate').val()== "") 
-            {
-                alert("Silahkan isi Start Date dan End Date terlebih dahulu","");
-            }
-            else{
+            // if($('#startdate').val()== null || $('#startdate').val()== "" || $('#enddate').val()== null || $('#enddate').val()== "") 
+            // {
+            //     alert("Silahkan isi Start Date dan End Date terlebih dahulu","");
+            // }
+            // else{
                 var searchData = $('.InputSearch').val()
                 var dtable = $('#example2').DataTable()
                 dtable.search(searchData).draw()
-            }
+            // }
 
         })
 
@@ -155,14 +162,29 @@
                 // {
                 //     $('#startdate').attr('type', 'text');
                 // }
-                var StartDate = $(this).val();
+
+                if($("#startdate").val() == null || $("#startdate").val() == "")
+                {
+                    var StartDate = '01/01/1900';
+                }
+                else{
+                    var StartDate = $("#startdate").val();
+                }
+
+                if($("#enddate").val() == null || $("#enddate").val() == "")
+                {
+                    var EndDate = now;
+                }
+                else{
+                    var EndDate = $("#enddate").val();
+                }
 
                 // if($("#startdate").val() == null && $("#enddate").val() == null  || $("#startdate").val() == "" && $("#enddate").val() == ""){
                 // var EndDate = "";
                 // }else if($("#enddate").val() == null || $("#enddate").val() == ""){
                 // var EndDate = now;
                 // }else{
-                    var EndDate = $("#enddate").val();
+                    // var EndDate = $("#enddate").val();
                // }
                 
                 var tempStartDateSelect = StartDate;
@@ -231,8 +253,25 @@
                 // {
                 //     $('#enddate').attr('type', 'text');
                 // }
-                var StartDate = $("#startdate").val();
-                var EndDate = $(this).val();
+                var fullDate = new Date()
+                var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+                var now= fullDate.getFullYear() + "-" + twoDigitMonth + "-" + fullDate.getDate() ;
+
+                if($("#enddate").val() == null || $("#enddate").val() == "")
+                {
+                    var EndDate = now;
+                }
+                else{
+                    var EndDate = $("#enddate").val();
+                }
+
+                if($("#startdate").val() == null || $("#startdate").val() == "")
+                {
+                    var StartDate = '01/01/1900';
+                }
+                else{
+                    var StartDate = $("#startdate").val();
+                }
 
                 var tempStartDateSelect = StartDate;
                 var tempEndDateSelect = EndDate;
