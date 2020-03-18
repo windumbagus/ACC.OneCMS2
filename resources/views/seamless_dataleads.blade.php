@@ -61,8 +61,8 @@
         <table id="example2" class="table table-bordered display nowrap" style="width:100%">
         <thead>
         <tr>
-            <th>Leads Id</th>
             <th>Waktu Pengajuan</th>
+            <th>Leads Id</th>
             <th>Nama</th>
             <th>No HP</th>
             <th>Brand</th>
@@ -81,8 +81,8 @@
         
             @foreach ($SeamlessDataLeads as $SeamlessDataLead)
             <tr>  
-                <td><span>{{$SeamlessDataLead->LEADS_ID}}</span></td>
-                <td><span>{{$SeamlessDataLead->DT_ADDED}}</span></td>    
+                <td><span>{{$SeamlessDataLead->DT_ADDED}}</span></td> 
+                <td><span>{{$SeamlessDataLead->LEADS_ID}}</span></td>   
                 <td><span>{{$SeamlessDataLead->NAME}}</span></td>
                 <td><span>{{$SeamlessDataLead->PHONE_NUMBER}}</span></td>
                 <td><span>{{$SeamlessDataLead->DESC_BRAND}}</span></td>
@@ -179,11 +179,11 @@
 
 
                     DataLeads.map(e=>{ 
-                        if (typeof e.LEADS_ID === 'undefined') {
-                        e.LEADS_ID = "";
-                        }
                         if (typeof e.DT_ADDED === 'undefined') {
                         e.DT_ADDED = "";
+                        }
+                        if (typeof e.LEADS_ID === 'undefined') {
+                        e.LEADS_ID = "";
                         }
                         if (typeof e.NAME === 'undefined') {
                         e.NAME = "";
@@ -223,8 +223,8 @@
                         }
 
                         table.row.add([
-                            e.LEADS_ID,
                             e.DT_ADDED,
+                            e.LEADS_ID,
                             e.NAME,
                             e.PHONE_NUMBER,
                             e.DESC_BRAND,
