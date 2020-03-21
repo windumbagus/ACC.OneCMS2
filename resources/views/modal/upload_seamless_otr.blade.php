@@ -13,7 +13,7 @@
         <form id="form-upload-seamless-unit-otr" action="{{asset('/seamless-otrupload/upload')}}" method="post" enctype="multipart/form-data"> 
             @csrf
                
-            Structure : ID_UNIT, CD_AREA, OTR, ID_USER_ADDED, ID_USER_UPDATED, CD_BRAND, CD_TYPE, CD_MODEL, TAHUN<br>
+            Structure : ID_UNIT, CD_AREA, OTR, ID_USER_ADDED, ID_USER_UPDATED<br>
             <br/><br/>
             Format &nbsp;&nbsp;&nbsp;: .xlsx file, no double-quotes for text
             <div class="row">
@@ -46,10 +46,7 @@
                     <th>OTR</th>
                     <th>ID_USER_ADDED</th>
                     <th>ID_USER_UPDATED</th>
-                    <th>CD_BRAND</th>
-                    <th>CD_TYPE</th>
-                    <th>CD_MODEL</th>
-                    <th>TAHUN</th>
+
 
                 </tr>
             </thead>
@@ -61,7 +58,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="col-sm-6">
-                    <a href="{{asset('/seamless-otrupload/cancel')}}" class="btn btn-block btn-primary">Back</a>
+                    <a href="{{asset('/seamless-otr-master')}}" class="btn btn-block btn-primary">Back</a>
                 </div>
                 <div class="col-sm-6">
                     
@@ -86,10 +83,6 @@
           'scrollX': true,
           sDom: 'lrtip', 
           "columns": [
-                null,
-                null,
-                null,
-                null,
                 null,
                 null,
                 null,
@@ -135,10 +128,6 @@
                         e.OTR,
                         e.ID_USER_ADDED,
                         e.ID_USER_UPDATED,
-                        e.CD_BRAND,
-                        e.CD_TYPE,
-                        e.CD_MODEL,
-                        e.TAHUN,
 
                     ]).draw(false)
                 }) 

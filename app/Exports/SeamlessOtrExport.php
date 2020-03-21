@@ -29,10 +29,7 @@ class SeamlessOtrExport implements FromArray, WithHeadings
             "OTR",
             "ID_USER_ADDED",
             "ID_USER_UPDATED",
-            "CD_BRAND",
-            "CD_TYPE",
-            "CD_MODEL",
-            "TAHUN",
+
             
         ];
     }

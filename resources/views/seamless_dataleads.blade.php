@@ -74,7 +74,8 @@
             <th>Tenor</th>
             <th>TDP</th>
             <th>Angsuran</th>
-            <th>OTR</th>           
+            <th>OTR</th> 
+            <th>Action</th>          
         </tr>
         </thead>
         <tbody>
@@ -95,7 +96,11 @@
                 <td><span>{{$SeamlessDataLead->AMT_TDP}}</span></td>
                 <td><span>{{$SeamlessDataLead->AMT_INSTALLMENT}}</span></td>
                 <td><span>{{$SeamlessDataLead->AMT_OTR}}</span></td>
-         
+                <td>
+                <span>
+                    <a href="{{ asset('/seamless-dataleads-detail/'.$SeamlessDataLead->LEADS_ID) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                </span>
+                </td>
                 
                 
             </tr>                              
@@ -129,6 +134,7 @@
                 null,
                 null,
                 null,                
+                null,
                 null,
                 null,
                 null,
@@ -223,6 +229,7 @@
                         e.AMT_OTR = "";
                         }
 
+                        detailleads="/seamless-dataleads-detail/"+e.LEADS_ID;
                         table.row.add([
                             e.DT_ADDED,
                             e.LEADS_ID,
@@ -238,7 +245,8 @@
                             e.AMT_TDP,
                             e.AMT_INSTALLMENT,
                             e.AMT_OTR,
-
+                            '<span>'+'<a href='+detailleads+' class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>'+'</span>',
+                           
                         ]).draw(false)
                     }) 
                 }

@@ -28,23 +28,23 @@
     <div class="box-body">
         <div class="row">
           
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <div class="col-sm-4">
                 
               
-                    <input type="text" placeholder="Search by SMS ID, etc" class="InputSearch form-control">
+                    <input type="text" placeholder="Search by Pesan, etc" class="InputSearch form-control">
                 </div>
 
                 <div class="col-sm-8">
                     <div class="col-sm-6">
-                        <h5 class="col-sm-3">Start</h5>
-                        <div class="col-sm-9">
+                        <h5 class="col-sm-2">Start</h5>
+                        <div class="col-sm-10">
                             <input type="date" id="startdate" name="startdate" class="form-control" value="">
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <h5 class="col-sm-3">End</h5>
-                        <div class="col-sm-9">
+                        <h5 class="col-sm-2">End</h5>
+                        <div class="col-sm-10">
                             <input type="date" id="enddate" name="enddate" class="form-control" value="">
                         </div>
 
@@ -72,7 +72,8 @@
             <th>Tgl Terkirim</th>
             <th>Tgl Diterima</th>
             <th>Nomor Tujuan</th>
-            <th>Pengirim</th>  
+            <th>Pengirim</th>
+            <th>Note Error</th>
         </tr>
         </thead>
         <tbody>
@@ -87,6 +88,7 @@
                 <td><span>{{$AcccashHistorySMS->SMS_DELIVERED}}</span></td>
                 <td><span>{{$AcccashHistorySMS->SMS_PHONENOTO}}</span></td>
                 <td><span>{{$AcccashHistorySMS->ID_USER_ADDED}}</span></td>
+                <td><span>{{$AcccashHistorySMS->SMS_STATUS_MSG}}</span></td>
                 
             </tr>                              
             @endforeach       
@@ -119,6 +121,7 @@
                 null,
                 null,
                 null,                
+                null,
                 null,
                 
             ]
@@ -163,20 +166,45 @@
                 //     $('#startdate').attr('type', 'text');
                 // }
 
-                if($("#startdate").val() == null || $("#startdate").val() == "")
+                if($("#startdate").val() == null || $("#startdate").val() == "") // startdate kosong
                 {
-                    var StartDate = '01/01/1900';
-                }
-                else{
-                    var StartDate = $("#startdate").val();
-                }
+                   // var StartDate = '01/01/1900';
+                    if($("#enddate").val() == null || $("#enddate").val() == "") // startdate dan enddate kosong
+                    {
+                        var StartDate = '01/01/1900';
+                        var EndDate = now;
+                    }
+                    else // startdate kosong enddate isi
+                    {
+                        var StartDate = now;
+                        var EndDate = $("#enddate").val();    
+                        alert("Tentukan Start Date terlebih dahulu",""); 
+                    }
 
-                if($("#enddate").val() == null || $("#enddate").val() == "")
-                {
-                    var EndDate = now;
                 }
-                else{
-                    var EndDate = $("#enddate").val();
+                else{ //start date isi
+                    //var StartDate = $("#startdate").val();
+                    if($("#enddate").val() == null || $("#enddate").val() == "") //startdate isi enddate kosong
+                    {
+                        var StartDate = $("#startdate").val();
+                        var EndDate = '01/01/1900';
+                        alert("Tentukan End Date terlebih dahulu",""); 
+                    }
+                    else //startdate dan enddate isi
+                    {
+
+                        var StartDate = $("#startdate").val();
+                        var EndDate = $("#enddate").val();    
+
+                        // month is 0-based, that's why we need dataParts[1] - 1
+                        var StartdateObject = new Date(+StartdateParts[2], StartdateParts[1] - 1, +StartdateParts[0]); 
+                        var EnddateObject = new Date(+EnddateParts[2], EnddateParts[1] - 1, +EnddateParts[0]); 
+                        if(StartdateObject > EnddateObject)
+                        {
+                            alert("Start Date lebih besar dari End Date","");                            
+                        }
+
+                    }
                 }
 
                 // if($("#startdate").val() == null && $("#enddate").val() == null  || $("#startdate").val() == "" && $("#enddate").val() == ""){
@@ -230,6 +258,9 @@
                         if (typeof e.ID_USER_ADDED === 'undefined') {
                         e.ID_USER_ADDED = "";
                         }
+                        if (typeof e.SMS_STATUS_MSG === 'undefined') {
+                        e.SMS_STATUS_MSG = "";
+                        }
                         
                         table.row.add([
                             e.SMS_ID,
@@ -240,6 +271,7 @@
                             e.SMS_DELIVERED,
                             e.SMS_PHONENOTO,
                             e.ID_USER_ADDED,
+                            e.SMS_STATUS_MSG,
 
                         ]).draw(false)
                     }) 
@@ -257,20 +289,48 @@
                 var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
                 var now= fullDate.getFullYear() + "-" + twoDigitMonth + "-" + fullDate.getDate() ;
 
-                if($("#enddate").val() == null || $("#enddate").val() == "")
+                if($("#startdate").val() == null || $("#startdate").val() == "") // startdate kosong
                 {
-                    var EndDate = now;
-                }
-                else{
-                    var EndDate = $("#enddate").val();
-                }
+                   // var StartDate = '01/01/1900';
+                    if($("#enddate").val() == null || $("#enddate").val() == "") // startdate dan enddate kosong
+                    {
+                        var StartDate = '01/01/1900';
+                        var EndDate = now;
+                    }
+                    else // startdate kosong enddate isi
+                    {
+                        var StartDate = now;
+                        var EndDate = $("#enddate").val();    
+                        alert("Tentukan Start Date terlebih dahulu",""); 
+                    }
 
-                if($("#startdate").val() == null || $("#startdate").val() == "")
-                {
-                    var StartDate = '01/01/1900';
                 }
-                else{
-                    var StartDate = $("#startdate").val();
+                else{ //start date isi
+                    //var StartDate = $("#startdate").val();
+                    if($("#enddate").val() == null || $("#enddate").val() == "") //startdate isi enddate kosong
+                    {
+                        var StartDate = $("#startdate").val();
+                        var EndDate = '01/01/1900';
+                        alert("Tentukan End Date terlebih dahulu",""); 
+                    }
+                    else //startdate dan enddate isi
+                    {
+
+                        var StartDate = $("#startdate").val();
+                        var EndDate = $("#enddate").val();    
+
+                        var StartdateParts = StartDate.split("/");
+                        var EnddateParts = EndDate.split("/");
+
+                        // month is 0-based, that's why we need dataParts[1] - 1
+                        var StartdateObject = new Date(+StartdateParts[2], StartdateParts[1] - 1, +StartdateParts[0]); 
+                        var EnddateObject = new Date(+EnddateParts[2], EnddateParts[1] - 1, +EnddateParts[0]); 
+                        if(StartdateObject > EnddateObject)
+                        {
+                            alert("Start Date lebih besar dari End Date","");                            
+                        }
+
+                    }
                 }
 
                 var tempStartDateSelect = StartDate;
@@ -315,7 +375,10 @@
                         if (typeof e.ID_USER_ADDED === 'undefined') {
                         e.ID_USER_ADDED = "";
                         }
-                        
+                        if (typeof e.SMS_STATUS_MSG === 'undefined') {
+                        e.SMS_STATUS_MSG = "";
+                        }
+
                         table.row.add([
                             e.SMS_ID,
                             e.SMS_GROUP_ID,
@@ -325,6 +388,7 @@
                             e.SMS_DELIVERED,
                             e.SMS_PHONENOTO,
                             e.ID_USER_ADDED,
+                            e.SMS_STATUS_MSG,
 
                         ]).draw(false)
                     }) 

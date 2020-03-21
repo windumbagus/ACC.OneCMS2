@@ -24,7 +24,7 @@
 	  position: fixed; /* Stay in place */
 	  z-index: 1; /* Sit on top */
 	  padding-top: 120px; /* Location of the box */
-	  left: 0%;
+	  left: 3%;
 	  top: 0;
 	  width: 100%; /* Full width */
 	  height: 100%; /* Full height */
@@ -95,7 +95,7 @@
 	
 	.clockwise {
 	  position: fixed;
-	  top: 55px;
+	  top: 45px;
 	  right: 100px;
 	  color: #f1f1f1;
 	  font-size: 40px;
@@ -104,7 +104,7 @@
 	}
 	.anticlockwise {
 	  position: fixed;
-	  top: 55px;
+	  top: 45px;
 	  right: 135px;
 	  color: #f1f1f1;
 	  font-size: 40px;
@@ -321,12 +321,12 @@
 												<div class="form-group">
 													<div class="col-sm-6">
 														
-														<h6> Rotate by Degrees </h6>
+														<!-- <h6> Rotate by Degrees </h6>
 														<input type="button" class="btn btn-warning" value="-90" onClick="rotateImage(this.value);" />
 														<input type="button" class="btn btn-warning" value="90" onClick="rotateImage(this.value);" />
 														<input type="button" class="btn btn-warning" value="0" onClick="rotateImage(this.value);" />
 														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage(this.value);" />
-														<br/><br/>
+														<br/><br/> -->
 														
 														@if(!empty($AccCashApplyPictures[0]->PATH_FILE))
 															<img id="myImg" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
@@ -335,12 +335,12 @@
 													</div>
 													
 													<div class="col-sm-6">
-													<h6> Rotate by Degrees </h6>
+													<!-- <h6> Rotate by Degrees </h6>
 														<input type="button" class="btn btn-warning" value="-90" onClick="rotateImage2(this.value);" />
 														<input type="button" class="btn btn-warning" value="90" onClick="rotateImage2(this.value);" />
 														<input type="button" class="btn btn-warning" value="0" onClick="rotateImage2(this.value);" />
 														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage2(this.value);" />
-														<br/><br/>
+														<br/><br/> -->
 														@if(!empty($AccCashApplyPictures[1]->PATH_FILE))
 															<img id="myImg2" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
 														@endif

@@ -113,6 +113,7 @@ class SeamlessDataLeadsController extends Controller
                   //  'UserCategories'=>$Hasils2->UserCategory, 
                   'role'=> $Hasilsrole->OUT_DATA,
                   'countpendingacccash'=>count($Hasilscount->OUT_DATA[0]->dataApply),
+                // 'countpendingacccash'=>"66",
                     'session' => $session
             ]);
 
