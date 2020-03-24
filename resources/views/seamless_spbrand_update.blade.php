@@ -30,7 +30,7 @@
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                     <div class="box-body">
 						<div class="row">
-							<form id="form-seamless-spbrand-update" action="{{ asset('/seamless-sprand-update/update') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+							<form id="form-seamless-spbrand-update" action="{{ asset('/seamless-spbrand-update/update') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 									
 									@csrf	
 									<div class="form-group">

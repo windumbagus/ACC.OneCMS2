@@ -98,12 +98,20 @@ class SeamlessProductDetailController extends Controller
             ),
         ));
 
-       
+        $data_param = json_encode(array(
+            "doSendDataCustomerApply" => array(   
+                "TRANSACTION_CODE"=>"GET_PARAM_SIMULATION",
+                "P_CD_PRODUCT"=>$request->Id,
+                "P_LANGUAGE"=>"IN",
+            ),
+        ));
 
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         //  $url = $this->base_url_sofia.'/restV2/acccash/getdata/transactionapply';
         $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+
+        $urlparam = config('global.base_url_sofia').'/restV2/seamless/accone/customerapply';
         // $url = $this->base_url+"restV2/acccash/getdata/transactionapply"; 
         
         //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionaggr";
@@ -155,6 +163,17 @@ class SeamlessProductDetailController extends Controller
         curl_close($ch_sim);
         $Hasils_sim= json_decode($result_sim); 
 
+        $ch_param = curl_init($urlparam);                   
+        curl_setopt($ch_param, CURLOPT_POST, true);                                  
+        curl_setopt($ch_param, CURLOPT_POSTFIELDS, $data_param);
+        curl_setopt($ch_param, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch_param, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch_param, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result_param = curl_exec($ch_param);
+        $err_param = curl_error($ch_param);
+        curl_close($ch_param);
+        $Hasils_param= json_decode($result_param); 
+
 
         if ($Hasilsrole->OUT_DATA == 'Super Admin' || $Hasilsrole->OUT_DATA == 'Super_Admin' || $Hasilsrole->OUT_DATA == 'seamless')
         {
@@ -165,6 +184,8 @@ class SeamlessProductDetailController extends Controller
                     'SeamlessProductDetails'=>$Hasils_detail->OUT_DATA,
                     'SeamlessProductPicts'=>$Hasils_pict->OUT_DATA,
                     'SeamlessProductSims'=>$Hasils_sim->OUT_DATA,
+                    'SeamlessProductParamDetails'=>$Hasils_param->OUT_DATA[0]->DATA_SIMULATION,
+                    'SeamlessProductParamDPs'=>$Hasils_param->OUT_DATA[0]->DATA_DP,
                     'CdProduct'=>$request->Id,
 
                    // 'Roles'=>$Hasils2->Roles,

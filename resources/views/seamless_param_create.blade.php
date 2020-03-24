@@ -1,7 +1,7 @@
 @extends('admin.admin') 
 
 @section('seamless', 'active')
-@section('seamless-param', 'active')
+@section('seamless-product', 'active')
 
 @section('content')
 
@@ -20,7 +20,7 @@
 
                 </div>
                 <div class="col-sm-6">
-                <a href="{{asset('seamless-param/')}}" class="btn btn-block btn-primary">Back</a>
+                <a href="{{asset('/seamless-product-detail/'.$cdproduct)}}" class="btn btn-block btn-primary">Back</a>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Kode Product</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" name="CD_PRODUCT" id="CD_PRODUCT" value="">
+											<input type="text" class="form-control" name="CD_PRODUCT" id="CD_PRODUCT" value="{{$cdproduct}}">
 										</div>
 									</div>
 									<div class="form-group">
@@ -47,18 +47,62 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">Tenor</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" name="TENOR" id="TENOR" value="">
-										</div>
+										<label class="col-sm-3 control-label">Tenor Minimal</label>
+                                        <div class="col-sm-7">
+                                            <select name="MIN_TENOR" id="MIN_TENOR">
+                                                @for ($i = 0; $i <= 60; $i+=12)
+                                                    <option value="{{strval($i)}}">
+                                                    {{$i}}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Type Insurance</label>
-										<div class="col-sm-7">
-                                            <select id="TYPE_INSU" name="TYPE_INSU">
-                                                <option value="A"> All Risk</option>
-                                                <option value="T"> TLO</option>
-                                               
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">Tenor Maksimal</label>
+                                        <div class="col-sm-7">
+                                            <select name="MAX_TENOR" id="MAX_TENOR">
+                                                @for ($i = 0; $i <= 60; $i+=12)
+                                                    <option value="{{strval($i)}}">
+                                                    {{$i}}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+									</div>
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">Kenaikan Tenor</label>
+                                        <div class="col-sm-7">
+                                            <select name="INC_TENOR" id="INC_TENOR"">
+                                                @for ($i = 0; $i <= 60; $i+=12)
+                                                    <option value="{{strval($i)}}">
+                                                    {{$i}}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+									</div>
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">Tenor All Risk</label>
+                                        <div class="col-sm-7">
+                                            <select  name="TENOR_AR" id="TENOR_AR">
+                                                @for ($i = 0; $i <= 5; $i++)
+                                                    <option value="{{strval($i)}}">
+                                                    {{strval($i)}}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+									</div>
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">Tenor TLO</label>
+                                        <div class="col-sm-7">
+                                            <select name="TENOR_TLO" id="TENOR_TLO">
+                                                @for ($i = 0; $i <= 5; $i++)
+                                                    <option value="{{strval($i)}}">
+                                                    {{strval($i)}}
+                                                    </option>
+                                                @endfor
                                             </select>
                                         </div>
 									</div>
@@ -68,19 +112,15 @@
                                             <select id="MODE_INSU" name="MODE_INSU">
                                                 <option value="C"> Cash</option>
                                                 <option value="K"> Kredit</option>
-                                               
                                             </select>
-                                        
                                         </div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Flag ACP</label>
 										<div class="col-sm-7">
-											
                                             <select id="FLAG_ACP" name="FLAG_ACP">
                                                 <option value="Y"> Yes</option>
                                                 <option value="N"> No</option>
-                                               
                                             </select>
                                         </div>
 									</div>
@@ -90,12 +130,10 @@
 											<select id="FLAG_ADDM" name="FLAG_ADDM">
                                                 <option value="ADDM"> ADDM</option>
                                                 <option value="ADDB"> ADDB</option>
-                                               
                                             </select>
                                         </div>
 									</div>
-									
-									
+																		
 									<div class="form-group">
 										<div class="col-sm-3">
 

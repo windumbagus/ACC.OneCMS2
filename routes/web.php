@@ -366,17 +366,17 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/seamless-param','SeamlessParamController@index');
     Route::get('/seamless-param/delete/{CD_PRODUCT}','SeamlessParamController@delete');
-    Route::get('/seamless-param-create','SeamlessParamCreateController@index');
+    Route::get('/seamless-param-create/{CD_PRODUCT}','SeamlessParamCreateController@index');
     Route::post('/seamless-param-create/create','SeamlessParamCreateController@create');
     Route::get('/seamless-param-update/{CD_PRODUCT}','SeamlessParamUpdateController@index');
     Route::post('/seamless-param-update/update','SeamlessParamUpdateController@update');
 
-    Route::get('/seamless-spbrand','SeamlessParamController@index');
-    Route::get('/seamless-spbrand/delete/{Id}','SeamlessParamController@delete');
-    Route::get('/seamless-spbrand-create','SeamlessParamCreateController@index');
-    Route::post('/seamless-spbrand-create/create','SeamlessParamCreateController@create');
-    Route::get('/seamless-spbrand-update/{Id}','SeamlessParamUpdateController@index');
-    Route::post('/seamless-spbrand-update/update','SeamlessParamUpdateController@update');
+    Route::get('/seamless-spbrand','SeamlessSpBrandController@index');
+    Route::get('/seamless-spbrand/delete/{Id}','SeamlessSpBrandController@delete');
+    Route::get('/seamless-spbrand-create','SeamlessSpBrandCreateController@index');
+    Route::post('/seamless-spbrand-create/create','SeamlessSpBrandCreateController@create');
+    Route::get('/seamless-spbrand-update/{Id}','SeamlessSpBrandUpdateController@index');
+    Route::post('/seamless-spbrand-update/update','SeamlessSpBrandUpdateController@update');
 
     Route::get('/invalid-permission','InvalidPermissionController@index');
 });//end group route

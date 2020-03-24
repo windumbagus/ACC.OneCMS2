@@ -10,13 +10,13 @@
 	
 	body {font-family: Arial, Helvetica, sans-serif;}
 	
-	#myImg, #myImg2 {
+	#myImg, #myImg2, #myimg3 {
 	  border-radius: 5px;
 	  cursor: pointer;
 	  transition: 0.3s;
 	}
 	
-	#myImg, #myImg2:hover {opacity: 0.7;}
+	#myImg, #myImg2, #myimg3:hover {opacity: 0.7;}
 	
 	/* The Modal (background) */
 	.modal {
@@ -329,7 +329,7 @@
 														<br/><br/> -->
 														
 														@if(!empty($AccCashApplyPictures[0]->PATH_FILE))
-															<img id="myImg" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
+															<img id="myImg" style="width: 50%; height: 50%; " alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
 														@endif
 													
 													</div>
@@ -342,7 +342,7 @@
 														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage2(this.value);" />
 														<br/><br/> -->
 														@if(!empty($AccCashApplyPictures[1]->PATH_FILE))
-															<img id="myImg2" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
+															<img id="myImg2" style="width: 50%; height: 50%; " alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
 														@endif
 													</div>
 
@@ -355,6 +355,24 @@
 														<div id="caption"></div>
 													</div>
 
+												</div>
+
+												<div class="form-group">
+													<div class="col-sm-12">
+														
+														<!-- <h6> Rotate by Degrees </h6>
+														<input type="button" class="btn btn-warning" value="-90" onClick="rotateImage(this.value);" />
+														<input type="button" class="btn btn-warning" value="90" onClick="rotateImage(this.value);" />
+														<input type="button" class="btn btn-warning" value="0" onClick="rotateImage(this.value);" />
+														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage(this.value);" />
+														<br/><br/> -->
+														
+														@if(!empty($AccCashApplyPictures[2]->PATH_FILE))
+															<img id="myImg3" style="width: 50%; height: 50%; " alt="" src="{{$AccCashApplyPictures[2]->PATH_FILE}}" class="center"/>
+														@endif
+													
+													</div>
+			
 												</div>
 												
 												@if ($Statusapply == "PENDING")
@@ -674,6 +692,16 @@
 		captionText2.innerHTML = this.alt;
 	};
 
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img3 = document.getElementById("myImg3");
+	var modalImg2 = document.getElementById("img01");
+	var captionText2 = document.getElementById("caption");
+	img2.onclick = function(){
+		modal.style.display = "block";
+		modalImg2.src = this.src;
+		captionText2.innerHTML = this.alt;
+	};
+
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
 
@@ -722,6 +750,18 @@
 
 	function rotateImage2(degree) {
 	$('#myImg2').animate({  transform: degree }, {
+    step: function(now,fx) {
+        $(this).css({
+            '-webkit-transform':'rotate('+now+'deg)', 
+            '-moz-transform':'rotate('+now+'deg)',
+            'transform':'rotate('+now+'deg)'
+			});
+		}
+		});
+	}
+
+	function rotateImage3(degree) {
+	$('#myImg3').animate({  transform: degree }, {
     step: function(now,fx) {
         $(this).css({
             '-webkit-transform':'rotate('+now+'deg)', 

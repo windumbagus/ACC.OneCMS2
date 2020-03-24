@@ -52,7 +52,7 @@ class SeamlessSpBrandUpdateController extends Controller
             ),
         ));
 
-        $urlcount = config('global.base_url_sofia').'/restv2/seamless/accone/datacms';
+        $urlcount = config('global.base_url_sofia').'/restV2/acccash/getdata/transactionapply';
 
         $chcount = curl_init($urlcount);                   
         curl_setopt($chcount, CURLOPT_POST, true);                                  
@@ -76,7 +76,7 @@ class SeamlessSpBrandUpdateController extends Controller
          //API GET
         //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
         //  $url = $this->base_url_sofia.'/restV2/acccash/getdata/transactionapply';
-        $url = config('global.base_url_sofia').'/restV2/seamless/accone/customerapply';
+        $url = config('global.base_url_sofia').'/restv2/seamless/accone/datacms';
         // $url = $this->base_url+"restV2/acccash/getdata/transactionapply"; 
         
         //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionaggr";
@@ -121,7 +121,7 @@ class SeamlessSpBrandUpdateController extends Controller
         // dd($end_date);
         $data = json_encode(array(
             "doSendParamSimulation" => array(   
-                "TRANSACTION_CODE"=>"UPDATE_PARAM_SIMULATION",
+                "TRANSACTION_CODE"=>"UPD_SP_BRAND",
                 "P_USER"=>"ADMIN",
                 "P_CD_BRAND"=>$request->CD_BRAND,
                 "P_CD_SP"=>$request->CD_SP,

@@ -185,8 +185,7 @@
                 @endif
                 <li class="@yield('seamless-dataleads')"><a href="{{ asset('seamless-dataleads') }}"><i class="fa fa-circle-o"></i> Data Leads</a></li>
                 @if($role == 'Super Admin' || $role == 'Super_Admin')
-                <li class="@yield('seamless-diskon')"><a href="{{ asset('seamless-diskon') }}"><i class="fa fa-circle-o"></i> Master Discount</a></li>
-                <li class="@yield('seamless-param')"><a href="{{ asset('seamless-param') }}"><i class="fa fa-circle-o"></i> Param Simulation</a></li>                
+                <li class="@yield('seamless-diskon')"><a href="{{ asset('seamless-diskon') }}"><i class="fa fa-circle-o"></i> Master Discount</a></li>           
                 <li class="@yield('seamless-spbrand')"><a href="{{ asset('seamless-spbrand') }}"><i class="fa fa-circle-o"></i> List Cabang Brand</a></li>
                 @endif
                 </ul>

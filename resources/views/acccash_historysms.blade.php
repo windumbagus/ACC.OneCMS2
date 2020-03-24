@@ -68,7 +68,6 @@
             <th>SMS ID</th>
             <th>Group ID</th>
             <th>Pesan</th>
-            <th>Status</th>
             <th>Tgl Terkirim</th>
             <th>Tgl Diterima</th>
             <th>Nomor Tujuan</th>
@@ -83,7 +82,6 @@
                 <td><span>{{$AcccashHistorySMS->SMS_ID}}</span></td>
                 <td><span>{{$AcccashHistorySMS->SMS_GROUP_ID}}</span></td>    
                 <td><span>{{$AcccashHistorySMS->SMS_MSG}}</span></td>
-                <td><span>{{$AcccashHistorySMS->SMS_STATUS}}</span></td>
                 <td><span>{{$AcccashHistorySMS->SMS_SENT}}</span></td>
                 <td><span>{{$AcccashHistorySMS->SMS_DELIVERED}}</span></td>
                 <td><span>{{$AcccashHistorySMS->SMS_PHONENOTO}}</span></td>
@@ -121,7 +119,6 @@
                 null,
                 null,
                 null,                
-                null,
                 null,
                 
             ]
@@ -243,9 +240,6 @@
                         if (typeof e.SMS_MSG === 'undefined') {
                         e.SMS_MSG = "";
                         }
-                        if (typeof e.SMS_STATUS === 'undefined') {
-                        e.SMS_STATUS = "";
-                        }
                         if (typeof e.SMS_SENT === 'undefined') {
                         e.SMS_SENT = "";
                         }
@@ -266,7 +260,6 @@
                             e.SMS_ID,
                             e.SMS_GROUP_ID,
                             e.SMS_MSG,
-                            e.SMS_STATUS,
                             e.SMS_SENT,
                             e.SMS_DELIVERED,
                             e.SMS_PHONENOTO,
@@ -360,9 +353,6 @@
                         if (typeof e.SMS_MSG === 'undefined') {
                         e.SMS_MSG = "";
                         }
-                        if (typeof e.SMS_STATUS === 'undefined') {
-                        e.SMS_STATUS = "";
-                        }
                         if (typeof e.SMS_SENT === 'undefined') {
                         e.SMS_SENT = "";
                         }
@@ -383,7 +373,6 @@
                             e.SMS_ID,
                             e.SMS_GROUP_ID,
                             e.SMS_MSG,
-                            e.SMS_STATUS,
                             e.SMS_SENT,
                             e.SMS_DELIVERED,
                             e.SMS_PHONENOTO,

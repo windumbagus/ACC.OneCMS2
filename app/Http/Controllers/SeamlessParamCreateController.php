@@ -75,6 +75,7 @@ class SeamlessParamCreateController extends Controller
                   //  'UserCategories'=>$Hasils2->UserCategory, 
                   'role'=> $Hasilsrole->OUT_DATA,
                   'countpendingacccash'=>count($Hasilscount->OUT_DATA[0]->dataApply),
+                  'cdproduct'=>$request->CD_PRODUCT,
                     'session' => $session
             ]);
 
@@ -96,8 +97,11 @@ class SeamlessParamCreateController extends Controller
                 "TRANSACTION_CODE"=>"INSERT_PARAM_SIMULATION",
                 "P_CD_PRODUCT"=>$request->CD_PRODUCT,
                 "P_PERC_DP"=>$request->PERC_DP,
-                "P_TENOR"=>$request->TENOR,
-                "P_TYPE_INSU"=>$request->TYPE_INSU,
+                "P_MIN_TENOR"=>$request->MIN_TENOR,
+                "P_MAX_TENOR"=>$request->MAX_TENOR,
+                "P_INC_TENOR"=>$request->INC_TENOR,
+                "P_TENOR_AR"=>$request->TENOR_AR,
+                "P_TENOR_TLO"=>$request->TENOR_TLO,
                 "P_MODE_INSU"=>$request->MODE_INSU,
                 "P_FLAG_ACP"=>$request->FLAG_ACP,
                 "P_FLAG_ADDM"=>$request->FLAG_ADDM,
@@ -128,7 +132,7 @@ class SeamlessParamCreateController extends Controller
         
         //  if ($Hasils->OUT_STAT == "T"){
             
-            return redirect('seamless-param/')->with('success','Data berhasil dibuat');
+            return redirect('seamless-product-detail/'.$request->CD_PRODUCT)->with('success','Data berhasil dibuat');
         // }else{
             // return redirect('seamless-param-create')->with('error',$Hasils->OUT_MESS);
         // }

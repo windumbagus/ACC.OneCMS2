@@ -1,13 +1,13 @@
 @extends('admin.admin') 
 
 @section('seamless', 'active')
-@section('seamless-param', 'active')
+@section('seamless-product', 'active')
 
 @section('content')
 
 
 
-<!-- UpdateSeamlessdiskon -->
+<!-- UpdateSeamlessParam -->
 <div class="box box-primary">
     <div class="box-header with-border">
         
@@ -20,7 +20,7 @@
 
                 </div>
                 <div class="col-sm-6">
-                <a href="{{asset('seamless-param/')}}" class="btn btn-block btn-primary">Back</a>
+                <a href="{{asset('/seamless-product-detail/'.$SeamlessParamUpdates->CD_PRODUCT)}}" class="btn btn-block btn-primary">Back</a>
                 </div>
             </div>
         </div>
@@ -42,31 +42,86 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">DP (%)</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" name="PERC_DP" id="PERC_DP" value="{{$SeamlessParamUpdates->PERC_DP}}">
+											<input type="text" class="form-control" name="PERC_DP" id="PERC_DP" value="{{$SeamlessParamUpdateDPs->PERC_DP}}">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">Tenor</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" name="TENOR" id="TENOR" value="{{$SeamlessParamUpdates->TENOR}}">
-										</div>
+										<label class="col-sm-3 control-label">Tenor Minimal</label>
+                                        <div class="col-sm-7">
+                                            <select name="MIN_TENOR" id="MIN_TENOR">
+                                                @for ($i = 0; $i <= 60; $i+=12)
+                                                    <option 
+                                                    @if ($SeamlessParamUpdates->MIN_TENOR == strval($i))
+                                                    selected
+                                                    @endif
+                                                    value="{{strval($i)}}">
+                                                    {{$i}}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Type Insurance</label>
-										<div class="col-sm-7">
-                                            <select id="TYPE_INSU" name="TYPE_INSU">
-                                                <option 
-                                                @if ($SeamlessParamUpdates->TYPE_INSU == 'A' ) 
-                                                selected 
-                                                @endif 
-                                                value="A"> All Risk</option>
-
-                                                <option 
-                                                @if ($SeamlessParamUpdates->TYPE_INSU == 'T' ) 
-                                                selected 
-                                                @endif 
-                                                value="T"> TLO</option>
-                                               
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">Tenor Maksimal</label>
+                                        <div class="col-sm-7">
+                                            <select name="MAX_TENOR" id="MAX_TENOR">
+                                                @for ($i = 0; $i <= 60; $i+=12)
+                                                    <option 
+                                                    @if ($SeamlessParamUpdates->MAX_TENOR == strval($i))
+                                                    selected
+                                                    @endif
+                                                    value="{{strval($i)}}">
+                                                    {{$i}}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+									</div>
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">Kenaikan Tenor</label>
+                                        <div class="col-sm-7">
+                                            <select name="INC_TENOR" id="INC_TENOR"">
+                                                @for ($i = 0; $i <= 60; $i+=12)
+                                                    <option 
+                                                    @if ($SeamlessParamUpdates->INC_TENOR == strval($i))
+                                                    selected
+                                                    @endif
+                                                    value="{{strval($i)}}">
+                                                    {{$i}}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+									</div>
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">Tenor All Risk</label>
+                                        <div class="col-sm-7">
+                                            <select  name="TENOR_AR" id="TENOR_AR">
+                                                @for ($i = 0; $i <= 5; $i++)
+                                                    <option 
+                                                    @if ($SeamlessParamUpdates->TENOR_AR == strval($i))
+                                                    selected
+                                                    @endif
+                                                    value="{{strval($i)}}">
+                                                    {{strval($i)}}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+									</div>
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">Tenor TLO</label>
+                                        <div class="col-sm-7">
+                                            <select name="TENOR_TLO" id="TENOR_TLO">
+                                                @for ($i = 0; $i <= 5; $i++)
+                                                    <option 
+                                                    @if ($SeamlessParamUpdates->TENOR_TLO == strval($i))
+                                                    selected
+                                                    @endif
+                                                    value="{{strval($i)}}">
+                                                    {{strval($i)}}
+                                                    </option>
+                                                @endfor
                                             </select>
                                         </div>
 									</div>

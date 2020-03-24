@@ -30,7 +30,7 @@
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                     <div class="box-body">
 						<div class="row">
-							<form id="form-seamless-spbrand-create" action="{{ asset('/seamless-spbranf-create/create') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+							<form id="form-seamless-spbrand-create" action="{{ asset('/seamless-spbrand-create/create') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 									
 									@csrf	
 

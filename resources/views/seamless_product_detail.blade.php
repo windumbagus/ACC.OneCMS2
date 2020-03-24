@@ -230,11 +230,7 @@
                             </span></td>
                         </tr>
                         </table>
-                        <div id="myModal" class="modal">
-														<span class="close">&times;</span>
-														<img class="modal-content" id="img01">
-														<div id="caption"></div>
-													</div>
+                        
                         <br/><br/>
                         <div class="col-sm-2">
                                 <a href="{{asset('/seamless-product-detail-update/'.$SeamlessProducts[0]->CD_PRODUCT)}}" class="btn btn-block btn-primary">Update</a>         
@@ -306,6 +302,7 @@
                     </div>
                   </div>
                 </div>
+                
                 <div class="panel box box-primary">
                   <div class="box-header with-border">
                     <h4 class="box-title">
@@ -357,6 +354,131 @@
                   </div>
                 </div>
                 
+                <div class="panel box box-danger">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        Param Simulation
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="box-body">
+                        <table style="width:100%">
+                        <tr>
+                            <th>Mode Insurance</th>
+                            <td> <span>
+                            @if( !empty($SeamlessProductParamDetails[0]->MODE_INSU))
+                              @if ($SeamlessProductParamDetails[0]->MODE_INSU == 'C')
+                                Cash
+                              @elseif ($SeamlessProductParamDetails[0]->MODE_INSU == 'K')
+                                Kredit
+                              @endif
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                         
+                        </tr>
+                        <tr>
+                            <th>Flag ACP</th>
+                            <td> <span>
+                            @if( !empty($SeamlessProductParamDetails[0]->FLAG_ACP))
+                              @if ($SeamlessProductParamDetails[0]->FLAG_ACP == 'Y')
+                                Yes
+                              @elseif ($SeamlessProductParamDetails[0]->FLAG_ACP == 'N')
+                                No
+                              @endif
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Flag ADDM</th>
+                            <td><span> 
+                            @if( !empty($SeamlessProductParamDetails[0]->FLAG_ADDM))
+                              {{$SeamlessProductParamDetails[0]->FLAG_ADDM}}
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Tenor Minimal</th>
+                            <td><span> 
+                            @if( !empty($SeamlessProductParamDetails[0]->MIN_TENOR))
+                              {{$SeamlessProductParamDetails[0]->MIN_TENOR}} Bulan
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Tenor Maksimal</th>
+                            <td><span> 
+                            @if( !empty($SeamlessProductParamDetails[0]->MAX_TENOR))
+                              {{$SeamlessProductParamDetails[0]->MAX_TENOR}} Bulan
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Kenaikan Tenor</th>
+                            <td><span> 
+                            @if( !empty($SeamlessProductParamDetails[0]->INC_TENOR))
+                              {{$SeamlessProductParamDetails[0]->INC_TENOR}} Bulan
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Tenor All Risk</th>
+                            <td><span> 
+                            @if( !empty($SeamlessProductParamDetails[0]->TENOR_AR))
+                              {{$SeamlessProductParamDetails[0]->TENOR_AR}} Tahun
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>Tenor TLO</th>
+                            <td><span> 
+                            @if( !empty($SeamlessProductParamDetails[0]->TENOR_TLO))
+                              {{$SeamlessProductParamDetails[0]->TENOR_TLO}} Tahun
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                        </tr>
+                        <tr>
+                            <th>DP (%)</th>
+                            <td><span> 
+                            @if( !empty($SeamlessProductParamDPs[0]->PERC_DP))
+                              {{$SeamlessProductParamDPs[0]->PERC_DP}} %
+                            @else
+                              -
+                            @endif
+                            </span></td>
+                        </tr>
+                        </table>
+                        <br/><br/>
+                        <div class="col-sm-2">
+                                         
+                                @if(empty($SeamlessProductParamDetails))
+                                  <a href="{{asset('/seamless-param-create/'.$SeamlessProducts[0]->CD_PRODUCT)}}" class="btn btn-block btn-primary">Create Param</a>
+                                @else
+                                <a href="{{asset('/seamless-param-update/'.$SeamlessProducts[0]->CD_PRODUCT)}}" class="btn btn-block btn-primary">Update Param</a>
+                                @endif
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
             </div>
             <!-- /.box-body -->

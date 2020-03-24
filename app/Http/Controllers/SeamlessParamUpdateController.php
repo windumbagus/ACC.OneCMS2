@@ -98,7 +98,8 @@ class SeamlessParamUpdateController extends Controller
            return view(
             'seamless_param_update',[
                // 'Role' => $Hasils->Role,
-                'SeamlessParamUpdates'=>$Hasils->OUT_DATA[0],
+                'SeamlessParamUpdates'=>$Hasils->OUT_DATA[0]->DATA_SIMULATION[0],
+                'SeamlessParamUpdateDPs'=>$Hasils->OUT_DATA[0]->DATA_DP[0],
                // 'Roles'=>$Hasils2->Roles,
               //  'UserCategories'=>$Hasils2->UserCategory, 
               'role'=> $Hasilsrole->OUT_DATA,
@@ -124,13 +125,17 @@ class SeamlessParamUpdateController extends Controller
                 "TRANSACTION_CODE"=>"UPDATE_PARAM_SIMULATION",
                 "P_CD_PRODUCT"=>$request->CD_PRODUCT,
                 "P_PERC_DP"=>$request->PERC_DP,
-                "P_TENOR"=>$request->TENOR,
-                "P_TYPE_INSU"=>$request->TYPE_INSU,
+                "P_MIN_TENOR"=>$request->MIN_TENOR,
+                "P_MAX_TENOR"=>$request->MAX_TENOR,
+                "P_INC_TENOR"=>$request->INC_TENOR,
+                "P_TENOR_AR"=>$request->TENOR_AR,
+                "P_TENOR_TLO"=>$request->TENOR_TLO,
                 "P_MODE_INSU"=>$request->MODE_INSU,
                 "P_FLAG_ACP"=>$request->FLAG_ACP,
                 "P_FLAG_ADDM"=>$request->FLAG_ADDM,
                 "P_USER"=>"ADMIN",
                 "P_LANGUAGE"=>"IN",
+               
             ),
         ));
 
@@ -157,7 +162,7 @@ class SeamlessParamUpdateController extends Controller
         
         //  if ($Hasils->OUT_STAT == "T"){
             
-            return redirect('seamless-param/')->with('success','Data berhasil diubah');
+            return redirect('seamless-product-detail/'.$request->CD_PRODUCT)->with('success','Data berhasil diubah');
         // }else{
             // return redirect('seamless-param-picture/'.$$request->CD_PRODUCT)->with('error',$Hasils->OUT_MESS);
         // }

@@ -26,11 +26,11 @@ class AccCashHistorySMSExport implements FromArray, WithHeadings
             "SMS_ID",
             "SMS_GROUP_ID",
             "SMS_MSG",
-            "SMS_STATUS",
             "SMS_SENT",
             "SMS_DELIVERED",
             "SMS_PHONENOTO",
             "ID_USER_ADDED",
+            "SMS_STATUS_MSG",
         ];
     }
 }
