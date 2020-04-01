@@ -95,11 +95,8 @@ class SeamlessDiskonCreateController extends Controller
             "doSendDataDiscount" => array(   
                 "TRANSACTION_CODE"=>"INSERT_DISCOUNT",
                 "P_DISCOUNT"=>$request->DISCOUNT,
-                "P_USER"=>"ADMIN",
-                "P_YEAR"=>$request->YEAR,
-                "P_CD_BRAND"=>$request->CD_BRAND,
-                "P_CD_TYPE"=>$request->CD_TYPE,
-                "P_CD_MODEL"=>$request->CD_MODEL,
+                "P_USER"=>$request->session()->get('Name'),
+                "P_ID_UNIT"=>$request->ID_UNIT,
                 "P_LANGUAGE"=>"IN",
 
             ),

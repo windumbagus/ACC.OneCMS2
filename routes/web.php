@@ -317,7 +317,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
 
     Route::get('/seamless-product-detail/{Id}','SeamlessProductDetailController@index');
     Route::get('/seamless-product-detail/hitungsimulasi/{Id}&{Unitid}','SeamlessProductDetailController@hitungsimulasi');
-
+    Route::get('/seamless-product-detail/deletedp/{CD_PRODUCT}&{PERC_DP}','SeamlessProductDetailController@deletedp');
 
     Route::get('/seamless-product-detail-update/{Id}','SeamlessProductDetailUpdateController@index');
     Route::post('/seamless-product-detail-update/update','SeamlessProductDetailUpdateController@update');
@@ -342,7 +342,7 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::get('/seamless-otrupload/download/','SeamlessOtrUploadController@download');
 
     Route::get('/seamless-otr-master','SeamlessOtrMasterController@index');
-    Route::post('/seamless-otr-master/delete-otr-selected','SeamlessOtrmasterController@deleteotrselected');
+    Route::post('/seamless-otr-master/delete-otr-selected','SeamlessOtrMasterController@deleteotrselected');
 
     Route::get('/seamless-dataleads','SeamlessDataLeadsController@index');
     Route::get('/seamless-dataleads/get-by-bulantahun','SeamlessDataLeadsController@getByBulanTahun');
@@ -370,6 +370,10 @@ Route::group(['middleware' => ['SessionCheck','revalidate']],function()
     Route::post('/seamless-param-create/create','SeamlessParamCreateController@create');
     Route::get('/seamless-param-update/{CD_PRODUCT}','SeamlessParamUpdateController@index');
     Route::post('/seamless-param-update/update','SeamlessParamUpdateController@update');
+
+    Route::get('/seamless-dp-create/{CD_PRODUCT}','SeamlessDPCreateController@index');
+    Route::post('/seamless-dp-create/create','SeamlessDPCreateController@create');
+
 
     Route::get('/seamless-spbrand','SeamlessSpBrandController@index');
     Route::get('/seamless-spbrand/delete/{Id}','SeamlessSpBrandController@delete');

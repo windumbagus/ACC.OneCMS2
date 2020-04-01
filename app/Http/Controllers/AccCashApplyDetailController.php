@@ -182,7 +182,7 @@ class AccCashApplyDetailController extends Controller
         //REJECT ALL
             case 'REJECT-NOTAPPLY':
                 $reasonchange = "Customer tidak merasa mengajukan";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                $statusnotif = 'Pengajuan Kamu sebesar Rp'.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
             case 'REJECT-UNCONTACTED':
@@ -192,27 +192,27 @@ class AccCashApplyDetailController extends Controller
 
             case 'REJECT-WRONGUNIT':
                 $reasonchange = "Spesifikasi mobil pada foto tidak sesuai dengan data pada AOL";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                $statusnotif = 'Pengajuan Kamu sebesar Rp'.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
             case 'REJECT-UNIT':
                 $reasonchange = "Kondisi mobil tidak layak untuk dibiayai";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                $statusnotif = 'Pengajuan Kamu sebesar Rp'.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
             case 'REJECT-STNKEXP':
                 $reasonchange = "Masa berlaku STNK habis dan customer tidak bersedia perpanjang";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                $statusnotif = 'Pengajuan Kamu sebesar Rp'.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
             case 'REJECT-STNKINVALID':
                 $reasonchange = "Data pada STNK yang dilampirkan tidak sesuai (No. Polisi berbeda dengan data yang tertera di CMS)";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                $statusnotif = 'Pengajuan Kamu sebesar Rp'.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
             case 'REJECT':
                 $reasonchange = "Customer berubah pikiran dan ingin mengajukan ulang";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
+                $statusnotif = 'Pengajuan Kamu sebesar Rp'.$request->DISBURSEMENT.' dari No. Kontrak '.$request->NO_AGGR.' ditolak karena belum memenuhi syarat dan ketentuan yang berlaku.';
                 break;
 
         //REJECT PARTIAL
@@ -246,7 +246,7 @@ class AccCashApplyDetailController extends Controller
 
             case 'APPROVED':
                 $reasonchange = "";
-                $statusnotif = 'Pengajuan Kamu sebesar '.$request->DISBURSEMENT.' dari No Kontrak '.$request->NO_AGGR.' telah disetujui. Kamu akan segera kami hubungi untuk tanda tangan kontrak.';
+                $statusnotif = 'Pengajuan Kamu sebesar Rp'.$request->DISBURSEMENT.' dari No Kontrak '.$request->NO_AGGR.' telah disetujui. Kamu akan segera kami hubungi untuk tanda tangan kontrak.';
                 break;
         
         }
@@ -368,7 +368,103 @@ class AccCashApplyDetailController extends Controller
                 $directstatus = "REJECT";
                 $leadsid=null;
             }
-            else
+            else if($statuschange == 'REJECT-STNKEXP') 
+            {
+
+                $dataLeads = json_encode(array(
+                    "doSendDataLeads" => array(   
+                        "P_ACCOUNT_ID"=>$HasilscashtoLeads->OUT_DATA[0]->ACCOUNT_ID,
+                        "P_NAME"=>$HasilscashtoLeads->OUT_DATA[0]->NAME, 
+                        "P_PRODUCT"=>"0003",
+                        "P_NO_AGGR"=>$HasilscashtoLeads->OUT_DATA[0]->NO_AGGR,
+                        "P_PHONE_NUMBER"=>$HasilscashtoLeads->OUT_DATA[0]->PHONE_MOBILE,
+                        "P_CD_VEHICLE_BRAND"=>$HasilscashtoLeads->OUT_DATA[0]->CD_VEHICLE_BRAND,	
+                        "P_CD_VEHICLE_MODEL"=>$HasilscashtoLeads->OUT_DATA[0]->CD_VEHICLE_MODEL,		
+                        "P_CD_VEHICLE_TYPE"=>$HasilscashtoLeads->OUT_DATA[0]->CD_VEHICLE_TYPE,     		
+                        "P_YEAR_OF_MFG"=>$HasilscashtoLeads->OUT_DATA[0]->YEAR_OF_MFG,
+                        "P_OTR"=>$HasilscashtoLeads->OUT_DATA[0]->OTR,
+                        "P_DP"=>$HasilscashtoLeads->OUT_DATA[0]->DP,
+                        "P_TENOR"=>$HasilscashtoLeads->OUT_DATA[0]->TENOR,
+                        "P_CD_AREA"=>$HasilscashtoLeads->OUT_DATA[0]->CD_AREA,
+                        "P_CD_SP"=>$HasilscashtoLeads->OUT_DATA[0]->CD_SP,
+                        "P_FLAT_RATE"=>$HasilscashtoLeads->OUT_DATA[0]->FLAT_RATE,
+                        "P_ASURANSI_CASH_KREDIT"=>$HasilscashtoLeads->OUT_DATA[0]->ASURANSI_CASH_KREDIT,
+                        "P_FLAG_ACP"=>$HasilscashtoLeads->OUT_DATA[0]->FLAG_ACP,
+                        "P_AMT_ACP"=>$HasilscashtoLeads->OUT_DATA[0]->AMT_ACP,
+                        "P_TDP"=>$HasilscashtoLeads->OUT_DATA[0]->TDP,
+                        "P_SOURCE_LEADS"=>$HasilscashtoLeads->OUT_DATA[0]->SOURCE_LEADS,
+                        "P_AGEN_SOURCE_LEADS"=>$HasilscashtoLeads->OUT_DATA[0]->AGEN_SOURCE_LEADS,
+                        "P_AMT_INSTALLMENT"=>$HasilscashtoLeads->OUT_DATA[0]->AMT_INSTALLMENT,
+                        "P_ADD_AMOUNT"=>$HasilscashtoLeads->OUT_DATA[0]->ADD_AMOUNT,
+                        "P_EFF_RATE"=>$HasilscashtoLeads->OUT_DATA[0]->EFF_RATE,
+                        "P_NO_ADV_INST"=>$HasilscashtoLeads->OUT_DATA[0]->NO_ADV_INST,
+                        "P_ADMIN_FEE"=>$HasilscashtoLeads->OUT_DATA[0]->ADMIN_FEE,
+                        "P_PAYMENT_METHOD"=>$HasilscashtoLeads->OUT_DATA[0]->PAYMENT_METHOD,
+                        "P_MODE_PROVISI"=>$HasilscashtoLeads->OUT_DATA[0]->MODE_PROVISI,
+                        "P_BIAYA_PROVISI"=>$HasilscashtoLeads->OUT_DATA[0]->BIAYA_PROVISI,
+                        "P_AF"=>$HasilscashtoLeads->OUT_DATA[0]->AF,
+                        "P_INTEREST"=>$HasilscashtoLeads->OUT_DATA[0]->INTEREST,
+                        "P_AR"=>$HasilscashtoLeads->OUT_DATA[0]->AR,
+                        "ID_USER"=>$HasilscashtoLeads->OUT_DATA[0]->ID_USER,
+                        "P_CD_SALESMAN"=>$HasilscashtoLeads->OUT_DATA[0]->CD_SALESMAN,
+                        "P_CD_BANK_BR"=>$HasilscashtoLeads->OUT_DATA[0]->CD_BANK_BR,
+                        "P_NO_REKENING"=>$HasilscashtoLeads->OUT_DATA[0]->NO_REKENING,
+                        "P_NAMA_REKENING"=>$HasilscashtoLeads->OUT_DATA[0]->NAMA_REKENING,
+                        "P_RESERVE1"=> $HasilscashtoLeads->OUT_DATA[0]->AMT_CASH_PENCAIRAN,
+                        "P_RESERVE2"=> $HasilscashtoLeads->OUT_DATA[0]->AMT_CASH_INT,
+                        "P_RESERVE3"=> $HasilscashtoLeads->OUT_DATA[0]->TENOR_CASH,
+                        "P_RESERVE4"=> $HasilscashtoLeads->OUT_DATA[0]->TUJUAN_DANA,
+                        "P_RESERVE5"=> $HasilscashtoLeads->OUT_DATA[0]->BARANG_JASA,
+                        "P_RESERVE6"=> $request->EXP_STNK,
+                        "P_CD_CHANNEL"=>"",
+                        "P_CD_SPK"=>"",
+                    ),
+                ));
+                //  dd($dataLeads);
+                //ACC LEADS
+                $urlLeads = config('global.base_url_sofia2').'/rest/com/acc/lms/in/httprest/dataentry/dataleads';
+                $chLeads = curl_init($urlLeads);                   
+                curl_setopt($chLeads, CURLOPT_POST, true);                                  
+                curl_setopt($chLeads, CURLOPT_POSTFIELDS, $dataLeads);
+                curl_setopt($chLeads, CURLOPT_SSL_VERIFYPEER, FALSE);   
+                curl_setopt($chLeads, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+                curl_setopt($chLeads, CURLOPT_RETURNTRANSFER, true);                                                                  
+                $resultLeads = curl_exec($chLeads);
+                $errLeads = curl_error($chLeads);
+                curl_close($chLeads);
+                $HasilsLeads= json_decode($resultLeads); 
+                  //dd($HasilsLeads);
+
+                $data_mail = [
+                    'NAME' => $request->NAME,
+                    'EMAIL' => $request->EMAIL,
+                    'DISBURSEMENT' => $request->DISBURSEMENT,
+                    'NO_CAR_POLICE'=>$request->NO_CAR_POLICE,
+                    'CABANG'=>$request->CABANG
+                ];
+                // dd($data_mail);
+                \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashRejectStnkExp($data_mail));
+
+                $directstatus = "REJECT";
+                //$leadsid=null;
+                $leadsid=$HasilsLeads->OUT_DATA;
+            }
+            else if($statuschange == 'REJECT-STNKINVALID') 
+            {
+                $data_mail = [
+                    'NAME' => $request->NAME,
+                    'EMAIL' => $request->EMAIL,
+                    'DISBURSEMENT' => $request->DISBURSEMENT,
+                    'NO_CAR_POLICE'=>$request->NO_CAR_POLICE,
+                    'CABANG'=>$request->CABANG
+                ];
+                // dd($data_mail);
+                \Mail::to($request->EMAIL)->send(new \App\Mail\MailAccCashRejectStnkInvalid($data_mail));
+
+                $directstatus = "REJECT";
+                $leadsid=null;
+            }
+            else 
             {
                 $data_mail = [
                     'NAME' => $request->NAME,

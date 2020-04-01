@@ -1,26 +1,26 @@
 @extends('admin.admin') 
 
 @section('seamless', 'active')
-@section('seamless-diskon', 'active')
+@section('seamless-product', 'active')
 
 @section('content')
 
 
 
-<!-- CreateSeamlessdiskon -->
+<!-- CreateSeamlessparam -->
 <div class="box box-primary">
     <div class="box-header with-border">
         
         <div class="row">
             <div class="col-sm-8">
-                <h3 class="box-title">Create Master Discount</h3>
+                <h3 class="box-title">Create Down Payment</h3>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">
 
                 </div>
                 <div class="col-sm-6">
-                <a href="{{asset('seamless-diskon/')}}" class="btn btn-block btn-primary">Back</a>
+                <a href="{{asset('/seamless-product-detail/'.$cdproduct)}}" class="btn btn-block btn-primary">Back</a>
                 </div>
             </div>
         </div>
@@ -30,25 +30,23 @@
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                     <div class="box-body">
 						<div class="row">
-							<form id="form-seamless-diskon-create" action="{{ asset('/seamless-diskon-create/create') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+							<form id="form-seamless-dp-create" action="{{ asset('/seamless-dp-create/create') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 									
 									@csrf	
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label">ID Unit</label>
+										<label class="col-sm-3 control-label">Kode Product</label>
 										<div class="col-sm-4">
-											<input type="text" class="form-control" name="ID_UNIT" id="ID_UNIT" value="">
+											<input type="text" class="form-control" name="CD_PRODUCT" id="CD_PRODUCT" value="{{$cdproduct}}" readonly>
 										</div>
 									</div>
-									
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Discount</label>
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label">DP (%)</label>
 										<div class="col-sm-4">
-											<input type="text" class="form-control" name="DISCOUNT" id="DISCOUNT" value="">
+											<input type="text" class="form-control" name="PERC_DP" id="PERC_DP" value="">
 										</div>
 									</div>
-									
-		
+                                 							
 									<div class="form-group">
 										<div class="col-sm-3">
 

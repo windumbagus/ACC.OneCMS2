@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AccCashApplyExport;
 
 class SeamlessParamCreateController extends Controller
 {
@@ -96,7 +94,6 @@ class SeamlessParamCreateController extends Controller
             "doSendParamSimulation" => array(   
                 "TRANSACTION_CODE"=>"INSERT_PARAM_SIMULATION",
                 "P_CD_PRODUCT"=>$request->CD_PRODUCT,
-                "P_PERC_DP"=>$request->PERC_DP,
                 "P_MIN_TENOR"=>$request->MIN_TENOR,
                 "P_MAX_TENOR"=>$request->MAX_TENOR,
                 "P_INC_TENOR"=>$request->INC_TENOR,
@@ -105,7 +102,7 @@ class SeamlessParamCreateController extends Controller
                 "P_MODE_INSU"=>$request->MODE_INSU,
                 "P_FLAG_ACP"=>$request->FLAG_ACP,
                 "P_FLAG_ADDM"=>$request->FLAG_ADDM,
-                "P_USER"=>"ADMIN",
+                "P_USER"=>$request->session()->get('Name'),
                 "P_LANGUAGE"=>"IN",
             ),
         ));

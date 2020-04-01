@@ -30,18 +30,13 @@
         <div class="box-body">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                 <div class="panel box">
-                  <div class="box-header">
-					<div class="col-sm-10">
+					<div class="box-header">
 						<h4 class="box-title">
-                        	Description
+							Description
 						</h4>
 					</div>
-					<div class="col-sm-2">
-						
-					</div>
-
-                  </div>
-                    <div class="box-body">
+ 
+					<div class="box-body">
 						<div class="row">
 							<form id="form-update-accash-apply" action="" method="post" class="form-horizontal"> 
 									
@@ -105,14 +100,14 @@
 
 						</div>
 
-                          
-                    </div>
+							
+					</div>
                   <!-- </div> -->
                 </div>
                 <div class="panel box">
                   <div class="box-header">
                     <h4 class="box-title">
-                        Tracking
+                    Tracking
                     </h4>
                   </div>
                   <!-- <div id="collapseTwo" class="panel-collapse collapse"> -->

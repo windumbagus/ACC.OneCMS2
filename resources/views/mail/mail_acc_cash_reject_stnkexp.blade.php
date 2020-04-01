@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
    
-    <title>Aplikasi acccash {{$data_mail["NO_AGGR"]}} Approved</title>
+    <title>Pengajuan Sebesar {{$data_mail["DISBURSEMENT"]}} dari Unit {{$data_mail["NO_CAR_POLICE"]}} Ditolak</title>
 </head>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
@@ -29,22 +29,20 @@
 <body>
     <div class="center panel panel-default" style=" width:800px; border-radius: 25px; border: 2px solid">
         <div class="panel-header" style="height:115px; background:#081e33;">
-        <br><img src="{{ asset('assets/Pictures/logo_acccash_text.png') }}" style="width:300px; height:75px !important; display: block; margin-left: auto; margin-right: auto;" alt="logoacccash" ><br><br>
+        <br><img src="{{ asset('assets/Pictures/logo_acccash_text.png') }}" alt="logoacccash" style="width:300px; height:75px !important; display: block; margin-left: auto; margin-right: auto;"><br><br>
         </div>
         <div class="panel-body">
 
             <h3>Hai, {{ $data_mail["NAME"] }}</h3>
-            <p>Selamat!</p>
-            <p>Pengajuan Kamu saat ini Approve dan akan dilanjutkan ke proses selanjutnya.<br>
-                Tim kami dari Cabang ACC {{ $data_mail["CABANG"] }} akan menghubungi Kamu untuk tanda
-                tangan kontrak.<br>
-                Terima kasih telah melakukan pengajuan melalui acc.one!<br>
-                Kami tunggu pengajuan Kamu selanjutnya.</p>
+            <p>Maaf saat ini pengajuan Kamu tidak dapat kami proses karena <b>masa berlaku STNK habis.</b></p><br>
+            <br>
+            <p>Namun, kami telah meneruskan pengajuan kamu ke Cabang ACC {{ $data_mail["CABANG"] }} sebagai pengajuan Multiguna dan Kamu akan segera kami hubungi.</p><br><br>
+            <p>Jika Kamu tetap ingin mengajukan pencairan plafon kredit acccash, ajukan kembali di acc.one setelah STNK selesai diperpanjang agar sesuai dengan <a href="https://www.acc.co.id/acccash">syarat & ketentuan </a>yang berlaku.</p>
 
-          <a class="center" href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png') }}" style="width:210px; height:30px !important; display: block; margin-left: auto; margin-right: auto;" alt="linkacccash" class="center"></a>    
+          <a class="center" href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png') }}" alt="linkacccash" style="width:210px; height:30px !important; display: block; margin-left: auto; margin-right: auto;" alt="" class="center"></a>    
           <div class="tengah">
-          <a href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px; display: block; margin-left: auto; margin-right: auto;" alt="playstore"></a>
-          <a href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png  ') }}" style="width:120px; height:50px; display: block; margin-left: auto; margin-right: auto; " alt="appstore" ></a>  
+          <a href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" alt="playstore" style="width:120px; height:50px; display: block; margin-left: auto; margin-right: auto;"></a>
+          <a href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png  ') }}" alt="appstore" style="width:120px; height:50px; display: block; margin-left: auto; margin-right: auto; "></a>  
           </div>
           
         </div>
@@ -95,7 +93,7 @@
 	font-size: 16px;
     }
   </style>  
-    <title>Aplikasi acccash {{$data_mail["NO_AGGR"]}} Approved</title>
+    <title>Pengajuan Sebesar {{$data_mail["DISBURSEMENT"]}} dari Unit {{$data_mail["NO_CAR_POLICE"]}} Ditolak</title>
 </head>
     
 <body>
@@ -105,17 +103,16 @@
         </div>
         <div style="margin:20px">
             <h3>Hai, {{ $data_mail["NAME"] }}</h3>
-            <p>Selamat!</p>
-            <p>Pengajuan Kamu saat ini Approve dan akan dilanjutkan ke proses selanjutnya.<br>
-                Tim kami dari Cabang ACC {{ $data_mail["CABANG"] }} akan menghubungi Kamu untuk tanda
-                tangan kontrak.<br>
-                Terima kasih telah melakukan pengajuan melalui acc.one!<br>
-                Kami tunggu pengajuan Kamu selanjutnya.</p>
+            <p>Maaf saat ini pengajuan Kamu tidak dapat kami proses karena <b>masa berlaku STNK habis.</b></p><br>
+            <br>
+            <p>Namun, kami telah meneruskan pengajuan kamu ke Cabang ACC {{ $data_mail["CABANG"] }} sebagai pengajuan Multiguna dan Kamu akan segera kami hubungi.</p><br><br>
+            <p>Jika Kamu tetap ingin mengajukan pencairan plafon kredit acccash, ajukan kembali di acc.one setelah STNK selesai diperpanjang agar sesuai dengan <a href="https://www.acc.co.id/acccash">syarat & ketentuan </a>yang berlaku.</p>
 
-            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" style="width:210px; height:30px !important; display: block; margin:0 auto;" alt="linkacccash"></a>    
+
+            <a href="https://www.acc.co.id/acccash"><img src="{{ asset('assets/Pictures/Picture2.png')}}" alt="linkacccash" style="width:210px; height:30px !important; display: block; margin:0 auto;"></a>    
           <div style="display:block; margin: 10px 0; text-align:center; position:relative;">
-            <a style="margin :5px;" href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" style="width:120px; height:50px;" alt="playstore"></a>
-            <a style="margin :5px;" href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png') }}" style="width:120px; height:50px;" alt="appstore"></a>  
+            <a style="margin :5px;" href="https://play.google.com/store/apps/details?id=com.outsystemsenterprise.prod8.ACCOne"><img src="{{ asset('assets/Pictures/downloadplaystore.png') }}" alt="playstore" style="width:120px; height:50px;"></a>
+            <a style="margin :5px;" href="https://apps.apple.com/us/app/acc-one/id1453382506"><img src="{{ asset('assets/Pictures/downloadappstore.png') }}" alt="appstore" style="width:120px; height:50px;"></a>  
           </div>
         </div>
             {{-- <a href="#"><img src="{{asset('assets/Pictures/Picture5.png')}}" alt="other" style="width:800px; display:block; border-bottom-left-radius :25px;border-bottom-right-radius :25px; position:relative; " ></a> --}}
@@ -129,7 +126,7 @@
             </tr>
             <tr>
               <td><img src="{{ asset('assets/Pictures/Picture6.png')}}" style="width:20px; height:20px !important;margin-right:5px" alt="whatsapplogo"> 0811-1-500-599</td>
-              <td><img src="{{ asset('assets/Pictures/Picture7.png')}}" style="width:20px; height:20px !important;margin-right:5px" alt="callcenterlogo"> 1500599</td>
+              <td><img src="{{ asset('assets/Pictures/Picture7.png')}}" style="width:20px; height:20px !important;margin-right:5px" alt="callcenter"> 1500599</td>
             </tr>
           </table>
           <p  style="padding:10px">This email is intended solely for the recipient specified in the message. This system-generate email,<strong> Please do not reply</strong>.<br></p>

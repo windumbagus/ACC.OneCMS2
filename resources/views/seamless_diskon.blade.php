@@ -45,6 +45,7 @@
         <table id="example2" class="table table-bordered display nowrap" style="width:100%">
         <thead>
         <tr>
+            <th>Id Unit</th>
             <th>Brand</th>
             <th>Type</th>
             <th>Model</th>
@@ -59,6 +60,7 @@
         
             @foreach ($SeamlessDiskons as $SeamlessDiskon)
             <tr>  
+                <td><span>{{$SeamlessDiskon->ID_UNIT}}</span></td>
                 <td><span>{{$SeamlessDiskon->DESC_BRAND}}</span></td>
                 <td><span>{{$SeamlessDiskon->DESC_TYPE}}</span></td>
                 <td><span>{{$SeamlessDiskon->DESC_MODEL}}</span></td>
@@ -91,6 +93,7 @@
           'scrollX': true,
           sDom: 'lrtip', 
           "columns": [
+                null,
                 null,
                 null,
                 null,

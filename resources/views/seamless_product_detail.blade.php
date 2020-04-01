@@ -454,16 +454,6 @@
                             @endif
                             </span></td>
                         </tr>
-                        <tr>
-                            <th>DP (%)</th>
-                            <td><span> 
-                            @if( !empty($SeamlessProductParamDPs[0]->PERC_DP))
-                              {{$SeamlessProductParamDPs[0]->PERC_DP}} %
-                            @else
-                              -
-                            @endif
-                            </span></td>
-                        </tr>
                         </table>
                         <br/><br/>
                         <div class="col-sm-2">
@@ -477,6 +467,61 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="panel box box-warning">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                        Down Payment
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseSix" class="panel-collapse collapse">
+                  <div class="box-body">
+                        <div class="row">
+                        
+                            <div class="col-sm-4">
+                                <input type="text" placeholder="Search DP" class="InputSearch3 form-control">
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="col-sm-4">
+                                    <a href="#" class="ButtonSearch3 btn btn-block btn-info">Search</a>    
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="#" class="ResetSearch3 btn btn-block btn-info">Reset</a>    
+                                </div>
+                                <div class="col-sm-4">
+                                  <a href="{{asset('/seamless-dp-create/'.$SeamlessProducts[0]->CD_PRODUCT)}}" class="btn btn-block btn-primary">Create DP</a>
+                                
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <table id="example3" class="table table-bordered display nowrap" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>DP</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @if( !empty($SeamlessProductParamDPs))
+                                @foreach ($SeamlessProductParamDPs as $SeamlessProductParamDP)
+                                <tr>  
+                                    <td><span>{{$SeamlessProductParamDP->PERC_DP}} %</span></td>
+                                    <td><span><a href="{{asset('/seamless-product-detail/deletedp/'.$SeamlessProductParamDP->CD_PRODUCT.'&'.$SeamlessProductParamDP->PERC_DP)}}" class="deletedp btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></span></td>
+                                </tr>                              
+                                @endforeach  
+                            @else
+                              <tr><td></td>
+                              </tr>
+                            @endif    
+                        </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+
 
 
               </div>
@@ -535,6 +580,24 @@
             ]
       })
 
+      // DOWN PAYMENT
+      $('#example3').DataTable({
+          'deferRender': true,
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : true,
+          'scrollX': true,
+          sDom: 'lrtip', 
+          "columns": [
+                null,
+                {"searchable":false},
+
+            ]
+      })
+
 
         //Button Search UNIT LIST
         $('.ButtonSearch1').on('click', function(){
@@ -563,6 +626,28 @@
             tab.search('').draw()
             $('.InputSearch2').val('')
         })
+
+        //Button Search DOWN PAYMENT
+        $('.ButtonSearch3').on('click', function(){
+            var searchData = $('.InputSearch3').val()
+            var dtable = $('#example3').DataTable()
+            dtable.search(searchData).draw()
+        })
+
+    
+        $('.ResetSearch3').on('click',function(){
+            var tab = $('#example3').DataTable()
+            tab.search('').draw()
+            $('.InputSearch3').val('')
+        })
+
+        $(".deletedp").on("click", function(){
+        if (confirm('Apakah Anda yakin akan menghapus DP ini?')) {
+          return true
+        } else {
+          return false;
+        }
+        });
 
 
     })

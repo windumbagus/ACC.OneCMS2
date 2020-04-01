@@ -37,13 +37,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Kode Product</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" name="CD_PRODUCT" id="CD_PRODUCT" value="{{$cdproduct}}">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">DP (%)</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" name="PERC_DP" id="PERC_DP" value="">
+											<input type="text" class="form-control" name="CD_PRODUCT" id="CD_PRODUCT" value="{{$cdproduct}}" readonly>
 										</div>
 									</div>
 									<div class="form-group">

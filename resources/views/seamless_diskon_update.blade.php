@@ -35,37 +35,19 @@
 									@csrf	
 									<div class="form-group">
 										<label class="col-sm-3 control-label">GUID</label>
-										<div class="col-sm-7">
+										<div class="col-sm-4">
 											<input type="text" class="form-control" name="GUID" id="GUID" value="{{$SeamlessDiskonUpdates->GUID}}" readonly>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">Kode Brand</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" name="CD_BRAND" id="CD_BRAND" value="{{$SeamlessDiskonUpdates->CD_BRAND}}" readonly>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Kode Type</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" name="CD_TYPE" id="CD_TYPE" value="{{$SeamlessDiskonUpdates->CD_TYPE}}" readonly>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Kode Model</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" name="CD_MODEL" id="CD_MODEL" value="{{$SeamlessDiskonUpdates->CD_MODEL}}" readonly>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Tahun</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" name="YEAR" id="YEAR" value="{{$SeamlessDiskonUpdates->YEAR}}" readonly>
+										<label class="col-sm-3 control-label">ID Unit</label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" name="ID_UNIT" id="ID_UNIT" value="{{$SeamlessDiskonUpdates->ID_UNIT}}" readonly>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Discount</label>
-										<div class="col-sm-7">
+										<div class="col-sm-4">
 											<input type="text" class="form-control" name="DISCOUNT" id="DISCOUNT" value="{{$SeamlessDiskonUpdates->DISCOUNT}}">
 										</div>
 									</div>

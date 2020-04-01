@@ -169,7 +169,7 @@ class SeamlessBannerUpdateController extends Controller
                 "P_URL"=>$request->URL_BANNER,
                 "P_IS_ACTIVE_BANNER"=>$request->IS_ACTIVE_BANNER,
                 "P_ID_FILE"=>$request->ID_FILE,
-                "P_USERNAME"=>"ADMIN",
+                "P_USERNAME"=>$request->session()->get('Name'),
                 "P_FILE_NAME"=>$request->FILE_NAME,
                 "P_PATH_FILE"=>$request->PATH_FILE,
                 "P_RAW_FILE"=>$content,

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AccCashApplyExport;
 
-class SeamlessParamUpdateController extends Controller
+class SeamlessDPCreateController extends Controller
 {
   
 
@@ -19,7 +17,7 @@ class SeamlessParamUpdateController extends Controller
             'Email'=>$request->session()->get('Email'),
             'Name'=>$request->session()->get('Name'),
             'Id'=>$request->session()->get('Id'),
-           // 'RoleId'=>$request->session()->get('RoleId'),
+            'RoleId'=>$request->session()->get('RoleId'),
            // 'SubMenuId'=>"15" // "15" untuk SubMenu UserCms
         ]);
 
@@ -65,83 +63,46 @@ class SeamlessParamUpdateController extends Controller
         curl_close($chcount);
         $Hasilscount= json_decode($resultcount); 
 
-        $data = json_encode(array(
-            "doSendDataCustomerApply" => array(   
-                "TRANSACTION_CODE"=>"GET_PARAM_SIMULATION",
-                "P_CD_PRODUCT"=>$request->CD_PRODUCT,
-                "P_LANGUAGE"=>"IN",
-            ),
-        ));
 
-         //API GET
-        //$url = "https://acc-dev1.outsystemsenterprise.com/ACCWorldCMS/rest/UserCMSAPI/GetAllUserCMS?RoleId=".$session[0]["RoleId"]."&SubMenuId=".$session[0]["SubMenuId"]; 
-        //  $url = $this->base_url_sofia.'/restV2/acccash/getdata/transactionapply';
-        $url = config('global.base_url_sofia').'/restV2/seamless/accone/customerapply';
-        // $url = $this->base_url+"restV2/acccash/getdata/transactionapply"; 
-        
-        //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionaggr";
-        //$url = "http://172.16.4.32:8301/restV2/acccash/getdata/transactionapply";
-        $ch = curl_init($url);                   
-        curl_setopt($ch, CURLOPT_POST, true);                                  
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
-        $result = curl_exec($ch);
-        $err = curl_error($ch);
-        curl_close($ch);
-        $Hasils= json_decode($result); 
-          
         if ($Hasilsrole->OUT_DATA == 'Super Admin' || $Hasilsrole->OUT_DATA == 'Super_Admin' || $Hasilsrole->OUT_DATA == 'seamless')
         {
-           //   dd($Hasils->OUT_DATA[0]);
-           return view(
-            'seamless_param_update',[
-               // 'Role' => $Hasils->Role,
-                'SeamlessParamUpdates'=>$Hasils->OUT_DATA[0]->DATA_SIMULATION[0],
-                'SeamlessParamUpdateDPs'=>$Hasils->OUT_DATA[0]->DATA_DP[0],
-               // 'Roles'=>$Hasils2->Roles,
-              //  'UserCategories'=>$Hasils2->UserCategory, 
-              'role'=> $Hasilsrole->OUT_DATA,
-              'countpendingacccash'=>count($Hasilscount->OUT_DATA[0]->dataApply),
-                'session' => $session
+            return view(
+                'seamless_dp_create',[
+                   // 'Role' => $Hasils->Role,
+                   // 'Roles'=>$Hasils2->Roles,
+                  //  'UserCategories'=>$Hasils2->UserCategory, 
+                  'role'=> $Hasilsrole->OUT_DATA,
+                  'countpendingacccash'=>count($Hasilscount->OUT_DATA[0]->dataApply),
+                  'cdproduct'=>$request->CD_PRODUCT,
+                    'session' => $session
             ]);
 
         }
         else
         {
             return redirect('/invalid-permission');
-        }
+        } 
 
             
     }
 
 
-    public function update(Request $request)
+    public function create(Request $request)
     {
-        // dd($end_date);
+
         $data = json_encode(array(
-            "doSendParamSimulation" => array(   
-                "TRANSACTION_CODE"=>"UPDATE_PARAM_SIMULATION",
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"INS_PERC_DP_CMS",
                 "P_CD_PRODUCT"=>$request->CD_PRODUCT,
-                "P_MIN_TENOR"=>$request->MIN_TENOR,
-                "P_MAX_TENOR"=>$request->MAX_TENOR,
-                "P_INC_TENOR"=>$request->INC_TENOR,
-                "P_TENOR_AR"=>$request->TENOR_AR,
-                "P_TENOR_TLO"=>$request->TENOR_TLO,
-                "P_MODE_INSU"=>$request->MODE_INSU,
-                "P_FLAG_ACP"=>$request->FLAG_ACP,
-                "P_FLAG_ADDM"=>$request->FLAG_ADDM,
-                "P_USER"=>$request->session()->get('Name'),
+                "P_PERC_DP"=>$request->PERC_DP,
+                "P_USERNAME"=>$request->session()->get('Name'),
                 "P_LANGUAGE"=>"IN",
-               
             ),
         ));
-
-         // dd($content);
+        // dd($data);
         //API GET
-        $url = config('global.base_url_sofia').'/restV2/seamless/accone/paramsimulation';
-        //   dd($data);
+        $url = config('global.base_url_sofia').'/restv2/seamless/accone/datacms';
+        //  dd($data);
 
         // dd($url);
 
@@ -155,15 +116,15 @@ class SeamlessParamUpdateController extends Controller
         $err = curl_error($ch);
         curl_close($ch);
         $Hasils= json_decode($result);
-        // dd($Hasils);
+       //  dd($Hasils);
         //dd($err);
         
         
         //  if ($Hasils->OUT_STAT == "T"){
             
-            return redirect('seamless-product-detail/'.$request->CD_PRODUCT)->with('success','Data berhasil diubah');
+            return redirect('seamless-product-detail/'.$request->CD_PRODUCT)->with('success','Data berhasil dibuat');
         // }else{
-            // return redirect('seamless-param-picture/'.$$request->CD_PRODUCT)->with('error',$Hasils->OUT_MESS);
+            // return redirect('seamless-param-create')->with('error',$Hasils->OUT_MESS);
         // }
     }
 

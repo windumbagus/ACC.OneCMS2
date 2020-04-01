@@ -94,7 +94,7 @@ class SeamlessSpBrandCreateController extends Controller
         $data = json_encode(array(
             "doSendParamSimulation" => array(   
                 "TRANSACTION_CODE"=>"INS_SP_BRAND",
-                "P_USER"=>"ADMIN",
+                "P_USER"=>$request->session()->get('Name'),
                 "P_CD_BRAND"=>$request->CD_BRAND,
                 "P_CD_SP"=>$request->CD_SP,
                 "P_CD_AREA"=>$request->CD_AREA,

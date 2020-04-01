@@ -10,13 +10,27 @@
 	
 	body {font-family: Arial, Helvetica, sans-serif;}
 	
-	#myImg, #myImg2, #myimg3 {
+	#myImg {
+	  border-radius: 5px;
+	  cursor: pointer;
+	  transition: 0.3s;
+	}
+
+	#myImg2 {
+	  border-radius: 5px;
+	  cursor: pointer;
+	  transition: 0.3s;
+	}
+
+	#myimg3 {
 	  border-radius: 5px;
 	  cursor: pointer;
 	  transition: 0.3s;
 	}
 	
-	#myImg, #myImg2, #myimg3:hover {opacity: 0.7;}
+	#myImg:hover {opacity: 0.7;}
+	#myImg2:hover {opacity: 0.7;}
+	#myImg3:hover {opacity: 0.7;}
 	
 	/* The Modal (background) */
 	.modal {
@@ -76,7 +90,8 @@
 	  position: fixed;
 	  top: 55px;
 	  right: 35px;
-	  color: #f1f1f1;
+	  color: #fff; 
+      opacity: 1;
 	  font-size: 40px;
 	  font-weight: bold;
 	  transition: 0.3s;
@@ -97,7 +112,7 @@
 	  position: fixed;
 	  top: 45px;
 	  right: 100px;
-	  color: #f1f1f1;
+	  color: #eee;
 	  font-size: 40px;
 	  font-weight: bold;
 	  transition: 0.3s;
@@ -279,17 +294,19 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">No Polisi</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" name="NO_CAR_POLICE" value="{{$AccCashApplys[0]->NO_CAR_POLICE}}" disabled>
+														<input type="text" class="form-control" name="NO_CAR_POLICE" value="{{$AccCashApplys[0]->NO_CAR_POLICE}}" readonly>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Jatuh Tempo STNK</label>
 													<div class="col-sm-7">
 														@if($AccCashApplys[0]->EXP_STNK != null)
-														<input type="text" class="form-control" name="EXP_STNK" value="{{date('d M Y', strtotime($AccCashApplys[0]->EXP_STNK))}}" disabled>
+														<input type="text" class="form-control" id="EXP_STNKDISPLAY" name="EXP_STNKDISPLAY" value="{{date('d M Y', strtotime($AccCashApplys[0]->EXP_STNK))}}" readonly>
+														<input type="text" class="form-control" id="EXP_STNK" name="EXP_STNK" value="{{$AccCashApplys[0]->EXP_STNK}}" style="display:none" readonly>
 														@else
-														<input type="text" class="form-control" name="EXP_STNK" value="" disabled>
+														<input type="text" class="form-control" id="EXP_STNK" name="EXP_STNK" value="" readonly>
 														@endif
+
 													</div>
 												</div>
 												
@@ -319,63 +336,46 @@
 													</div>
 												</div> -->
 												<div class="form-group">
-													<div class="col-sm-6">
-														
-														<!-- <h6> Rotate by Degrees </h6>
-														<input type="button" class="btn btn-warning" value="-90" onClick="rotateImage(this.value);" />
-														<input type="button" class="btn btn-warning" value="90" onClick="rotateImage(this.value);" />
-														<input type="button" class="btn btn-warning" value="0" onClick="rotateImage(this.value);" />
-														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage(this.value);" />
-														<br/><br/> -->
-														
+													<div class="col-sm-4">
+										
 														@if(!empty($AccCashApplyPictures[0]->PATH_FILE))
-															<img id="myImg" style="width: 50%; height: 50%; " alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
+															<img id="myImg" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[0]->PATH_FILE}}" class="center"/>
 														@endif
 													
 													</div>
 													
-													<div class="col-sm-6">
-													<!-- <h6> Rotate by Degrees </h6>
-														<input type="button" class="btn btn-warning" value="-90" onClick="rotateImage2(this.value);" />
-														<input type="button" class="btn btn-warning" value="90" onClick="rotateImage2(this.value);" />
-														<input type="button" class="btn btn-warning" value="0" onClick="rotateImage2(this.value);" />
-														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage2(this.value);" />
-														<br/><br/> -->
+													<div class="col-sm-4">
+
 														@if(!empty($AccCashApplyPictures[1]->PATH_FILE))
-															<img id="myImg2" style="width: 50%; height: 50%; " alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
+															<img id="myImg2" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[1]->PATH_FILE}}" class="center"/>
 														@endif
+
 													</div>
 
-													<!-- The Modal image-->
-													<div id="myModal" class="modal">
-														<span class="close">&times;</span>
-														<span class="anticlockwise"> &#8630;</span>
-														<span class="clockwise"> &#8631;</span>
-														<img class="modal-content" angle="0" id="img01">
-														<div id="caption"></div>
+													<div class="col-sm-4">
+														
+														@if(!empty($AccCashApplyPictures[2]->PATH_FILE))
+															<img id="myImg3" style="width: 70%; height: 70%; " alt="" src="{{$AccCashApplyPictures[2]->PATH_FILE}}" class="center"/>
+														@endif
+													
 													</div>
+													
+
 
 												</div>
 
 												<div class="form-group">
-													<div class="col-sm-12">
-														
-														<!-- <h6> Rotate by Degrees </h6>
-														<input type="button" class="btn btn-warning" value="-90" onClick="rotateImage(this.value);" />
-														<input type="button" class="btn btn-warning" value="90" onClick="rotateImage(this.value);" />
-														<input type="button" class="btn btn-warning" value="0" onClick="rotateImage(this.value);" />
-														<input type="button" class="btn btn-warning" value="180" onClick="rotateImage(this.value);" />
-														<br/><br/> -->
-														
-														@if(!empty($AccCashApplyPictures[2]->PATH_FILE))
-															<img id="myImg3" style="width: 50%; height: 50%; " alt="" src="{{$AccCashApplyPictures[2]->PATH_FILE}}" class="center"/>
-														@endif
-													
+													<div id="myModal" class="modal">
+															<span class="close">&times;</span>
+															<span class="anticlockwise"> &#8630;</span>
+															<span class="clockwise"> &#8631;</span>
+															<img class="modal-content" angle="0" id="img01">
+															<div id="caption"></div>
 													</div>
-			
+				
 												</div>
 												
-												@if ($Statusapply == "PENDING")
+												@if ($AccCashApplys[0]->STATUS == "PENDING")
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Status</label>
 													
@@ -448,12 +448,12 @@
 												@else
 
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Status</label>
-													@if ($AccCashApplys[0]->STATUS == "REJECT-NOTAPPLY" || $AccCashApplys[0]->STATUS == "REJECT-UNCONTACTED" || $AccCashApplys[0]->STATUS == "REJECT-WRONGUNIT" || $AccCashApplys[0]->STATUS == "REJECT-UNIT")
+													<label class="col-sm-3 control-label">Status</label>													
+													@if ($AccCashApplys[0]->STATUS == "REJECT-NOTAPPLY" || $AccCashApplys[0]->STATUS == "REJECT-UNCONTACTED" || $AccCashApplys[0]->STATUS == "REJECT-WRONGUNIT" || $AccCashApplys[0]->STATUS == "REJECT-UNIT" || $AccCashApplys[0]->STATUS == "REJECT-STNKEXP" || $AccCashApplys[0]->STATUS == "REJECT-STNKINVALID")
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="STATUS" value="REJECT SEMUA" readonly>
 													</div>
-													@elseif ($AccCashApplys[0]->STATUS == "REJECT-DATA" || $AccCashApplys[0]->STATUS == "REJECT-PICT")
+													@elseif ($AccCashApplys[0]->STATUS == "REJECT-DATA" || $AccCashApplys[0]->STATUS == "REJECT-PICT" || $AccCashApplys[0]->STATUS == "REJECT-STNK" || $AccCashApplys[0]->STATUS == "REJECT-STNKUNIT" )
 													<div class="col-sm-7">
 														<input type="text" class="form-control" name="STATUS" value="REJECT SEBAGIAN" readonly>
 													</div>
@@ -661,8 +661,12 @@
         });
 
 		$(".changestatus").on("submit", function(){
-			$(this).find('button[type="submit"]').prop( 'disabled', true );
-        return confirm('Apakah Anda yakin akan ' + $('#STATUS').val() +' aplikasi ini?');
+			if (confirm('Apakah Anda yakin akan ' + $('#STATUS').val() +' aplikasi ini?')) {
+			   $(this).find('button[type="submit"]').prop( 'disabled', true );
+			   return true
+			} else {
+			   return false;
+			}
     	});
 
     })
@@ -694,12 +698,12 @@
 
 	// Get the image and insert it inside the modal - use its "alt" text as a caption
 	var img3 = document.getElementById("myImg3");
-	var modalImg2 = document.getElementById("img01");
-	var captionText2 = document.getElementById("caption");
-	img2.onclick = function(){
+	var modalImg3 = document.getElementById("img01");
+	var captionText3 = document.getElementById("caption");
+	img3.onclick = function(){
 		modal.style.display = "block";
-		modalImg2.src = this.src;
-		captionText2.innerHTML = this.alt;
+		modalImg3.src = this.src;
+		captionText3.innerHTML = this.alt;
 	};
 
 	// Get the <span> element that closes the modal

@@ -127,7 +127,7 @@ class SeamlessUnitDetailUpdateController extends Controller
                 "P_CD_VALUE"=>null,
                 "P_CHAR_VALUE"=>$request->CHAR_VALUE,
                 "P_CHAR_DESC"=>$request->CHAR_DESC,
-                "P_USERNAME"=>"ADMIN",
+                "P_USERNAME"=>$request->session()->get('Name'),
                 "P_ID_UNIT"=>$request->ID_UNIT,
                 "P_GUID"=>$request->GUID,
                 "P_LANGUAGE"=>"IN",

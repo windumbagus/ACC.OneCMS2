@@ -166,7 +166,7 @@ class SeamlessProductUploadPictureController extends Controller
                 "P_DESC_DETAIL"=>$request->DESC_DETAIL,
                 "P_TNC"=>$request->TNC,
                 "P_FILE_NAME"=>$request->FILE_NAME,
-                "P_USER_NAME"=>"ADMIN",
+                "P_USER_NAME"=>$request->session()->get('Name'),
                 "P_PATH_FILE"=>$request->PATH_FILE,
                 "P_LANGUAGE"=>"IN",
                 "P_RAW_FILE"=>$content,

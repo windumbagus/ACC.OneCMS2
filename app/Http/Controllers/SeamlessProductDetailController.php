@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AccCashApplyExport;
 
 class SeamlessProductDetailController extends Controller
 {
@@ -304,6 +302,42 @@ class SeamlessProductDetailController extends Controller
         return json_encode($val);
     }
 
+    public function deletedp(Request $request)
+    {
+
+       
+        $data = json_encode(array(
+            "doSendDataCMS" => array(   
+                "TRANSACTION_CODE"=>"DEL_PERC_DP_CMS",
+                "P_CD_PRODUCT"=>$request->CD_PRODUCT,
+                "P_PERC_DP"=>$request->PERC_DP,
+                "P_LANGUAGE"=>"IN",
+               // "P_USERNAME"=>$request->session()->get('Name'),
+
+            ),
+        ));
+
+     
+        //dd($data);
+         //API GET
+        $url = config('global.base_url_sofia').'/restV2/seamless/accone/datacms';
+        $ch = curl_init($url);                   
+        curl_setopt($ch, CURLOPT_POST, true);                                  
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));                                                             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                  
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        $Hasils= json_decode($result); 
+        //   dd($Hasils);
+
+      
+        //dd($Hasils);
+        return redirect("seamless-product-detail/".$request->CD_PRODUCT)->with('success','DP berhasil terhapus');
+       
+    }
 
 
 

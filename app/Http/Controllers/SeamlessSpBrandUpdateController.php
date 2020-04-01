@@ -122,7 +122,7 @@ class SeamlessSpBrandUpdateController extends Controller
         $data = json_encode(array(
             "doSendParamSimulation" => array(   
                 "TRANSACTION_CODE"=>"UPD_SP_BRAND",
-                "P_USER"=>"ADMIN",
+                "P_USER"=>$request->session()->get('Name'),
                 "P_CD_BRAND"=>$request->CD_BRAND,
                 "P_CD_SP"=>$request->CD_SP,
                 "P_GUID"=>$request->GUID,
@@ -134,7 +134,7 @@ class SeamlessSpBrandUpdateController extends Controller
          // dd($content);
         //API GET
         $url = config('global.base_url_sofia').'/seamless/accone/customerapply';
-        //   dd($data);
+           dd($data);
 
         // dd($url);
 

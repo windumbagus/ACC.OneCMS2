@@ -40,12 +40,6 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">DP (%)</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" name="PERC_DP" id="PERC_DP" value="{{$SeamlessParamUpdateDPs->PERC_DP}}">
-										</div>
-									</div>
-									<div class="form-group">
 										<label class="col-sm-3 control-label">Tenor Minimal</label>
                                         <div class="col-sm-7">
                                             <select name="MIN_TENOR" id="MIN_TENOR">

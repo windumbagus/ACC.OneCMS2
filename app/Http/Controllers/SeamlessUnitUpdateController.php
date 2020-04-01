@@ -138,7 +138,7 @@ class SeamlessUnitUpdateController extends Controller
                 "P_MACHINE_CAPACITY"=>$request->MACHINE_CAPACITY,
                 "P_TRANSMISSION"=>$request->TRANSMISSION,
                 "P_DESC_PRODUCT"=>$request->DESC_PRODUCT,
-                "P_USERNAME"=>"ADMIN",
+                "P_USERNAME"=>$request->session()->get('Name'),
 
             ),
         ));

@@ -218,7 +218,7 @@
                                 <td><span>
                                 <!-- <a href="#" data-id="{{$SeamlessUnitColor->GUID}}" class="upload-seamless-picture btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
                                 <a href="{{asset('/seamless-unit-picture/'.$SeamlessUnitColor->GUID.'&'.$SeamlessUnitColor->ID_UNIT)}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="{{asset('/seamless-unit-detail/deletecolorpict/'.$SeamlessUnitColor->GUID.'&'.$SeamlessUnitColor->ID_UNIT)}}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin akan menghapus data color/pict ini?')"><i class="fa fa-trash"></i></a>
+                                <a href="{{asset('/seamless-unit-detail/deletecolorpict/'.$SeamlessUnitColor->GUID.'&'.$SeamlessUnitColor->ID_UNIT)}}" class="deletecolorpict btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                 </span>
                                 </td>
                             </tr>                              
@@ -304,7 +304,7 @@
                             <a href="#" class="btn btn-block btn-warning" onclick="deletedetailSelected()">Delete Selected</a>
                           </div>
                           <div class="col-md-2">
-                            <a href="{{asset('/seamless-unit-detail/deletedetailall/'.$unitid)}}" onclick="return confirm('Are you sure want to delete all data?')" class="btn btn-block btn-danger">Delete All</a>
+                            <a href="{{asset('/seamless-unit-detail/deletedetailall/'.$unitid)}}" class="deletedetailall btn btn-block btn-danger">Delete All</a>
                           </div>
                         </div>
 
@@ -371,7 +371,7 @@
                           <a href="#" class="btn btn-block btn-warning" onclick="deleteotrSelected()">Delete Selected</a>
                         </div>
                         <div class="col-md-2">
-                          <a href="{{asset('/seamless-unit-detail/deleteotrall/'.$unitid)}}" onclick="return confirm('Are you sure want to delete all data?')" class="btn btn-block btn-danger">Delete All</a>
+                          <a href="{{asset('/seamless-unit-detail/deleteotrall/'.$unitid)}}" class="deleteotrall btn btn-block btn-danger">Delete All</a>
                         </div>
                       </div>
                       <div class="col-sm-2">
@@ -580,6 +580,29 @@
             $('.InputSearch2').val('')
         })
 
+        $(".deletecolorpict").on("click", function(){
+        if (confirm('Apakah Anda yakin akan menghapus color/pict ini?')) {
+          return true
+        } else {
+          return false;
+        }
+        });
+
+        $(".deletedetailall").on("click", function(){
+        if (confirm('Are you sure want to delete all this unit details data?')) {
+          return true
+        } else {
+          return false;
+        }
+        });
+
+        $(".deleteotrall").on("click", function(){
+        if (confirm('Are you sure want to delete all this unit OTR data?')) {
+          return true
+        } else {
+          return false;
+        }
+        });
 
         $(document).on('click','.upload-seamless-picture',function(){
             var id = $(this).attr('data-id');

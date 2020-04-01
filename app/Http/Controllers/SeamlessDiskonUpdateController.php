@@ -125,8 +125,7 @@ class SeamlessDiskonUpdateController extends Controller
                 "TRANSACTION_CODE"=>"UPDATE_DISCOUNT",
                 "P_GUID"=>$request->GUID,
                 "P_DISCOUNT"=>$request->DISCOUNT,
-                "P_USER"=>"ADMIN",
-                "P_YEAR"=>$request->YEAR,
+                "P_USER"=>$request->session()->get('Name'),
                 "P_LANGUAGE"=>"IN",
 
             ),
