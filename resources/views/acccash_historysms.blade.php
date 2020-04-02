@@ -149,8 +149,8 @@
                         var StartDate = '01/01/1900';
                         var EndDate = now;
 
-                        var tempStartDateSelect = StartDate;
-                        var tempEndDateSelect = EndDate;
+                        var tempStartDateSelect = moment(StartDate).format('DD-MM-YYYY');
+                        var tempEndDateSelect = moment(EndDate).format('DD-MM-YYYY');
                         document.getElementById('button-download').setAttribute("href", "");
                         document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${tempStartDateSelect}/${tempEndDateSelect}')}}`);
                 
@@ -246,8 +246,8 @@
                         //     alert("Start Date lebih besar dari End Date","");                            
                         // }
 
-                        var tempStartDateSelect = StartDate;
-                        var tempEndDateSelect = EndDate;
+                        var tempStartDateSelect = moment(StartDate).format('DD-MM-YYYY');
+                        var tempEndDateSelect = moment(EndDate).format('DD-MM-YYYY');
                         document.getElementById('button-download').setAttribute("href", "");
                         document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${tempStartDateSelect}/${tempEndDateSelect}')}}`);
                 
@@ -334,8 +334,8 @@
             var StartDate = '01/01/1900';
             var EndDate = now;
 
-            var tempStartDateSelect = StartDate;
-                var tempEndDateSelect = EndDate;
+            var tempStartDateSelect = moment(StartDate).format('DD-MM-YYYY');
+                var tempEndDateSelect = moment(EndDate).format('DD-MM-YYYY');
                 document.getElementById('button-download').setAttribute("href", "");
                 document.getElementById('button-download').setAttribute("href", `{{asset('/acccash-apply-historysms/download/${tempStartDateSelect}/${tempEndDateSelect}')}}`);
         
